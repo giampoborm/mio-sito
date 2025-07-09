@@ -40,34 +40,6 @@ export function spawnCenterText(world, container, text, options = {}) {
   return { body, domElement };
 }
 
-// before it just console.logs; now we return!
-export function analyzeTextAlignment(el) {
-  const dom = el.getBoundingClientRect();
-  const style = window.getComputedStyle(el);
-  const font = `${style.fontSize} ${style.fontFamily}`;
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  ctx.font = font;
-  const text = el.textContent.trim() || '?';
-  const m = ctx.measureText(text);
-
-  const fontBox       = m.fontBoundingBoxAscent  + m.fontBoundingBoxDescent;
-  const glyphBox      = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
-  const extraLeading  = dom.height - fontBox;
-  const baselineOffset = (dom.height - glyphBox) / 2 + m.actualBoundingBoxAscent;
-  const offsetFromCenter = baselineOffset - dom.height/2;
-
-  return {
-    domHeight:       dom.height,
-    fontBox,
-    glyphBox,
-    extraLeading,
-    baselineOffset,
-    offsetFromCenter
-  };
-}
-
-
 export function measureTextDimensions(text, className = '', { wrap = false } = {}) {
   const temp = document.createElement('div');
   temp.textContent     = text;
@@ -161,11 +133,4 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
       reject(err);
     });
   });
-}
-
-// Helper function (if not already in generalUtils.js)
-export function createElementWithClass(tag, className) {
-    const element = document.createElement(tag);
-    element.className = className;
-    return element;
 }
