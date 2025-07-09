@@ -484,7 +484,7 @@ export function setupWhoPhysics() {
   createAnchors(world, container, bodies, isOnMobile);
 
   // 6. Physics runner and sync
-  enableDragging(engine, world, container);
+  const cleanupDragging = enableDragging(engine, world, container);
   const cleanupSyncLoop = syncDOMWithBodies(bodies, container);
 
   // 7. Runner
@@ -541,6 +541,9 @@ export function setupWhoPhysics() {
     }
     if (cleanupSyncLoop) { // Call the stored cleanup function
       cleanupSyncLoop();
+    }
+    if (cleanupDragging) {
+      cleanupDragging();
     }
 
     // Debug Renderer Cleanup

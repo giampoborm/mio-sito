@@ -67,7 +67,7 @@ export function enableDragging(engine, world, container) {
   let isDragging = false;
   let dragStart = { x: 0, y: 0 };
 
-  container.addEventListener('touchstart', (e) => {
+  const handleTouchStart = (e) => {
     if (e.touches.length === 1) {
       isDragging = false;
       dragStart = {
@@ -75,9 +75,9 @@ export function enableDragging(engine, world, container) {
         y: e.touches[0].clientY
       };
     }
-  }, { passive: true });
+  };
 
-  container.addEventListener('touchmove', (e) => {
+  const handleTouchMove = (e) => {
     if (e.touches.length === 1) {
       const dx = e.touches[0].clientX - dragStart.x;
       const dy = e.touches[0].clientY - dragStart.y;
@@ -85,16 +85,25 @@ export function enableDragging(engine, world, container) {
         isDragging = true;
       }
     }
-  }, { passive: true });
+  };
 
-  container.addEventListener('touchend', (e) => {
+  const handleTouchEnd = (e) => {
     if (!isDragging && e.target.closest('a, button, .link-text, #container')) {
       e.preventDefault();
       e.target.click();
     }
-  });
+  };
 
-  return mouseConstraint;
+  container.addEventListener('touchstart', handleTouchStart, { passive: true });
+  container.addEventListener('touchmove', handleTouchMove, { passive: true });
+  container.addEventListener('touchend', handleTouchEnd);
+
+  return function cleanupDragging() {
+    Matter.World.remove(world, mouseConstraint);
+    container.removeEventListener('touchstart', handleTouchStart);
+    container.removeEventListener('touchmove', handleTouchMove);
+    container.removeEventListener('touchend', handleTouchEnd);
+  };
 }
 
 // Set or Adjust Gravity Dynamically
