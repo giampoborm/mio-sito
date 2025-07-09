@@ -1,0 +1,3896 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+index.html
+package.json
+public/vite.svg
+src/data/projects.json
+src/data/who_text.js
+src/main.js
+src/pages/homepage.js
+src/pages/whatpage.js
+src/pages/whopage.js
+src/router.js
+src/style.css
+src/utils/fullProjectModal.js
+src/utils/generalUtils.js
+src/utils/iosPermission.js
+src/utils/navButtons.js
+src/utils/physicsSetup.js
+src/utils/whatNav.js
+src/utils/whatPhysics.js
+src/utils/whoPhysics copy.js
+src/utils/whoPhysics.js
+vite.config.js
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+</file>
+
+<file path="index.html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Fare Niente Production</title>
+</head>
+<body>
+
+
+  <!-- Main App Container -->
+  <main id="app">
+    <!-- Dynamic content will be rendered here -->
+  </main>
+
+  <!-- Vite injects JS scripts automatically in development and build -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+</file>
+
+<file path="package.json">
+{
+  "name": "new-portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "matter-js": "^0.20.0"
+  }
+}
+</file>
+
+<file path="public/vite.svg">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="31.88" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 257"><defs><linearGradient id="IconifyId1813088fe1fbc01fb466" x1="-.828%" x2="57.636%" y1="7.652%" y2="78.411%"><stop offset="0%" stop-color="#41D1FF"></stop><stop offset="100%" stop-color="#BD34FE"></stop></linearGradient><linearGradient id="IconifyId1813088fe1fbc01fb467" x1="43.376%" x2="50.316%" y1="2.242%" y2="89.03%"><stop offset="0%" stop-color="#FFEA83"></stop><stop offset="8.333%" stop-color="#FFDD35"></stop><stop offset="100%" stop-color="#FFA800"></stop></linearGradient></defs><path fill="url(#IconifyId1813088fe1fbc01fb466)" d="M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.537 6.537 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62Z"></path><path fill="url(#IconifyId1813088fe1fbc01fb467)" d="M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z"></path></svg>
+</file>
+
+<file path="src/data/projects.json">
+{
+  "projects": [
+    {
+      "title": "moodnothing.baby",
+      "summary": {
+        "elements": [
+          {
+            "type": "text",
+            "content": "an online tshirt brand, entirely thought and built from scratch",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/logo.webp"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/smile.webp"
+          },
+          {
+            "type": "text",
+            "content": "post-irony extremely online brand identity",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/not-funny-tee.webp"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/cat-calling-tee.webp"
+          },
+          {
+            "type": "text",
+            "content": "the webstore was built through a custom shopify theme development",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screenshot-desktop.webp"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screensmobile-1.webp"
+          },
+          {
+            "type": "text",
+            "content": "a punk-careless-memesque tone of voice for communication",
+            "class": "description"
+          },
+          {
+            "type": "video",
+            "src": "src/assets/what/moodnothing.baby/video-collezione_1.mp4"
+          },
+          {
+            "type": "text",
+            "content": "Photoshop\nIllustrator\nInDesign\nPremiere Pro\nAdobe After Effects\nTouchDesigner\nShopify Liquid\nScreenprinting",
+            "class": "credits"
+          }
+        ]
+      },
+      "details": {
+        "elements": [
+          {
+            "type": "text",
+            "content": "moodnothing.baby",
+            "class": "modal-title",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "2022",
+            "class": "modal-title",
+            "sidebar": true
+          },
+          {
+            "type": "text",
+            "content": "Started as a joke between two friends, this was a six‑week journey to build a “post‑ironic” t-shirt brand from scratch. The main motivation behind the idea was that my friend and I wanted some \"funny tees\" for ourselves. We closely studied a trend that started one or two years prior, which included expressions such as \"shirts that go hard\", \"slogan tees\" or \"accidental caps\". This trend had then become even bigger lately, with established brands happily jumping on the post‑irony train.",
+            "class": "modal-text",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "idea and first concept",
+            "class": "modal-text",
+            "sidebar": true
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/not-funny-tee.webp",
+            "columns": 1,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/unemployed-tee.webp",
+            "columns": 1,
+            "gridColumnStart": 2
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/cat-calling-tee.webp",
+            "columns": 1,
+            "gridColumnStart": 3
+          },
+          {
+            "type": "text",
+            "content": "We started with a few designs, all based on the same concept: a t-shirt with a funny phrase on it. We wanted to create something that would make people laugh, but also something that would be wearable in public. We wanted to avoid the \"ironic\" t-shirts that are so common these days, and instead focus on something that was genuinely funny.",
+            "class": "modal-text",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/logo.webp",
+            "columns": 1,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/smile.webp",
+            "columns": 1,
+            "gridColumnStart": 2
+          },
+          {
+            "type": "text",
+            "content": "We wanted the visual identity to feel authentic—avoiding both the overused hand‑drawn‑coffee‑shop‑logo aesthetic and anything that felt \"too polished.\"\nWe started with simple modernist fonts & shapes, stretched, simplified, and distorted them and kept everything intentionally raw.",
+            "class": "modal-text",
+            "columns": 2,
+            "gridColumnStart": 3
+          },
+          {
+            "type": "text",
+            "content": "branding",
+            "class": "modal-text",
+            "sidebar": true
+          },
+          {
+            "type": "text",
+            "content": "We built the site on Shopify, quickly learning Liquid Language to customize a theme that aligned with our vision:\n    No pop‑ups.\n    No excessive animations.\n    No distractions.\nJust a straight‑line from \"seeing something funny online\" → buying the t‑shirt.",
+            "class": "modal-text",
+            "columns": 2,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screensmobile-1.webp",
+            "columns": 1,
+            "gridColumnStart": 3
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screensmobile-2.webp",
+            "columns": 1,
+            "gridColumnStart": 4
+          },
+          {
+            "type": "text",
+            "content": "web development",
+            "class": "modal-text",
+            "sidebar": true
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screenshot-desktop.webp",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "Our brand voice followed the irony‑poisoned humour of the internet. We built content using \"goofy\" motion graphics, low‑effort meme‑like edits, Pop culture references reinterpreted with a DIY punkish ethos.",
+            "class": "modal-text",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "communication",
+            "class": "modal-text",
+            "sidebar": true
+          },
+          {
+            "type": "video",
+            "src": "src/assets/what/moodnothing.baby/video-collezione_1.mp4",
+            "columns": 1,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "A few months in, we shut down the website as we both went and proceeded with different careers. Though the brand is gone, I still screenprint some designs on demand for friends and family.",
+            "class": "modal-text",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "Photoshop\nIllustrator\nInDesign\nPremiere Pro\nAdobe After Effects\nTouchDesigner\nShopify Liquid\nScreenprinting",
+            "class": "modal-text",
+            "sidebar": true
+          }
+        ]
+      }    
+    },
+    {
+      "title": "postmoderno accidentale",
+      "summary": {
+        "elements": [
+          {
+            "type": "text",
+            "content": "A booklet exploring how photography synthesizes the post-ideological reality of the 21st century.",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/copertina.jpg"
+          },
+          {
+            "type": "text",
+            "content": "Two gazes, one image: the photographer’s intent vs the accidental postmodernist meaning.",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/carro.jpg"
+          },
+          {
+            "type": "text",
+            "content": "2022",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/mockup6-7.jpg"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/mockup-copertine.jpg"
+          },
+          {
+            "type": "text",
+            "content": "Indesign\nPhotoshop\nBookbinding",
+            "class": "credits"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/ylean.jpg"
+          }
+        ]
+      },
+      "details": {
+        "elements": [
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/mockup-copertine.jpg"
+          },
+          {
+            "type": "text",
+            "content": "Postmoderno Accidentale is a booklet questioning how photography can synthesize the post-ideological reality of the 21st Century.",
+            "class": "description"
+          },
+          {
+            "type": "text",
+            "content": "Working on a photography-themed booklet within the context of a university class (Contemporary Art History & Language of Visual Communication), I chose to investigate and define what I call 'Accidental Postmodernism.' The term describes the juxtaposition of two gazes on the same subject; here one gaze saw something and chose to take a picture (for whatever reasons) and the other one, seeing the same picture, applies a postmodern meaning to it, thus accidental (the person who took the picture didn't have any postmodernist 'intention'). This meaning is basically seeing a picture as a representation (or a synthesis) of the post-ideological zeitgeist of the 21st century, where there are no real boundaries between reality and hyperstitions, meant as the creation of meanings through beliefs.",
+            "class": "details"
+          },
+          {
+            "type": "text",
+            "content": "The pictures chosen could as well be found on the usual 'aesthetic-meme archive' type of Instagram profiles. The main one from which my dissertation starts sees a Ukrainian woman posing to be photographed in front of a destroyed Russian tank. Others are Taliban graduates' picture weirdly resembling the Windows XP hill background, or a ton of pictures of Kaliningrad citizens posing in front of Kant's tomb, wearing USSR T-shirts.",
+            "class": "details"
+          },
+          {
+            "type": "text",
+            "content": "The booklet is structured to guide readers through this concept, starting with defining Accidental Postmodernism through striking examples, then moving into deeper analysis. I explore visual contrasts (destroyed tank/shiny red car), meaning contrasts (war/photoshoot), and cultural contrasts that create the surreal quality of these images.",
+            "class": "details"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/carro.jpg"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/pag2.jpg"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/pag3.jpg"
+          },
+          {
+            "type": "text",
+            "content": "As the booklet progresses, it categorizes different manifestations of this phenomenon - from politically charged scenes to what I call 'the value of vibes,' where rational analysis gives way to purely aesthetic or emotional reactions. This section explores instances where postmodernism is either intentionally created or where analysis disappears completely, leaving only aesthetic (or emotionally charged) impressions. The booklet culminates by examining the socio-cultural influence of this post-ideological gaze, particularly relevant in our era of ubiquitous and schizophrenic pop culture phenomena.",
+            "class": "details"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/mockup6-7.jpg"
+          },
+          {
+            "type": "text",
+            "content": "Graphically speaking, I chose to abide by one of my favorite approaches, which consists in treating the page as notes from school: black ink on white paper with red accents and decorative elements, as doodles drawn out of boredom and distraction. In this case, those 'doodles' represent the 'gazes' of this Accidental Postmodernism as squared viewframes, all skewed differently, inconsistently. The use of memes clearly follows the deep pop-cultural tone of the whole booklet, reinforcing the concept that these images exist at the intersection of serious analysis and internet culture.",
+            "class": "details"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/postmoderno-accidentale/retro.jpg"
+          },
+          {
+            "type": "text",
+            "content": "Indesign\nPhotoshop\nBookbinding",
+            "class": "credits"
+          }
+        ]
+      }
+    },
+    {
+      "title": "my previous portfolio",
+      "summary": {
+        "elements": [
+          {
+            "type": "image",
+            "src": "../public/what/project2.gif"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Brief description",
+            "class": "description"
+          }
+        ]
+      },
+      "details": {
+        "elements": [
+          {
+            "type": "image",
+            "src": "../public/what/project2.gif"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Description about the project...",
+            "class": "description"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Details about the project...",
+            "class": "details"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: credits...",
+            "class": "credits"
+          }
+        ]
+      }
+    },
+    {
+      "title": "menu design",
+      "summary": {
+        "elements": [
+          {
+            "type": "image",
+            "src": "../public/what/project2.gif"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Brief description",
+            "class": "description"
+          }
+        ]
+      },
+      "details": {
+        "elements": [
+          {
+            "type": "image",
+            "src": "../public/what/project2.gif"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Description about the project...",
+            "class": "description"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Details about the project...",
+            "class": "details"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: credits...",
+            "class": "credits"
+          }
+        ]
+      }
+    },
+    {
+      "title": "bookbinding works",
+      "summary": {
+        "elements": [
+          {
+            "type": "image",
+            "src": "../public/what/project2.gif"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Brief description",
+            "class": "description"
+          }
+        ]
+      },
+      "details": {
+        "elements": [
+          {
+            "type": "image",
+            "src": "../public/what/project2.gif"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Description about the project...",
+            "class": "description"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: Details about the project...",
+            "class": "details"
+          },
+          {
+            "type": "text",
+            "content": "Project 3: credits...",
+            "class": "credits"
+          }
+        ]
+      }
+    }
+  ]
+}
+</file>
+
+<file path="src/data/who_text.js">
+// src/data/who_text.js
+
+export const ANCHORS = [
+  {
+    id: "main-name",
+    text: "i'm gianpaolo\nbormioli",
+    position: {
+      desktop: { x: 0.4, y: 0.45 }, // edit as you wish, 0.5 = centered
+      mobile:  { x: 0.32, y: 0.50 }
+    },
+    size: "big",
+    microTexts: [
+      { text: "yes, i'm italian" }
+    ]
+  },
+  {
+    id: "what-about-you",
+    text: "what\nabout you?",
+    position: {
+      desktop: { x: 0.6, y: 0.55 },
+      mobile:  { x: 0.745, y: 0.6 }
+    },
+    size: "big",
+    microTexts: [
+      { text: "send me an email", link: "mailto:giampobo@gmail.com", class: "link" },
+      { text: "or intrude my privacy on instagram", link: "https://instagram.com/giampogonzalez", class: "link" }
+    ]
+  },
+  {
+    id: "maniacally-diy",
+    text: "maniacally diy",
+    position: {
+      desktop: { x: 0.14, y: 0.2 },
+      mobile:  { x: 0.15, y: 0.17 }
+    },
+    size: "small",
+    microTexts: [
+      { text: "i love anything open-source, raw, self-made, independent" },
+      { text: "contradictions, research, intuition, seeking knowledge, anthropocentrism" },
+      { text: "ok, i'm getting esoteric again... someone come get me pls" }
+    ]
+  },
+  {
+    id: "communication-designer",
+    text: "a communication designer",
+    position: {
+      desktop: { x: 0.75, y: 0.23 },
+      mobile:  { x: 0.7, y: 0.23 }
+    },
+    size: "small",
+    microTexts: [
+      { text: "what does that even mean?" },
+      { text: "usually that's what i'm asked" }
+    ]
+  },
+  {
+    id: "digital-analog",
+    text: "digital / analog media",
+    position: {
+      desktop: { x: 0.4, y: 0.74 },
+      mobile:  { x: 0.42, y: 0.35 }
+    },
+    size: "small",
+    microTexts: [
+      { text: "graphic design" },
+      { text: "motion design" },
+      { text: "AI image manipulation" },
+      { text: "creative coding" },
+      { text: "screenprinting" },
+      { text: "live visuals" },
+      { text: "bookbinding" },
+      { text: "calligraphy" },
+      { text: "other stuff" }
+    ]
+  },
+  {
+    id: "creative-direction",
+    text: "creative direction / storytelling",
+    position: {
+      desktop: { x: 0.85, y: 0.8 },
+      mobile:  { x: 0.65, y: 0.76 }
+    },
+    size: "small",
+    microTexts: [
+      { text: "creative director" }, // now its own microtext
+      { text: "yeah, i'm good at thinking. i swear." }
+    ]
+  },
+  {
+    id: "joke-anchor",
+    text: "i could make some jokes here",
+    position: {
+      desktop: { x: 0.14, y: 0.9 },
+      mobile:  { x: 0.35, y: 0.95 }
+    },
+    size: "small",
+    microTexts: [
+      { text: "my tools are coffee and ctrl+z" },
+      { text: "pineapple on pizza" },
+      { text: "crying laughing emoji" }
+    ]
+  }
+];
+</file>
+
+<file path="src/main.js">
+// src/main.js
+import { initRouter } from './router.js';
+import './style.css';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const app = document.getElementById('app');
+  initRouter(app);
+});
+</file>
+
+<file path="src/pages/homepage.js">
+import { requestIOSMotionPermission } from '../utils/iosPermission.js';
+
+const COLORS = ["#FF0000", "#0000FF", "#FFFF00"];
+const TILT_THRESHOLD = 20; // degrees; tweak as needed
+
+function getRandomColor(exclude) {
+  const available = COLORS.filter(c => c !== exclude);
+  return available[Math.floor(Math.random() * available.length)];
+}
+
+function setupGyroColorSwitch(topDiv, bottomDiv, threshold = TILT_THRESHOLD) {
+  let lastTop = null, lastBottom = null;
+  let currentState = "none";
+
+  function handleOrientation(event) {
+    const { beta } = event;
+    if (beta > threshold && currentState !== "top") {
+      const color = getRandomColor(lastTop);
+      topDiv.style.background = color;
+      bottomDiv.style.background = "#fff";
+      lastTop = color;
+      currentState = "top";
+    } else if (beta < -threshold && currentState !== "bottom") {
+      const color = getRandomColor(lastBottom);
+      bottomDiv.style.background = color;
+      topDiv.style.background = "#fff";
+      lastBottom = color;
+      currentState = "bottom";
+    } else if (beta >= -threshold && beta <= threshold && currentState !== "none") {
+      topDiv.style.background = "#fff";
+      bottomDiv.style.background = "#fff";
+      currentState = "none";
+    }
+  }
+
+  window.addEventListener("deviceorientation", handleOrientation, true);
+  return () => window.removeEventListener("deviceorientation", handleOrientation, true);
+}
+
+export function renderHomepage(app) {
+  app.innerHTML = "";
+
+  const container = document.createElement("div");
+  container.className = "home-split";
+
+  // Top (who)
+  const whoDiv = document.createElement("div");
+  whoDiv.className = "home-side who-side";
+  whoDiv.textContent = "who?";
+  container.appendChild(whoDiv);
+
+  // Bottom (what)
+  const whatDiv = document.createElement("div");
+  whatDiv.className = "home-side what-side";
+  whatDiv.textContent = "what?";
+  container.appendChild(whatDiv);
+
+  app.appendChild(container);
+
+  // Routing
+  whoDiv.addEventListener("click", () => {
+    history.pushState({}, "", "/who");
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  });
+  whatDiv.addEventListener("click", () => {
+    history.pushState({}, "", "/what");
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  });
+
+  // Desktop hover logic
+  let lastWhoColor = null, lastWhatColor = null;
+  whoDiv.addEventListener("mouseenter", () => {
+    if (window.innerWidth > 800) {
+      const color = getRandomColor(lastWhoColor);
+      whoDiv.style.background = color;
+      lastWhoColor = color;
+    }
+  });
+  whoDiv.addEventListener("mouseleave", () => {
+    if (window.innerWidth > 800) whoDiv.style.background = "#fff";
+  });
+  whatDiv.addEventListener("mouseenter", () => {
+    if (window.innerWidth > 800) {
+      const color = getRandomColor(lastWhatColor);
+      whatDiv.style.background = color;
+      lastWhatColor = color;
+    }
+  });
+  whatDiv.addEventListener("mouseleave", () => {
+    if (window.innerWidth > 800) whatDiv.style.background = "#fff";
+  });
+
+  // Mobile: ask for motion permission first, then activate gyro logic
+  let teardownGyro = null;
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    requestIOSMotionPermission(
+      // enableOrientationCallback:
+      () => {
+        teardownGyro = setupGyroColorSwitch(whoDiv, whatDiv, TILT_THRESHOLD);
+      },
+      // fallbackCallback:
+      () => {
+        // No gyro: maybe show a message, or just leave colors static
+        // Optionally: set both backgrounds to white for clarity
+        whoDiv.style.background = "#fff";
+        whatDiv.style.background = "#fff";
+      }
+    );
+  }
+
+  return () => {
+    if (teardownGyro) teardownGyro();
+    // Any further cleanup if needed
+  };
+}
+</file>
+
+<file path="src/pages/whatpage.js">
+import { setupWhatPhysics } from '../utils/whatPhysics.js';
+
+export function renderWhatpage(app) {
+  // Clear the main app container.
+  app.innerHTML = '';
+
+  // Initialize the what page physics simulation.
+  // This function returns a teardown function.
+  const teardownWhatPhysics = setupWhatPhysics();
+
+  // Return the teardown function so that the router can call it when leaving this page.
+  return teardownWhatPhysics;
+}
+</file>
+
+<file path="src/pages/whopage.js">
+import { setupWhoPhysics } from '../utils/whoPhysics.js';
+
+export function renderWhopage(app) {
+  // Clear the main app container
+  app.innerHTML = '';
+
+  // Set up the who page physics simulation and capture the teardown function
+  const teardownWhoPhysics = setupWhoPhysics();
+
+  // Return the teardown function for the router to use
+  return teardownWhoPhysics;
+}
+</file>
+
+<file path="src/router.js">
+// src/router.js
+let currentTeardown = null;
+
+export async function handleRoute(app) {
+  // Teardown previous page if needed
+  if (currentTeardown) {
+    currentTeardown();
+    currentTeardown = null;
+  }
+
+  // Normalize pathname
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+
+  switch (path) {
+    case '/':
+    case '/home': {
+      const { renderHomepage } = await import('./pages/homepage.js');
+      currentTeardown = renderHomepage(app);
+      break;
+    }
+    case '/what': {
+      const { renderWhatpage } = await import('./pages/whatpage.js');
+      currentTeardown = renderWhatpage(app);
+      break;
+    }
+    case '/who': {
+      const { renderWhopage } = await import('./pages/whopage.js');
+      currentTeardown = renderWhopage(app);
+      break;
+    }
+    // Add more cases for extra pages if/when needed
+    default: {
+      app.innerHTML = '<h2>404: Page Not Found</h2>';
+    }
+  }
+}
+
+export function initRouter(app) {
+  handleRoute(app);
+  window.addEventListener('popstate', () => handleRoute(app));
+  document.addEventListener('click', (event) => {
+    // Internal navigation hijack
+    if (event.target.tagName === 'A' && event.target.href.startsWith(window.location.origin)) {
+      event.preventDefault();
+      history.pushState({}, '', event.target.getAttribute('href'));
+      handleRoute(app);
+    }
+  });
+}
+</file>
+
+<file path="src/style.css">
+/* ==========================================================================
+   Global Styles & Reset
+   ========================================================================== */
+@font-face {
+  font-family: 'HelveticaRounded';
+  src: url('src/assets/font1/HelveticaRoundedLTStd-Bd.woff2') format('woff2'),
+       url('src/assets/font1/HelveticaRoundedLTStd-Bd.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+canvas {
+  z-index: -999;
+}
+html, body {
+  font-family: 'HelveticaRounded', sans-serif;
+  width: 100%;
+  min-height: 100%;
+  overflow: auto;
+  font-display: swap;
+}
+
+img {
+  user-select: none;
+  pointer-events: none;   /* unless you intentionally want to block clicks */
+}
+
+
+@media (max-width: 768px) {
+  /* On mobile, let the user scroll vertically */
+  html, body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+  }
+}
+.center-text {
+  color: #000000;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+/* Main container for physics */
+#container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+
+.nav-button {
+  font-size: 2rem;
+  font-family: inherit;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  line-height: 1;
+}
+
+
+
+
+
+/* ==========================================================================
+   Component: Homepage
+   --------------------------------------------------------------------------
+   Base (Mobile-first) Styles for Homepage Elements
+   ========================================================================== */
+.home-split {
+  display: flex;
+  width: 100vw;
+  height: 100dvh;
+  flex-direction: row;
+  min-height: 0;
+}
+
+.home-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6vw;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  transition: background 0.18s;
+  user-select: none;
+  font-family: 'HelveticaRounded', sans-serif;
+}
+
+@media (max-width: 800px) {
+    .home-split {
+    flex-direction: column;
+    height: 100dvh;  /* <-- KEY */
+    min-height: 0;
+  }
+  .home-side { font-size: 10vw; }
+}
+
+
+/* permission pop up */
+
+#motion-permission-window {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 500px);
+  background: white;
+  border: 4px solid black;
+  border-radius: 1rem;
+  z-index: 9999;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 4px 4px 0 black;
+}
+
+#motion-permission-window p {
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  line-height: 1.4;
+}
+
+#motion-permission-window .btn-option, .btn-option1 {
+  font-family: inherit; /* <-- THIS LINE */
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  border-color: black;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin: .3rem;
+}
+
+
+#motion-permission-window .btn-option {
+  background-color: black;
+  color: white;
+}
+
+#motion-permission-window .btn-option1 {
+  background-color: white;
+  color: black;
+} 
+
+/* ==========================================================================
+   Component: What Page
+   --------------------------------------------------------------------------
+   Base (Mobile-first) Styles for What Page Elements
+   ========================================================================== */
+
+.whatpage-title {
+  position: absolute;
+  font-size: 1.5rem;  /* mobile base */
+  text-align: center;
+  max-width: 70vw;  /* mobile-friendly width */
+}
+
+.project-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.project-image {
+  object-fit: contain;
+}
+
+.project-video {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+
+/* Comic-book action button */
+.view-full-project-button {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  background: #fff;           /* white card look  */
+  color: #000;
+  border: 4px solid #000;     /* thick black outline */
+  border-radius: 18px;        /* same radius family */
+  box-shadow: 4px 4px 0 #000; /* offset shadow: right + bottom only */
+  cursor: pointer;
+}
+.view-full-project-button:hover {
+  transform: translate(-2px, -2px);       /* subtle lift */
+  box-shadow: 6px 6px 0 #000;             /* deeper shadow */
+}
+.view-full-project-button:active {
+  transform: translate(0, 0);             /* press-in */
+  box-shadow: 2px 2px 0 #000;
+}
+
+.description-text,
+.details-text,
+.credits-text,
+.project-text {
+  display: block; /* `fit-content` works best with block-level elements */
+  width: -moz-fit-content; /* Firefox Tweak */
+  width: fit-content;      /* Standard */
+  
+  margin-left: auto;   /* This will center the 'fit-content' block itself */
+  margin-right: auto;  /* if its parent allows (e.g., if #container is full width) */
+
+  white-space: pre-line; /* You need this to respect newline characters in your text */
+  text-align: center;    /* This will center the text *within* the now tighter box */
+
+  /* Optional: Add some padding if you want space between the text and the physics box edge */
+  /* padding: 3px 8px; */ 
+}
+
+/* Apply max-width within media queries */
+@media (max-width: 768px) { /* Or your preferred mobile breakpoint */
+  .whatpage-title {
+    font-size: 1.2rem;
+    /* Apply fit-content to title too if needed */
+    display: block;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; /* If title can wrap */
+    max-width: 90vw;
+  }
+
+  .description-text,
+  .details-text,
+  .credits-text,
+  .project-text {
+    max-width: 85vw; /* Adjust as needed, e.g., 80vw or 90vw */
+                     /* This acts as the upper limit for fit-content */
+  }
+}
+
+/* Desktop adjustments (if you want different max-widths) */
+@media (min-width: 769px) { /* Example desktop breakpoint */
+  .description-text,
+  .details-text,
+  .credits-text,
+  .project-text {
+    max-width: 700px; /* Or your preferred desktop max-width */
+  }
+}
+
+/* Desktop adjustments */
+@media (min-width: 1024px) {
+  .whatpage-title {
+    font-size: 2rem;
+  }
+
+}
+
+/* ==========================================================================
+   Component: Modal (What Page Extended)
+   ========================================================================== */
+
+.full-project-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-container {
+  background-color: #fff;
+  border: 4px solid #000;
+  width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0.8fr; /* 4 content cols + 1 sidebar */
+  position: relative;
+  row-gap: 1.8rem;          /* more breathing room between rows   */
+  column-gap: 1.8rem;       /* keep columns nicely separated      */
+  padding: 2rem 2.2rem;     /* a bit more inner padding           */
+  border-radius: 28px;
+  box-shadow: 4px 4px 0 black;
+  scrollbar-gutter: stable;
+}
+
+.col-span-1 { grid-column: span 1; }
+.col-span-2 { grid-column: span 2; }
+.col-span-3 { grid-column: span 3; }
+.col-span-4 { grid-column: span 4; }
+/* === correct the sidebar rule === */
+.col-sidebar {
+  grid-column: 5;      /* last track */
+  text-align: right;
+  font-size: .9rem;
+  color: #000;
+
+  
+}
+
+
+.modal-section {
+  grid-column: 1 / -1;
+  display: contents;
+}
+
+.full-project-image, .full-project-video{
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 3px 14px rgba(0,0,0,.09);
+  object-fit: contain;            /* keeps shirts nicely framed      */
+  background: #fafafa;            /* avoids transparent → black edge */
+}
+
+.full-project-text {
+  font-family: 'HelveticaRounded', sans-serif;
+  font-size: 0.9rem;  /* mobile base */
+  color: #000;
+  line-height: 1.4;
+}
+
+.full-project-unknown {
+  font-family: 'HelveticaRounded', sans-serif;
+  font-size: 0.9rem;  /* mobile base */
+  color: red;
+}
+
+.modal-title {
+  font-size: 3rem;  /* mobile base */
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.modal-text {
+  font-size: 0.9rem;  /* mobile base */
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.sidebar-item {
+  text-align: right;
+}
+
+.modal-close-button {
+  font-family: inherit;
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding: 0.5rem .8rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 3px solid #000;
+  box-shadow: 2px 2px 0 #000;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform .15s, box-shadow .15s;
+
+    /* — STICKY behaviour — */
+  position: sticky;
+  top: .2rem;                /* distance from container’s scroll top */
+  z-index: 2;               /* stay above neighbouring content */
+
+}
+.modal-close-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+.modal-close-button:active {
+  transform: translate(0,0);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* src/style.css */
+@media (max-width: 768px) { /* Or your preferred mobile breakpoint */
+  .modal-container {
+    grid-template-columns: 1fr; /* Single column */
+    column-gap: 0; /* No column gap needed */
+    row-gap: 1.2rem; /* Adjust row gap as needed */
+    padding: 1.5rem 1rem; /* Adjust padding for smaller screens */
+    width: 95vw; /* Slightly more width if needed */
+    max-height: 90dvh; /* Use dvh for dynamic viewport height */
+  }
+
+  /* Override column spans for all modal elements */
+  .modal-container > * { /* Target direct children */
+    grid-column: 1 / -1 !important; /* Force all items to span the single column */
+  }
+
+  /* Specific adjustments for elements if needed */
+  .full-project-text {
+    font-size: 0.9rem; /* Adjust font size for mobile readability */
+    line-height: 1.5;
+  }
+  .modal-title {
+    font-size: 2rem; /* Adjust title size */
+  }
+  .col-sidebar {
+    text-align: left; /* Sidebar items might look better left-aligned now */
+    font-size: 0.85rem;
+    margin-top: 0.5rem; /* Add some space if they flow after main content */
+  }
+
+}
+
+
+/* ==========================================================================
+   Component: Who Page
+   --------------------------------------------------------------------------
+   ========================================================================== */
+
+.anchor-big {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.anchor-small {
+
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.anchor {
+  color: #111;
+  background: none;
+  pointer-events: auto;
+  user-select: none;
+  text-align: center;
+  cursor: pointer;
+  white-space: pre-line; /* ESSENTIAL for \n to work */
+  /* Optional: text-shadow for contrast */
+}
+
+.microtext {
+  /* Consistent drag target, never outgrow screen, visually clear */
+  max-width: 240px;
+  min-width: 48px;
+  word-break: break-word;
+  color: #181818;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: grab;
+  z-index: 10;
+  user-select: none;
+  /* Drag friendliness */
+  touch-action: none;
+  z-index: 1000;
+}
+
+.microtext:active {
+  cursor: grabbing;
+}
+
+/* For links */
+.microtext.link {
+  padding: 0.5rem .8rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 3px solid #000;
+  box-shadow: 2px 2px 0 #000;
+  cursor: pointer;
+  border-radius: 14px;
+}
+.microtext.link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+.microtext.link:active {
+  transform: translate(0,0);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Example for custom class, e.g. .special (optional) */
+.microtext.special {
+  background: #f9ed69;
+  border-color: #e0c200;
+}
+
+@media (max-width: 768px) { /* Your mobile breakpoint */
+  .nav-button {
+    font-size: 1.8rem; /* Or whatever looks good */
+  }
+  .anchor-big {
+    font-size: 1.7rem; /* Example */
+  }
+  .anchor-small {
+    font-size: .8rem;   /* Example */
+  }
+  .microtext {
+    font-size: 0.85rem; /* Example */
+    /* Consider a max-width for microtexts on mobile too */
+    max-width: 30vw; /* Or a pixel value that works */
+  }
+}
+</file>
+
+<file path="src/utils/fullProjectModal.js">
+// src/utils/fullProjectModal.js
+
+/**
+ * Opens a modal displaying the full project details.
+ * If projectDetails has sections, it iterates over them; otherwise, it uses a flat elements array.
+ */
+export function openFullProjectModal(projectDetails) {
+  // Create the overlay.
+  const modalOverlay = document.createElement('div');
+  modalOverlay.classList.add('full-project-modal-overlay');
+
+  // Create the modal container (grid container).
+  const modalContainer = document.createElement('div');
+  modalContainer.classList.add('modal-container');
+
+  // Create and append a close button.
+  const closeButton = document.createElement('button');
+  closeButton.textContent = 'close';
+  closeButton.classList.add('modal-close-button');
+  closeButton.addEventListener('click', () => {
+    closeFullProjectModal(modalOverlay);
+  });
+  modalContainer.appendChild(closeButton);
+
+  // Build content from sections if available; otherwise, use flat elements.
+  if (projectDetails.sections && Array.isArray(projectDetails.sections)) {
+    projectDetails.sections.forEach((section) => {
+      const sectionEl = document.createElement('div');
+      sectionEl.classList.add('modal-section');
+      if (section.type) {
+        sectionEl.classList.add(`modal-section-${section.type}`);
+      }
+      section.elements.forEach((item) => {
+        const itemEl = createFullProjectElement(item);
+        sectionEl.appendChild(itemEl);
+      });
+      modalContainer.appendChild(sectionEl);
+    });
+  } else if (projectDetails.elements && Array.isArray(projectDetails.elements)) {
+    projectDetails.elements.forEach((item) => {
+      const itemEl = createFullProjectElement(item);
+      modalContainer.appendChild(itemEl);
+    });
+  }
+
+  modalOverlay.appendChild(modalContainer);
+  document.body.appendChild(modalOverlay);
+  return modalOverlay;
+}
+
+/**
+ * Closes and removes the modal overlay from the DOM.
+ */
+export function closeFullProjectModal(modalOverlay) {
+  if (modalOverlay && modalOverlay.parentNode) {
+    modalOverlay.parentNode.removeChild(modalOverlay);
+  }
+}
+
+/**
+ * Creates a DOM element for a project detail item and applies explicit grid placement if specified.
+ */
+function createFullProjectElement(item) {
+  let el;
+  switch (item.type) {
+    case 'image':
+      el = document.createElement('img');
+      el.src = item.src;
+      el.classList.add('full-project-image');
+      break;
+    case 'text':
+      el = document.createElement('div');
+      el.innerHTML = item.content.replace(/\n/g, '<br>');
+      el.classList.add('full-project-text');
+      break;
+    case 'video':
+      el = document.createElement('video');
+      el.src = item.src;
+      el.controls = true;
+      el.classList.add('full-project-video');
+      break;
+    default:
+      el = document.createElement('div');
+      el.textContent = 'Unknown element type';
+      el.classList.add('full-project-unknown');
+  }
+
+  // Add any custom class provided.
+  if (item.class) {
+    el.classList.add(item.class);
+  }
+
+  // Apply explicit grid placement if provided.
+  if (item.gridColumnStart && item.columns) {
+    el.style.gridColumn = `${item.gridColumnStart} / span ${item.columns}`;
+  } else if (item.sidebar) {
+    el.classList.add('col-sidebar');
+  } else if (item.columns) {
+    el.classList.add(`col-span-${item.columns}`);
+  } else {
+    // Default: text elements span 4 columns, images/videos span 1.
+    el.classList.add(item.type === 'text' ? 'col-span-4' : 'col-span-1');
+  }
+
+  if (item.gridRowStart) {
+    if (item.gridRowEnd) {
+      el.style.gridRow = `${item.gridRowStart} / ${item.gridRowEnd}`;
+    } else {
+      el.style.gridRow = `${item.gridRowStart} / span 1`;
+    }
+  }
+  
+  return el;
+}
+</file>
+
+<file path="src/utils/generalUtils.js">
+import Matter from 'matter-js';
+
+export function spawnCenterText(world, container, text, options = {}) {
+  const { tag = 'div', className = 'center-text' } = options;
+
+  // Create your DOM element with the chosen tag
+  const domElement = document.createElement(tag);
+  domElement.textContent = text;
+
+  // Optionally add a CSS class
+  if (className) {
+    domElement.classList.add(className);
+  }
+
+  // Position absolutely so we can sync with Matter.js
+  domElement.style.position = 'absolute';
+  domElement.style.userSelect = 'none';
+
+  container.appendChild(domElement);
+
+  // Now measure it so we can create a Matter body that matches its bounding box
+  // (At first, it might be 0x0 until rendered; we can forcibly measure after a layout reflow)
+  // However, typically you'd do a tiny "wait" or measure in the next frame. For simplicity:
+  const { width, height } = domElement.getBoundingClientRect();
+
+  // If it's 0 or extremely small, pick a fallback or measure again in setTimeout, etc.
+  const bodyWidth = width || 50;
+  const bodyHeight = height || 20;
+
+  // Create a static rectangle body
+  const body = Matter.Bodies.rectangle(
+    window.innerWidth / 2,
+    window.innerHeight / 2,
+    bodyWidth,
+    bodyHeight,
+    { isStatic: true }
+  );
+  Matter.World.add(world, body);
+
+  return { body, domElement };
+}
+
+// before it just console.logs; now we return!
+export function analyzeTextAlignment(el) {
+  const dom = el.getBoundingClientRect();
+  const style = window.getComputedStyle(el);
+  const font = `${style.fontSize} ${style.fontFamily}`;
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.font = font;
+  const text = el.textContent.trim() || '?';
+  const m = ctx.measureText(text);
+
+  const fontBox       = m.fontBoundingBoxAscent  + m.fontBoundingBoxDescent;
+  const glyphBox      = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+  const extraLeading  = dom.height - fontBox;
+  const baselineOffset = (dom.height - glyphBox) / 2 + m.actualBoundingBoxAscent;
+  const offsetFromCenter = baselineOffset - dom.height/2;
+
+  return {
+    domHeight:       dom.height,
+    fontBox,
+    glyphBox,
+    extraLeading,
+    baselineOffset,
+    offsetFromCenter
+  };
+}
+
+
+export function measureTextDimensions(text, className = '', { wrap = false } = {}) {
+  const temp = document.createElement('div');
+  temp.textContent     = text;
+  temp.style.position  = 'absolute';
+  temp.style.visibility= 'hidden';
+  temp.style.display   = 'inline-block';     // 👈   important
+  if (!wrap) temp.style.whiteSpace = 'nowrap';
+  if (className) temp.classList.add(className);
+
+  document.body.appendChild(temp);
+  const { width, height } = temp.getBoundingClientRect();
+  document.body.removeChild(temp);
+  return { width, height };
+}
+
+
+
+
+export function loadAndMeasureImage(src, container, scale = 1) {
+  return new Promise((resolve, reject) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.position = 'absolute';
+    container.appendChild(img);
+    img.addEventListener('load', () => {
+      // Get natural dimensions
+      const naturalW = img.naturalWidth;
+      const naturalH = img.naturalHeight;
+      // Apply the scaling factor
+      const scaledW = naturalW * scale;
+      const scaledH = naturalH * scale;
+      // Set the rendered size
+      img.style.width = `${scaledW}px`;
+      img.style.height = `${scaledH}px`;
+      // After CSS is applied, measure the actual size
+      const measuredW = img.offsetWidth;
+      const measuredH = img.offsetHeight;
+      resolve({ element: img, width: measuredW, height: measuredH });
+    });
+    img.addEventListener('error', (err) => reject(err));
+  });
+}
+
+export function loadAndMeasureVideo(src, container, scale = 1) {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video');
+    video.src = src;
+    video.style.position = 'absolute';
+    video.controls = true;
+    container.appendChild(video);
+    
+    video.addEventListener('loadedmetadata', () => {
+      // Get natural dimensions
+      const naturalW = video.videoWidth;
+      const naturalH = video.videoHeight;
+      
+      // Apply scaling factor
+      const scaledW = naturalW * scale;
+      const scaledH = naturalH * scale;
+      
+      // Set the video's dimensions
+      video.style.width = `${scaledW}px`;
+      video.style.height = `${scaledH}px`;
+      
+      // Allow time for CSS to apply, then measure.
+      const measuredW = video.offsetWidth;
+      const measuredH = video.offsetHeight;
+      
+      resolve({ element: video, width: measuredW, height: measuredH });
+    });
+    
+    video.addEventListener('error', (err) => {
+      reject(err);
+    });
+  });
+}
+
+// Helper function (if not already in generalUtils.js)
+export function createElementWithClass(tag, className) {
+    const element = document.createElement(tag);
+    element.className = className;
+    return element;
+}
+</file>
+
+<file path="src/utils/iosPermission.js">
+export function requestIOSMotionPermission(enableOrientationCallback, fallbackCallback) {
+    const wrapper = document.createElement('div');
+    wrapper.id = 'motion-permission-window';
+  
+    const message = document.createElement('p');
+    message.textContent = 'i am usually more of a surprise kind of guy, but i need to ask your permission in this case. Can i use your device motion sensor?';
+  
+    const btnFun = document.createElement('button');
+    btnFun.textContent = 'yes (fun)';
+    btnFun.className = 'btn-option';
+  
+    const btnNormal = document.createElement('button');
+    btnNormal.textContent = 'no (less fun maybe)';
+    btnNormal.className = 'btn-option1';
+    
+  
+    btnFun.addEventListener('click', () => {
+      wrapper.remove();
+      enableOrientationCallback(); // request motion + enable
+    });
+  
+    btnNormal.addEventListener('click', () => {
+      wrapper.remove();
+      fallbackCallback(); // just call normal gravity
+    });
+  
+    wrapper.appendChild(message);
+    wrapper.appendChild(btnFun);
+    wrapper.appendChild(btnNormal);
+    document.body.appendChild(wrapper);
+  }
+</file>
+
+<file path="src/utils/navButtons.js">
+import Matter from 'matter-js';
+import { measureTextDimensions } from './generalUtils.js';
+
+// Color palette for highlight
+const PRIMARY_COLORS = ['#FF0000', '#FFFF00', '#0000FF', '#FFA500', '#008000'];
+
+// Utility: pick a random color
+export function pickRandomPrimary() {
+  return PRIMARY_COLORS[Math.floor(Math.random() * PRIMARY_COLORS.length)];
+}
+
+/**
+ * Creates nav menu with tight Matter.js boxes and "against the wall" layout.
+ * @param {Matter.World} world
+ * @param {HTMLElement} container
+ * @param {string} currentPage - '/', '/who', or '/what'
+ * @returns {Array} for syncDOMWithBodies
+ */
+export function createPhysicsNavMenu(world, container, currentPage) {
+  const navButtons = [
+    { label: 'who?', path: '/who', id: 'who' },
+    { label: '?',    path: '/',    id: 'home' },
+    { label: 'what?', path: '/what', id: 'what' }
+  ];
+
+  // Pick highlight color once per load
+  if (!window.__navHighlightColor) window.__navHighlightColor = pickRandomPrimary();
+  const highlightColor = window.__navHighlightColor;
+
+  const bodies = [];
+  const margin = 18; // Smallest gap from edge (adjust to taste)
+  const y = 40;      // Vertically near the top
+
+  navButtons.forEach((btn, index) => {
+    // Use helper for dimensions
+    const { width, height } = measureTextDimensions(btn.label, 'nav-button');
+
+    // Placement: left, center, right
+    let x;
+    if (index === 0) {
+      // Left edge: half width + margin
+      x = margin + width / 2;
+    } else if (index === 1) {
+      // Center: exactly centered
+      x = window.innerWidth / 2;
+    } else if (index === 2) {
+      // Right edge: window width - half width - margin
+      x = window.innerWidth - margin - width / 2;
+    }
+
+    // DOM setup
+    const el = document.createElement('div');
+    el.textContent = btn.label;
+    el.className = 'nav-button';
+    el.style.position = 'absolute';
+    el.style.cursor = 'pointer';
+    el.style.fontFamily = 'inherit';
+    el.style.userSelect = 'none';
+    el.style.background = 'transparent';
+
+    // Highlight logic (NO underline)
+    const isActive =
+      (currentPage === '/' && btn.id === 'home') ||
+      (currentPage === '/who' && btn.id === 'who') ||
+      (currentPage === '/what' && btn.id === 'what');
+    if (isActive) {
+      el.style.color = highlightColor;
+      el.style.textDecoration = 'none'; // explicitly no underline
+    } else {
+      el.style.color = '#000';
+    }
+
+    // SPA navigation
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.location.pathname !== btn.path) {
+        history.pushState({}, '', btn.path);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      }
+    });
+
+    // Add to DOM and physics
+    container.appendChild(el);
+
+    // Physics: TIGHT bounding box, no added spacing
+    const body = Matter.Bodies.rectangle(x, y, width, height, {
+      isStatic: true
+    });
+    Matter.World.add(world, body);
+    bodies.push({ body, domElement: el });
+  });
+
+  return bodies;
+}
+</file>
+
+<file path="src/utils/physicsSetup.js">
+import Matter from 'matter-js';
+import { requestIOSMotionPermission } from './iosPermission';
+
+// Initialize the Matter.js Engine and World
+export function initializeMatterEngine() {
+  const engine = Matter.Engine.create();
+  return engine;
+}
+
+// Create viewport boundaries
+export function createViewportBoundaries(world, width = window.innerWidth, height = window.innerHeight) {
+  const thickness = 50;
+  const boundaries = [
+    Matter.Bodies.rectangle(width / 2, -thickness / 2, width, thickness, { isStatic: true }),
+    Matter.Bodies.rectangle(width / 2, height + thickness / 2, width, thickness, { isStatic: true }),
+    Matter.Bodies.rectangle(-thickness / 2, height / 2, thickness, height, { isStatic: true }),
+    Matter.Bodies.rectangle(width + thickness / 2, height / 2, thickness, height, { isStatic: true })
+  ];
+  Matter.World.add(world, boundaries);
+  return boundaries;
+}
+
+// MODIFIED: Sync DOM elements with Matter.js bodies
+export function syncDOMWithBodies(bodies, container) {
+  let animationFrameId = null; // Store the animation frame ID
+
+  function sync() {
+    for (const { body, domElement } of bodies) {
+      // Ensure domElement still exists and is in the DOM
+      if (domElement && domElement.isConnected && domElement.offsetParent !== null) {
+        const x = body.position.x;
+        const y = body.position.y;
+        const w = domElement.offsetWidth;
+        const h = domElement.offsetHeight;
+        const angle = body.angle;
+        domElement.style.transform =
+          `translate(${x - w / 2}px, ${y - h / 2}px) rotate(${angle}rad)`;
+      }
+    }
+    animationFrameId = requestAnimationFrame(sync);
+  }
+  sync();
+
+  // Return a function to stop the animation loop
+  return function cleanupSync() {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+  };
+}
+
+
+// Add Mouse Interaction for Dragging
+export function enableDragging(engine, world, container) {
+  const mouse = Matter.Mouse.create(container);
+  const mouseConstraint = Matter.MouseConstraint.create(engine, {
+    mouse,
+    constraint: {
+      stiffness: 0.2,
+      render: { visible: false },
+    },
+  });
+  Matter.World.add(world, mouseConstraint);
+
+  // Custom mobile-friendly tap/drag detection
+  let isDragging = false;
+  let dragStart = { x: 0, y: 0 };
+
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      isDragging = false;
+      dragStart = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY
+      };
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1) {
+      const dx = e.touches[0].clientX - dragStart.x;
+      const dy = e.touches[0].clientY - dragStart.y;
+      if (Math.sqrt(dx * dx + dy * dy) > 10) {
+        isDragging = true;
+      }
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    if (!isDragging && e.target.closest('a, button, .link-text, #container')) {
+      e.preventDefault();
+      e.target.click();
+    }
+  });
+
+  return mouseConstraint;
+}
+
+// Set or Adjust Gravity Dynamically
+export function setGravity(engine, x = 0, y = 1) {
+  engine.gravity.x = x;
+  engine.gravity.y = y;
+}
+
+
+
+
+export function enableDeviceGravity(engine) {
+  let isListening = false; // Flag to track if the event listener is active
+  let currentHandler = null; // Store the active handler reference for removal
+
+  // 1. The core function that updates gravity based on device orientation
+  const handleOrientation = (event) => {
+    // Guard: If the engine or gravity object doesn't exist (e.g., during teardown), do nothing.
+    if (!engine || !engine.gravity) {
+      // console.warn('Engine or engine.gravity is not available in handleOrientation.');
+      return;
+    }
+
+    const { beta, gamma } = event; // beta is front-to-back, gamma is side-to-side
+
+    // Normalize gamma and beta to a range (e.g., -1 to 1) for gravity
+    // Adjust the division factor (e.g., 90) to control sensitivity
+    const gravityX = Math.max(-1, Math.min(1, (gamma || 0) / 90)); // Use (gamma || 0) for safety
+    const gravityY = Math.max(-1, Math.min(1, (beta || 0) / 90));  // Use (beta || 0) for safety
+
+    engine.gravity.x = gravityX;
+    engine.gravity.y = gravityY;
+  };
+
+  // 2. Fallback function if orientation is not available or not permitted
+  const fallbackToDefaultGravity = () => {
+    // console.log('Falling back to default gravity.');
+    setGravity(engine, 0, 1); // Or your desired default (e.g., randomGravity())
+  };
+
+  // 3. Function to start listening to device orientation events
+  const startListeningToOrientation = () => {
+    if (!isListening) { // Prevent adding multiple listeners
+      // Store the handler reference
+      currentHandler = handleOrientation;
+      window.addEventListener('deviceorientation', currentHandler, true);
+      isListening = true;
+      // console.log('Device orientation listener added.');
+    }
+  };
+
+  // 4. The cleanup function that will be returned
+  // This function is responsible for removing the event listener
+  const cleanupDeviceGravity = () => {
+    if (isListening && currentHandler) {
+      window.removeEventListener('deviceorientation', currentHandler, true);
+      isListening = false;
+      currentHandler = null; // Clear the stored handler
+      // console.log('Device orientation listener removed.');
+    }
+  };
+
+  // 5. Logic to request permission (for iOS) and enable tilt gravity
+  const attemptToEnableTiltGravity = () => {
+    // A. iOS 13+ requires explicit permission for DeviceOrientationEvent
+    if (
+      typeof DeviceOrientationEvent !== 'undefined' &&
+      typeof DeviceOrientationEvent.requestPermission === 'function'
+    ) {
+      DeviceOrientationEvent.requestPermission()
+        .then(permissionState => {
+          if (permissionState === 'granted') {
+            startListeningToOrientation();
+          } else {
+            // console.warn('Device orientation permission not granted by user.');
+            fallbackToDefaultGravity();
+          }
+        })
+        .catch(error => {
+          // This catch block might be hit if the user dismisses the prompt too quickly
+          // or if there's an unexpected issue with the API.
+          // console.error('Error requesting device orientation permission:', error);
+          // Attempt with DeviceMotionEvent as a deeper fallback for some iOS quirks (less common now)
+          if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+            DeviceMotionEvent.requestPermission()
+              .then(motionPermissionState => {
+                if (motionPermissionState === 'granted') {
+                  // While DeviceMotionEvent is granted, we still prefer DeviceOrientationEvent for tilt
+                  // This path usually means the user denied DeviceOrientation but might allow generic motion.
+                  // If you strictly need DeviceOrientation, you might just fallback here.
+                  // For simplicity, let's assume if motion is granted, orientation might work (or try adding again).
+                  startListeningToOrientation();
+                } else {
+                  fallbackToDefaultGravity();
+                }
+              })
+              .catch(motionError => {
+                // console.error('Error requesting device motion permission:', motionError);
+                fallbackToDefaultGravity();
+              });
+          } else {
+            fallbackToDefaultGravity();
+          }
+        });
+    } else {
+      // B. For Android devices or older iOS versions/other browsers that don't require explicit permission,
+      // or if DeviceOrientationEvent itself is not defined (very unlikely for modern browsers).
+      // We can try to attach the listener directly.
+      // It's good to check if 'ondeviceorientation' is in window to be more robust.
+      if ('ondeviceorientation' in window) {
+        startListeningToOrientation();
+      } else {
+        // console.warn('Device orientation events not supported by this browser/device.');
+        fallbackToDefaultGravity();
+      }
+    }
+  };
+
+  // 6. Check user's stored preference (if any)
+  const userPreference = localStorage.getItem('gravity-mode');
+
+  if (userPreference === 'orientation') {
+    attemptToEnableTiltGravity();
+  } else if (userPreference === 'normal') {
+    fallbackToDefaultGravity();
+  } else {
+    // 7. If no preference, ask the user (this typically involves your custom UI prompt)
+    // `requestIOSMotionPermission` is your custom function that shows a dialog
+    requestIOSMotionPermission(
+      () => { // This is the 'yes' (enable) callback from your dialog
+        localStorage.setItem('gravity-mode', 'orientation');
+        attemptToEnableTiltGravity();
+      },
+      () => { // This is the 'no' (fallback) callback from your dialog
+        localStorage.setItem('gravity-mode', 'normal');
+        fallbackToDefaultGravity();
+      }
+    );
+  }
+
+  // 8. Return the cleanup function so it can be called when the physics setup is torn down
+  return cleanupDeviceGravity;
+}
+
+
+// Simple mobile device detection
+export function isMobile() {
+  return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+}
+
+// Handle Window Resize for Boundaries
+export function handleResize(boundaries, world) {
+  const resizeHandler = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    boundaries.forEach((boundary, index) => {
+      if (index === 0) Matter.Body.setPosition(boundary, { x: width / 2, y: -25 });
+      if (index === 1) Matter.Body.setPosition(boundary, { x: width / 2, y: height + 25 });
+      if (index === 2) Matter.Body.setPosition(boundary, { x: -25, y: height / 2 });
+      if (index === 3) Matter.Body.setPosition(boundary, { x: width + 25, y: height / 2 });
+    });
+  };
+
+  window.addEventListener('resize', resizeHandler);
+  return () => window.removeEventListener('resize', resizeHandler);
+}
+
+// Clean up a Matter.js engine, runner, container, etc.
+export function teardownMatter(engine, runner, container) {
+  if (runner) Matter.Runner.stop(runner);
+  if (engine) {
+    Matter.World.clear(engine.world, false);
+    Matter.Engine.clear(engine);
+  }
+  if (container && container.parentNode) container.remove();
+}
+</file>
+
+<file path="src/utils/whatNav.js">
+// src/utils/whatNav.js
+import Matter from 'matter-js';
+import { measureTextDimensions } from './generalUtils.js'; // Helper from earlier to measure text dimensions
+
+/**
+ * Creates the specific navigation menu for the what page.
+ *
+ * This menu consists of two buttons (Previous and Next) that allow the user to navigate between projects.
+ * They are placed at the bottom center of the viewport. If the current project is the first, only Next is shown;
+ * if it's the last, only Previous is shown.
+ *
+ * @param {Matter.World} world - The Matter.js world to add the buttons to.
+ * @param {HTMLElement} container - The container element where the DOM buttons are appended.
+ * @param {number} currentProjectIndex - The index of the current project (0-based).
+ * @param {number} totalProjects - The total number of projects.
+ * @returns {Array<Object>} An array of objects for each button containing { body, domElement, target }.
+ */
+export function createWhatProjectNav(world, container, currentProjectIndex, totalProjects) {
+  const margin = 20; // Margin from the bottom of the viewport.
+  const spacing = 20; // Space between the two buttons.
+  const navButtons = [];
+
+  // Determine which buttons to show.
+  const showPrevious = currentProjectIndex > 0;
+  const showNext = currentProjectIndex < totalProjects - 1;
+
+  // Prepare button data (display label and a target value).
+  const buttonsData = [];
+  if (showPrevious) {
+    // For the previous button, label it simply as "Previous"
+    buttonsData.push({ display: 'previous', target: 'previous' });
+  }
+  if (showNext) {
+    // For the next button, label it as "Next"
+    buttonsData.push({ display: 'next', target: 'next' });
+  }
+
+  // First, measure each button's text dimensions using the helper.
+  // The helper creates a temporary DOM element with the class "what-nav-button" to get the correct size.
+  const measuredButtons = buttonsData.map(data => {
+    const dims = measureTextDimensions(data.display, 'what-nav-button');
+    return { ...data, width: dims.width, height: dims.height };
+  });
+
+  // Compute the total width occupied by the buttons (including spacing if both are present).
+  let combinedWidth = measuredButtons.reduce((sum, btn, index) => {
+    return sum + btn.width + (index > 0 ? spacing : 0);
+  }, 0);
+
+  // Determine the starting x-coordinate so that the combined buttons are centered.
+  let startX = (window.innerWidth - combinedWidth) / 2;
+
+  // For each button, create the Matter.js body and DOM element.
+  measuredButtons.forEach((buttonData, index) => {
+    const centerX = startX + buttonData.width / 2;
+    const centerY = window.innerHeight - margin - buttonData.height / 2;
+
+    // Create a static Matter.js body with exactly the measured dimensions.
+    const body = Matter.Bodies.rectangle(centerX, centerY, buttonData.width, buttonData.height, { isStatic: true });
+
+    // Create the corresponding DOM element.
+    const buttonElement = document.createElement('div');
+    buttonElement.textContent = buttonData.display;
+    // Minimal inline style for positioning; visual styling should be done via the CSS class.
+    buttonElement.style.position = 'absolute';
+    buttonElement.classList.add('what-nav-button');
+
+    // Append the DOM element to the container.
+    container.appendChild(buttonElement);
+    // Add the body to the Matter.js world.
+    Matter.World.add(world, body);
+
+    // Attach a click event to trigger navigation.
+    buttonElement.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Dispatch a custom event to signal navigation. You can listen for this event elsewhere in your code.
+      const navEvent = new CustomEvent('whatProjectNav', { detail: { target: buttonData.target } });
+      window.dispatchEvent(navEvent);
+    });
+
+    navButtons.push({ body, domElement: buttonElement, target: buttonData.target });
+
+    // Update startX for the next button.
+    startX += buttonData.width + spacing;
+  });
+
+  return navButtons;
+}
+</file>
+
+<file path="src/utils/whatPhysics.js">
+// src/utils/whatPhysics.js
+
+import Matter from 'matter-js';
+import {
+  initializeMatterEngine,
+  createViewportBoundaries,
+  syncDOMWithBodies,      // Expects this to return a cleanup function
+  enableDragging,
+  enableDeviceGravity,    // Expects this to return a cleanup function
+  isMobile,
+  setGravity,
+  handleResize,           // Expects this to return a cleanup function
+} from './physicsSetup.js';
+import projectsData from '../data/projects.json';
+import {
+  spawnCenterText,
+  measureTextDimensions, 
+  loadAndMeasureImage,
+  loadAndMeasureVideo
+} from './generalUtils.js';
+import { createPhysicsNavMenu } from './navButtons.js';
+import { createWhatProjectNav } from './whatNav.js'; // Ensure class name 'what-nav-button' is used by this
+import { openFullProjectModal } from './fullProjectModal.js';
+
+const MOBILE_SCALING = {
+  image: 0.45, // e.g., images are 45% of their desktop summary size on mobile
+  video: 0.1,  // Videos might need more aggressive scaling due to their original size
+  text: 1.0,   // Text physics bodies might be 80% of desktop, actual font via CSS
+  button: 0.8, // Button physics bodies
+  // Add more types if needed
+};
+
+const DESKTOP_SCALING = { // Original scales you were using
+  image: 0.75,
+  video: 0.15,
+  text: 1.0,    // Assuming no explicit scaling for text/button bodies before
+  button: 1.0,
+};
+
+export function setupWhatPhysics() {
+  // --- Step 1: Initialization and Variable Scoping ---
+  const engine = initializeMatterEngine();
+  const world = engine.world;
+
+  // Store cleanup functions. Initialize them to no-op functions.
+  let cleanupDeviceGravityListener = () => {};
+  let cleanupSyncLoop = () => {};
+  let cleanupResizeHandler = () => {}; // For the return of handleResize
+
+  const bodies = []; // To track all Matter bodies and their DOM elements
+
+  // --- Step 2: Gravity Setup ---
+  function randomGravity() {
+    return {
+      x: (Math.random() - 0.5) * 0.3,
+      y: (Math.random() - 0.5) * 0.3
+    };
+  }
+
+  if (isMobile()) {
+    // Store the returned cleanup function from enableDeviceGravity
+    cleanupDeviceGravityListener = enableDeviceGravity(engine);
+  } else {
+    const initialGravity = randomGravity();
+    setGravity(engine, initialGravity.x, initialGravity.y);
+  }
+
+  // --- Step 3: Boundaries and Resize Handling ---
+  const boundaries = createViewportBoundaries(world);
+  // Store the returned cleanup function from handleResize
+  cleanupResizeHandler = handleResize(boundaries, world);
+
+  // --- Step 4: DOM Container Setup ---
+  const container = document.createElement('div');
+  container.id = 'container';
+  container.classList.add('container');
+  container.style.touchAction = 'none'; // Crucial for custom pointer/touch handling
+  document.body.appendChild(container);
+
+  // --- Step 5: Project Data and State ---
+  const projects = projectsData.projects;
+  let currentProjectIndex = 0;
+  let currentElementIndex = 0;
+
+  // --- Step 6: Initial Project Title ---
+  let { body: titleBody, domElement: titleDom } = spawnCenterText(
+    world,
+    container,
+    projects[currentProjectIndex].title,
+    { tag: 'h1', className: 'whatpage-title' }
+  );
+  bodies.push({ body: titleBody, domElement: titleDom });
+
+ const amIMobile = isMobile(); // Check once at the start of setupWhatPhysics
+
+  async function addProjectElement(elementData, spawnX, spawnY) {
+    let domElement, measuredWidth, measuredHeight;
+    
+    // Determine current scale based on device
+    const currentImageScale = amIMobile ? MOBILE_SCALING.image : DESKTOP_SCALING.image;
+    const currentVideoScale = amIMobile ? MOBILE_SCALING.video : DESKTOP_SCALING.video;
+    // For text and buttons, we might primarily control visual size with CSS,
+    // but we can scale the physics body if desired.
+    const currentTextBodyScale = amIMobile ? MOBILE_SCALING.text : DESKTOP_SCALING.text;
+    const currentButtonBodyScale = amIMobile ? MOBILE_SCALING.button : DESKTOP_SCALING.button;
+
+    if (elementData.type === 'image') {
+      // Use currentImageScale when loading/measuring
+      const data = await loadAndMeasureImage(elementData.src, container, currentImageScale);
+      domElement = data.element;
+      measuredWidth = data.width;
+      measuredHeight = data.height;
+      domElement.classList.add('project-image');
+    } else if (elementData.type === 'video') {
+      // Use currentVideoScale
+      const data = await loadAndMeasureVideo(elementData.src, container, currentVideoScale);
+      domElement = data.element;
+      measuredWidth = data.width;
+      measuredHeight = data.height;
+      domElement.classList.add('project-video');
+/* ── TEXT ELEMENTS ─────────────────────────────────────────── */
+} else if (elementData.type === 'text') {
+  // 1 ▸ decide CSS class
+  const cssClass = (() => {
+    switch (elementData.class) {
+      case 'description': return 'description-text';
+      case 'details':     return 'details-text';
+      case 'credits':     return 'credits-text';
+      default:            return 'project-text';
+    }
+  })();
+  const summaryText = elementData.content.split('. ')[0];
+
+  // Measure with wrapping, relying on the CSS class for fit-content
+  const { width: rawW, height: rawH } = measureTextDimensions(
+    summaryText,
+    cssClass,
+    { wrap: true } // This flag might be less important now if class has white-space: pre-line
+  );
+
+  measuredWidth  = rawW * currentTextBodyScale; // currentTextBodyScale is likely 1.0
+  measuredHeight = rawH * currentTextBodyScale;
+
+  domElement = document.createElement('div');
+  domElement.innerHTML = summaryText.replace(/\n/g, '<br>');
+  domElement.classList.add(cssClass); // Applies display:block, width:fit-content, etc.
+  // domElement.style.display = 'inline-table'; // REMOVE this if you were experimenting
+  // domElement.style.display = 'inline-block'; // REMOVE this
+  container.appendChild(domElement);
+
+  // ... (ResizeObserver logic, which should still work fine) ...
+// Inside addProjectElement, when creating the ResizeObserver for text elements
+    const ro = new ResizeObserver(([e]) => {
+  // Ensure body is still valid and part of the Matter world
+  if (body && world.bodies.includes(body)) {
+      const currentBodyWidth = body.bounds.max.x - body.bounds.min.x;
+      const currentBodyHeight = body.bounds.max.y - body.bounds.min.y;
+
+      const newDomWidth = e.contentRect.width;
+      const newDomHeight = e.contentRect.height;
+
+      // Check for positive dimensions to avoid division by zero or NaN scales
+      if (currentBodyWidth > 0 && currentBodyHeight > 0 && newDomWidth > 0 && newDomHeight > 0) {
+          const scaleX = newDomWidth / currentBodyWidth;
+          const scaleY = newDomHeight / currentBodyHeight;
+
+          // Apply scaling only if there's a noticeable difference (e.g., > 1%)
+          // This helps prevent jitter from tiny floating point differences.
+          if (Math.abs(scaleX - 1) > 0.01 || Math.abs(scaleY - 1) > 0.01) {
+               Matter.Body.scale(body, scaleX, scaleY);
+               // Re-set inertia after scaling to prevent odd rotations if density changes drastically
+               Matter.Body.setInertia(body, Matter.Body.getInertia(body));
+          }
+            }
+        } else {
+            // If body is no longer valid (e.g., removed from world), unobserve
+            ro.unobserve(e.target); // e.target is the domElement
+        }
+      });
+      ro.observe(domElement);
+
+    } else if (elementData.type === 'button') {
+      domElement = document.createElement('button');
+      domElement.textContent = elementData.content;
+      domElement.classList.add('view-full-project-button');
+      domElement.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openFullProjectModal(projects[currentProjectIndex].details);
+      });
+      container.appendChild(domElement);
+      const rect = domElement.getBoundingClientRect();
+      measuredWidth = rect.width || 100; // Fallback
+      measuredHeight = rect.height || 30; // Fallback
+      // Scale the physics body dimensions for button
+      measuredWidth *= currentButtonBodyScale;
+      measuredHeight *= currentButtonBodyScale;
+    } else {
+      domElement = document.createElement('div');
+      domElement.textContent = 'Unknown element type';
+      domElement.classList.add('project-unknown');
+      measuredWidth = elementData.width || 100; // Fallback
+      measuredHeight = elementData.height || 30; // Fallback
+      // Apply a generic mobile scale if desired for unknown types too
+      const genericScale = amIMobile ? 0.6 : 1.0;
+      measuredWidth = (elementData.width || 100) * genericScale;
+      measuredHeight = (elementData.height || 30) * genericScale;
+      container.appendChild(domElement);
+    }
+    
+    domElement.classList.add('project-element');
+    domElement.style.position = 'absolute';
+    domElement.style.userSelect = 'none';
+    domElement.setAttribute('draggable', 'false');
+    
+    // Re-measure DOM element for visual reference if needed, but physics body uses scaled values
+    // const finalRect = domElement.getBoundingClientRect();
+    // Note: measuredWidth and measuredHeight are now the SIZED values for the physics body
+
+    const body = Matter.Bodies.rectangle(
+      (typeof spawnX === 'number') ? spawnX : Math.random() * window.innerWidth,
+      (typeof spawnY === 'number') ? spawnY : Math.random() * window.innerHeight,
+      measuredWidth > 0 ? measuredWidth : 50,
+      measuredHeight > 0 ? measuredHeight : 20,
+      { restitution: 0.9, friction: 0.05 }
+    );
+    Matter.World.add(world, body);
+    bodies.push({ body, domElement });
+  }
+
+  // --- Step 8: `clearProjectElements` Function ---
+  function clearProjectElements() {
+    for (let i = bodies.length - 1; i >= 0; i--) {
+      const item = bodies[i];
+      if (item.body !== titleBody &&
+          !(item.domElement.classList && item.domElement.classList.contains('nav-button')) &&
+          !(item.domElement.classList && item.domElement.classList.contains('what-nav-button'))
+      ) {
+        // Disconnect ResizeObserver if it exists
+        if (item.ro && typeof item.ro.disconnect === 'function') {
+          item.ro.disconnect();
+        }
+
+        Matter.World.remove(world, item.body);
+        if (item.domElement.parentNode) {
+          item.domElement.parentNode.removeChild(item.domElement);
+        }
+        bodies.splice(i, 1);
+      }
+    }
+  }
+
+  // --- Step 9: General Navigation Menu ---
+  const navMenuBodies = createPhysicsNavMenu(world, container, '/what');
+  bodies.push(...navMenuBodies);
+
+  // --- Step 10: Pointer Event Handling for Spawning ---
+  let pointerDownPos = null;
+  let isDragging = false;
+  const DRAG_THRESHOLD = 5;
+
+  // Define handlers as constants to ensure correct removal
+  const handlePointerDown = (e) => {
+    if (!e.isPrimary) return;
+    pointerDownPos = { x: e.clientX, y: e.clientY };
+    isDragging = false;
+  };
+
+  const handlePointerMove = (e) => {
+    if (!e.isPrimary || !pointerDownPos) return;
+    const dx = e.clientX - pointerDownPos.x;
+    const dy = e.clientY - pointerDownPos.y;
+    if (Math.sqrt(dx * dx + dy * dy) > DRAG_THRESHOLD) {
+      isDragging = true;
+    }
+  };
+
+  const handlePointerUp = (e) => {
+    if (!e.isPrimary) return;
+
+    if (isDragging) {
+      isDragging = false;
+      pointerDownPos = null;
+      return;
+    }
+
+    // Check if the tap was on the container itself or a non-interactive child
+    if (e.target === container || container.contains(e.target)) {
+      // Prevent spawning if a button with its own interaction was clicked/tapped
+      if (e.target.classList.contains('view-full-project-button') ||
+          e.target.closest('.nav-button') || // General nav
+          e.target.closest('.what-nav-button')) { // Project-specific nav (ensure this class is used in whatNav.js)
+        pointerDownPos = null; // Reset, but let the button's own click handler fire
+        return;
+      }
+      handleClickToSpawn(e); // Proceed to spawn
+    }
+    pointerDownPos = null; // Reset after any interaction
+  };
+
+  const handlePointerCancel = (e) => {
+    if (!e.isPrimary) return;
+    pointerDownPos = null;
+    isDragging = false;
+  };
+
+  // Attach pointer event listeners
+  container.addEventListener('pointerdown', handlePointerDown);
+  container.addEventListener('pointermove', handlePointerMove);
+  container.addEventListener('pointerup', handlePointerUp);
+  container.addEventListener('pointercancel', handlePointerCancel);
+
+  // --- Step 11: `handleClickToSpawn` Function (Triggered by PointerUp) ---
+  async function handleClickToSpawn(event) {
+    if (isDragging) return; // Should already be handled by pointerup, but as a safeguard
+
+    const x = event.clientX;
+    const y = event.clientY;
+
+    const currentProject = projects[currentProjectIndex];
+    const summaryElements = currentProject.summary.elements;
+
+    if (currentElementIndex < summaryElements.length) {
+      const elementData = summaryElements[currentElementIndex];
+      await addProjectElement(elementData, x, y);
+      currentElementIndex++;
+      if (currentElementIndex === summaryElements.length) {
+        const buttonData = { type: 'button', content: 'View Full Project' };
+        await addProjectElement(buttonData, x + (Math.random()*40-20), y + (Math.random()*40-20)); // Slight offset
+      }
+    } else {
+      // Advance to the next project
+      currentProjectIndex = (currentProjectIndex + 1) % projects.length;
+      currentElementIndex = 0;
+      clearProjectElements(); // Clears only summary items, not title/nav
+
+      // Remove old title
+      Matter.World.remove(world, titleBody);
+      if (titleDom.parentNode) titleDom.parentNode.removeChild(titleDom);
+      const titleIndexInBodies = bodies.findIndex(b => b.body === titleBody);
+      if (titleIndexInBodies > -1) bodies.splice(titleIndexInBodies, 1);
+
+
+      // Create new title
+      const newTitleData = spawnCenterText(
+        world,
+        container,
+        projects[currentProjectIndex].title,
+        { tag: 'h1', className: 'whatpage-title' }
+      );
+      titleBody = newTitleData.body;
+      titleDom = newTitleData.domElement;
+      bodies.push({ body: titleBody, domElement: titleDom });
+      Matter.Body.setPosition(titleBody, { x: window.innerWidth / 2, y: window.innerHeight / 2 });
+
+      if (!isMobile()) { // Only change gravity on desktop, mobile uses device orientation
+        const newGravity = randomGravity();
+        setGravity(engine, newGravity.x, newGravity.y);
+      }
+      
+      updateSpecificNav();
+    }
+  }
+
+  // --- Step 12: Project-Specific Navigation (Bottom Nav) ---
+  let specificNavButtonObjects = createWhatProjectNav(world, container, currentProjectIndex, projects.length);
+  bodies.push(...specificNavButtonObjects);
+
+  function updateSpecificNav() {
+    // Remove old specific nav buttons from Matter world, DOM, and the `bodies` array
+    specificNavButtonObjects.forEach(({ body, domElement }) => {
+      Matter.World.remove(world, body);
+      if (domElement.parentNode) {
+        domElement.parentNode.removeChild(domElement);
+      }
+      const indexInBodies = bodies.findIndex(b => b.body === body);
+      if (indexInBodies > -1) {
+        bodies.splice(indexInBodies, 1);
+      }
+    });
+    
+    // Create and add new ones
+    specificNavButtonObjects = createWhatProjectNav(world, container, currentProjectIndex, projects.length);
+    bodies.push(...specificNavButtonObjects);
+  }
+
+  // --- Step 13: Custom Event Listener for Project Navigation ---
+  function handleProjectNavigation(newIndex) {
+    currentProjectIndex = newIndex;
+    currentElementIndex = 0;
+    clearProjectElements();
+
+    // Remove old title
+    Matter.World.remove(world, titleBody);
+    if (titleDom.parentNode) titleDom.parentNode.removeChild(titleDom);
+    const titleIndexInBodies = bodies.findIndex(b => b.body === titleBody);
+    if (titleIndexInBodies > -1) bodies.splice(titleIndexInBodies, 1);
+
+
+    // Create new title
+    const newTitleData = spawnCenterText(
+      world,
+      container,
+      projects[currentProjectIndex].title,
+      { tag: 'h1', className: 'whatpage-title' }
+    );
+    titleBody = newTitleData.body;
+    titleDom = newTitleData.domElement;
+    bodies.push({ body: titleBody, domElement: titleDom });
+    Matter.Body.setPosition(titleBody, { x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    
+    if (!isMobile()) {
+        const newGravity = randomGravity();
+        setGravity(engine, newGravity.x, newGravity.y);
+    }
+    updateSpecificNav();
+  }
+  
+  // Define the handler for the custom event
+  const handleWhatProjectNavEvent = (e) => {
+    const { target } = e.detail;
+    let newIndex = currentProjectIndex;
+    if (target === 'previous') {
+      newIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
+    } else if (target === 'next') {
+      newIndex = (currentProjectIndex + 1) % projects.length;
+    } else if (typeof target === 'number' && target >= 0 && target < projects.length) {
+        newIndex = target;
+    }
+    if (newIndex !== currentProjectIndex) { // Only navigate if index actually changes
+        handleProjectNavigation(newIndex);
+    }
+  };
+  window.addEventListener('whatProjectNav', handleWhatProjectNavEvent);
+
+  // --- Step 14: Start DOM Syncing, Dragging, and Matter.js Runner ---
+  // Store the returned cleanup function from syncDOMWithBodies
+  cleanupSyncLoop = syncDOMWithBodies(bodies, container);
+
+  enableDragging(engine, world, container); // Assuming this handles its own cleanup if needed, or is minor
+
+  const runner = Matter.Runner.create();
+  Matter.Runner.run(runner, engine);
+
+  
+/* === DEBUG RENDERER (wire-frame overlay) ===================== */
+const DEBUG = false;   // flip to false in production
+
+let debugRender = null;
+let debugResizeHandler = null;
+
+if (DEBUG) {
+  debugRender = Matter.Render.create({
+    element: container,          // overlays inside same div
+    engine:  engine,
+    options: {
+      width:        window.innerWidth,
+      height:       window.innerHeight,
+      wireframes:   true,        // <-- outlines only
+      background:   'transparent',
+      pixelRatio:   window.devicePixelRatio,
+    },
+  });
+  Matter.Render.run(debugRender);
+
+  // keep canvas size in sync on resize
+  debugResizeHandler = () => {
+    debugRender.canvas.width  = window.innerWidth;
+    debugRender.canvas.height = window.innerHeight;
+    debugRender.options.width  = window.innerWidth;
+    debugRender.options.height = window.innerHeight;
+  };
+  window.addEventListener('resize', debugResizeHandler);
+}
+/* ============================================================= */
+
+  // --- Step 15: Teardown Function ---
+  return function teardownWhatPhysics() {
+    // console.log('Tearing down WhatPhysics...');
+
+    // A. Remove event listeners
+    container.removeEventListener('pointerdown', handlePointerDown);
+    container.removeEventListener('pointermove', handlePointerMove);
+    container.removeEventListener('pointerup', handlePointerUp);
+    container.removeEventListener('pointercancel', handlePointerCancel);
+    window.removeEventListener('whatProjectNav', handleWhatProjectNavEvent);
+    // console.log('Custom and pointer listeners removed.');
+
+    // B. Call cleanup functions for ongoing processes
+    if (cleanupSyncLoop) {
+      cleanupSyncLoop();
+      // console.log('DOM sync loop stopped.');
+    }
+    if (cleanupDeviceGravityListener) {
+      cleanupDeviceGravityListener();
+      // console.log('Device gravity listener stopped.');
+    }
+    if (cleanupResizeHandler) {
+      cleanupResizeHandler();
+      // console.log('Resize handler stopped.');
+    }
+
+    // C. Stop Matter.js
+    Matter.Runner.stop(runner);
+    // console.log('Matter Runner stopped.');
+
+    // Clear all bodies from the Matter world and DOM *before* clearing the world/engine
+    // This also helps if syncDOMWithBodies tries one last frame.
+    bodies.forEach(item => {
+      if (item.body && world.bodies.includes(item.body)) { // Check if body is still in world
+         Matter.World.remove(world, item.body, true); // true for deep removal if it's a composite
+      }
+      if (item.domElement && item.domElement.parentNode) {
+        item.domElement.parentNode.removeChild(item.domElement);
+      }
+    });
+    bodies.length = 0; // Empty the tracking array
+
+    Matter.World.clear(world, false); // false: don't clear child composites recursively if already handled
+    // console.log('Matter World cleared.');
+    Matter.Engine.clear(engine);
+    // console.log('Matter Engine cleared.');
+
+    // D. Remove the main container from the DOM
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+      // console.log('Physics container removed from DOM.');
+    }
+    // console.log('WhatPhysics teardown complete.');
+  };
+}
+</file>
+
+<file path="src/utils/whoPhysics copy.js">
+import Matter from 'matter-js';
+import {
+  initializeMatterEngine,
+  createViewportBoundaries,
+  syncDOMWithBodies,
+  enableDragging,
+  isMobile,
+  enableDeviceGravity,
+  setGravity,
+  handleResize,
+} from './physicsSetup.js';
+import { loadAndMeasureImage } from '../utils/generalUtils.js';
+import { createPhysicsNavMenu } from '../utils/navButtons.js';
+
+// Example asset imports
+import headPath from '../assets/who/head.png';
+import torsoPath from '../assets/who/torso.png';
+import leftUpperArmPath from '../assets/who/leftUpperArm.png';
+import leftLowerArmPath from '../assets/who/leftLowerArm.png';
+import rightUpperArmPath from '../assets/who/rightUpperArm.png';
+import rightLowerArmPath from '../assets/who/rightLowerArm.png';
+import leftUpperLegPath from '../assets/who/leftUpperLeg.png';
+import leftLowerLegPath from '../assets/who/leftLowerLeg.png';
+import rightUpperLegPath from '../assets/who/rightUpperLeg.png';
+import rightLowerLegPath from '../assets/who/rightLowerLeg.png';
+
+function addContactLinks(world, container, bodies, spawnX, spawnY) {
+  // Create Instagram link element
+  const instaLink = document.createElement('a');
+  instaLink.classList.add('contact-dynamic-link'); // Style in CSS
+  instaLink.textContent = 'my instagram';
+  instaLink.href = 'https://www.instagram.com/giampogonzalez'; // Replace with your actual handle
+  instaLink.target = '_blank';
+  container.appendChild(instaLink);
+  const instaRect = instaLink.getBoundingClientRect();
+  // Position relative to the spawn point: a bit to the left
+  const instaX = spawnX - instaRect.width - 10;
+  const instaY = spawnY;
+  const instaBody = Matter.Bodies.rectangle(
+    instaX,
+    instaY,
+    instaRect.width,
+    instaRect.height,
+    { isStatic: false }
+  );
+  Matter.World.add(world, instaBody);
+  bodies.push({ body: instaBody, domElement: instaLink });
+
+  // Create Email link element
+  const emailLink = document.createElement('a');
+  emailLink.classList.add('contact-dynamic-link');
+  emailLink.textContent = 'send me an email';
+  emailLink.href = 'mailto:giampobo@gmail.com';
+  container.appendChild(emailLink);
+  const emailRect = emailLink.getBoundingClientRect();
+  // Position relative to the spawn point: a bit to the right
+  const emailX = spawnX + 10;
+  const emailY = spawnY;
+  const emailBody = Matter.Bodies.rectangle(
+    emailX,
+    emailY,
+    emailRect.width,
+    emailRect.height,
+    { isStatic: false }
+  );
+  Matter.World.add(world, emailBody);
+  bodies.push({ body: emailBody, domElement: emailLink });
+}
+
+function addWhoTexts(world, container, bodies) {
+
+  const isMobile = window.innerWidth <= 768;
+
+  let scrollWrapper;
+  if (isMobile) {
+    scrollWrapper = document.createElement('div');
+    scrollWrapper.id = 'who-text-scroll-wrapper';
+    container.appendChild(scrollWrapper);
+  }
+
+  const isOnMobile = window.innerWidth <= 768; // or use your existing isMobile()
+
+  const baseX = isOnMobile 
+    ? 20         // center text on mobile
+    : window.innerWidth * 0.60;     // keep right side on desktop
+
+  let currentY = isOnMobile 
+    ? window.innerHeight * 0.55     // start text below puppet
+    : window.innerHeight * 0.25;    // keep top section on desktop
+
+  // === 1) TITLE BLOCK ===
+  const titleEl = document.createElement('h1');
+  titleEl.classList.add('who-title');
+  titleEl.textContent = 'gianpaolo bormioli';
+
+  const target = isMobile ? scrollWrapper : container;
+  target.appendChild(titleEl);
+  const titleRect = titleEl.getBoundingClientRect();
+  // Place the title so its center matches (baseX, currentY + half its height)
+  const titleX = baseX + (titleRect.width / 2);
+  const titleY = currentY + (titleRect.height / 2);
+
+  const titleBody = Matter.Bodies.rectangle(
+    titleX,
+    titleY,
+    titleRect.width,
+    titleRect.height,
+    { isStatic: true }
+  );
+  Matter.World.add(world, titleBody);
+  bodies.push({ body: titleBody, domElement: titleEl });
+
+  // Add some vertical spacing below the title
+  currentY += titleRect.height + (isOnMobile ? 50 : 100);
+
+// === 2) FIRST PARAGRAPH BLOCK ===
+const firstParaEl = document.createElement('p');
+firstParaEl.classList.add('who-paragraph');
+// Use innerHTML so we can insert markup into the text.
+firstParaEl.innerHTML = 
+  `In other words: me.
+A designer is a quick and easy way to define what I do. A storyteller is a more flattering and poetic one. Anyone who’s had the arguable luck of spending more than five minutes with me can vouch for my tendency to narrate endless stories, down to the smallest details, with the bright enthusiasm of friends who’ve already heard them a thousand times. This habit naturally shaped the way I experience things, as potential stories.
+Thanks to my beloved mother, who always made me tidy my room (not always successfully), I developed an acute attention to detail—if anything, just to pair it with a dose of merciless and indiscriminate (self)criticism. A perfect mix for storytelling, very humbly. Creativity serves the same purpose, providing the how, which medium, which tool, which software?
+Shamelessly following the zeitgeist, I make my own kefir, buy nice coffee beans and am way too familiar around natural wineries. A sensitive young man, some might say. I read, worked, ate, drank, traveled, and enjoyed all of it for one reason: to stock pieces of life that allow me to better tell stories. My focus is on telling them, but I’m also an avid consumer of others' stories.
+<span class="contact-link">Tell me yours.</span>`;
+
+target.appendChild(firstParaEl);
+const firstParaRect = firstParaEl.getBoundingClientRect();
+
+const firstParaX = baseX + (firstParaRect.width / 2);
+const firstParaY = currentY + (firstParaRect.height / 2);
+
+const firstParaBody = Matter.Bodies.rectangle(
+  firstParaX,
+  firstParaY,
+  firstParaRect.width,
+  firstParaRect.height,
+  { isStatic: true }
+);
+Matter.World.add(world, firstParaBody);
+bodies.push({ body: firstParaBody, domElement: firstParaEl });
+
+  // --- Attach event to the clickable text ---
+  const contactLink = firstParaEl.querySelector('.contact-link');
+  let linksSpawned = false;
+  contactLink.addEventListener('click', (event) => {
+    if (!linksSpawned) {
+      // Capture the cursor position from the event.
+      const spawnX = event.clientX;
+      const spawnY = event.clientY;
+      // Now spawn the dynamic links at the cursor's position.
+      addContactLinks(world, container, bodies, spawnX, spawnY);
+      linksSpawned = true;
+    }
+  });
+
+
+  // Add spacing below the first paragraph
+  currentY += firstParaRect.height + (isOnMobile ? 20 : 40);
+
+
+  // === 3) SECOND PARAGRAPH BLOCK ===
+  const secondParaEl = document.createElement('p');
+  secondParaEl.classList.add('who-paragraph');
+  secondParaEl.textContent = 
+    `On a practical level, I work with communication—visual, digital, analog. I do graphics (print & digital), videos, animations, websites, and more experimental things (see the *what?* page). I can print, cut, bind, and sew. I can write and direct too.
+I wish I could say I can sing, but that would be a lie. Big fan of karaoke, though.`;
+  target.appendChild(secondParaEl);
+  const secondParaRect = secondParaEl.getBoundingClientRect();
+
+  const secondParaX = baseX + (secondParaRect.width / 2);
+  const secondParaY = currentY + (secondParaRect.height / 2);
+
+  const secondParaBody = Matter.Bodies.rectangle(
+    secondParaX,
+    secondParaY,
+    secondParaRect.width,
+    secondParaRect.height,
+    { isStatic: true }
+  );
+  Matter.World.add(world, secondParaBody);
+  bodies.push({ body: secondParaBody, domElement: secondParaEl });
+}
+
+/**
+ * Creates a ragdoll composite using measured PNG data,
+ * ensuring arms have short constraints by placing them
+ * physically at the torso's shoulders from the start.
+ */
+function createRagdoll(x, y, scale, loadedData) {
+  const {
+    headData,
+    torsoData,
+    leftUpperArmData,
+    leftLowerArmData,
+    rightUpperArmData,
+    rightLowerArmData,
+    leftUpperLegData,
+    leftLowerLegData,
+    rightUpperLegData,
+    rightLowerLegData,
+  } = loadedData;
+
+  // Basic dimensions
+  const headRadius = (headData.width * scale) / 2;
+  const torsoW = torsoData.width * scale;
+  const torsoH = torsoData.height * scale;
+
+  // TORSO
+  const torsoBody = Matter.Bodies.rectangle(
+    x,
+    y,
+    torsoW,
+    torsoH,
+    { label: 'torso', chamfer: { radius: 10 * scale } }
+  );
+
+  // HEAD: place so its bottom touches torso's top
+  const headBody = Matter.Bodies.circle(
+    x,
+    y - torsoH / 2 - headRadius,
+    headRadius,
+    { label: 'head' }
+  );
+
+  // ARMS
+  // We place each upper arm so that its top anchor point
+  // exactly overlaps the torso's shoulder coordinate.
+  const luaW = leftUpperArmData.width * scale;
+  const luaH = leftUpperArmData.height * scale;
+  const llaW = leftLowerArmData.width * scale;
+  const llaH = leftLowerArmData.height * scale;
+
+  // LEFT UPPER ARM: place center so top is at (x - torsoW/2, y - torsoH/4)
+  const leftShoulderX = x - torsoW / 2;
+  const leftShoulderY = y - torsoH / 4;
+  const leftUpperArmBody = Matter.Bodies.rectangle(
+    leftShoulderX,
+    leftShoulderY + luaH / 2, // offset by half its height so top aligns
+    luaW,
+    luaH,
+    { label: 'leftUpperArm', chamfer: { radius: 5 * scale } }
+  );
+  // LEFT LOWER ARM: place so top aligns with bottom of upper arm
+  const leftLowerArmBody = Matter.Bodies.rectangle(
+    leftShoulderX,
+    (leftShoulderY + luaH / 2) + luaH / 2 + llaH / 2, 
+    llaW,
+    llaH,
+    { label: 'leftLowerArm', chamfer: { radius: 5 * scale } }
+  );
+
+  // RIGHT ARMS
+  const ruaW = rightUpperArmData.width * scale;
+  const ruaH = rightUpperArmData.height * scale;
+  const rlaW = rightLowerArmData.width * scale;
+  const rlaH = rightLowerArmData.height * scale;
+
+  const rightShoulderX = x + torsoW / 2;
+  const rightShoulderY = y - torsoH / 4;
+  const rightUpperArmBody = Matter.Bodies.rectangle(
+    rightShoulderX,
+    rightShoulderY + ruaH / 2,
+    ruaW,
+    ruaH,
+    { label: 'rightUpperArm', chamfer: { radius: 5 * scale } }
+  );
+  const rightLowerArmBody = Matter.Bodies.rectangle(
+    rightShoulderX,
+    (rightShoulderY + ruaH / 2) + ruaH / 2 + rlaH / 2,
+    rlaW,
+    rlaH,
+    { label: 'rightLowerArm', chamfer: { radius: 5 * scale } }
+  );
+
+  // LEGS
+  // Same approach: place them so the top of each leg is exactly at the torso's bottom corners.
+  const lulW = leftUpperLegData.width * scale;
+  const lulH = leftUpperLegData.height * scale;
+  const lllW = leftLowerLegData.width * scale;
+  const lllH = leftLowerLegData.height * scale;
+
+  // Left hip
+  const leftHipX = x - torsoW / 4;
+  const leftHipY = y + torsoH / 2;
+  const leftUpperLegBody = Matter.Bodies.rectangle(
+    leftHipX,
+    leftHipY + lulH / 2,
+    lulW,
+    lulH,
+    { label: 'leftUpperLeg', chamfer: { radius: 5 * scale } }
+  );
+  const leftLowerLegBody = Matter.Bodies.rectangle(
+    leftHipX,
+    leftHipY + lulH + lllH / 2,
+    lllW,
+    lllH,
+    { label: 'leftLowerLeg', chamfer: { radius: 5 * scale } }
+  );
+
+  // Right hip
+  const rulW = rightUpperLegData.width * scale;
+  const rulH = rightUpperLegData.height * scale;
+  const rllW = rightLowerLegData.width * scale;
+  const rllH = rightLowerLegData.height * scale;
+
+  const rightHipX = x + torsoW / 4;
+  const rightHipY = y + torsoH / 2;
+  const rightUpperLegBody = Matter.Bodies.rectangle(
+    rightHipX,
+    rightHipY + rulH / 2,
+    rulW,
+    rulH,
+    { label: 'rightUpperLeg', chamfer: { radius: 5 * scale } }
+  );
+  const rightLowerLegBody = Matter.Bodies.rectangle(
+    rightHipX,
+    rightHipY + rulH + rllH / 2,
+    rllW,
+    rllH,
+    { label: 'rightLowerLeg', chamfer: { radius: 5 * scale } }
+  );
+
+  // CONSTRAINTS
+  // We do NOT specify 'length', so the rest length is the initial distance between pointA & pointB.
+  // Because we physically placed them so they overlap at the joint, the rest length is near zero.
+  // We set stiffness high (0.9) to keep them from floating out.
+  const stiffConstraint = { stiffness: 0.6 };
+  const constraints = [];
+
+  // Neck
+  constraints.push(Matter.Constraint.create({
+    bodyA: headBody,
+    pointA: { x: 0, y: headRadius },
+    bodyB: torsoBody,
+    pointB: { x: 0, y: -torsoH / 2 },
+    ...stiffConstraint,
+  }));
+
+  // LEFT SHOULDER
+  constraints.push(Matter.Constraint.create({
+    bodyA: torsoBody,
+    pointA: { x: -torsoW / 2, y: -torsoH / 4 },
+    bodyB: leftUpperArmBody,
+    pointB: { x: 0, y: -luaH / 2 },
+    ...stiffConstraint,
+  }));
+  // LEFT ELBOW
+  constraints.push(Matter.Constraint.create({
+    bodyA: leftUpperArmBody,
+    pointA: { x: 0, y: luaH / 2 },
+    bodyB: leftLowerArmBody,
+    pointB: { x: 0, y: -llaH / 2 },
+    ...stiffConstraint,
+  }));
+
+  // RIGHT SHOULDER
+  constraints.push(Matter.Constraint.create({
+    bodyA: torsoBody,
+    pointA: { x: torsoW / 2, y: -torsoH / 4 },
+    bodyB: rightUpperArmBody,
+    pointB: { x: 0, y: -ruaH / 2 },
+    ...stiffConstraint,
+  }));
+  // RIGHT ELBOW
+  constraints.push(Matter.Constraint.create({
+    bodyA: rightUpperArmBody,
+    pointA: { x: 0, y: ruaH / 2 },
+    bodyB: rightLowerArmBody,
+    pointB: { x: 0, y: -rlaH / 2 },
+    ...stiffConstraint,
+  }));
+
+  // LEFT HIP
+  constraints.push(Matter.Constraint.create({
+    bodyA: torsoBody,
+    pointA: { x: -torsoW / 4, y: torsoH / 2 },
+    bodyB: leftUpperLegBody,
+    pointB: { x: 0, y: -lulH / 2 },
+    ...stiffConstraint,
+  }));
+  // LEFT KNEE
+  constraints.push(Matter.Constraint.create({
+    bodyA: leftUpperLegBody,
+    pointA: { x: 0, y: lulH / 2 },
+    bodyB: leftLowerLegBody,
+    pointB: { x: 0, y: -lllH / 2 },
+    ...stiffConstraint,
+  }));
+
+  // RIGHT HIP
+  constraints.push(Matter.Constraint.create({
+    bodyA: torsoBody,
+    pointA: { x: torsoW / 4, y: torsoH / 2 },
+    bodyB: rightUpperLegBody,
+    pointB: { x: 0, y: -rulH / 2 },
+    ...stiffConstraint,
+  }));
+  // RIGHT KNEE
+  constraints.push(Matter.Constraint.create({
+    bodyA: rightUpperLegBody,
+    pointA: { x: 0, y: rulH / 2 },
+    bodyB: rightLowerLegBody,
+    pointB: { x: 0, y: -rllH / 2 },
+    ...stiffConstraint,
+  }));
+
+  // Assemble composite
+  const ragdoll = Matter.Composite.create({ label: 'ragdoll' });
+  Matter.Composite.add(ragdoll, [
+    headBody,
+    torsoBody,
+    leftUpperArmBody,
+    leftLowerArmBody,
+    rightUpperArmBody,
+    rightLowerArmBody,
+    leftUpperLegBody,
+    leftLowerLegBody,
+    rightUpperLegBody,
+    rightLowerLegBody,
+  ]);
+  constraints.forEach(c => Matter.Composite.add(ragdoll, c));
+
+  // Return mapping for DOM sync
+  const partsMap = {
+    head: headBody,
+    torso: torsoBody,
+    leftUpperArm: leftUpperArmBody,
+    leftLowerArm: leftLowerArmBody,
+    rightUpperArm: rightUpperArmBody,
+    rightLowerArm: rightLowerArmBody,
+    leftUpperLeg: leftUpperLegBody,
+    leftLowerLeg: leftLowerLegBody,
+    rightUpperLeg: rightUpperLegBody,
+    rightLowerLeg: rightLowerLegBody,
+  };
+
+  return { composite: ragdoll, partsMap };
+}
+
+export function setupWhoPhysics() {
+  // 1) Initialize engine and world
+  const engine = initializeMatterEngine();
+  const world = engine.world;
+
+  // 2) Setup gravity + boundaries
+  if (isMobile()) {
+    enableDeviceGravity(engine);
+  } else {
+    setGravity(engine, 0, 1); // or whatever default gravity
+  }
+  const boundaries = createViewportBoundaries(world);
+  const cleanupResize = handleResize(boundaries, world);
+
+  // 3) Create container
+  const container = document.createElement('div');
+  container.id = 'container';
+  document.body.appendChild(container);
+
+  const bodies = [];
+
+  // 4) Navigation menu
+  const navBodies = createPhysicsNavMenu(world, container, '/who');
+  bodies.push(...navBodies);
+
+  // 5) Text blocks (title and two paragraphs)
+  addWhoTexts(world, container, bodies);
+
+
+  // 6) Load assets for the ragdoll (unchanged from previous code)
+  const scaleFactor = 1; // Tweak as needed
+  Promise.all([
+    loadAndMeasureImage(headPath, container, scaleFactor),
+    loadAndMeasureImage(torsoPath, container, scaleFactor),
+    loadAndMeasureImage(leftUpperArmPath, container, scaleFactor),
+    loadAndMeasureImage(leftLowerArmPath, container, scaleFactor),
+    loadAndMeasureImage(rightUpperArmPath, container, scaleFactor),
+    loadAndMeasureImage(rightLowerArmPath, container, scaleFactor),
+    loadAndMeasureImage(leftUpperLegPath, container, scaleFactor),
+    loadAndMeasureImage(leftLowerLegPath, container, scaleFactor),
+    loadAndMeasureImage(rightUpperLegPath, container, scaleFactor),
+    loadAndMeasureImage(rightLowerLegPath, container, scaleFactor),
+  ])
+    .then(([
+      headData,
+      torsoData,
+      leftUpperArmData,
+      leftLowerArmData,
+      rightUpperArmData,
+      rightLowerArmData,
+      leftUpperLegData,
+      leftLowerLegData,
+      rightUpperLegData,
+      rightLowerLegData,
+    ]) => {
+      const loadedData = {
+        headData,
+        torsoData,
+        leftUpperArmData,
+        leftLowerArmData,
+        rightUpperArmData,
+        rightLowerArmData,
+        leftUpperLegData,
+        leftLowerLegData,
+        rightUpperLegData,
+        rightLowerLegData,
+      };
+
+      // 7) Create the ragdoll with the loaded assets
+      const isMobile = window.innerWidth <= 768;
+      const ragdollX = isMobile 
+        ? window.innerWidth / 2 
+        : window.innerWidth / 4;
+      
+      const ragdollY = isMobile 
+        ? window.innerHeight * 0.3  // higher spawn
+        : window.innerHeight * 0.5;
+      
+      const { composite, partsMap } = createRagdoll(ragdollX, ragdollY, scaleFactor, loadedData);
+      Matter.World.addComposite(world, composite);
+
+      // 8) Pair each body with its corresponding DOM element for sync
+      const partNames = [
+        'head',
+        'torso',
+        'leftUpperArm',
+        'leftLowerArm',
+        'rightUpperArm',
+        'rightLowerArm',
+        'leftUpperLeg',
+        'leftLowerLeg',
+        'rightUpperLeg',
+        'rightLowerLeg',
+      ];
+      partNames.forEach(part => {
+        bodies.push({
+          body: partsMap[part],
+          domElement: loadedData[`${part}Data`].element,
+        });
+      });
+
+      enableDragging(engine, world, container);
+      syncDOMWithBodies(bodies, container);
+    })
+    .catch(err => console.error('Error loading images:', err));
+
+    
+if (isMobile()) {
+  // We allow scrolling on mobile, so let's keep the static bodies in sync.
+  window.addEventListener('scroll', () => {
+    bodies.forEach(({ body, domElement }) => {
+      // Only reposition if it's a static body representing a text block
+      if (body.isStatic) {
+        const rect = domElement.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        Matter.Body.setPosition(body, { x: centerX, y: centerY });
+      }
+    });
+  });
+}
+
+  // 9) Optional debug wireframe
+  const render = Matter.Render.create({
+    element: container,
+    engine: engine,
+    options: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      wireframes: true,
+    },
+  });
+  Matter.Render.run(render);
+
+  // 10) Run the engine
+  const runner = Matter.Runner.create();
+  Matter.Runner.run(runner, engine);
+
+  // Return teardown function
+  return function teardownWhoPhysics() {
+    Matter.Runner.stop(runner);
+    Matter.World.clear(world, false);
+    Matter.Engine.clear(engine);
+    if (container.parentNode) container.parentNode.removeChild(container);
+    if (cleanupResize) cleanupResize();
+  };
+}
+</file>
+
+<file path="src/utils/whoPhysics.js">
+// src/utils/whoPhysics.js
+
+import Matter from 'matter-js';
+import {
+  initializeMatterEngine,
+  createViewportBoundaries,
+  syncDOMWithBodies,
+  enableDragging,
+  setGravity,
+  handleResize,
+  enableDeviceGravity,
+  isMobile
+} from './physicsSetup.js';
+import { loadAndMeasureImage } from './generalUtils.js';
+import { createPhysicsNavMenu } from './navButtons.js';
+import { ANCHORS } from '../data/who_text.js';
+
+// --- Ragdoll asset imports ---
+import headPath from '../assets/who/head.png';
+import torsoPath from '../assets/who/torso.png';
+import leftUpperArmPath from '../assets/who/leftUpperArm.png';
+import leftLowerArmPath from '../assets/who/leftLowerArm.png';
+import rightUpperArmPath from '../assets/who/rightUpperArm.png';
+import rightLowerArmPath from '../assets/who/rightLowerArm.png';
+import leftUpperLegPath from '../assets/who/leftUpperLeg.png';
+import leftLowerLegPath from '../assets/who/leftLowerLeg.png';
+import rightUpperLegPath from '../assets/who/rightUpperLeg.png';
+import rightLowerLegPath from '../assets/who/rightLowerLeg.png';
+
+// --- Helper: Get anchor position (fractional, supports dx/dy pixel nudge) ---
+function getAnchorPosition(anchor, isOnMobile) {
+  const mode = isOnMobile ? "mobile" : "desktop";
+  const pos = anchor.position[mode];
+  const dx = pos && "dx" in pos ? pos.dx : 0;
+  const dy = pos && "dy" in pos ? pos.dy : 0;
+  return {
+    x: Math.round((pos.x || 0) * window.innerWidth + dx),
+    y: Math.round((pos.y || 0) * window.innerHeight + dy),
+  };
+}
+
+// --- Microtext spawner ---
+function spawnMicroText(world, container, bodies, micro, event, idx = 0) {
+  let el;
+  if (micro.link) {
+    el = document.createElement('a');
+    el.href = micro.link;
+    el.textContent = micro.text;
+    el.target = "_blank";
+    el.className = "microtext link";
+  } else {
+    el = document.createElement('div');
+    el.textContent = micro.text;
+    el.className = "microtext";
+  }
+  if (micro.class) el.classList.add(micro.class);
+
+  el.style.position = 'absolute';
+  container.appendChild(el);
+
+  // Measure for width/height ONLY
+  const rect = el.getBoundingClientRect();
+
+  // Get mouse coords relative to container
+  const containerRect = container.getBoundingClientRect();
+  const spawnX = event.clientX - containerRect.left;
+  const spawnY = event.clientY - containerRect.top + idx * 36;
+
+  // Create Matter.js body at desired spawnX/Y and with measured size
+  const body = Matter.Bodies.rectangle(
+    spawnX,
+    spawnY,
+    rect.width,
+    rect.height,
+    { restitution: 0.9 }
+  );
+  Matter.World.add(world, body);
+  bodies.push({ body, domElement: el });
+}
+
+// --- Easter egg spawner ---
+function spawnEasterEgg(world, container, bodies) {
+  const el = document.createElement('div');
+  el.textContent = "congrats, you've unleashed maximal chaos. this is why i don't do awards.";
+  el.className = "easter-egg";
+  container.appendChild(el);
+  // Spawn in the center, let it fall dramatically
+  const x = window.innerWidth / 2;
+  const y = -80;
+  const rect = el.getBoundingClientRect();
+  const body = Matter.Bodies.rectangle(x, y, rect.width, rect.height, { restitution: 0.8 });
+  Matter.World.add(world, body);
+  bodies.push({ body, domElement: el });
+}
+
+// --- Main anchor block creator (now using fractional positions!) ---
+function createAnchors(world, container, bodies, isOnMobile) {
+  const spawnedAnchors = new Set();
+
+  ANCHORS.forEach((anchor) => {
+    // Get position using the new system
+    const { x, y } = getAnchorPosition(anchor, isOnMobile);
+
+     // 2. Determine display text based on device type for specific anchors
+    let displayText = anchor.text; // Start with the original text from JSON
+
+    // If it's NOT mobile (i.e., desktop), and the anchor is one of the targeted ones,
+    // replace newline characters with spaces to make it single-line.
+    if (!isOnMobile) {
+      if (anchor.id === "main-name" || anchor.id === "what-about-you") {
+        displayText = anchor.text.replace(/\n/g, ' '); // Replace all occurrences of \n
+      }
+      // Add more 'else if (anchor.id === "some-other-id")' here if other anchors
+      // need different desktop vs. mobile text formatting involving newlines.
+    }
+    // On mobile, displayText will retain any \n characters from anchor.text.
+
+
+    // DOM setup
+    const el = document.createElement('div');
+    el.textContent = displayText;
+    el.className = anchor.size === "big" ? "anchor-big anchor" : "anchor-small anchor";
+     // Add any other classes based on anchor.class if you have that property
+    if (anchor.class) { // Assuming you might have a general 'class' property for anchors
+        el.classList.add(anchor.class);
+    }
+    el.style.position = 'absolute';
+    container.appendChild(el);
+    const rect = el.getBoundingClientRect();
+
+    // Create Matter.js body *centered* at (x, y)
+    const body = Matter.Bodies.rectangle(x, y, rect.width, rect.height, { isStatic: true });
+    Matter.World.add(world, body);
+    bodies.push({ body, domElement: el });
+
+    // --- MODIFICATION FOR TOUCH & CLICK ---
+    let lastTouchCoords = null;
+
+    // Listen to touchend to capture coordinates
+    el.addEventListener('touchend', (touchEvent) => {
+      // Prevent click if touchend is part of a drag/scroll
+      if (touchEvent.cancelable) { // Check if it can be cancelled
+          // A simple check: if the touch moved significantly, it might be a scroll.
+          // This is a basic heuristic. For robust drag detection, you'd need more.
+          // For now, let's assume a tap doesn't move much.
+      }
+      if (touchEvent.changedTouches && touchEvent.changedTouches.length > 0) {
+        lastTouchCoords = {
+          clientX: touchEvent.changedTouches[0].clientX,
+          clientY: touchEvent.changedTouches[0].clientY,
+        };
+      }
+      // We don't preventDefault here usually, to allow the click event to fire.
+      // However, if double spawning occurs, you might need to manage it.
+    }, { passive: true }); // Use passive for touchend if not preventing default scroll
+
+    el.addEventListener('click', (clickEvent) => {
+      if (spawnedAnchors.has(anchor.id)) return;
+      spawnedAnchors.add(anchor.id);
+
+      // Determine the event coordinates to use for spawning
+      const coordsToUse = lastTouchCoords || { // Prioritize last touch coordinates
+        clientX: clickEvent.clientX,
+        clientY: clickEvent.clientY,
+      };
+
+      anchor.microTexts.forEach((micro, microIdx) => {
+        // Pass the determined coordinates (either from touch or click)
+        spawnMicroText(world, container, bodies, micro, coordsToUse, microIdx);
+      });
+
+      lastTouchCoords = null; // Reset for the next interaction
+    });
+    // --- END MODIFICATION ---
+  });
+}
+
+function addRagdoll(world, container, bodies, currentlyIsMobile) {
+  const desktopScale = 1.0; // Original scale for desktop
+  const mobileScale = 0.5;  // Example: Ragdoll is 70% of its desktop size on mobile
+  const scale = currentlyIsMobile ? mobileScale : desktopScale;
+
+  // Define initial spawn position based on device type
+  const x = currentlyIsMobile ? window.innerWidth / 2 : window.innerWidth / 2 - 200;
+  const y = currentlyIsMobile ? window.innerHeight * 0.28 : window.innerHeight / 4; // Spawn a bit higher on mobile
+
+
+  Promise.all([
+    loadAndMeasureImage(headPath, container, scale),
+    loadAndMeasureImage(torsoPath, container, scale),
+    loadAndMeasureImage(leftUpperArmPath, container, scale),
+    loadAndMeasureImage(leftLowerArmPath, container, scale),
+    loadAndMeasureImage(rightUpperArmPath, container, scale),
+    loadAndMeasureImage(rightLowerArmPath, container, scale),
+    loadAndMeasureImage(leftUpperLegPath, container, scale),
+    loadAndMeasureImage(leftLowerLegPath, container, scale),
+    loadAndMeasureImage(rightUpperLegPath, container, scale),
+    loadAndMeasureImage(rightLowerLegPath, container, scale),
+  ]).then(([
+    headData,
+    torsoData,
+    leftUpperArmData,
+    leftLowerArmData,
+    rightUpperArmData,
+    rightLowerArmData,
+    leftUpperLegData,
+    leftLowerLegData,
+    rightUpperLegData,
+    rightLowerLegData,
+  ]) => {
+    // Basic dimensions
+    const headRadius = (headData.width * scale) / 2;
+    const torsoW = torsoData.width;
+    const torsoH = torsoData.height;
+
+    // TORSO
+    const torsoBody = Matter.Bodies.rectangle(
+      x,
+      y,
+      torsoW,
+      torsoH,
+      { label: 'torso', chamfer: { radius: 10 * scale } }
+    );
+
+    // HEAD: place so its bottom touches torso's top
+    const headBody = Matter.Bodies.circle(
+      x,
+      y - torsoH / 2 - (headData.height / 2),
+      headData.width / 2,
+      { label: 'head' }
+    );
+
+    // ARMS
+    const luaW = leftUpperArmData.width;
+    const luaH = leftUpperArmData.height;
+    const llaW = leftLowerArmData.width;
+    const llaH = leftLowerArmData.height;
+
+    // LEFT UPPER ARM
+    const leftShoulderX = x - torsoW / 2;
+    const leftShoulderY = y - torsoH / 4;
+    const leftUpperArmBody = Matter.Bodies.rectangle(
+      leftShoulderX ,
+      leftShoulderY + luaH / 2,
+      luaW,
+      luaH,
+      { label: 'leftUpperArm', chamfer: { radius: 5 * scale } }
+    );
+    // LEFT LOWER ARM
+    const leftLowerArmBody = Matter.Bodies.rectangle(
+      leftShoulderX,
+      (leftShoulderY + luaH / 2) + luaH / 2 + llaH / 2, 
+      llaW,
+      llaH,
+      { label: 'leftLowerArm', chamfer: { radius: 5 * scale } }
+    );
+
+    // RIGHT ARMS
+    const ruaW = rightUpperArmData.width;
+    const ruaH = rightUpperArmData.height;
+    const rlaW = rightLowerArmData.width;
+    const rlaH = rightLowerArmData.height;
+
+    const rightShoulderX = x + torsoW / 2;
+    const rightShoulderY = y - torsoH / 4;
+    const rightUpperArmBody = Matter.Bodies.rectangle(
+      rightShoulderX,
+      rightShoulderY + ruaH / 2,
+      ruaW,
+      ruaH,
+      { label: 'rightUpperArm', chamfer: { radius: 5 * scale } }
+    );
+    const rightLowerArmBody = Matter.Bodies.rectangle(
+      rightShoulderX,
+      (rightShoulderY + ruaH / 2) + ruaH / 2 + rlaH / 2,
+      rlaW,
+      rlaH,
+      { label: 'rightLowerArm', chamfer: { radius: 5 * scale } }
+    );
+
+    // LEGS
+    const lulW = leftUpperLegData.width;
+    const lulH = leftUpperLegData.height;
+    const lllW = leftLowerLegData.width;
+    const lllH = leftLowerLegData.height;
+
+    // Left hip
+    const leftHipX = x - torsoW / 4;
+    const leftHipY = y + torsoH / 2;
+    const leftUpperLegBody = Matter.Bodies.rectangle(
+      leftHipX,
+      leftHipY + lulH / 2,
+      lulW,
+      lulH,
+      { label: 'leftUpperLeg', chamfer: { radius: 5 * scale } }
+    );
+    const leftLowerLegBody = Matter.Bodies.rectangle(
+      leftHipX,
+      leftHipY + lulH + lllH / 2,
+      lllW,
+      lllH,
+      { label: 'leftLowerLeg', chamfer: { radius: 5 * scale } }
+    );
+
+    // Right hip
+    const rulW = rightUpperLegData.width;
+    const rulH = rightUpperLegData.height;
+    const rllW = rightLowerLegData.width;
+    const rllH = rightLowerLegData.height;
+
+    const rightHipX = x + torsoW / 4;
+    const rightHipY = y + torsoH / 2;
+    const rightUpperLegBody = Matter.Bodies.rectangle(
+      rightHipX,
+      rightHipY + rulH / 2,
+      rulW,
+      rulH,
+      { label: 'rightUpperLeg', chamfer: { radius: 5 * scale } }
+    );
+    const rightLowerLegBody = Matter.Bodies.rectangle(
+      rightHipX,
+      rightHipY + rulH + rllH / 2,
+      rllW,
+      rllH,
+      { label: 'rightLowerLeg', chamfer: { radius: 5 * scale } }
+    );
+
+    // CONSTRAINTS
+    const stiffConstraint = { stiffness: 0.6 };
+    const constraints = [];
+
+    // Neck
+    constraints.push(Matter.Constraint.create({
+      bodyA: headBody,
+      pointA: { x: 0, y: headRadius },
+      bodyB: torsoBody,
+      pointB: { x: 0, y: -torsoH / 2 },
+      ...stiffConstraint,
+    }));
+
+    // LEFT SHOULDER
+    constraints.push(Matter.Constraint.create({
+      bodyA: torsoBody,
+      pointA: { x: -torsoW / 2, y: -torsoH / 4 },
+      bodyB: leftUpperArmBody,
+      pointB: { x: 0, y: -luaH / 2 },
+      ...stiffConstraint,
+    }));
+    // LEFT ELBOW
+    constraints.push(Matter.Constraint.create({
+      bodyA: leftUpperArmBody,
+      pointA: { x: 0, y: luaH / 2 },
+      bodyB: leftLowerArmBody,
+      pointB: { x: 0, y: -llaH / 2 },
+      ...stiffConstraint,
+    }));
+
+    // RIGHT SHOULDER
+    constraints.push(Matter.Constraint.create({
+      bodyA: torsoBody,
+      pointA: { x: torsoW / 2, y: -torsoH / 4 },
+      bodyB: rightUpperArmBody,
+      pointB: { x: 0, y: -ruaH / 2 },
+      ...stiffConstraint,
+    }));
+    // RIGHT ELBOW
+    constraints.push(Matter.Constraint.create({
+      bodyA: rightUpperArmBody,
+      pointA: { x: 0, y: ruaH / 2 },
+      bodyB: rightLowerArmBody,
+      pointB: { x: 0, y: -rlaH / 2 },
+      ...stiffConstraint,
+    }));
+
+    // LEFT HIP
+    constraints.push(Matter.Constraint.create({
+      bodyA: torsoBody,
+      pointA: { x: -torsoW / 4, y: torsoH / 2 },
+      bodyB: leftUpperLegBody,
+      pointB: { x: 0, y: -lulH / 2 },
+      ...stiffConstraint,
+    }));
+    // LEFT KNEE
+    constraints.push(Matter.Constraint.create({
+      bodyA: leftUpperLegBody,
+      pointA: { x: 0, y: lulH / 2 },
+      bodyB: leftLowerLegBody,
+      pointB: { x: 0, y: -lllH / 2 },
+      ...stiffConstraint,
+    }));
+
+    // RIGHT HIP
+    constraints.push(Matter.Constraint.create({
+      bodyA: torsoBody,
+      pointA: { x: torsoW / 4, y: torsoH / 2 },
+      bodyB: rightUpperLegBody,
+      pointB: { x: 0, y: -rulH / 2 },
+      ...stiffConstraint,
+    }));
+    // RIGHT KNEE
+    constraints.push(Matter.Constraint.create({
+      bodyA: rightUpperLegBody,
+      pointA: { x: 0, y: rulH / 2 },
+      bodyB: rightLowerLegBody,
+      pointB: { x: 0, y: -rllH / 2 },
+      ...stiffConstraint,
+    }));
+
+    // Assemble composite
+    const ragdoll = Matter.Composite.create({ label: 'ragdoll' });
+    Matter.Composite.add(ragdoll, [
+      headBody,
+      torsoBody,
+      leftUpperArmBody,
+      leftLowerArmBody,
+      rightUpperArmBody,
+      rightLowerArmBody,
+      leftUpperLegBody,
+      leftLowerLegBody,
+      rightUpperLegBody,
+      rightLowerLegBody,
+    ]);
+    constraints.forEach(c => Matter.Composite.add(ragdoll, c));
+
+    // Add to world!
+    Matter.World.addComposite(world, ragdoll);
+
+    // Sync DOM elements for each part:
+    bodies.push({ body: headBody, domElement: headData.element });
+    bodies.push({ body: torsoBody, domElement: torsoData.element });
+    bodies.push({ body: leftUpperArmBody, domElement: leftUpperArmData.element });
+    bodies.push({ body: leftLowerArmBody, domElement: leftLowerArmData.element });
+    bodies.push({ body: rightUpperArmBody, domElement: rightUpperArmData.element });
+    bodies.push({ body: rightLowerArmBody, domElement: rightLowerArmData.element });
+    bodies.push({ body: leftUpperLegBody, domElement: leftUpperLegData.element });
+    bodies.push({ body: leftLowerLegBody, domElement: leftLowerLegData.element });
+    bodies.push({ body: rightUpperLegBody, domElement: rightUpperLegData.element });
+    bodies.push({ body: rightLowerLegBody, domElement: rightLowerLegData.element });
+
+  }).catch(err => console.error('Error loading ragdoll images:', err));
+}
+
+
+export function setupWhoPhysics() {
+
+   // --- DEBUG RENDERER FLAG ---
+  const DEBUG_WHO_PAGE = false; // << SET TO true TO ENABLE, false TO DISABLE
+
+  // 1. Engine, world, boundaries, gravity
+  const engine = initializeMatterEngine();
+  const world = engine.world;
+  
+
+  let cleanupDeviceGravityListener = () => {}; // No-op function for cleanup
+  const currentlyIsMobile = isMobile();
+
+    if (isMobile()) {
+      // On mobile, enable device orientation gravity.
+      // This function from physicsSetup.js handles the permission prompt.
+      cleanupDeviceGravityListener = enableDeviceGravity(engine);
+    } else {
+      // On desktop, set standard downward gravity.
+      setGravity(engine, 0, 1);
+    }
+
+  const boundaries = createViewportBoundaries(world);
+  const cleanupResize = handleResize(boundaries, world);
+
+  // 2. Main container
+  const container = document.createElement('div');
+  container.id = 'container';
+  document.body.appendChild(container);
+  const bodies = [];
+
+  // 3. Nav menu
+  const navBodies = createPhysicsNavMenu(world, container, '/who');
+  bodies.push(...navBodies);
+
+  // 4. Add ragdoll
+  addRagdoll(world, container, bodies, currentlyIsMobile);
+
+  // 5. Anchors (with new fractional positioning)
+  const isOnMobile = window.innerWidth <= 768;
+  createAnchors(world, container, bodies, isOnMobile);
+
+  // 6. Physics runner and sync
+  enableDragging(engine, world, container);
+  const cleanupSyncLoop = syncDOMWithBodies(bodies, container);
+
+  // 7. Runner
+  const runner = Matter.Runner.create();
+  Matter.Runner.run(runner, engine);
+
+   // --- DEBUG RENDERER SETUP ---
+  let matterRenderInstance = null;
+  let debugRendererResizeHandler = null;
+
+  if (DEBUG_WHO_PAGE) {
+    matterRenderInstance = Matter.Render.create({
+      element: container, // Render inside your main physics container
+      engine: engine,
+      options: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        pixelRatio: window.devicePixelRatio, // For sharper rendering on high DPI screens
+        background: 'transparent',       // So your DOM elements are visible underneath
+        wireframeBackground: 'transparent',
+        wireframes: true,                // Crucial: shows outlines, not solid shapes
+        showAngleIndicator: true,
+        showCollisions: true,
+        showVelocity: true
+      }
+    });
+
+    Matter.Render.run(matterRenderInstance);
+
+    // Keep the renderer's canvas size in sync with the window
+    debugRendererResizeHandler = () => {
+      if (matterRenderInstance) {
+        matterRenderInstance.canvas.width = window.innerWidth;
+        matterRenderInstance.canvas.height = window.innerHeight;
+        matterRenderInstance.options.width = window.innerWidth;
+        matterRenderInstance.options.height = window.innerHeight;
+      }
+    };
+    window.addEventListener('resize', debugRendererResizeHandler);
+  }
+  // --- END DEBUG RENDERER SETUP ---
+
+  
+
+  return function teardownWhoPhysics() {
+    Matter.Runner.stop(runner);
+
+    // --- CLEANUP ---
+    if (cleanupDeviceGravityListener) {
+      cleanupDeviceGravityListener();
+    }
+    if (cleanupResize) { // Use the renamed variable
+      cleanupResize();
+    }
+    if (cleanupSyncLoop) { // Call the stored cleanup function
+      cleanupSyncLoop();
+    }
+
+    // Debug Renderer Cleanup
+    if (DEBUG_WHO_PAGE && matterRenderInstance) {
+      Matter.Render.stop(matterRenderInstance);
+      if (matterRenderInstance.canvas && matterRenderInstance.canvas.parentNode) {
+        matterRenderInstance.canvas.parentNode.removeChild(matterRenderInstance.canvas);
+      }
+      if (debugRendererResizeHandler) {
+        window.removeEventListener('resize', debugRendererResizeHandler);
+      }
+    }
+    // --- END CLEANUP ---
+
+    // Clear bodies and DOM elements
+    bodies.forEach(item => {
+      if (item.body && world.bodies.includes(item.body)) {
+         Matter.World.remove(world, item.body, true);
+      }
+      if (item.domElement && item.domElement.parentNode) {
+        item.domElement.parentNode.removeChild(item.domElement);
+      }
+    });
+    bodies.length = 0;
+
+    Matter.World.clear(world, false);
+    Matter.Engine.clear(engine);
+
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+  };
+}
+</file>
+
+<file path="vite.config.js">
+// vite.config.js
+export default {
+    server: {
+      host: true,
+      port: 5173, // optional, can be changed
+    },
+  };
+</file>
+
+</files>

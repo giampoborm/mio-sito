@@ -1,0 +1,515 @@
+/* ==========================================================================
+   Global Styles & Reset
+   ========================================================================== */
+@font-face {
+  font-family: 'HelveticaRounded';
+  src: url('src/assets/font1/HelveticaRoundedLTStd-Bd.woff2') format('woff2'),
+       url('src/assets/font1/HelveticaRoundedLTStd-Bd.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+canvas {
+  z-index: -999;
+}
+html, body {
+  font-family: 'HelveticaRounded', sans-serif;
+  width: 100%;
+  min-height: 100%;
+  overflow: auto;
+  font-display: swap;
+}
+
+img {
+  user-select: none;
+  pointer-events: none;   /* unless you intentionally want to block clicks */
+}
+
+
+@media (max-width: 768px) {
+  /* On mobile, let the user scroll vertically */
+  html, body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+  }
+}
+.center-text {
+  color: #000000;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+/* Main container for physics */
+#container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+
+.nav-button {
+  font-size: 2rem;
+  font-family: inherit;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  line-height: 1;
+}
+
+
+
+
+
+/* ==========================================================================
+   Component: Homepage
+   --------------------------------------------------------------------------
+   Base (Mobile-first) Styles for Homepage Elements
+   ========================================================================== */
+.home-split {
+  display: flex;
+  width: 100vw;
+  height: 100dvh;
+  flex-direction: row;
+  min-height: 0;
+}
+
+.home-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6vw;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  transition: background 0.18s;
+  user-select: none;
+  font-family: 'HelveticaRounded', sans-serif;
+}
+
+@media (max-width: 800px) {
+    .home-split {
+    flex-direction: column;
+    height: 100dvh;  /* <-- KEY */
+    min-height: 0;
+  }
+  .home-side { font-size: 10vw; }
+}
+
+
+/* permission pop up */
+
+#motion-permission-window {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 500px);
+  background: white;
+  border: 4px solid black;
+  border-radius: 1rem;
+  z-index: 9999;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 4px 4px 0 black;
+}
+
+#motion-permission-window p {
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  line-height: 1.4;
+}
+
+#motion-permission-window .btn-option, .btn-option1 {
+  font-family: inherit; /* <-- THIS LINE */
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  border-color: black;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin: .3rem;
+}
+
+
+#motion-permission-window .btn-option {
+  background-color: black;
+  color: white;
+}
+
+#motion-permission-window .btn-option1 {
+  background-color: white;
+  color: black;
+} 
+
+/* ==========================================================================
+   Component: What Page
+   --------------------------------------------------------------------------
+   Base (Mobile-first) Styles for What Page Elements
+   ========================================================================== */
+
+.whatpage-title {
+  position: absolute;
+  font-size: 1.5rem;  /* mobile base */
+  text-align: center;
+  max-width: 70vw;  /* mobile-friendly width */
+}
+
+.project-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.project-image {
+  object-fit: contain;
+}
+
+.project-video {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+
+/* Comic-book action button */
+.view-full-project-button {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  background: #fff;           /* white card look  */
+  color: #000;
+  border: 4px solid #000;     /* thick black outline */
+  border-radius: 18px;        /* same radius family */
+  box-shadow: 4px 4px 0 #000; /* offset shadow: right + bottom only */
+  cursor: pointer;
+}
+.view-full-project-button:hover {
+  transform: translate(-2px, -2px);       /* subtle lift */
+  box-shadow: 6px 6px 0 #000;             /* deeper shadow */
+}
+.view-full-project-button:active {
+  transform: translate(0, 0);             /* press-in */
+  box-shadow: 2px 2px 0 #000;
+}
+
+.description-text,
+.details-text,
+.credits-text,
+.project-text {
+  display: block; /* `fit-content` works best with block-level elements */
+  width: -moz-fit-content; /* Firefox Tweak */
+  width: fit-content;      /* Standard */
+  
+  margin-left: auto;   /* This will center the 'fit-content' block itself */
+  margin-right: auto;  /* if its parent allows (e.g., if #container is full width) */
+
+  white-space: pre-line; /* You need this to respect newline characters in your text */
+  text-align: center;    /* This will center the text *within* the now tighter box */
+
+  /* Optional: Add some padding if you want space between the text and the physics box edge */
+  /* padding: 3px 8px; */ 
+}
+
+/* Apply max-width within media queries */
+@media (max-width: 768px) { /* Or your preferred mobile breakpoint */
+  .whatpage-title {
+    font-size: 1.2rem;
+    /* Apply fit-content to title too if needed */
+    display: block;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; /* If title can wrap */
+    max-width: 90vw;
+  }
+
+  .description-text,
+  .details-text,
+  .credits-text,
+  .project-text {
+    max-width: 85vw; /* Adjust as needed, e.g., 80vw or 90vw */
+                     /* This acts as the upper limit for fit-content */
+  }
+}
+
+/* Desktop adjustments (if you want different max-widths) */
+@media (min-width: 769px) { /* Example desktop breakpoint */
+  .description-text,
+  .details-text,
+  .credits-text,
+  .project-text {
+    max-width: 700px; /* Or your preferred desktop max-width */
+  }
+}
+
+/* Desktop adjustments */
+@media (min-width: 1024px) {
+  .whatpage-title {
+    font-size: 2rem;
+  }
+
+}
+
+/* ==========================================================================
+   Component: Modal (What Page Extended)
+   ========================================================================== */
+
+.full-project-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-container {
+  background-color: #fff;
+  border: 4px solid #000;
+  width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0.8fr; /* 4 content cols + 1 sidebar */
+  position: relative;
+  row-gap: 1.8rem;          /* more breathing room between rows   */
+  column-gap: 1.8rem;       /* keep columns nicely separated      */
+  padding: 2rem 2.2rem;     /* a bit more inner padding           */
+  border-radius: 28px;
+  box-shadow: 4px 4px 0 black;
+  scrollbar-gutter: stable;
+}
+
+.col-span-1 { grid-column: span 1; }
+.col-span-2 { grid-column: span 2; }
+.col-span-3 { grid-column: span 3; }
+.col-span-4 { grid-column: span 4; }
+/* === correct the sidebar rule === */
+.col-sidebar {
+  grid-column: 5;      /* last track */
+  text-align: right;
+  font-size: .9rem;
+  color: #000;
+
+  
+}
+
+
+.modal-section {
+  grid-column: 1 / -1;
+  display: contents;
+}
+
+.full-project-image, .full-project-video{
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 3px 14px rgba(0,0,0,.09);
+  object-fit: contain;            /* keeps shirts nicely framed      */
+  background: #fafafa;            /* avoids transparent → black edge */
+}
+
+.full-project-text {
+  font-family: 'HelveticaRounded', sans-serif;
+  font-size: 0.9rem;  /* mobile base */
+  color: #000;
+  line-height: 1.4;
+}
+
+.full-project-unknown {
+  font-family: 'HelveticaRounded', sans-serif;
+  font-size: 0.9rem;  /* mobile base */
+  color: red;
+}
+
+.modal-title {
+  font-size: 3rem;  /* mobile base */
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.modal-text {
+  font-size: 0.9rem;  /* mobile base */
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.sidebar-item {
+  text-align: right;
+}
+
+.modal-close-button {
+  font-family: inherit;
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding: 0.5rem .8rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 3px solid #000;
+  box-shadow: 2px 2px 0 #000;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform .15s, box-shadow .15s;
+
+    /* — STICKY behaviour — */
+  position: sticky;
+  top: .2rem;                /* distance from container’s scroll top */
+  z-index: 2;               /* stay above neighbouring content */
+
+}
+.modal-close-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+.modal-close-button:active {
+  transform: translate(0,0);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* src/style.css */
+@media (max-width: 768px) { /* Or your preferred mobile breakpoint */
+  .modal-container {
+    grid-template-columns: 1fr; /* Single column */
+    column-gap: 0; /* No column gap needed */
+    row-gap: 1.2rem; /* Adjust row gap as needed */
+    padding: 1.5rem 1rem; /* Adjust padding for smaller screens */
+    width: 95vw; /* Slightly more width if needed */
+    max-height: 90dvh; /* Use dvh for dynamic viewport height */
+  }
+
+  /* Override column spans for all modal elements */
+  .modal-container > * { /* Target direct children */
+    grid-column: 1 / -1 !important; /* Force all items to span the single column */
+  }
+
+  /* Specific adjustments for elements if needed */
+  .full-project-text {
+    font-size: 0.9rem; /* Adjust font size for mobile readability */
+    line-height: 1.5;
+  }
+  .modal-title {
+    font-size: 2rem; /* Adjust title size */
+  }
+  .col-sidebar {
+    text-align: left; /* Sidebar items might look better left-aligned now */
+    font-size: 0.85rem;
+    margin-top: 0.5rem; /* Add some space if they flow after main content */
+  }
+
+}
+
+
+/* ==========================================================================
+   Component: Who Page
+   --------------------------------------------------------------------------
+   ========================================================================== */
+
+.anchor-big {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.anchor-small {
+
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.anchor {
+  color: #111;
+  background: none;
+  pointer-events: auto;
+  user-select: none;
+  text-align: center;
+  cursor: pointer;
+  white-space: pre-line; /* ESSENTIAL for \n to work */
+  /* Optional: text-shadow for contrast */
+}
+
+.microtext {
+  /* Consistent drag target, never outgrow screen, visually clear */
+  max-width: 240px;
+  min-width: 48px;
+  word-break: break-word;
+  color: #181818;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: grab;
+  z-index: 10;
+  user-select: none;
+  /* Drag friendliness */
+  touch-action: none;
+  z-index: 1000;
+}
+
+.microtext:active {
+  cursor: grabbing;
+}
+
+/* For links */
+.microtext.link {
+  padding: 0.5rem .8rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 3px solid #000;
+  box-shadow: 2px 2px 0 #000;
+  cursor: pointer;
+  border-radius: 14px;
+}
+.microtext.link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+.microtext.link:active {
+  transform: translate(0,0);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Example for custom class, e.g. .special (optional) */
+.microtext.special {
+  background: #f9ed69;
+  border-color: #e0c200;
+}
+
+@media (max-width: 768px) { /* Your mobile breakpoint */
+  .nav-button {
+    font-size: 1.8rem; /* Or whatever looks good */
+  }
+  .anchor-big {
+    font-size: 1.7rem; /* Example */
+  }
+  .anchor-small {
+    font-size: .8rem;   /* Example */
+  }
+  .microtext {
+    font-size: 0.85rem; /* Example */
+    /* Consider a max-width for microtexts on mobile too */
+    max-width: 30vw; /* Or a pixel value that works */
+  }
+}
+
+
+

@@ -1,0 +1,1160 @@
+{
+  "projects": [
+    {
+      "title": "moodnothing.baby",
+      "summary": {
+        "elements": [
+          {
+            "type": "text",
+            "content": "an online tshirt brand, entirely thought and built from scratch",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/logo.webp"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/smile.webp"
+          },
+          {
+            "type": "text",
+            "content": "post-irony extremely online brand identity",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/not-funny-tee.webp"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/cat-calling-tee.webp"
+          },
+          {
+            "type": "text",
+            "content": "the webstore was built through a custom shopify theme development",
+            "class": "description"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screenshot-desktop.webp"
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screensmobile-1.webp"
+          },
+          {
+            "type": "text",
+            "content": "a punk-careless-memesque tone of voice for communication",
+            "class": "description"
+          },
+          {
+            "type": "video",
+            "src": "src/assets/what/moodnothing.baby/video-collezione_1.mp4"
+          }
+        ]
+      },
+      "details": {
+        "elements": [
+          {
+            "type": "text",
+            "content": "moodnothing.baby",
+            "class": "modal-title",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "2022",
+            "class": "modal-title",
+            "sidebar": true
+          },
+          {
+            "type": "text",
+            "content": "Started as a joke between two friends, this was a six‑week journey to build a “post‑ironic” t-shirt brand from scratch. The main motivation behind the idea was that my friend and I wanted some \"funny tees\" for ourselves. We closely studied a trend that started one or two years prior, which included expressions such as \"shirts that go hard\", \"slogan tees\" or \"accidental caps\". This trend had then become even bigger lately, with established brands happily jumping on the post‑irony train.",
+            "class": "modal-text",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "idea and first concept",
+            "class": "modal-text",
+            "sidebar": true
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/not-funny-tee.webp",
+            "columns": 1,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/unemployed-tee.webp",
+            "columns": 1,
+            "gridColumnStart": 2
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/cat-calling-tee.webp",
+            "columns": 1,
+            "gridColumnStart": 3
+          },
+          {
+            "type": "text",
+            "content": "We started with a few designs, all based on the same concept: a t-shirt with a funny phrase on it. We wanted to create something that would make people laugh, but also something that would be wearable in public. We wanted to avoid the \"ironic\" t-shirts that are so common these days, and instead focus on something that was genuinely funny.",
+            "class": "modal-text",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/logo.webp",
+            "columns": 1,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/facciamodal.webp",
+            "columns": 1,
+            "gridColumnStart": 2
+          },
+          {
+            "type": "text",
+            "content": "We wanted the visual identity to feel authentic—avoiding both the overused hand‑drawn‑coffee‑shop‑logo aesthetic and anything that felt \"too polished.\"\nWe started with simple modernist fonts & shapes, stretched, simplified, and distorted them and kept everything intentionally raw.",
+            "class": "modal-text",
+            "columns": 2,
+            "gridColumnStart": 3
+          },
+          {
+            "type": "text",
+            "content": "branding",
+            "class": "modal-text",
+            "sidebar": true
+          },
+          {
+            "type": "text",
+            "content": "We built the site on Shopify, quickly learning Liquid Language to customize a theme that aligned with our vision:\n    No pop‑ups.\n    No excessive animations.\n    No distractions.\nJust a straight‑line from \"seeing something funny online\" → buying the t‑shirt.",
+            "class": "modal-text",
+            "columns": 2,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screensmobile-1modalB.webp",
+            "columns": 1,
+            "gridColumnStart": 3
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screensmobile-2modalB.webp",
+            "columns": 1,
+            "gridColumnStart": 4
+          },
+          {
+            "type": "text",
+            "content": "web development",
+            "class": "modal-text",
+            "sidebar": true
+          },
+          {
+            "type": "image",
+            "src": "src/assets/what/moodnothing.baby/screenshot-desktopmodal.webp",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "Our brand voice followed the irony‑poisoned humour of the internet. We built content using \"goofy\" motion graphics, low‑effort meme‑like edits, Pop culture references reinterpreted with a DIY punkish ethos.",
+            "class": "modal-text",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "communication",
+            "class": "modal-text",
+            "sidebar": true
+          },
+          {
+            "type": "video",
+            "src": "src/assets/what/moodnothing.baby/teaser-prima-collezione.mp4",
+            "columns": 1,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "video",
+            "src": "src/assets/what/moodnothing.baby/video-collezione_1.mp4",
+            "columns": 1,
+            "gridColumnStart": 2
+          },
+          {
+            "type": "video",
+            "src": "src/assets/what/moodnothing.baby/thinking_1.mp4",
+            "columns": 1,
+            "gridColumnStart": 3
+          },
+          {
+            "type": "video",
+            "src": "src/assets/what/moodnothing.baby/natale.mp4",
+            "columns": 1,
+            "gridColumnStart": 4
+          },
+          {
+            "type": "text",
+            "content": "A few months in, we shut down the website as we both went and proceeded with different careers. Though the brand is gone, I still screenprint some designs on demand for friends and family.",
+            "class": "modal-text",
+            "columns": 4,
+            "gridColumnStart": 1
+          },
+          {
+            "type": "text",
+            "content": "Photoshop\nIllustrator\nInDesign\nPremiere Pro\nAdobe After Effects\nTouchDesigner\nShopify Liquid\nScreenprinting",
+            "class": "modal-text",
+            "sidebar": true
+          }
+        ]
+      }    
+    },
+  {
+    "title": "postmoderno accidentale",
+    "summary": {
+      "elements": [
+        {
+          "type": "text",
+          "content": "a booklet exploring how photography synthesizes the post-ideological reality of the 21st century",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/copertina.webp"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/mockup-doppio.webp"
+        },
+        {
+          "type": "text",
+          "content": "two gazes, one image: the photographer’s intent vs the accidental postmodernist meaning.",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/carro.webp"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/tipafiamme1.webp"
+        },
+        {
+          "type": "text",
+          "content": "a brief analysis of memesque photography",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/mockup6-7.webp"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/kant.webp"
+        },
+        {
+          "type": "text",
+          "content": "2022",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/ylean.webp"
+        }
+      ]
+    },
+    "details": {
+      "elements": [
+        {
+          "type": "text",
+          "content": "Postmoderno Accidentale",
+          "class": "modal-title",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "2022",
+          "class": "modal-title",
+          "sidebar": true
+        },
+        {
+          "type": "text",
+          "content": "Postmoderno Accidentale is a booklet questioning how photography can synthesize the post-ideological reality of the 21st Century.",
+          "class": "modal-text",
+          "columns": 2,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/copertina-croppata.webp",
+          "columns": 2,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "text",
+          "content": "Working on a photography-themed booklet within the context of a university class (Contemporary Art History & Language of Visual Communication), I chose to investigate and define what I call \"Accidental Postmodernism.\" The term describes the juxtaposition of two gazes on the same subject; here one gaze saw something and chose to take a picture (for whatever reasons) and the other one, seeing the same picture, applies a postmodern meaning to it, thus accidental (the person who took the picture didn't have any postmodernist \"intention\"). This meaning is basically seeing a picture as a representation (or a synthesis) of the post-ideological zeitgeist of the 21st century, where there are no real boundaries between reality and hyperstitions, meant as the creation of meanings through beliefs.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "core concept",
+          "class": "modal-text",
+          "sidebar": true
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/carroM.webp",
+          "columns": 2,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/tipafiamme.webp",
+          "columns": 2,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "text",
+          "content": "The pictures chosen could be as well be found on the usual \"aesthetic-meme archive\" type of Instagram profiles. The main one from which my dissertation starts sees a Ukrainian woman posing to be photographed in front of a destroyed Russian tank. Others are Taliban graduates' picture weirdly resembling the Windows XP hill background, or a ton of pictures of Kalingrad citizens posing in front of Kant's tomb, wearing USSR T-shirts.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "choice of pictures",
+          "class": "modal-text",
+          "sidebar": true
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/mockup-aperto.webp",
+          "columns": 1,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "The booklet is structured to guide readers through this concept, starting with defining Accidental Postmodernism through striking examples, then moving into deeper analysis. I explore visual contrasts (destroyed tank/shiny red car), meaning contrasts (war/photoshoot), and cultural contrasts that create the surreal quality of these images.",
+          "class": "modal-text",
+          "columns": 3,
+          "gridColumnStart": 2
+        },
+        {
+          "type": "text",
+          "content": "analysis",
+          "class": "modal-text",
+          "sidebar": true
+        },
+        {
+          "type": "text",
+          "content": "As the booklet progresses, it categorizes different manifestations of this phenomenon - from politically charged scenes to what I call \"the value of vibes,\" where rational analysis gives way to purely aesthetic or emotional reactions. This section explores instances where postmodernism is either intentionally created or where analysis disappears completely, leaving only aesthetic (or emotionally charged) impressions. The booklet culminates by examining the socio-cultural influence of this post-ideological gaze, particularly relevant in our era of ubiquitous and schizophrenic pop culture phenomena.",
+          "class": "modal-text",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/kant2.webp",
+          "columns": 1,
+          "gridColumnStart": 4
+        },
+        {
+          "type": "text",
+          "content": "Graphically speaking, I chose to abide by one of my favorite approaches, which consists in treating the page as notes from school: black ink on white paper with red accents and decorative elements, as doodles drawn out of boredom and distraction. In this case, those \"doodles\" represent the \"gazes\" of this Accidental Postmodernism as squared viewframes, all skewed differently, inconsistently. The use of memes clearly follows the deep pop-cultural tone of the whole booklet, reinforcing the concept that these images exist at the intersection of serious analysis and internet culture.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "visual language",
+          "class": "modal-text",
+          "sidebar": true
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/pag1.webp",
+          "columns": 1,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/pag2.webp",
+          "columns": 1,
+          "gridColumnStart": 2
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/pag3.webp",
+          "columns": 1,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/retro.webp",
+          "columns": 1,
+          "gridColumnStart": 4
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/mockup-aperto-pt2.webp",
+          "columns": 2,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/postmoderno-accidentale/pisa.webp",
+          "columns": 2,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "text",
+          "content": "Indesign\nPhotoshop\nBookbinding",
+          "class": "modal-text",
+          "sidebar": true
+        }
+      ]
+    }
+  },
+  {
+    "title": "beyond the frame",
+    "summary": {
+      "elements": [
+        {
+          "type": "text",
+          "content": "a photo album connecting analog film photography with AI and AR.",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/copertina.webp"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/spreadC.webp"
+        },
+        {
+          "type": "text",
+          "content": "2024",
+          "class": "description"
+        },
+        {
+          "type": "text",
+          "content": "expanding beyond the borders of the page, then giving life to it thanks to AI models.",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/lizscan.webp"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/lizpini2.webp"
+        },
+        {
+          "type": "video",
+          "src": "src/assets/what/beyond-the-frame/lizposa.mp4"
+        },
+        {
+          "type": "text",
+          "content": "AR is used to showcase the animation, using the physical album as a starter.",
+          "class": "description"
+        },
+        {
+          "type": "video",
+          "src": "src/assets/what/beyond-the-frame/spicegirlverticale1.mp4"
+        },
+        {
+          "type": "text",
+          "content": "the album is printed and bound, meant to be used as an actual collector for the developed film.",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/spread2V.webp"
+        }
+      ]
+    },
+    "details": {
+      "elements": [
+        {
+          "type": "text",
+          "content": "Beyond the Frame",
+          "class": "modal-title",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "2024",
+          "class": "modal-title",
+          "sidebar": true
+        },
+        {
+          "type": "text",
+          "content": "Beyond the Frame is a hybrid photo album that reimagines analog film photography using AI and augmented reality. It is made to collect developed film photos and give each image an expanded, interactive context. Each copy is hand-bound and intended for real use, to collect actual pictures.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "what it is",
+          "class": "modal-text",
+          "sidebar": true
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/copertinina.webp",
+          "columns": 2,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/copertinona.webp",
+          "columns": 2,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "text",
+          "content": "You start with 24 developed film photos. Each page in the album has a blank white rectangle (the same size as your print), surrounded by an AI-generated frame. To view a spread, you find the matching photo and place it over the blank space. Using a custom Snapchat AR Lens, you point your phone at the page. The full spread, now completed with your photo, animates on your screen, merging the original memory with its new, generated environment.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "how it works",
+          "class": "modal-text",
+          "sidebar": true
+        },
+        {
+          "type": "video",
+          "src": "src/assets/what/beyond-the-frame/videoesperienza1.mp4",
+          "columns": 1,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "video",
+          "src": "src/assets/what/beyond-the-frame/copertinedoppoia.mp4",
+          "columns": 1,
+          "gridColumnStart": 2
+        },
+        {
+          "type": "video",
+          "src": "src/assets/what/beyond-the-frame/cavalloverticale1.mp4",
+          "columns": 1,
+          "gridColumnStart":3
+        },
+                {
+          "type": "video",
+          "src": "src/assets/what/beyond-the-frame/girarepagina.mp4",
+          "columns": 1,
+          "gridColumnStart": 4
+        },
+        {
+          "type": "text",
+          "content": "Only the AI-generated surroundings are printed on each page. The center is left blank, creating a puzzle-like experience where you reconstruct the original image and trigger the animation.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/spreadG1.webp",
+          "columns": 2,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "Each photo was scanned and processed with an open-source AI image-to-image model to expand the scene beyond the original borders. The complete composition is then animated using an image-to-video model to create a short clip for each spread. For animation, I used a proprietary model, since open-source options weren’t strong enough at the time.",
+          "class": "modal-text",
+          "columns": 2,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "text",
+          "content": "how it’s made",
+          "class": "modal-text",
+          "sidebar": true
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/leicammina.webp",
+          "columns": 1,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/cavallovuoto.webp",
+          "columns": 1,
+          "gridColumnStart": 2
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/ferrodicavallo.webp",
+          "columns": 1,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "video",
+          "src": "src/assets/what/beyond-the-frame/lizcammina.mp4",
+          "columns": 1,
+          "gridColumnStart": 4
+        },
+        {
+          "type": "video",
+          "src": "src/assets/what/beyond-the-frame/videocavallo.mp4",
+          "columns": 2,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "For the AR element, each page is used as a Marker in the Snapchat Lens Studio. The AR lens recognizes the finished spread and plays the assigned animation when viewed through your phone. The album is themed around a trip along the Atlantic coast of France and Northern Spain, with additional videos and animations to push the storytelling beyond the “AI, wow” and create a more personal and richer context.",
+          "class": "modal-text",
+          "columns": 2,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "text",
+          "content": "I bound the album myself using a five-stitch bookbinding technique. The cover is printed on 260g matte paper for a more texturized effect, while the interior pages use a slightly glossy paper to mimic the reflective quality of photographic prints.",
+          "class": "modal-text",
+          "columns": 2,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/beyond-the-frame/binding.webp",
+          "columns": 2,
+          "gridColumnStart": 3
+        },
+        {
+          "type": "text",
+          "content": "open-source AI image gen models\nComfyUI\nInvokeAI\nKlingAI\nPhotoshop\nIndesign\nAfter Effects\nBook Binding",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        }
+      ]
+    }
+  },
+{
+  "title": "parolo wines label",
+  "summary": {
+    "elements": [
+      {
+        "type": "text",
+        "content": "a wine label design for a small wine production in Valtellina, Italy",
+        "class": "description"
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/Strebottiglie.webp"
+      },
+      {
+        "type": "text",
+        "content": "a playful design that uses regional myths about UFOs sightings to catch attention",
+        "class": "description"
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/Sfinal.webp"
+      },
+      {
+        "type": "text",
+        "content": "made using AI outpainting techniques with open source models.",
+        "class": "description"
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/Sneroiniziale.webp"
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/Snerooutp.webp"
+      },
+      {
+        "type": "text",
+        "content": "different versions where made with this technique",
+        "class": "description"
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/Sbiancofinale.webp"
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/Sdasotto.webp"
+      },
+      {
+        "type": "text",
+        "content": "2025",
+        "class": "description"
+      }
+    ]
+  },
+  "details": {
+    "elements": [
+      {
+        "type": "text",
+        "content": "Parolo Wines Label",
+        "class": "modal-title",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "text",
+        "content": "2025",
+        "class": "modal-title",
+        "sidebar": true
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/hero.webp",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "text",
+        "content": "I was hired to design the label for the 2025 vintage from Stefano Parolo, a winemaker from Valtellina. I needed to find an eclectic solution for a young producer entering the wine market for the first time. My approach combined new techniques with simple and structured typography, balancing legal requirements and the practical needs of small scale production.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "text",
+        "content": "Stefano Parolo produces a single wine (fewer than 1,000 bottles) using a very low-additive method. The result is an artisanal, pure wine made from local Chiavennasca grapes. This made it an obvious fit for the low-intervention, natural wine scene, especially in a city like Berlin, where these qualities are valued. The challenge was to create a visual synthesis for someone not embedded in that market, finding a way to attract buyers and give the brand a modern look, without undermining the perceived value of a solid, classic wine.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "text",
+        "content": "Context",
+        "class": "modal-text",
+        "sidebar": true
+      },
+      {
+        "type": "text",
+        "content": "My research began broadly: I created a custom form for Stefano to describe his work, share family stories, local myths, and any anecdotes that might be useful for visual storytelling. This process also helped us address all the legally required elements for the label, which can get complicated depending on the wine’s regional denomination.",
+        "class": "modal-text",
+        "columns": 2,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/form.webp",
+        "columns": 2,
+        "gridColumnStart": 3
+      },
+      {
+        "type": "text",
+        "content": "Research",
+        "class": "modal-text",
+        "sidebar": true
+      },
+      {
+        "type": "text",
+        "content": "One of the most striking stories to emerge from the research was about the neighboring village, known for its dozens of UFO sightings in recent years. This phenomenon has generated a bizarre lore that extends well beyond the region, with stories circulating across Italy and even abroad. This inspired the more visual prototype: a label featuring an alien set against the terraced vineyards of Valtellina. The second prototype was based on a story from Parolo’s own family. According to his grandfather’s military records, he was described by his superiors as a simple man, interested only in farming. This detail inspired a purely typographic label, reflecting the straightforward, honest character behind the wine. In the end, Stefano chose the visual direction, with the alien.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/prototipo1.webp",
+        "columns": 2,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/prototipo2.webp",
+        "columns": 2,
+        "gridColumnStart": 3
+      },
+      {
+        "type": "text",
+        "content": "Design Process",
+        "class": "modal-text",
+        "sidebar": true
+      },
+      {
+        "type": "text",
+        "content": "Once Stefano chose the visual direction, I started from the actual bottle, aiming for an elegant label that could be applied manually in one go. It also had to include all the mandatory information without feeling cramped. I landed on the right size and shape, then focused on image content and quality.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "text",
+        "content": "Image Generation",
+        "class": "modal-text",
+        "sidebar": true
+      },
+      {
+        "type": "text",
+        "content": "To produce the alien prototype, I used an AI-powered image manipulation workflow I’ve refined over time. I began by researching prompts for a closed model, like Sora by OpenAI, to generate a base image with the right style and strong prompt adherence. After achieving a solid starting point, I switched to open-source models, using InvokeAI and ComfyUI to outpaint and inpaint with tools like Flux Fill.1 and SDXL. The main goal was to create a cohesive and realistic 20 cm wide scene of Valtellina’s terraced vineyards with the alien in the foreground. Stylistically, I aimed to add noise and subtle depth to suit textured paper and create a more tactile, almost 3D effect.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/neroiniziale.webp",
+        "columns": 2,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/nerooutp.webp",
+        "columns": 2,
+        "gridColumnStart": 3
+      },
+      {
+        "type": "text",
+        "content": "During the process, Parolo requested a daylight version, which I developed using the same workflow, although we later returned to the night scene for the final version.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/biancoiniziale.webp",
+        "columns": 2,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/biancooutp.webp",
+        "columns": 2,
+        "gridColumnStart": 3
+      },
+      {
+        "type": "text",
+        "content": "For the typography, I kept it simple and legible, given the label’s height of only 7 cm. I wanted to balance out the potentially excessive irony from the alien image with either an extremely elegant or a modern, clean typeface.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "text",
+        "content": "Typography & Layout",
+        "class": "modal-text",
+        "sidebar": true
+      },
+      {
+        "type": "text",
+        "content": "After some research, I gathered all the required legal information and chose to place the excess details on an external webpage, reducing visual clutter on the label itself.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/final.webp",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "text",
+        "content": "Finally, I modeled a bottle in Blender to match the specific slender Burgundy type with thick, dark glass. I created mockups featuring the final label and black foil for presentation and print approval.",
+        "class": "modal-text",
+        "columns": 4,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "image",
+        "src": "src/assets/what/parolo-wines-label/trebottiglie.webp",
+        "columns": 2,
+        "gridColumnStart": 1
+      },
+      {
+        "type": "video",
+        "src": "src/assets/what/parolo-wines-label/videovini.mp4",
+        "columns": 2,
+        "gridColumnStart": 3
+      },
+      {
+        "type": "text",
+        "content": "AI image manipulation techniques\nInvokeAI\nComfyUi\nPhotoshop\nIndesign\nBlender\nAfter Effects",
+        "class": "credits",
+        "sidebar": true
+      }
+    ]
+  }
+},
+  {
+    "title": "archive",
+    "summary": {
+      "elements": [
+        {
+          "type": "text",
+          "content": "a collection of less relevant artefacts to show you the other stuff I have made",
+          "class": "description"
+        },
+        {
+          "type": "text",
+          "content": "i can screenprint and bookbind",
+          "class": "description"
+        },
+        {
+          "type": "video",
+          "src": "src/assets/what/archive/screenprint2.mp4"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/archive/libricinitagliati.webp"
+        },
+        {
+          "type": "text",
+          "content": "make flyers for events",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/archive/www1s.webp"
+        },
+        {
+          "type": "text",
+          "content": "do live audioreactive visuals",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/archive/performancefoto.webp"
+        },
+        {
+          "type": "text",
+          "content": "design menus and typefaces",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/archive/menufront.webp"
+        },
+        {
+          "type": "text",
+          "content": "make tiktoks",
+          "class": "description"
+        },
+        {
+          "type": "image",
+          "src": "src/assets/what/archive/boh.webp"
+        },
+        {
+          "type": "text",
+          "content": "and more",
+          "class": "description"
+        }
+      ]
+    },
+    "details": {
+      "elements": [
+        {
+          "type": "text",
+          "content": "archive",
+          "class": "modal-title",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "A collection of secondary works or projects I worked on that I deem relevant to showcase my various interests and thinking process. It’s a patchwork of different type of artefacts, not developed nor “high quality” enough to deserve their own page but yet part of my journey, especially in my skillset evolution.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+
+        {
+          "type": "text",
+          "content": "arts & crafts",
+          "class": "archive-title",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "2024-now",
+          "sidebar": true
+        },
+        {
+          "type": "text",
+          "content": "Experiments with bookbinding and screenprinting in a home setting. The purpose of including this is to showcase the attention to prototyping which I think is absolutely necessary these days upon planning to design any artefact.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        { "type": "video", "src": "src/assets/what/archive/screenp1.mp4", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "src/assets/what/archive/screenpfoto.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "src/assets/what/archive/screenpdrummer.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "src/assets/what/archive/drummertshi.webp", "columns": 1, "gridColumnStart": 4 },
+        { "type": "image", "src": "src/assets/what/archive/trelibricini.webp", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "src/assets/what/archive/copertina.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "src/assets/what/archive/pagfotoalbum.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "src/assets/what/archive/libricini.webp", "columns": 1, "gridColumnStart": 4 },
+
+        {
+          "type": "text",
+          "content": "WWW flyers",
+          "class": "archive-title",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "text", "content": "2024", "sidebar": true },
+        {
+          "type": "text",
+          "content": "A series of flyers for a monthly event hosted at Markthalle Pfefferberg, sponsored by Woodford Reserve, where Whiskey cocktails and Chicken wings were served. My goal here was mainly to have a playful instagram friendly graphic, that had to be replicable and fast to produce.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        { "type": "image", "src": "src/assets/what/archive/www1.webp", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "src/assets/what/archive/www2.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "src/assets/what/archive/www3.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "src/assets/what/archive/wwwretro.webp", "columns": 1, "gridColumnStart": 4 },
+
+        {
+          "type": "text",
+          "content": "live visuals",
+          "class": "archive-title",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "text", "content": "2024", "sidebar": true },
+        {
+          "type": "text",
+          "content": "Collaboration with a local berlin artist Vxba for its visuals during three live shows. Live audioreactive visuals and projection mapping. The workflow usually involved a brainstorming session, were elements for the live performance were thought and declined into a visually enticing composition.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "The first live was mostly a patchwork of all the elements that will be later used consistently: emojis, nature clips and surreal animations. The goal is to give a background that could compliment the live performance without distracting.",
+          "class": "modal-text",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "video", "src": "src/assets/what/archive/perf1.mp4", "columns": 1, "gridColumnStart": 4 },
+        { "type": "video", "src": "src/assets/what/archive/perf2.mp4", "columns": 1, "gridColumnStart": 1 },
+        {
+          "type": "text",
+          "content": "The second performance tended more towards an irony-borne strategy, this idea of a supportive chorus of clones, that with a slightly uncanny set of movements stood behind the artist.",
+          "class": "modal-text",
+          "columns": 3,
+          "gridColumnStart": 2
+        },
+        {
+          "type": "text",
+          "content": "The last of the trilogy was meant for a different setting: a music-only podcast recording built around a white arch. The previous themes return in a black and white composition mapped inside the arch.",
+          "class": "modal-text",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "video", "src": "src/assets/what/archive/perf3.mp4", "columns": 1, "gridColumnStart": 4 },
+
+        {
+          "type": "text",
+          "content": "menus",
+          "class": "archive-title",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "text", "content": "2024", "sidebar": true },
+        {
+          "type": "text",
+          "content": "Two cocktail menus made for markthalle pfefferberg bars.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        {
+          "type": "text",
+          "content": "The first one was made for a small secondary mezcal only bar within the markthalle, to make it I created a custom font inspired by ignorant style tattoos and related icon. Given the complexity of the cocktails, the rapid updates to the various items, there was the need for a fast printed, easily updated and spacey layout.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        { "type": "image", "src": "src/assets/what/archive/bellafotomenu.webp", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "src/assets/what/archive/menupag2.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "src/assets/what/archive/menupag3foto.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "src/assets/what/archive/font.webp", "columns": 1, "gridColumnStart": 4 },
+        {
+          "type": "text",
+          "content": "The second one was meant to be a totem menu for the main bar, it needed to be eye catching, cocktail driven yet comprehensive of all the information, ingredients and quantity included. I created two versions made for two different sides of the bar, but didn’t have the opportunity to test them as prototypes as the bar has been closed since.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        { "type": "image", "src": "src/assets/what/archive/orizzontale.webp", "columns": 2, "gridColumnStart": 1 },
+        { "type": "image", "src": "src/assets/what/archive/veticalemenu.webp", "columns": 1, "gridColumnStart": 3 },
+        {
+          "type": "text",
+          "content": "reels / tiktok",
+          "class": "archive-title",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "text", "content": "2023", "sidebar": true },
+        {
+          "type": "text",
+          "content": "My personal moment of fame: desperate for a new flat I made a creative/ironic tiktok that gathered 150k views. The reason why I put it is because it showcase what has been my approach towards social media communication, preferring an informal “surprising” format that is able to reach to people in a genuine yet strategic way.",
+          "class": "modal-text",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "video", "src": "src/assets/what/archive/boh.mp4", "columns": 1, "gridColumnStart": 4 },
+        { "type": "image", "src": "src/assets/what/archive/tiktokanalytics.webp", "columns": 4, "gridColumnStart": 1 },
+
+        {
+          "type": "text",
+          "content": "university portfolio",
+          "class": "archive-title",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "text", "content": "2022", "sidebar": true },
+        {
+          "type": "text",
+          "content": "Legacy portfolio made for my graduation from Politecnico di Milano. It consists in a Windows XP simulation where each project is considered an application. An interactive pdf version and a printed one were made. I researched heavily into Windows XP branding documentation, following them to the pixel. The printed version experiments with transparency, to associate closing a window with turning a page.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        { "type": "image", "src": "src/assets/what/archive/primapag.webp", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "src/assets/what/archive/desktopfoto.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "src/assets/what/archive/intro.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "src/assets/what/archive/random.webp", "columns": 1, "gridColumnStart": 4 },
+
+        {
+          "type": "text",
+          "content": "gambling ad university",
+          "class": "archive-title",
+          "columns": 3,
+          "gridColumnStart": 1
+        },
+        { "type": "text", "content": "2022", "sidebar": true },
+        {
+          "type": "text",
+          "content": "A workshop for anti gambling advertising for my university. It was a group project, I came up with the idea of “copying” the design of usual gambling services (slots/scratchcards/etc) and produced some of the final artefacts.",
+          "class": "modal-text",
+          "columns": 4,
+          "gridColumnStart": 1
+        },
+        { "type": "video", "src": "src/assets/what/archive/slot.mp4", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "src/assets/what/archive/treflyer.webp", "columns": 2, "gridColumnStart": 2 }
+      ]
+    }
+  }
+  ]
+}
