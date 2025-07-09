@@ -95,6 +95,7 @@ export function setupWhatPhysics() {
 
   async function addProjectElement(elementData, spawnX, spawnY) {
     let domElement, measuredWidth, measuredHeight;
+    let ro; // ResizeObserver for text elements, if created
     
     // Determine current scale based on device
     const currentImageScale = amIMobile ? MOBILE_SCALING.image : DESKTOP_SCALING.image;
@@ -149,8 +150,8 @@ export function setupWhatPhysics() {
   container.appendChild(domElement);
 
   // ... (ResizeObserver logic, which should still work fine) ...
-// Inside addProjectElement, when creating the ResizeObserver for text elements
-    const ro = new ResizeObserver(([e]) => {
+  // Inside addProjectElement, when creating the ResizeObserver for text elements
+    ro = new ResizeObserver(([e]) => {
   // Ensure body is still valid and part of the Matter world
   if (body && world.bodies.includes(body)) {
       const currentBodyWidth = body.bounds.max.x - body.bounds.min.x;
@@ -224,7 +225,9 @@ export function setupWhatPhysics() {
       { restitution: 0.9, friction: 0.05 }
     );
     Matter.World.add(world, body);
-    bodies.push({ body, domElement });
+    const item = { body, domElement };
+    if (ro) item.ro = ro;
+    bodies.push(item);
   }
 
   // --- Step 8: `clearProjectElements` Function ---
