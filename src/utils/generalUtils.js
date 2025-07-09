@@ -83,6 +83,19 @@ export function measureTextDimensions(text, className = '', { wrap = false } = {
   return { width, height };
 }
 
+// Attach visibility-based pause behaviour. The video will pause
+// automatically when it leaves the viewport. No hover playback.
+export function setupVideoPlayback(video) {
+  const pause = () => video.pause();
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) pause();
+    });
+  });
+  observer.observe(video);
+}
+
 
 
 
@@ -118,6 +131,8 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
     video.style.position = 'absolute';
     video.controls = true;
     container.appendChild(video);
+    // Set up interactive playback behaviour
+    setupVideoPlayback(video);
     
     video.addEventListener('loadedmetadata', () => {
       // Get natural dimensions
