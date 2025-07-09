@@ -1,4 +1,5 @@
 // src/utils/fullProjectModal.js
+import { setupVideoPlayback } from './generalUtils.js';
 
 /**
  * Opens a modal displaying the full project details.
@@ -79,6 +80,7 @@ function createFullProjectElement(item) {
       el.src = item.src;
       el.controls = true;
       el.classList.add('full-project-video');
+      setupVideoPlayback(el);
       break;
     default:
       el = document.createElement('div');
