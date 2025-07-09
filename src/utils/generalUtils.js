@@ -83,13 +83,13 @@ export function measureTextDimensions(text, className = '', { wrap = false } = {
   return { width, height };
 }
 
-// Attach hover/touch playback behavior and pause when the video leaves the viewport
+
+// Attach visibility-based pause behaviour. The video will pause
+// automatically when it leaves the viewport. No hover playback.
 export function setupVideoPlayback(video) {
-  const play = () => video.play();
   const pause = () => video.pause();
 
-  video.addEventListener('mouseenter', play);
-  video.addEventListener('mouseleave', pause);
+
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
