@@ -83,6 +83,22 @@ export function measureTextDimensions(text, className = '', { wrap = false } = {
   return { width, height };
 }
 
+// Attach hover/touch playback behavior and pause when the video leaves the viewport
+export function setupVideoPlayback(video) {
+  const play = () => video.play();
+  const pause = () => video.pause();
+
+  video.addEventListener('mouseenter', play);
+  video.addEventListener('mouseleave', pause);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) pause();
+    });
+  });
+  observer.observe(video);
+}
+
 
 
 
@@ -118,6 +134,8 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
     video.style.position = 'absolute';
     video.controls = true;
     container.appendChild(video);
+    // Set up interactive playback behaviour
+    setupVideoPlayback(video);
     
     video.addEventListener('loadedmetadata', () => {
       // Get natural dimensions
