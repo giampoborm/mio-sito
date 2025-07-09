@@ -262,12 +262,3 @@ export function handleResize(boundaries, world) {
   return () => window.removeEventListener('resize', resizeHandler);
 }
 
-// Clean up a Matter.js engine, runner, container, etc.
-export function teardownMatter(engine, runner, container) {
-  if (runner) Matter.Runner.stop(runner);
-  if (engine) {
-    Matter.World.clear(engine.world, false);
-    Matter.Engine.clear(engine);
-  }
-  if (container && container.parentNode) container.remove();
-}
