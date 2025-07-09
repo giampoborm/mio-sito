@@ -291,7 +291,7 @@ img {
   position: relative;
   row-gap: 1.8rem;          /* more breathing room between rows   */
   column-gap: 1.8rem;       /* keep columns nicely separated      */
-  padding: 2rem 2.2rem;     /* a bit more inner padding           */
+  padding: 2rem 2.2rem 100px;     /* a bit more inner padding           */
   border-radius: 28px;
   box-shadow: 4px 4px 0 black;
   scrollbar-gutter: stable;
@@ -389,7 +389,7 @@ img {
     grid-template-columns: 1fr; /* Single column */
     column-gap: 0; /* No column gap needed */
     row-gap: 1.2rem; /* Adjust row gap as needed */
-    padding: 1.5rem 1rem; /* Adjust padding for smaller screens */
+    padding: 1.5rem 1rem 100px; /* Adjust padding for smaller screens */
     width: 95vw; /* Slightly more width if needed */
     max-height: 90dvh; /* Use dvh for dynamic viewport height */
   }
@@ -409,8 +409,14 @@ img {
   }
   .col-sidebar {
     text-align: left; /* Sidebar items might look better left-aligned now */
-    font-size: 0.85rem;
     margin-top: 0.5rem; /* Add some space if they flow after main content */
+  }
+  .col-sidebar.modal-title {
+    font-size: 2rem;
+  }
+  .col-sidebar.modal-text {
+    font-size: 1.3rem;
+    font-weight: bold;
   }
 
 }

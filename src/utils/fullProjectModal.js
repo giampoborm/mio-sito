@@ -44,6 +44,7 @@ export function openFullProjectModal(projectDetails) {
   }
 
   modalOverlay.appendChild(modalContainer);
+  reorderSidebarForMobile(modalContainer);
   document.body.appendChild(modalOverlay);
   return modalOverlay;
 }
@@ -111,4 +112,24 @@ function createFullProjectElement(item) {
   }
   
   return el;
+}
+
+// Helper: On small screens move sidebar elements before the preceding item
+function reorderSidebarForMobile(container) {
+  // Ensure we only run once per modal instance
+  if (container.__sidebarReordered) return;
+  container.__sidebarReordered = true;
+
+  if (window.innerWidth > 768) return;
+
+  const pairs = Array.from(container.querySelectorAll('.col-sidebar')).map((item) => ({
+    item,
+    prev: item.previousElementSibling,
+  }));
+
+  pairs.forEach(({ item, prev }) => {
+    if (prev && prev.parentNode) {
+      prev.parentNode.insertBefore(item, prev);
+    }
+  });
 }
