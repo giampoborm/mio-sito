@@ -46,6 +46,7 @@ export function setupWhatPhysics() {
   let cleanupDeviceGravityListener = () => {};
   let cleanupSyncLoop = () => {};
   let cleanupResizeHandler = () => {}; // For the return of handleResize
+  let cleanupDragging = () => {};
 
   const bodies = []; // To track all Matter bodies and their DOM elements
 
@@ -436,7 +437,7 @@ export function setupWhatPhysics() {
   // Store the returned cleanup function from syncDOMWithBodies
   cleanupSyncLoop = syncDOMWithBodies(bodies, container);
 
-  enableDragging(engine, world, container); // Assuming this handles its own cleanup if needed, or is minor
+  cleanupDragging = enableDragging(engine, world, container);
 
   const runner = Matter.Runner.create();
   Matter.Runner.run(runner, engine);
@@ -497,6 +498,9 @@ if (DEBUG) {
     if (cleanupResizeHandler) {
       cleanupResizeHandler();
       // console.log('Resize handler stopped.');
+    }
+    if (cleanupDragging) {
+      cleanupDragging();
     }
 
     // C. Stop Matter.js
