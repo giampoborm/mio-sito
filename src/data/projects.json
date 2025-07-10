@@ -7,7 +7,8 @@
           {
             "type": "text",
             "content": "an online tshirt brand, entirely thought and built from scratch",
-            "class": "description"
+            "class": "description",
+            "size": "lg"
           },
           {
             "type": "image",
@@ -20,7 +21,8 @@
           {
             "type": "text",
             "content": "post-irony extremely online brand identity",
-            "class": "description"
+            "class": "description",
+            "size": "sm"
           },
           {
             "type": "image",
@@ -33,7 +35,8 @@
           {
             "type": "text",
             "content": "the webstore was built through a custom shopify theme development",
-            "class": "description"
+            "class": "description",
+            "size": "sm"
           },
           {
             "type": "image",
@@ -46,7 +49,8 @@
           {
             "type": "text",
             "content": "a punk-careless-memesque tone of voice for communication",
-            "class": "description"
+            "class": "description",
+            "size": "xs"
           },
           {
             "type": "video",
@@ -220,11 +224,12 @@
     "title": "postmoderno accidentale",
     "summary": {
       "elements": [
-        {
-          "type": "text",
-          "content": "a booklet exploring how photography synthesizes the post-ideological reality of the 21st century",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "a booklet exploring how photography synthesizes the post-ideological reality of the 21st century",
+            "class": "description",
+            "size": "lg"
+          },
         {
           "type": "image",
           "src": "src/assets/what/postmoderno-accidentale/copertina.webp"
@@ -233,11 +238,12 @@
           "type": "image",
           "src": "src/assets/what/postmoderno-accidentale/mockup-doppio.webp"
         },
-        {
-          "type": "text",
-          "content": "two gazes, one image: the photographer’s intent vs the accidental postmodernist meaning.",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "two gazes, one image: the photographer’s intent vs the accidental postmodernist meaning.",
+            "class": "description",
+            "size": "sm"
+          },
         {
           "type": "image",
           "src": "src/assets/what/postmoderno-accidentale/carro.webp"
@@ -246,11 +252,12 @@
           "type": "image",
           "src": "src/assets/what/postmoderno-accidentale/tipafiamme1.webp"
         },
-        {
-          "type": "text",
-          "content": "a brief analysis of memesque photography",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "a brief analysis of memesque photography",
+            "class": "description",
+            "size": "xs"
+          },
         {
           "type": "image",
           "src": "src/assets/what/postmoderno-accidentale/mockup6-7.webp"
@@ -259,11 +266,12 @@
           "type": "image",
           "src": "src/assets/what/postmoderno-accidentale/kant.webp"
         },
-        {
-          "type": "text",
-          "content": "2022",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "2022",
+            "class": "description",
+            "size": "sm"
+          },
         {
           "type": "image",
           "src": "src/assets/what/postmoderno-accidentale/ylean.webp"
@@ -430,11 +438,12 @@
     "title": "beyond the frame",
     "summary": {
       "elements": [
-        {
-          "type": "text",
-          "content": "a photo album connecting analog film photography with AI and AR.",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "a photo album connecting analog film photography with AI and AR.",
+            "class": "description",
+            "size": "lg"
+          },
         {
           "type": "image",
           "src": "src/assets/what/beyond-the-frame/copertina.webp"
@@ -443,16 +452,18 @@
           "type": "image",
           "src": "src/assets/what/beyond-the-frame/spreadC.webp"
         },
-        {
-          "type": "text",
-          "content": "2024",
-          "class": "description"
-        },
-        {
-          "type": "text",
-          "content": "expanding beyond the borders of the page, then giving life to it thanks to AI models.",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "2024",
+            "class": "description",
+            "size": "xs"
+          },
+          {
+            "type": "text",
+            "content": "expanding beyond the borders of the page, then giving life to it thanks to AI models.",
+            "class": "description",
+            "size": "sm"
+          },
         {
           "type": "image",
           "src": "src/assets/what/beyond-the-frame/lizscan.webp"
@@ -465,20 +476,22 @@
           "type": "video",
           "src": "src/assets/what/beyond-the-frame/lizposa.mp4"
         },
-        {
-          "type": "text",
-          "content": "AR is used to showcase the animation, using the physical album as a starter.",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "AR is used to showcase the animation, using the physical album as a starter.",
+            "class": "description",
+            "size": "sm"
+          },
         {
           "type": "video",
           "src": "src/assets/what/beyond-the-frame/spicegirlverticale1.mp4"
         },
-        {
-          "type": "text",
-          "content": "the album is printed and bound, meant to be used as an actual collector for the developed film.",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "the album is printed and bound, meant to be used as an actual collector for the developed film.",
+            "class": "description",
+            "size": "xs"
+          },
         {
           "type": "image",
           "src": "src/assets/what/beyond-the-frame/spread2V.webp"
@@ -652,29 +665,32 @@
   "title": "parolo wines label",
   "summary": {
     "elements": [
-      {
-        "type": "text",
-        "content": "a wine label design for a small wine production in Valtellina, Italy",
-        "class": "description"
-      },
+        {
+          "type": "text",
+          "content": "a wine label design for a small wine production in Valtellina, Italy",
+          "class": "description",
+          "size": "lg"
+        },
       {
         "type": "image",
         "src": "src/assets/what/parolo-wines-label/Strebottiglie.webp"
       },
-      {
-        "type": "text",
-        "content": "a playful design that uses regional myths about UFOs sightings to catch attention",
-        "class": "description"
-      },
+        {
+          "type": "text",
+          "content": "a playful design that uses regional myths about UFOs sightings to catch attention",
+          "class": "description",
+          "size": "sm"
+        },
       {
         "type": "image",
         "src": "src/assets/what/parolo-wines-label/Sfinal.webp"
       },
-      {
-        "type": "text",
-        "content": "made using AI outpainting techniques with open source models.",
-        "class": "description"
-      },
+        {
+          "type": "text",
+          "content": "made using AI outpainting techniques with open source models.",
+          "class": "description",
+          "size": "xs"
+        },
       {
         "type": "image",
         "src": "src/assets/what/parolo-wines-label/Sneroiniziale.webp"
@@ -683,11 +699,12 @@
         "type": "image",
         "src": "src/assets/what/parolo-wines-label/Snerooutp.webp"
       },
-      {
-        "type": "text",
-        "content": "different versions where made with this technique",
-        "class": "description"
-      },
+        {
+          "type": "text",
+          "content": "different versions where made with this technique",
+          "class": "description",
+          "size": "sm"
+        },
       {
         "type": "image",
         "src": "src/assets/what/parolo-wines-label/Sbiancofinale.webp"
@@ -696,11 +713,12 @@
         "type": "image",
         "src": "src/assets/what/parolo-wines-label/Sdasotto.webp"
       },
-      {
-        "type": "text",
-        "content": "2025",
-        "class": "description"
-      }
+        {
+          "type": "text",
+          "content": "2025",
+          "class": "description",
+          "size": "xs"
+        }
     ]
   },
   "details": {
@@ -897,16 +915,18 @@
     "title": "archive",
     "summary": {
       "elements": [
-        {
-          "type": "text",
-          "content": "a collection of less relevant artefacts to show you the other stuff I have made",
-          "class": "description"
-        },
-        {
-          "type": "text",
-          "content": "i can screenprint and bookbind",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "a collection of less relevant artefacts to show you the other stuff I have made",
+            "class": "description",
+            "size": "lg"
+          },
+          {
+            "type": "text",
+            "content": "i can screenprint and bookbind",
+            "class": "description",
+            "size": "sm"
+          },
         {
           "type": "video",
           "src": "src/assets/what/archive/screenprint2.mp4"
@@ -915,47 +935,52 @@
           "type": "image",
           "src": "src/assets/what/archive/libricinitagliati.webp"
         },
-        {
-          "type": "text",
-          "content": "make flyers for events",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "make flyers for events",
+            "class": "description",
+            "size": "sm"
+          },
         {
           "type": "image",
           "src": "src/assets/what/archive/www1s.webp"
         },
-        {
-          "type": "text",
-          "content": "do live audioreactive visuals",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "do live audioreactive visuals",
+            "class": "description",
+            "size": "xs"
+          },
         {
           "type": "image",
           "src": "src/assets/what/archive/performancefoto.webp"
         },
-        {
-          "type": "text",
-          "content": "design menus and typefaces",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "design menus and typefaces",
+            "class": "description",
+            "size": "sm"
+          },
         {
           "type": "image",
           "src": "src/assets/what/archive/menufront.webp"
         },
-        {
-          "type": "text",
-          "content": "make tiktoks",
-          "class": "description"
-        },
+          {
+            "type": "text",
+            "content": "make tiktoks",
+            "class": "description",
+            "size": "xs"
+          },
         {
           "type": "image",
           "src": "src/assets/what/archive/boh.webp"
         },
-        {
-          "type": "text",
-          "content": "and more",
-          "class": "description"
-        }
+          {
+            "type": "text",
+            "content": "and more",
+            "class": "description",
+            "size": "xs"
+          }
       ]
     },
     "details": {

@@ -14,7 +14,8 @@ import {
 import projectsData from '../data/projects.json';
 import {
   spawnCenterText,
-  measureTextDimensions, 
+  measureTextDimensions,
+  measureTextDimensionsAfterFonts,
   loadAndMeasureImage,
   loadAndMeasureVideo
 } from './generalUtils.js';
@@ -122,22 +123,27 @@ export function setupWhatPhysics() {
       domElement.classList.add('project-video');
 /* ── TEXT ELEMENTS ─────────────────────────────────────────── */
 } else if (elementData.type === 'text') {
-  // 1 ▸ decide CSS class
-  const cssClass = (() => {
+  // 1 ▸ decide CSS classes
+  const cssClasses = (() => {
     switch (elementData.class) {
-      case 'description': return 'description-text';
-      case 'details':     return 'details-text';
-      case 'credits':     return 'credits-text';
-      default:            return 'project-text';
+      case 'description': {
+        const arr = ['description-text'];
+        if (elementData.size) arr.push(`summary-${elementData.size}`);
+        return arr;
+      }
+      case 'details':       return ['details-text'];
+      case 'credits':       return ['credits-text'];
+      case 'archive-title': return ['archive-title'];
+      default:              return ['project-text'];
     }
   })();
   const summaryText = elementData.content.split('. ')[0];
 
-  // Measure with wrapping, relying on the CSS class for fit-content
-  const { width: rawW, height: rawH } = measureTextDimensions(
+  // Measure after fonts load so physics body matches final text size
+  const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     summaryText,
-    cssClass,
-    { wrap: true } // This flag might be less important now if class has white-space: pre-line
+    cssClasses,
+    { wrap: true }
   );
 
   measuredWidth  = rawW * currentTextBodyScale; // currentTextBodyScale is likely 1.0
@@ -145,7 +151,7 @@ export function setupWhatPhysics() {
 
   domElement = document.createElement('div');
   domElement.innerHTML = summaryText.replace(/\n/g, '<br>');
-  domElement.classList.add(cssClass); // Applies display:block, width:fit-content, etc.
+  domElement.classList.add(...cssClasses); // Applies display:block, width:fit-content, etc.
   // domElement.style.display = 'inline-table'; // REMOVE this if you were experimenting
   // domElement.style.display = 'inline-block'; // REMOVE this
   container.appendChild(domElement);

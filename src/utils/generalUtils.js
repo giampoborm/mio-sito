@@ -47,12 +47,26 @@ export function measureTextDimensions(text, className = '', { wrap = false } = {
   temp.style.visibility= 'hidden';
   temp.style.display   = 'inline-block';     // 👈   important
   if (!wrap) temp.style.whiteSpace = 'nowrap';
-  if (className) temp.classList.add(className);
+  if (className) {
+    if (Array.isArray(className)) temp.classList.add(...className);
+    else temp.classList.add(...String(className).split(' '));
+  }
 
   document.body.appendChild(temp);
   const { width, height } = temp.getBoundingClientRect();
   document.body.removeChild(temp);
   return { width, height };
+}
+
+export async function measureTextDimensionsAfterFonts(text, className = '', opts = {}) {
+  try {
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+  } catch (e) {
+    // ignore font readiness errors
+  }
+  return measureTextDimensions(text, className, opts);
 }
 
 
