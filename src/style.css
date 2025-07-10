@@ -205,22 +205,43 @@ img {
   box-shadow: 2px 2px 0 #000;
 }
 
-.description-text,
 .details-text,
 .credits-text,
-.project-text {
-  display: block; /* `fit-content` works best with block-level elements */
-  width: -moz-fit-content; /* Firefox Tweak */
-  width: fit-content;      /* Standard */
-  
-  margin-left: auto;   /* This will center the 'fit-content' block itself */
-  margin-right: auto;  /* if its parent allows (e.g., if #container is full width) */
+.project-text,
+.archive-title {
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: min(36ch, 85vw);
+  margin-left: auto;
+  margin-right: auto;
+  white-space: pre-line;
+  text-align: center;
+}
 
-  white-space: pre-line; /* You need this to respect newline characters in your text */
-  text-align: center;    /* This will center the text *within* the now tighter box */
+.archive-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
 
-  /* Optional: Add some padding if you want space between the text and the physics box edge */
-  /* padding: 3px 8px; */ 
+.summary-xs { font-size: clamp(1rem, 1vw + .2rem, 1.05rem); }
+.summary-sm { font-size: clamp(1.1rem, 1.1vw + .25rem, 1.25rem); }
+.summary-lg { font-size: clamp(1.3rem, 1.2vw + .35rem, 1.55rem); }
+
+/* shared layout for all summary classes */
+.description-text,
+.summary-xs, .summary-sm, .summary-lg {
+  max-inline-size: 36ch;
+  inline-size: fit-content;
+  line-height: 1.35;
+  white-space: normal;
+  text-wrap: balance;
+  margin-block: var(--space-2);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 /* Apply max-width within media queries */
@@ -238,21 +259,33 @@ img {
   }
 
   .description-text,
+  .summary-xs,
+  .summary-sm,
+  .summary-lg {
+    max-inline-size: 90%;
+    inline-size: 90%;
+    line-height: 1.45;
+  }
+
   .details-text,
   .credits-text,
-  .project-text {
-    max-width: 85vw; /* Adjust as needed, e.g., 80vw or 90vw */
-                     /* This acts as the upper limit for fit-content */
+  .project-text,
+  .archive-title {
+    max-width: min(36ch, 85vw);
   }
 }
 
 /* Desktop adjustments (if you want different max-widths) */
 @media (min-width: 769px) { /* Example desktop breakpoint */
   .description-text,
+  .summary-xs,
+  .summary-sm,
+  .summary-lg,
   .details-text,
   .credits-text,
-  .project-text {
-    max-width: 700px; /* Or your preferred desktop max-width */
+  .project-text,
+  .archive-title {
+    max-inline-size: 36ch;
   }
 }
 
@@ -287,6 +320,12 @@ img {
   border-radius: 28px;
   box-shadow: 4px 4px 0 black;
   scrollbar-gutter: stable;
+}
+.modal-container::after {
+  content: '';
+  display: block;
+  height: 100px;      /* extra white space for smooth scroll-end */
+  grid-column: 1 / -1; /* span full grid width */
 }
 
 .col-span-1 { grid-column: span 1; }
