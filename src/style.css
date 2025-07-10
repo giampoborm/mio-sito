@@ -160,7 +160,7 @@ img {
 
 .whatpage-title {
   position: absolute;
-  font-size: 1.5rem;  /* mobile base */
+  font-size: 3rem;  /* mobile base */
   text-align: center;
   max-width: 70vw;  /* mobile-friendly width */
 }
@@ -226,7 +226,7 @@ img {
 /* Apply max-width within media queries */
 @media (max-width: 768px) { /* Or your preferred mobile breakpoint */
   .whatpage-title {
-    font-size: 1.2rem;
+    font-size: 2rem;
     /* Apply fit-content to title too if needed */
     display: block;
     width: -moz-fit-content;
@@ -256,14 +256,6 @@ img {
   }
 }
 
-/* Desktop adjustments */
-@media (min-width: 1024px) {
-  .whatpage-title {
-    font-size: 2rem;
-  }
-
-}
-
 /* ==========================================================================
    Component: Modal (What Page Extended)
    ========================================================================== */
@@ -291,7 +283,7 @@ img {
   position: relative;
   row-gap: 1.8rem;          /* more breathing room between rows   */
   column-gap: 1.8rem;       /* keep columns nicely separated      */
-  padding: 2rem 2.2rem 100px;     /* a bit more inner padding           */
+  padding: 2rem 2.2rem;     /* a bit more inner padding           */
   border-radius: 28px;
   box-shadow: 4px 4px 0 black;
   scrollbar-gutter: stable;
