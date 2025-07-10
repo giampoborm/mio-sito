@@ -220,7 +220,7 @@ img {
 }
 
 .archive-title {
-  font-size: 1.3rem;
+  font-size: 2rem;
   font-weight: bold;
   margin: 0.5rem 0;
 }
@@ -359,9 +359,7 @@ img {
 
 .full-project-text {
   font-family: 'HelveticaRounded', sans-serif;
-  font-size: 0.9rem;  /* mobile base */
   color: #000;
-  line-height: 1.4;
 }
 
 .full-project-unknown {
