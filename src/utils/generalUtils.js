@@ -45,13 +45,8 @@ export function measureTextDimensions(text, className = '', { wrap = false } = {
   temp.textContent     = text;
   temp.style.position  = 'absolute';
   temp.style.visibility= 'hidden';
-
-  // Allow CSS classes to control display and wrapping. Only force nowrap when
-  // explicitly requested.
-  if (!wrap) {
-    temp.style.whiteSpace = 'nowrap';
-  }
-
+  temp.style.display   = 'inline-block';     // 👈   important
+  if (!wrap) temp.style.whiteSpace = 'nowrap';
   if (className) {
     if (Array.isArray(className)) temp.classList.add(...className);
     else temp.classList.add(...String(className).split(' '));
