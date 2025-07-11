@@ -139,7 +139,8 @@ export function setupWhatPhysics() {
   })();
   const summaryText = elementData.content.split('. ')[0];
 
-  // Measure after fonts load so physics body matches final text size
+  // Measure after fonts load so physics body matches final text size.
+  // Passing { wrap: true } ensures the text wraps exactly like in the page.
   const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     summaryText,
     cssClasses,
