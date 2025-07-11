@@ -453,7 +453,7 @@ export function setupWhatPhysics() {
 
   
 /* === DEBUG RENDERER (wire-frame overlay) ===================== */
-const DEBUG = false;   // flip to false in production
+const DEBUG = true;   // flip to false in production
 
 let debugRender = null;
 let debugResizeHandler = null;

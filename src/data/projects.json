@@ -72,7 +72,7 @@
             "content": "2022",
             "class": "modal-title",
             "sidebar": true,
-            "mobileOrder": -2
+            "mobileOrder": -1
           },
           {
             "type": "text",
@@ -86,7 +86,7 @@
             "content": "idea and first concept",
             "class": "modal-text",
             "sidebar": true,
-            "mobileOrder": 1
+            "mobileOrder": -1
           },
           {
             "type": "image",
@@ -136,7 +136,9 @@
             "type": "text",
             "content": "branding",
             "class": "modal-text",
-            "sidebar": true
+            "sidebar": true,
+            "mobileOrder": -3
+
           },
           {
             "type": "text",
@@ -161,7 +163,9 @@
             "type": "text",
             "content": "web development",
             "class": "modal-text",
-            "sidebar": true
+            "sidebar": true,
+            "mobileOrder": -3
+
           },
           {
             "type": "image",
@@ -180,7 +184,9 @@
             "type": "text",
             "content": "communication",
             "class": "modal-text",
-            "sidebar": true
+            "sidebar": true,
+            "mobileOrder": -1
+
           },
           {
             "type": "video",
@@ -218,7 +224,7 @@
             "content": "Photoshop\nIllustrator\nInDesign\nPremiere Pro\nAdobe After Effects\nTouchDesigner\nShopify Liquid\nScreenprinting",
             "class": "modal-text",
             "sidebar": true,
-            "mobileOrder": 1
+            "mobileOrder": 2
           }
         ]
       }    
@@ -231,7 +237,7 @@
             "type": "text",
             "content": "a booklet exploring how photography synthesizes the post-ideological reality of the 21st century",
             "class": "description",
-            "size": "lg"
+            "size": "xs"
           },
         {
           "type": "image",
@@ -259,7 +265,7 @@
             "type": "text",
             "content": "a brief analysis of memesque photography",
             "class": "description",
-            "size": "xs"
+            "size": "lg"
           },
         {
           "type": "image",
@@ -273,7 +279,7 @@
             "type": "text",
             "content": "2022",
             "class": "description",
-            "size": "sm"
+            "size": "lg"
           },
         {
           "type": "image",
@@ -294,7 +300,9 @@
           "type": "text",
           "content": "2022",
           "class": "modal-title",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -1
+
         },
         {
           "type": "text",
@@ -320,7 +328,9 @@
           "type": "text",
           "content": "core concept",
           "class": "modal-text",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -1
+
         },
         {
           "type": "image",
@@ -345,7 +355,8 @@
           "type": "text",
           "content": "choice of pictures",
           "class": "modal-text",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -1
         },
         {
           "type": "image",
@@ -364,7 +375,8 @@
           "type": "text",
           "content": "analysis",
           "class": "modal-text",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -2
         },
         {
           "type": "text",
@@ -390,7 +402,8 @@
           "type": "text",
           "content": "visual language",
           "class": "modal-text",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -1
         },
         {
           "type": "image",
@@ -459,7 +472,7 @@
             "type": "text",
             "content": "2024",
             "class": "description",
-            "size": "xs"
+            "size": "lg"
           },
           {
             "type": "text",
@@ -483,7 +496,7 @@
             "type": "text",
             "content": "AR is used to showcase the animation, using the physical album as a starter.",
             "class": "description",
-            "size": "sm"
+            "size": "xs"
           },
         {
           "type": "video",
@@ -514,7 +527,8 @@
           "type": "text",
           "content": "2024",
           "class": "modal-title",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -1
         },
         {
           "type": "text",
@@ -527,7 +541,8 @@
           "type": "text",
           "content": "what it is",
           "class": "modal-text",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -1
         },
         {
           "type": "image",
@@ -552,7 +567,8 @@
           "type": "text",
           "content": "how it works",
           "class": "modal-text",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -1
         },
         {
           "type": "video",
@@ -602,7 +618,8 @@
           "type": "text",
           "content": "how it’s made",
           "class": "modal-text",
-          "sidebar": true
+          "sidebar": true,
+          "mobileOrder": -2
         },
         {
           "type": "image",
@@ -658,8 +675,8 @@
           "type": "text",
           "content": "open-source AI image gen models\nComfyUI\nInvokeAI\nKlingAI\nPhotoshop\nIndesign\nAfter Effects\nBook Binding",
           "class": "modal-text",
-          "columns": 4,
-          "gridColumnStart": 1
+          "sidebar": true
+
         }
       ]
     }
@@ -682,7 +699,7 @@
           "type": "text",
           "content": "a playful design that uses regional myths about UFOs sightings to catch attention",
           "class": "description",
-          "size": "sm"
+          "size": "xs"
         },
       {
         "type": "image",
@@ -692,7 +709,7 @@
           "type": "text",
           "content": "made using AI outpainting techniques with open source models.",
           "class": "description",
-          "size": "xs"
+          "size": "sm"
         },
       {
         "type": "image",
@@ -706,7 +723,7 @@
           "type": "text",
           "content": "different versions where made with this technique",
           "class": "description",
-          "size": "sm"
+          "size": "xs"
         },
       {
         "type": "image",
@@ -720,7 +737,7 @@
           "type": "text",
           "content": "2025",
           "class": "description",
-          "size": "xs"
+          "size": "lg"
         }
     ]
   },
@@ -737,7 +754,8 @@
         "type": "text",
         "content": "2025",
         "class": "modal-title",
-        "sidebar": true
+        "sidebar": true,
+        "mobileOrder": -1
       },
       {
         "type": "image",
@@ -761,9 +779,10 @@
       },
       {
         "type": "text",
-        "content": "Context",
+        "content": "context",
         "class": "modal-text",
-        "sidebar": true
+        "sidebar": true,
+        "mobileOrder": -1
       },
       {
         "type": "text",
@@ -780,9 +799,10 @@
       },
       {
         "type": "text",
-        "content": "Research",
+        "content": "research",
         "class": "modal-text",
-        "sidebar": true
+        "sidebar": true,
+        "mobileOrder": -2
       },
       {
         "type": "text",
@@ -805,12 +825,6 @@
       },
       {
         "type": "text",
-        "content": "Design Process",
-        "class": "modal-text",
-        "sidebar": true
-      },
-      {
-        "type": "text",
         "content": "Once Stefano chose the visual direction, I started from the actual bottle, aiming for an elegant label that could be applied manually in one go. It also had to include all the mandatory information without feeling cramped. I landed on the right size and shape, then focused on image content and quality.",
         "class": "modal-text",
         "columns": 4,
@@ -820,7 +834,8 @@
         "type": "text",
         "content": "Image Generation",
         "class": "modal-text",
-        "sidebar": true
+        "sidebar": true,
+        "mobileOrder": -1
       },
       {
         "type": "text",
@@ -871,7 +886,8 @@
         "type": "text",
         "content": "Typography & Layout",
         "class": "modal-text",
-        "sidebar": true
+        "sidebar": true,
+        "mobileOrder": -1
       },
       {
         "type": "text",

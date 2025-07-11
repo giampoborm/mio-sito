@@ -233,7 +233,6 @@ img {
 .description-text,
 .summary-xs, .summary-sm, .summary-lg {
   max-inline-size: 36ch;
-  inline-size: fit-content;
   line-height: 1.35;
   white-space: normal;
   text-wrap: balance;
@@ -247,7 +246,7 @@ img {
 /* Apply max-width within media queries */
 @media (max-width: 768px) { /* Or your preferred mobile breakpoint */
   .whatpage-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     /* Apply fit-content to title too if needed */
     display: block;
     width: -moz-fit-content;
@@ -255,16 +254,15 @@ img {
     margin-left: auto;
     margin-right: auto;
     text-align: center; /* If title can wrap */
-    max-width: 90vw;
+    max-width: 70vw;
   }
 
   .description-text,
   .summary-xs,
   .summary-sm,
   .summary-lg {
-    max-inline-size: 90%;
-    inline-size: 90%;
-    line-height: 1.45;
+    inline-size: fit-content;
+    line-height: 1;
   }
 
   .details-text,
@@ -435,6 +433,7 @@ img {
   }
   .modal-title {
     font-size: 2rem; /* Adjust title size */
+    margin: 0rem;
   }
   .col-sidebar {
     text-align: left; /* Sidebar items might look better left-aligned now */
@@ -442,6 +441,9 @@ img {
   }
   .col-sidebar.modal-title {
     font-size: 2rem;
+  }
+  .archive-title {
+    font-size: 1.7rem; /* Adjust archive title size */
   }
   .col-sidebar.modal-text {
     font-size: 1.3rem;
