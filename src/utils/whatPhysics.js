@@ -84,6 +84,8 @@ export function setupWhatPhysics() {
   let currentProjectIndex = 0;
   let currentElementIndex = 0;
 
+  const amIMobile = isMobile(); // Determine device type once
+
   // --- Step 6: Initial Project Title ---
   let { body: titleBody, domElement: titleDom } = spawnCenterText(
     world,
@@ -93,7 +95,11 @@ export function setupWhatPhysics() {
   );
   bodies.push({ body: titleBody, domElement: titleDom });
 
- const amIMobile = isMobile(); // Check once at the start of setupWhatPhysics
+  // Position the title: center on desktop, lower on mobile
+  Matter.Body.setPosition(
+    titleBody,
+    { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.8 : window.innerHeight / 2 }
+  );
 
   async function addProjectElement(elementData, spawnX, spawnY) {
     let domElement, measuredWidth, measuredHeight;
@@ -360,7 +366,10 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       titleBody = newTitleData.body;
       titleDom = newTitleData.domElement;
       bodies.push({ body: titleBody, domElement: titleDom });
-      Matter.Body.setPosition(titleBody, { x: window.innerWidth / 2, y: window.innerHeight / 2 });
+      Matter.Body.setPosition(
+        titleBody,
+        { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.8 : window.innerHeight / 2 }
+      );
 
       if (!isMobile()) { // Only change gravity on desktop, mobile uses device orientation
         const newGravity = randomGravity();
@@ -416,7 +425,10 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     titleBody = newTitleData.body;
     titleDom = newTitleData.domElement;
     bodies.push({ body: titleBody, domElement: titleDom });
-    Matter.Body.setPosition(titleBody, { x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    Matter.Body.setPosition(
+      titleBody,
+      { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.8 : window.innerHeight / 2 }
+    );
     
     if (!isMobile()) {
         const newGravity = randomGravity();
