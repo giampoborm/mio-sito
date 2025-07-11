@@ -98,7 +98,7 @@ export function setupWhatPhysics() {
   // Position the title: center on desktop, lower on mobile
   Matter.Body.setPosition(
     titleBody,
-    { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.8 : window.innerHeight / 2 }
+    { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.9 : window.innerHeight / 2 }
   );
 
   async function addProjectElement(elementData, spawnX, spawnY) {
@@ -368,7 +368,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       bodies.push({ body: titleBody, domElement: titleDom });
       Matter.Body.setPosition(
         titleBody,
-        { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.8 : window.innerHeight / 2 }
+        { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * .9 : window.innerHeight / 2 }
       );
 
       if (!isMobile()) { // Only change gravity on desktop, mobile uses device orientation
@@ -427,7 +427,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     bodies.push({ body: titleBody, domElement: titleDom });
     Matter.Body.setPosition(
       titleBody,
-      { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.8 : window.innerHeight / 2 }
+      { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.9 : window.innerHeight / 2 }
     );
     
     if (!isMobile()) {
@@ -465,7 +465,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
 
   
 /* === DEBUG RENDERER (wire-frame overlay) ===================== */
-const DEBUG = true;   // flip to false in production
+const DEBUG = false;   // flip to false in production
 
 let debugRender = null;
 let debugResizeHandler = null;
