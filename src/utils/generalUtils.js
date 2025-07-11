@@ -40,27 +40,30 @@ export function spawnCenterText(world, container, text, options = {}) {
   return { body, domElement };
 }
 
-export function measureTextDimensions(text, className = '', { wrap = false } = {}) {
+export function measureTextDimensions(text, className = '') {
   const temp = document.createElement('div');
   temp.textContent = text;
+
+  // These styles are essential to keep it invisible and off-screen
   temp.style.position = 'absolute';
   temp.style.visibility = 'hidden';
-  // Allow CSS classes to dictate display and wrapping behaviour
-  if (!wrap) {
-    temp.style.whiteSpace = 'nowrap';
-  }
+
+  // Apply the class(es) passed in. This is where ALL styling
+  // for display, width, max-width, and wrapping will come from.
   if (className) {
-    if (Array.isArray(className)) temp.classList.add(...className);
-    else temp.classList.add(...String(className).split(' '));
+    const classes = Array.isArray(className) ? className : String(className).split(' ');
+    temp.classList.add(...classes);
   }
 
   document.body.appendChild(temp);
   const { width, height } = temp.getBoundingClientRect();
   document.body.removeChild(temp);
+  
   return { width, height };
 }
 
-export async function measureTextDimensionsAfterFonts(text, className = '', opts = {}) {
+// And update the wrapper function to match
+export async function measureTextDimensionsAfterFonts(text, className = '') { // Removed 'opts'
   try {
     if (document.fonts && document.fonts.ready) {
       await document.fonts.ready;
@@ -68,7 +71,7 @@ export async function measureTextDimensionsAfterFonts(text, className = '', opts
   } catch (e) {
     // ignore font readiness errors
   }
-  return measureTextDimensions(text, className, opts);
+  return measureTextDimensions(text, className); // Pass only text and class
 }
 
 

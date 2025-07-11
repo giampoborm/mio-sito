@@ -232,16 +232,8 @@ img {
 /* shared layout for all summary classes */
 .description-text,
 .summary-xs, .summary-sm, .summary-lg {
-  max-inline-size: 36ch;
-  line-height: 1.35;
-  white-space: normal;
-  text-wrap: balance;
-  margin-block: var(--space-2);
-  display: block;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+ white-space: normal;
+  display: inline-block;
   text-align: center;
 }
 
@@ -265,13 +257,14 @@ img {
   .summary-lg {
     inline-size: fit-content;
     line-height: 1;
+        max-width: 18ch;
   }
 
   .details-text,
   .credits-text,
   .project-text,
   .archive-title {
-    max-width: min(36ch, 85vw);
+    max-width: 18ch;
   }
 }
 

@@ -141,11 +141,10 @@ export function setupWhatPhysics() {
 
   // Measure after fonts load so physics body matches final text size.
   // Passing { wrap: true } ensures the text wraps exactly like in the page.
-  const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
-    summaryText,
-    cssClasses,
-    { wrap: true }
-  );
+const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
+  summaryText,
+  cssClasses
+);
 
   measuredWidth  = rawW * currentTextBodyScale; // currentTextBodyScale is likely 1.0
   measuredHeight = rawH * currentTextBodyScale;
