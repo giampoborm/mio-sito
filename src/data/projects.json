@@ -71,7 +71,8 @@
             "type": "text",
             "content": "2022",
             "class": "modal-title",
-            "sidebar": true
+            "sidebar": true,
+            "mobileOrder": -2
           },
           {
             "type": "text",
@@ -84,7 +85,8 @@
             "type": "text",
             "content": "idea and first concept",
             "class": "modal-text",
-            "sidebar": true
+            "sidebar": true,
+            "mobileOrder": 1
           },
           {
             "type": "image",
@@ -215,7 +217,8 @@
             "type": "text",
             "content": "Photoshop\nIllustrator\nInDesign\nPremiere Pro\nAdobe After Effects\nTouchDesigner\nShopify Liquid\nScreenprinting",
             "class": "modal-text",
-            "sidebar": true
+            "sidebar": true,
+            "mobileOrder": 1
           }
         ]
       }    

@@ -45,7 +45,9 @@ export function openFullProjectModal(projectDetails) {
   }
 
   modalOverlay.appendChild(modalContainer);
-  reorderSidebarForMobile(modalContainer);
+  if (window.innerWidth <= 768) {
+    reorderSidebarForMobile(modalContainer);
+  }
   document.body.appendChild(modalOverlay);
   return modalOverlay;
 }
@@ -98,6 +100,7 @@ function createFullProjectElement(item) {
     el.style.gridColumn = `${item.gridColumnStart} / span ${item.columns}`;
   } else if (item.sidebar) {
     el.classList.add('col-sidebar');
+    el.dataset.mobileOrder = item.mobileOrder || 0;
   } else if (item.columns) {
     el.classList.add(`col-span-${item.columns}`);
   } else {
@@ -116,22 +119,25 @@ function createFullProjectElement(item) {
   return el;
 }
 
-// Helper: On small screens move sidebar elements before the preceding item
-function reorderSidebarForMobile(container) {
-  // Ensure we only run once per modal instance
-  if (container.__sidebarReordered) return;
-  container.__sidebarReordered = true;
+// Helper: reorder sidebar items according to their mobileOrder value
+function reorderSidebarForMobile(modal) {
+  const children = Array.from(modal.children);
 
-  if (window.innerWidth > 768) return;
+  children.forEach((el, i) => {
+    if (!el.classList.contains('col-sidebar')) return;
 
-  const pairs = Array.from(container.querySelectorAll('.col-sidebar')).map((item) => ({
-    item,
-    prev: item.previousElementSibling,
-  }));
+    const shift = Number(el.dataset.mobileOrder || 0);
+    if (shift === 0) return;  // default already handled elsewhere
 
-  pairs.forEach(({ item, prev }) => {
-    if (prev && prev.parentNode) {
-      prev.parentNode.insertBefore(item, prev);
-    }
+    const targetIndex = Math.max(
+      0,
+      Math.min(children.length - 1, i + shift)
+    );
+
+    const anchor = children[targetIndex];
+    anchor.parentNode.insertBefore(
+      el,
+      shift < 0 ? anchor : anchor.nextSibling
+    );
   });
 }
