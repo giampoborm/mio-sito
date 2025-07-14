@@ -482,7 +482,7 @@ img {
 }
 
 .touch-reactive {
-  transition: color 0.2s linear;
+  transition: color 0.1s linear;
 }
 
 .microtext {
