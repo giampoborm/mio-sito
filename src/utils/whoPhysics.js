@@ -13,6 +13,7 @@ import {
 } from './physicsSetup.js';
 import { loadAndMeasureImage } from './generalUtils.js';
 import { createPhysicsNavMenu } from './navButtons.js';
+import { enableHighlightOnTouch } from './highlightOnTouch.js';
 import { ANCHORS } from '../data/who_text.js';
 
 // --- Ragdoll asset imports ---
@@ -121,6 +122,7 @@ function createAnchors(world, container, bodies, isOnMobile) {
     el.id = anchor.id;
     el.textContent = displayText;
     el.className = anchor.size === "big" ? "anchor-big anchor" : "anchor-small anchor";
+    el.classList.add('touch-reactive');
      // Add any other classes based on anchor.class if you have that property
     if (anchor.class) { // Assuming you might have a general 'class' property for anchors
         el.classList.add(anchor.class);
@@ -484,6 +486,9 @@ export function setupWhoPhysics() {
   const isOnMobile = window.innerWidth <= 768;
   createAnchors(world, container, bodies, isOnMobile);
 
+  const highlightColor = window.__navHighlightColor || '#ff0000';
+  const cleanupHighlight = enableHighlightOnTouch(engine, bodies, { highlightColor });
+
   // 6. Physics runner and sync
   const cleanupDragging = enableDragging(engine, world, container);
   const cleanupSyncLoop = syncDOMWithBodies(bodies, container);
@@ -545,6 +550,9 @@ export function setupWhoPhysics() {
     }
     if (cleanupDragging) {
       cleanupDragging();
+    }
+    if (cleanupHighlight) {
+      cleanupHighlight();
     }
 
     // Debug Renderer Cleanup

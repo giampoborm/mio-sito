@@ -481,6 +481,10 @@ img {
   /* Optional: text-shadow for contrast */
 }
 
+.touch-reactive {
+  transition: color 0.2s linear;
+}
+
 .microtext {
   /* Consistent drag target, never outgrow screen, visually clear */
   max-width: 240px;
