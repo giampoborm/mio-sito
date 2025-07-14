@@ -107,7 +107,7 @@ function createAnchors(world, container, bodies, isOnMobile) {
     // If it's NOT mobile (i.e., desktop), and the anchor is one of the targeted ones,
     // replace newline characters with spaces to make it single-line.
     if (!isOnMobile) {
-      if (anchor.id === "main-name" || anchor.id === "what-about-you") {
+      if (anchor.id === "main-name" || anchor.id === "contact") {
         displayText = anchor.text.replace(/\n/g, ' '); // Replace all occurrences of \n
       }
       // Add more 'else if (anchor.id === "some-other-id")' here if other anchors
