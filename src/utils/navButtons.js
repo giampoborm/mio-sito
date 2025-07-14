@@ -2,7 +2,14 @@ import Matter from 'matter-js';
 import { measureTextDimensions } from './generalUtils.js';
 
 // Color palette for highlight
-const PRIMARY_COLORS = ['#FF0000', '#FFFF00', '#0000FF', '#FFA500', '#008000'];
+const PRIMARY_COLORS = [
+  '#FF0000', // red
+  '#0000FF', // blue
+  '#FFFF00', // yellow
+  '#FFA500', // orange
+  '#008000', // green
+  '#800080'  // purple
+];
 
 // Utility: pick a random color
 export function pickRandomPrimary() {
