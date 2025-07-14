@@ -12,7 +12,8 @@ import {
   isMobile
 } from './physicsSetup.js';
 import { loadAndMeasureImage } from './generalUtils.js';
-import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
+import { createPhysicsNavMenu } from './navButtons.js';
+import { nextColour, persist, recall } from './colorEngine.js';
 import { enableHighlightOnTouch } from './highlightOnTouch.js';
 import { markDone } from './doneColor.js';
 import { ANCHORS } from '../data/who_text.js';
@@ -124,8 +125,11 @@ function createAnchors(world, container, bodies, isOnMobile) {
     el.textContent = displayText;
     el.className = anchor.size === "big" ? "anchor-big anchor" : "anchor-small anchor";
     el.classList.add('touch-reactive');
-    // Assign a random highlight color for collision feedback
-    el.dataset.highlightColor = pickRandomPrimary();
+    // Determine or recall a highlight colour for this anchor
+    const stored = recall(anchor.id);
+    const color = stored || nextColour('who-anchor', 'cycle');
+    if (!stored) persist(anchor.id, color);
+    el.dataset.highlightColor = color;
      // Add any other classes based on anchor.class if you have that property
     if (anchor.class) { // Assuming you might have a general 'class' property for anchors
         el.classList.add(anchor.class);
