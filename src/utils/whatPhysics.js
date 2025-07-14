@@ -19,9 +19,10 @@ import {
   loadAndMeasureImage,
   loadAndMeasureVideo
 } from './generalUtils.js';
-import { createPhysicsNavMenu } from './navButtons.js';
+import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
 import { createWhatProjectNav } from './whatNav.js'; // Ensure class name 'what-nav-button' is used by this
 import { openFullProjectModal } from './fullProjectModal.js';
+import { markDone } from './doneColor.js';
 
 const MOBILE_SCALING = {
   image: 0.45, // e.g., images are 45% of their desktop summary size on mobile
@@ -93,6 +94,8 @@ export function setupWhatPhysics() {
     projects[currentProjectIndex].title,
     { tag: 'h1', className: 'whatpage-title' }
   );
+  // Assign a random highlight colour so it can persist after completion
+  titleDom.dataset.highlightColor = pickRandomPrimary();
   bodies.push({ body: titleBody, domElement: titleDom });
 
   // Position the title: center on desktop, lower on mobile
@@ -342,6 +345,8 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       if (currentElementIndex === summaryElements.length) {
         const buttonData = { type: 'button', content: 'View Full Project' };
         await addProjectElement(buttonData, x + (Math.random()*40-20), y + (Math.random()*40-20)); // Slight offset
+        // All summary elements spawned - mark title as done
+        markDone(titleDom);
       }
     } else {
       // Advance to the next project
@@ -365,6 +370,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       );
       titleBody = newTitleData.body;
       titleDom = newTitleData.domElement;
+      titleDom.dataset.highlightColor = pickRandomPrimary();
       bodies.push({ body: titleBody, domElement: titleDom });
       Matter.Body.setPosition(
         titleBody,
@@ -424,6 +430,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     );
     titleBody = newTitleData.body;
     titleDom = newTitleData.domElement;
+    titleDom.dataset.highlightColor = pickRandomPrimary();
     bodies.push({ body: titleBody, domElement: titleDom });
     Matter.Body.setPosition(
       titleBody,

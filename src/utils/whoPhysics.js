@@ -12,8 +12,9 @@ import {
   isMobile
 } from './physicsSetup.js';
 import { loadAndMeasureImage } from './generalUtils.js';
-import { createPhysicsNavMenu } from './navButtons.js';
+import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
 import { enableHighlightOnTouch } from './highlightOnTouch.js';
+import { markDone } from './doneColor.js';
 import { ANCHORS } from '../data/who_text.js';
 
 // --- Ragdoll asset imports ---
@@ -123,6 +124,8 @@ function createAnchors(world, container, bodies, isOnMobile) {
     el.textContent = displayText;
     el.className = anchor.size === "big" ? "anchor-big anchor" : "anchor-small anchor";
     el.classList.add('touch-reactive');
+    // Assign a random highlight color for collision feedback
+    el.dataset.highlightColor = pickRandomPrimary();
      // Add any other classes based on anchor.class if you have that property
     if (anchor.class) { // Assuming you might have a general 'class' property for anchors
         el.classList.add(anchor.class);
@@ -171,6 +174,9 @@ function createAnchors(world, container, bodies, isOnMobile) {
         // Pass the determined coordinates (either from touch or click)
         spawnMicroText(world, container, bodies, micro, coordsToUse, microIdx);
       });
+
+      // Mark anchor as done and keep its highlight colour
+      markDone(el);
 
       lastTouchCoords = null; // Reset for the next interaction
     });
