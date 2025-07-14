@@ -533,6 +533,12 @@ img {
   .anchor-big {
     font-size: 1.7rem; /* Example */
   }
+  #main-name {
+    text-align: left;
+  }
+  #contact {
+    text-align: right;
+  }
   .anchor-small {
     font-size: .8rem;   /* Example */
   }

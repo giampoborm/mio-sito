@@ -5,8 +5,8 @@ export const ANCHORS = [
     id: "main-name",
     text: "i'm gianpaolo\nbormioli",
     position: {
-      desktop: { x: 0.4, y: 0.45 }, // edit as you wish, 0.5 = centered
-      mobile:  { x: 0.32, y: 0.50 }
+      desktop: { x: 0.42, y: 0.45 }, // edit as you wish, 0.5 = centered
+      mobile:  { x: 0.25, y: 0.42 }
     },
     size: "big",
     microTexts: [
@@ -14,11 +14,11 @@ export const ANCHORS = [
     ]
   },
   {
-    id: "what-about-you",
+    id: "contact",
     text: "what\nabout you?",
     position: {
-      desktop: { x: 0.6, y: 0.55 },
-      mobile:  { x: 0.745, y: 0.6 }
+      desktop: { x: 0.62, y: 0.55 },
+      mobile:  { x: 0.8, y: 0.52 }
     },
     size: "big",
     microTexts: [
@@ -27,49 +27,47 @@ export const ANCHORS = [
     ]
   },
   {
-    id: "maniacally-diy",
-    text: "maniacally diy",
+    id: "anti-nothing",
+    text: "anti-nothing approach",
     position: {
       desktop: { x: 0.14, y: 0.2 },
-      mobile:  { x: 0.15, y: 0.17 }
+      mobile:  { x: 0.7, y: 0.8 }
     },
     size: "small",
     microTexts: [
-      { text: "i love anything open-source, raw, self-made, independent" },
-      { text: "contradictions, research, intuition, seeking knowledge, anthropocentrism" },
-      { text: "ok, i'm getting esoteric again... someone come get me pls" }
+      { text: "if there's a box, i think outside of it" },
+      { text: "intuition fueled by knowledge and research" },
+      { text: "in short: i am a curious boy." }
     ]
   },
   {
     id: "communication-designer",
     text: "a communication designer",
     position: {
-      desktop: { x: 0.75, y: 0.23 },
-      mobile:  { x: 0.7, y: 0.23 }
+      desktop: { x: 0.785, y: 0.3 },
+      mobile:  { x: 0.3, y: 0.17 }
     },
     size: "small",
     microTexts: [
-      { text: "what does that even mean?" },
-      { text: "usually that's what i'm asked" }
+      { text: "across print, digital, and hybrid media" },
+      { text: "what does that mean? well..." }
     ]
   },
   {
-    id: "digital-analog",
-    text: "digital / analog media",
+    id: "stuff-i-do",
+    text: "i do stuff",
     position: {
-      desktop: { x: 0.4, y: 0.74 },
-      mobile:  { x: 0.42, y: 0.35 }
+      desktop: { x: 0.2, y: 0.7 },
+      mobile:  { x: 0.7, y: 0.3 }
     },
     size: "small",
     microTexts: [
-      { text: "graphic design" },
+      { text: "visual identities" },
       { text: "motion design" },
-      { text: "AI image manipulation" },
-      { text: "creative coding" },
-      { text: "screenprinting" },
-      { text: "live visuals" },
-      { text: "bookbinding" },
-      { text: "calligraphy" },
+      { text: "generative design" },
+      { text: "audiovisual design" },
+      { text: "editorial & bookmaking" },
+      { text: "typography" },
       { text: "other stuff" }
     ]
   },
@@ -77,27 +75,14 @@ export const ANCHORS = [
     id: "creative-direction",
     text: "creative direction / storytelling",
     position: {
-      desktop: { x: 0.85, y: 0.8 },
-      mobile:  { x: 0.65, y: 0.76 }
+      desktop: { x: 0.7, y: 0.8 },
+      mobile:  { x: 0.3, y: 0.67 }
     },
     size: "small",
     microTexts: [
-      { text: "creative director" }, // now its own microtext
-      { text: "yeah, i'm good at thinking. i swear." }
-    ]
-  },
-  {
-    id: "joke-anchor",
-    text: "i could make some jokes here",
-    position: {
-      desktop: { x: 0.14, y: 0.9 },
-      mobile:  { x: 0.35, y: 0.95 }
-    },
-    size: "small",
-    microTexts: [
-      { text: "my tools are coffee and ctrl+z" },
-      { text: "pineapple on pizza" },
-      { text: "crying laughing emoji" }
+      { text: "shaping ideas into artefacts" },
+      { text: "yeah, i'm good at thinking" },
+      { text: "i swear." }
     ]
   }
 ];

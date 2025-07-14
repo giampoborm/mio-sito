@@ -118,6 +118,7 @@ function createAnchors(world, container, bodies, isOnMobile) {
 
     // DOM setup
     const el = document.createElement('div');
+    el.id = anchor.id;
     el.textContent = displayText;
     el.className = anchor.size === "big" ? "anchor-big anchor" : "anchor-small anchor";
      // Add any other classes based on anchor.class if you have that property
