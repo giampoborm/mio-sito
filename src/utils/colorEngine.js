@@ -18,6 +18,7 @@ function pickDistinct(last, avoid = []) {
 }
 
 function nextColour(key, strategy = 'cycle') {
+  if (key == null) key = 'default';
   if (strategy === 'cycle') {
     const idx = cycleState[key] || 0;
     cycleState[key] = (idx + 1) % PALETTE.length;

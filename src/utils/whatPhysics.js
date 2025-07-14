@@ -25,6 +25,10 @@ import { createWhatProjectNav } from './whatNav.js'; // Ensure class name 'what-
 import { openFullProjectModal } from './fullProjectModal.js';
 import { markDone } from './doneColor.js';
 
+// Simple slug generator from a string title
+const slugify = (str) =>
+  str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
 const MOBILE_SCALING = {
   image: 0.45, // e.g., images are 45% of their desktop summary size on mobile
   video: 0.1,  // Videos might need more aggressive scaling due to their original size
@@ -95,8 +99,9 @@ export function setupWhatPhysics() {
     projects[currentProjectIndex].title,
     { tag: 'h1', className: 'whatpage-title' }
   );
-  // Assign a stable colour per project slug using the colour engine
-  titleDom.dataset.highlightColor = nextColour(projects[currentProjectIndex].slug, 'hash');
+  // Assign a stable colour based on a slug from the project title
+  const firstSlug = slugify(projects[currentProjectIndex].title);
+  titleDom.dataset.highlightColor = nextColour(firstSlug, 'hash');
   bodies.push({ body: titleBody, domElement: titleDom });
 
   // Position the title: center on desktop, lower on mobile
@@ -371,7 +376,8 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       );
       titleBody = newTitleData.body;
       titleDom = newTitleData.domElement;
-      titleDom.dataset.highlightColor = nextColour(projects[currentProjectIndex].slug, 'hash');
+      const newSlug = slugify(projects[currentProjectIndex].title);
+      titleDom.dataset.highlightColor = nextColour(newSlug, 'hash');
       bodies.push({ body: titleBody, domElement: titleDom });
       Matter.Body.setPosition(
         titleBody,
@@ -431,7 +437,8 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     );
     titleBody = newTitleData.body;
     titleDom = newTitleData.domElement;
-    titleDom.dataset.highlightColor = nextColour(projects[currentProjectIndex].slug, 'hash');
+    const navSlug = slugify(projects[currentProjectIndex].title);
+    titleDom.dataset.highlightColor = nextColour(navSlug, 'hash');
     bodies.push({ body: titleBody, domElement: titleDom });
     Matter.Body.setPosition(
       titleBody,
