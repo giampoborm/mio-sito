@@ -96,6 +96,21 @@ img {
   font-family: 'HelveticaRounded', sans-serif;
 }
 
+/* pane styling for tilt interaction */
+.pane {
+  background: var(--pane-bkg, #fff);
+  transition: background 180ms ease-out;
+  background-position: center var(--bkg-offset, 0);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pane {
+    transition-duration: 0ms;
+  }
+}
+
 @media (max-width: 800px) {
     .home-split {
     flex-direction: column;
