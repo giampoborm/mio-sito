@@ -134,6 +134,17 @@ function createAnchors(world, container, bodies, isOnMobile) {
       color = getRandomColor();
     }
     el.dataset.highlightColor = color;
+    el.style.color = '#111';
+    el.addEventListener('mouseenter', () => {
+      el.style.color = el.dataset.highlightColor;
+    });
+    el.addEventListener('mouseleave', () => {
+      if (el.dataset.done === 'true') {
+        el.style.color = el.dataset.highlightColor;
+      } else {
+        el.style.color = '#111';
+      }
+    });
      // Add any other classes based on anchor.class if you have that property
     if (anchor.class) { // Assuming you might have a general 'class' property for anchors
         el.classList.add(anchor.class);
