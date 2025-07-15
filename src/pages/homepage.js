@@ -1,113 +1,214 @@
-
 import { requestIOSMotionPermission } from '../utils/iosPermission.js';
 import { getRandomColor, setNavHighlightColor } from '../utils/colorSystem.js';
 
-const TILT_THRESHOLD = 20; // degrees; tweak as needed
+/**
+ * Initialise tilt interaction on the home page.
+ * Calibrates once, swaps pane colours on tilt and shows a hint after
+ * two seconds in the neutral zone. The hint auto-runs a quick demo.
+ * Returns a teardown function removing listeners and timers.
+*/
+function initTiltHome(whoPane, whatPane, container, tapSwap) {
+  let baseBeta = null;
+  let active = 'none';
+  let lastWho = null;
+  let lastWhat = null;
+  let neutralTimer = null;
+  let demoRunning = false;
+  let hintEl = null;
 
-function setupGyroColorSwitch(topDiv, bottomDiv, threshold = TILT_THRESHOLD) {
-  let lastTop = null, lastBottom = null;
-  let currentState = "none";
+  const hideHint = () => {
+    if (hintEl && hintEl.isConnected) hintEl.remove();
+  };
 
-  function handleOrientation(event) {
-    const { beta } = event;
-    if (beta > threshold && currentState !== "top") {
-      const color = getRandomColor([lastTop, lastBottom]);
-      topDiv.style.background = color;
-      bottomDiv.style.background = "#fff";
-      lastTop = color;
-      currentState = "top";
-    } else if (beta < -threshold && currentState !== "bottom") {
-      const color = getRandomColor([lastBottom, lastTop]);
-      bottomDiv.style.background = color;
-      topDiv.style.background = "#fff";
-      lastBottom = color;
-      currentState = "bottom";
-    } else if (beta >= -threshold && beta <= threshold && currentState !== "none") {
-      topDiv.style.background = "#fff";
-      bottomDiv.style.background = "#fff";
-      currentState = "none";
+  const showDemo = () => {
+    if (demoRunning) return;
+    demoRunning = true;
+
+    if (!hintEl) {
+      hintEl = document.createElement('div');
+      hintEl.textContent = 'Tilt to choose';
+      hintEl.className = 'tilt-hint';
     }
-  }
+    container.appendChild(hintEl);
 
-  window.addEventListener("deviceorientation", handleOrientation, true);
-  return () => window.removeEventListener("deviceorientation", handleOrientation, true);
+    const seq = [
+      () => tapSwap('who'),
+      () => tapSwap('what'),
+      () => {
+        whoPane.style.setProperty('--pane-bkg', '#fff');
+        whatPane.style.setProperty('--pane-bkg', '#fff');
+        hideHint();
+      },
+    ];
+
+    let step = 0;
+    const interval = setInterval(() => {
+      seq[step]();
+      step += 1;
+      if (step === seq.length) {
+        clearInterval(interval);
+        demoRunning = false;
+        if (active === 'none') startNeutralTimer();
+      }
+    }, 400);
+  };
+
+  const startNeutralTimer = () => {
+    if (neutralTimer || demoRunning) return;
+    neutralTimer = setTimeout(() => {
+      neutralTimer = null;
+      if (active === 'none') showDemo();
+    }, 2000);
+  };
+
+  const clearNeutralTimer = () => {
+    if (neutralTimer) {
+      clearTimeout(neutralTimer);
+      neutralTimer = null;
+    }
+  };
+
+  const handleOrientation = (e) => {
+    if (baseBeta === null) baseBeta = e.beta;
+    const dBeta = e.beta - baseBeta;
+    let newActive = 'none';
+    if (dBeta <= -8) newActive = 'who';
+    else if (dBeta >= 8) newActive = 'what';
+
+    if (newActive !== active) {
+      if (newActive === 'who') {
+        const color = getRandomColor([lastWho, lastWhat]);
+        whoPane.style.setProperty('--pane-bkg', color);
+        whatPane.style.setProperty('--pane-bkg', '#fff');
+        lastWho = color;
+      } else if (newActive === 'what') {
+        const color = getRandomColor([lastWhat, lastWho]);
+        whatPane.style.setProperty('--pane-bkg', color);
+        whoPane.style.setProperty('--pane-bkg', '#fff');
+        lastWhat = color;
+      } else {
+        whoPane.style.setProperty('--pane-bkg', '#fff');
+        whatPane.style.setProperty('--pane-bkg', '#fff');
+      }
+      whoPane.style.setProperty('--bkg-offset', '0px');
+      whatPane.style.setProperty('--bkg-offset', '0px');
+      active = newActive;
+    }
+
+    if (active === 'who') {
+      const extra = Math.max(-3, Math.min(dBeta + 8, 3));
+      whoPane.style.setProperty('--bkg-offset', `${(extra / 3) * 10}px`);
+    } else if (active === 'what') {
+      const extra = Math.max(-3, Math.min(dBeta - 8, 3));
+      whatPane.style.setProperty('--bkg-offset', `${(extra / 3) * 10}px`);
+    }
+
+    if (active === 'none') {
+      startNeutralTimer();
+    } else {
+      hideHint();
+      clearNeutralTimer();
+    }
+  };
+
+  window.addEventListener('deviceorientation', handleOrientation, true);
+  startNeutralTimer();
+
+  return () => {
+    window.removeEventListener('deviceorientation', handleOrientation, true);
+    clearNeutralTimer();
+    hideHint();
+  };
 }
 
 export function renderHomepage(app) {
-  app.innerHTML = "";
+  app.innerHTML = '';
 
-  const container = document.createElement("div");
-  container.className = "home-split";
+  const container = document.createElement('div');
+  container.className = 'home-split';
 
-  // Top (who)
-  const whoDiv = document.createElement("div");
-  whoDiv.className = "home-side who-side";
-  whoDiv.textContent = "who?";
-  container.appendChild(whoDiv);
+  const whoPane = document.createElement('section');
+  whoPane.id = 'pane-who';
+  whoPane.className = 'home-side pane pane--top';
+  whoPane.textContent = 'who?';
 
-  // Bottom (what)
-  const whatDiv = document.createElement("div");
-  whatDiv.className = "home-side what-side";
-  whatDiv.textContent = "what?";
-  container.appendChild(whatDiv);
+  const whatPane = document.createElement('section');
+  whatPane.id = 'pane-what';
+  whatPane.className = 'home-side pane pane--bottom';
+  whatPane.textContent = 'what?';
 
+  container.appendChild(whoPane);
+  container.appendChild(whatPane);
   app.appendChild(container);
 
-  // Routing
-  whoDiv.addEventListener("click", () => {
+  let lastWhoColor = null;
+  let lastWhatColor = null;
+
+  // routing on tap
+  whoPane.addEventListener('click', () => {
     if (lastWhoColor) setNavHighlightColor(lastWhoColor);
-    history.pushState({}, "", "/who");
-    window.dispatchEvent(new PopStateEvent("popstate"));
+    history.pushState({}, '', '/who');
+    window.dispatchEvent(new PopStateEvent('popstate'));
   });
-  whatDiv.addEventListener("click", () => {
+  whatPane.addEventListener('click', () => {
     if (lastWhatColor) setNavHighlightColor(lastWhatColor);
-    history.pushState({}, "", "/what");
-    window.dispatchEvent(new PopStateEvent("popstate"));
+    history.pushState({}, '', '/what');
+    window.dispatchEvent(new PopStateEvent('popstate'));
   });
 
   // Desktop hover logic
-  let lastWhoColor = null, lastWhatColor = null;
-  whoDiv.addEventListener("mouseenter", () => {
+  whoPane.addEventListener('mouseenter', () => {
     if (window.innerWidth > 800) {
       const color = getRandomColor([lastWhoColor, lastWhatColor]);
-      whoDiv.style.background = color;
+      whoPane.style.setProperty('--pane-bkg', color);
       lastWhoColor = color;
     }
   });
-  whoDiv.addEventListener("mouseleave", () => {
-    if (window.innerWidth > 800) whoDiv.style.background = "#fff";
+  whoPane.addEventListener('mouseleave', () => {
+    if (window.innerWidth > 800) whoPane.style.setProperty('--pane-bkg', '#fff');
   });
-  whatDiv.addEventListener("mouseenter", () => {
+  whatPane.addEventListener('mouseenter', () => {
     if (window.innerWidth > 800) {
       const color = getRandomColor([lastWhatColor, lastWhoColor]);
-      whatDiv.style.background = color;
+      whatPane.style.setProperty('--pane-bkg', color);
       lastWhatColor = color;
     }
   });
-  whatDiv.addEventListener("mouseleave", () => {
-    if (window.innerWidth > 800) whatDiv.style.background = "#fff";
+  whatPane.addEventListener('mouseleave', () => {
+    if (window.innerWidth > 800) whatPane.style.setProperty('--pane-bkg', '#fff');
   });
 
-  // Mobile: ask for motion permission first, then activate gyro logic
-  let teardownGyro = null;
+  // fallback tap-colour change if orientation not granted
+  const tapSwap = (target) => {
+    if (target === 'who') {
+      const color = getRandomColor([lastWhoColor, lastWhatColor]);
+      whoPane.style.setProperty('--pane-bkg', color);
+      whatPane.style.setProperty('--pane-bkg', '#fff');
+      lastWhoColor = color;
+    } else {
+      const color = getRandomColor([lastWhatColor, lastWhoColor]);
+      whatPane.style.setProperty('--pane-bkg', color);
+      whoPane.style.setProperty('--pane-bkg', '#fff');
+      lastWhatColor = color;
+    }
+  };
+  whoPane.addEventListener('touchstart', () => tapSwap('who'));
+  whatPane.addEventListener('touchstart', () => tapSwap('what'));
+
+  let teardownTilt = null;
   if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
     requestIOSMotionPermission(
-      // enableOrientationCallback:
       () => {
-        teardownGyro = setupGyroColorSwitch(whoDiv, whatDiv, TILT_THRESHOLD);
+        teardownTilt = initTiltHome(whoPane, whatPane, app, tapSwap);
       },
-      // fallbackCallback:
       () => {
-        // No gyro: maybe show a message, or just leave colors static
-        // Optionally: set both backgrounds to white for clarity
-        whoDiv.style.background = "#fff";
-        whatDiv.style.background = "#fff";
+        whoPane.style.setProperty('--pane-bkg', '#fff');
+        whatPane.style.setProperty('--pane-bkg', '#fff');
       }
     );
   }
 
   return () => {
-    if (teardownGyro) teardownGyro();
-    // Any further cleanup if needed
+    if (teardownTilt) teardownTilt();
   };
 }
