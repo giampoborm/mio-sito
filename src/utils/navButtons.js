@@ -32,7 +32,7 @@ export function createPhysicsNavMenu(world, container, currentPage) {
 
   const bodies = [];
   const margin = 18; // Smallest gap from edge (adjust to taste)
-  const y = 40;      // Vertically near the top
+  const y = 30;      // Vertically near the top
 
   navButtons.forEach((btn, index) => {
     // Use helper for dimensions
