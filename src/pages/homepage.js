@@ -9,6 +9,8 @@ import { getRandomColor, setNavHighlightColor } from '../utils/colorSystem.js';
 function initTiltHome(whoPane, whatPane) {
   let baseBeta = null;
   let active = 'none';
+  let lastWho = null;
+  let lastWhat = null;
 
   const handleOrientation = (e) => {
     if (baseBeta === null) baseBeta = e.beta;
@@ -19,11 +21,15 @@ function initTiltHome(whoPane, whatPane) {
 
     if (newActive !== active) {
       if (newActive === 'who') {
-        whoPane.style.setProperty('--pane-bkg', 'var(--session-colour)');
+        const color = getRandomColor([lastWho, lastWhat]);
+        whoPane.style.setProperty('--pane-bkg', color);
         whatPane.style.setProperty('--pane-bkg', '#fff');
+        lastWho = color;
       } else if (newActive === 'what') {
-        whatPane.style.setProperty('--pane-bkg', 'var(--session-colour)');
+        const color = getRandomColor([lastWhat, lastWho]);
+        whatPane.style.setProperty('--pane-bkg', color);
         whoPane.style.setProperty('--pane-bkg', '#fff');
+        lastWhat = color;
       } else {
         whoPane.style.setProperty('--pane-bkg', '#fff');
         whatPane.style.setProperty('--pane-bkg', '#fff');
@@ -33,7 +39,6 @@ function initTiltHome(whoPane, whatPane) {
       active = newActive;
     }
 
-    // micro parallax up to ±3°
     if (active === 'who') {
       const extra = Math.max(-3, Math.min(dBeta + 8, 3));
       whoPane.style.setProperty('--bkg-offset', `${(extra / 3) * 10}px`);
@@ -67,30 +72,55 @@ export function renderHomepage(app) {
   container.appendChild(whatPane);
   app.appendChild(container);
 
-  const root = document.documentElement;
-  const sessionColor = getRandomColor();
-  root.style.setProperty('--session-colour', sessionColor);
+  let lastWhoColor = null;
+  let lastWhatColor = null;
 
   // routing on tap
   whoPane.addEventListener('click', () => {
-    setNavHighlightColor(sessionColor);
+    if (lastWhoColor) setNavHighlightColor(lastWhoColor);
     history.pushState({}, '', '/who');
     window.dispatchEvent(new PopStateEvent('popstate'));
   });
   whatPane.addEventListener('click', () => {
-    setNavHighlightColor(sessionColor);
+    if (lastWhatColor) setNavHighlightColor(lastWhatColor);
     history.pushState({}, '', '/what');
     window.dispatchEvent(new PopStateEvent('popstate'));
+  });
+
+  // Desktop hover logic
+  whoPane.addEventListener('mouseenter', () => {
+    if (window.innerWidth > 800) {
+      const color = getRandomColor([lastWhoColor, lastWhatColor]);
+      whoPane.style.setProperty('--pane-bkg', color);
+      lastWhoColor = color;
+    }
+  });
+  whoPane.addEventListener('mouseleave', () => {
+    if (window.innerWidth > 800) whoPane.style.setProperty('--pane-bkg', '#fff');
+  });
+  whatPane.addEventListener('mouseenter', () => {
+    if (window.innerWidth > 800) {
+      const color = getRandomColor([lastWhatColor, lastWhoColor]);
+      whatPane.style.setProperty('--pane-bkg', color);
+      lastWhatColor = color;
+    }
+  });
+  whatPane.addEventListener('mouseleave', () => {
+    if (window.innerWidth > 800) whatPane.style.setProperty('--pane-bkg', '#fff');
   });
 
   // fallback tap-colour change if orientation not granted
   const tapSwap = (target) => {
     if (target === 'who') {
-      whoPane.style.setProperty('--pane-bkg', 'var(--session-colour)');
+      const color = getRandomColor([lastWhoColor, lastWhatColor]);
+      whoPane.style.setProperty('--pane-bkg', color);
       whatPane.style.setProperty('--pane-bkg', '#fff');
+      lastWhoColor = color;
     } else {
-      whatPane.style.setProperty('--pane-bkg', 'var(--session-colour)');
+      const color = getRandomColor([lastWhatColor, lastWhoColor]);
+      whatPane.style.setProperty('--pane-bkg', color);
       whoPane.style.setProperty('--pane-bkg', '#fff');
+      lastWhatColor = color;
     }
   };
   whoPane.addEventListener('touchstart', () => tapSwap('who'));
@@ -121,14 +151,8 @@ export function renderHomepage(app) {
     app.appendChild(hint);
 
     const seq = [
-      () => {
-        whoPane.style.setProperty('--pane-bkg', 'var(--session-colour)');
-        whatPane.style.setProperty('--pane-bkg', '#fff');
-      },
-      () => {
-        whoPane.style.setProperty('--pane-bkg', '#fff');
-        whatPane.style.setProperty('--pane-bkg', 'var(--session-colour)');
-      },
+      () => tapSwap('who'),
+      () => tapSwap('what'),
       () => {
         whoPane.style.setProperty('--pane-bkg', '#fff');
         whatPane.style.setProperty('--pane-bkg', '#fff');
