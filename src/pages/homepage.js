@@ -3,14 +3,70 @@ import { getRandomColor, setNavHighlightColor } from '../utils/colorSystem.js';
 
 /**
  * Initialise tilt interaction on the home page.
- * Calibrates on first event and updates pane background colour based on device orientation.
- * Returns a teardown function removing the event listener.
- */
-function initTiltHome(whoPane, whatPane) {
+ * Calibrates once, swaps pane colours on tilt and shows a hint after
+ * two seconds in the neutral zone. The hint auto-runs a quick demo.
+ * Returns a teardown function removing listeners and timers.
+*/
+function initTiltHome(whoPane, whatPane, container, tapSwap) {
   let baseBeta = null;
   let active = 'none';
   let lastWho = null;
   let lastWhat = null;
+  let neutralTimer = null;
+  let demoRunning = false;
+  let hintEl = null;
+
+  const hideHint = () => {
+    if (hintEl && hintEl.isConnected) hintEl.remove();
+  };
+
+  const showDemo = () => {
+    if (demoRunning) return;
+    demoRunning = true;
+
+    if (!hintEl) {
+      hintEl = document.createElement('div');
+      hintEl.textContent = 'Tilt to choose';
+      hintEl.className = 'tilt-hint';
+    }
+    container.appendChild(hintEl);
+
+    const seq = [
+      () => tapSwap('who'),
+      () => tapSwap('what'),
+      () => {
+        whoPane.style.setProperty('--pane-bkg', '#fff');
+        whatPane.style.setProperty('--pane-bkg', '#fff');
+        hideHint();
+      },
+    ];
+
+    let step = 0;
+    const interval = setInterval(() => {
+      seq[step]();
+      step += 1;
+      if (step === seq.length) {
+        clearInterval(interval);
+        demoRunning = false;
+        if (active === 'none') startNeutralTimer();
+      }
+    }, 400);
+  };
+
+  const startNeutralTimer = () => {
+    if (neutralTimer || demoRunning) return;
+    neutralTimer = setTimeout(() => {
+      neutralTimer = null;
+      if (active === 'none') showDemo();
+    }, 2000);
+  };
+
+  const clearNeutralTimer = () => {
+    if (neutralTimer) {
+      clearTimeout(neutralTimer);
+      neutralTimer = null;
+    }
+  };
 
   const handleOrientation = (e) => {
     if (baseBeta === null) baseBeta = e.beta;
@@ -46,10 +102,23 @@ function initTiltHome(whoPane, whatPane) {
       const extra = Math.max(-3, Math.min(dBeta - 8, 3));
       whatPane.style.setProperty('--bkg-offset', `${(extra / 3) * 10}px`);
     }
+
+    if (active === 'none') {
+      startNeutralTimer();
+    } else {
+      hideHint();
+      clearNeutralTimer();
+    }
   };
 
   window.addEventListener('deviceorientation', handleOrientation, true);
-  return () => window.removeEventListener('deviceorientation', handleOrientation, true);
+  startNeutralTimer();
+
+  return () => {
+    window.removeEventListener('deviceorientation', handleOrientation, true);
+    clearNeutralTimer();
+    hideHint();
+  };
 }
 
 export function renderHomepage(app) {
@@ -130,7 +199,7 @@ export function renderHomepage(app) {
   if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
     requestIOSMotionPermission(
       () => {
-        teardownTilt = initTiltHome(whoPane, whatPane);
+        teardownTilt = initTiltHome(whoPane, whatPane, app, tapSwap);
       },
       () => {
         whoPane.style.setProperty('--pane-bkg', '#fff');
@@ -139,41 +208,7 @@ export function renderHomepage(app) {
     );
   }
 
-  // auto demo after idle
-  const demoTimeout = setTimeout(() => {
-    const hint = document.createElement('div');
-    hint.textContent = 'Tilt to choose';
-    hint.style.position = 'absolute';
-    hint.style.top = '50%';
-    hint.style.left = '50%';
-    hint.style.transform = 'translate(-50%, -50%)';
-    hint.style.pointerEvents = 'none';
-    app.appendChild(hint);
-
-    const seq = [
-      () => tapSwap('who'),
-      () => tapSwap('what'),
-      () => {
-        whoPane.style.setProperty('--pane-bkg', '#fff');
-        whatPane.style.setProperty('--pane-bkg', '#fff');
-        hint.remove();
-      }
-    ];
-
-    let step = 0;
-    const interval = setInterval(() => {
-      seq[step]();
-      step += 1;
-      if (step === seq.length) clearInterval(interval);
-    }, 400);
-  }, 1500);
-
-  const cancelDemo = () => clearTimeout(demoTimeout);
-  window.addEventListener('deviceorientation', cancelDemo, { once: true });
-  document.addEventListener('touchstart', cancelDemo, { once: true });
-
   return () => {
     if (teardownTilt) teardownTilt();
-    clearTimeout(demoTimeout);
   };
 }
