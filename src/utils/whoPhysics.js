@@ -16,6 +16,7 @@ import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
 import { enableHighlightOnTouch } from './highlightOnTouch.js';
 import { markDone } from './doneColor.js';
 import { ANCHORS } from '../data/who_text.js';
+import { shuffleColors, getRandomColor, getNavHighlightColor, COLORS } from './colorSystem.js';
 
 // --- Ragdoll asset imports ---
 import headPath from '../assets/who/head.png';
@@ -98,6 +99,8 @@ function spawnEasterEgg(world, container, bodies) {
 // --- Main anchor block creator (now using fractional positions!) ---
 function createAnchors(world, container, bodies, isOnMobile) {
   const spawnedAnchors = new Set();
+  const colorCycle = shuffleColors();
+  let colorIndex = 0;
 
   ANCHORS.forEach((anchor) => {
     // Get position using the new system
@@ -124,8 +127,13 @@ function createAnchors(world, container, bodies, isOnMobile) {
     el.textContent = displayText;
     el.className = anchor.size === "big" ? "anchor-big anchor" : "anchor-small anchor";
     el.classList.add('touch-reactive');
-    // Assign a random highlight color for collision feedback
-    el.dataset.highlightColor = pickRandomPrimary();
+    let color;
+    if (colorIndex < colorCycle.length) {
+      color = colorCycle[colorIndex++];
+    } else {
+      color = getRandomColor();
+    }
+    el.dataset.highlightColor = color;
      // Add any other classes based on anchor.class if you have that property
     if (anchor.class) { // Assuming you might have a general 'class' property for anchors
         el.classList.add(anchor.class);
@@ -492,7 +500,7 @@ export function setupWhoPhysics() {
   const isOnMobile = window.innerWidth <= 768;
   createAnchors(world, container, bodies, isOnMobile);
 
-  const highlightColor = window.__navHighlightColor || '#ff0000';
+  const highlightColor = getNavHighlightColor() || COLORS[0];
   const cleanupHighlight = enableHighlightOnTouch(engine, bodies, { highlightColor });
 
   // 6. Physics runner and sync

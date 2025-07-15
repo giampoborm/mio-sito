@@ -51,6 +51,7 @@ export function setupWhatPhysics() {
   let cleanupDragging = () => {};
 
   const bodies = []; // To track all Matter bodies and their DOM elements
+  let lastTitleColor = null;
 
   // --- Step 2: Gravity Setup ---
   function randomGravity() {
@@ -94,8 +95,6 @@ export function setupWhatPhysics() {
     projects[currentProjectIndex].title,
     { tag: 'h1', className: 'whatpage-title' }
   );
-  // Assign a random highlight colour so it can persist after completion
-  titleDom.dataset.highlightColor = pickRandomPrimary();
   bodies.push({ body: titleBody, domElement: titleDom });
 
   // Position the title: center on desktop, lower on mobile
@@ -345,8 +344,10 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       if (currentElementIndex === summaryElements.length) {
         const buttonData = { type: 'button', content: 'View Full Project' };
         await addProjectElement(buttonData, x + (Math.random()*40-20), y + (Math.random()*40-20)); // Slight offset
-        // All summary elements spawned - mark title as done
+        const color = pickRandomPrimary([lastTitleColor]);
+        titleDom.dataset.highlightColor = color;
         markDone(titleDom);
+        lastTitleColor = color;
       }
     } else {
       // Advance to the next project
@@ -370,7 +371,6 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       );
       titleBody = newTitleData.body;
       titleDom = newTitleData.domElement;
-      titleDom.dataset.highlightColor = pickRandomPrimary();
       bodies.push({ body: titleBody, domElement: titleDom });
       Matter.Body.setPosition(
         titleBody,
@@ -430,7 +430,6 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     );
     titleBody = newTitleData.body;
     titleDom = newTitleData.domElement;
-    titleDom.dataset.highlightColor = pickRandomPrimary();
     bodies.push({ body: titleBody, domElement: titleDom });
     Matter.Body.setPosition(
       titleBody,

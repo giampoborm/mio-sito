@@ -1,6 +1,7 @@
 // src/utils/whatNav.js
 import Matter from 'matter-js';
-import { measureTextDimensions } from './generalUtils.js'; // Helper from earlier to measure text dimensions
+import { measureTextDimensions } from './generalUtils.js';
+import { getRandomColor, getNavHighlightColor, setNavHighlightColor } from './colorSystem.js';
 
 /**
  * Creates the specific navigation menu for the what page.
@@ -70,10 +71,28 @@ export function createWhatProjectNav(world, container, currentProjectIndex, tota
     // Add the body to the Matter.js world.
     Matter.World.add(world, body);
 
-    // Attach a click event to trigger navigation.
+    buttonElement.dataset.currentColor = '';
+
+    buttonElement.addEventListener('mouseenter', () => {
+      const other = navButtons.find(nb => nb.domElement && nb.domElement !== buttonElement);
+      const exclude = [getNavHighlightColor()];
+      if (other && other.domElement.dataset.currentColor) {
+        exclude.push(other.domElement.dataset.currentColor);
+      }
+      const c = getRandomColor(exclude);
+      buttonElement.style.color = c;
+      buttonElement.dataset.currentColor = c;
+    });
+
+    buttonElement.addEventListener('mouseleave', () => {
+      buttonElement.style.color = '#000';
+      buttonElement.dataset.currentColor = '';
+    });
+
     buttonElement.addEventListener('click', (e) => {
       e.stopPropagation();
-      // Dispatch a custom event to signal navigation. You can listen for this event elsewhere in your code.
+      const c = buttonElement.dataset.currentColor || getRandomColor([getNavHighlightColor()]);
+      setNavHighlightColor(c);
       const navEvent = new CustomEvent('whatProjectNav', { detail: { target: buttonData.target } });
       window.dispatchEvent(navEvent);
     });
