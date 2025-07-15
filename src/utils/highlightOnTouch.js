@@ -1,8 +1,9 @@
 import Matter from 'matter-js';
+import { COLORS } from './colorSystem.js';
 
 export function enableHighlightOnTouch(engine, bodies, options = {}) {
   const reactiveClass = options.reactiveClass || 'touch-reactive';
-  const defaultColor = options.highlightColor || '#ff0000';
+  const defaultColor = options.highlightColor || COLORS[0];
 
   const bodyToElement = new Map();
   const collisionCounts = new Map();

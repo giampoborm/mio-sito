@@ -1,13 +1,8 @@
 
 import { requestIOSMotionPermission } from '../utils/iosPermission.js';
+import { getRandomColor, setNavHighlightColor } from '../utils/colorSystem.js';
 
-const COLORS = ["#FF0000", "#0000FF", "#FFFF00"];
 const TILT_THRESHOLD = 20; // degrees; tweak as needed
-
-function getRandomColor(exclude) {
-  const available = COLORS.filter(c => c !== exclude);
-  return available[Math.floor(Math.random() * available.length)];
-}
 
 function setupGyroColorSwitch(topDiv, bottomDiv, threshold = TILT_THRESHOLD) {
   let lastTop = null, lastBottom = null;
@@ -16,13 +11,13 @@ function setupGyroColorSwitch(topDiv, bottomDiv, threshold = TILT_THRESHOLD) {
   function handleOrientation(event) {
     const { beta } = event;
     if (beta > threshold && currentState !== "top") {
-      const color = getRandomColor(lastTop);
+      const color = getRandomColor([lastTop, lastBottom]);
       topDiv.style.background = color;
       bottomDiv.style.background = "#fff";
       lastTop = color;
       currentState = "top";
     } else if (beta < -threshold && currentState !== "bottom") {
-      const color = getRandomColor(lastBottom);
+      const color = getRandomColor([lastBottom, lastTop]);
       bottomDiv.style.background = color;
       topDiv.style.background = "#fff";
       lastBottom = color;
@@ -60,10 +55,12 @@ export function renderHomepage(app) {
 
   // Routing
   whoDiv.addEventListener("click", () => {
+    if (lastWhoColor) setNavHighlightColor(lastWhoColor);
     history.pushState({}, "", "/who");
     window.dispatchEvent(new PopStateEvent("popstate"));
   });
   whatDiv.addEventListener("click", () => {
+    if (lastWhatColor) setNavHighlightColor(lastWhatColor);
     history.pushState({}, "", "/what");
     window.dispatchEvent(new PopStateEvent("popstate"));
   });
@@ -72,7 +69,7 @@ export function renderHomepage(app) {
   let lastWhoColor = null, lastWhatColor = null;
   whoDiv.addEventListener("mouseenter", () => {
     if (window.innerWidth > 800) {
-      const color = getRandomColor(lastWhoColor);
+      const color = getRandomColor([lastWhoColor, lastWhatColor]);
       whoDiv.style.background = color;
       lastWhoColor = color;
     }
@@ -82,7 +79,7 @@ export function renderHomepage(app) {
   });
   whatDiv.addEventListener("mouseenter", () => {
     if (window.innerWidth > 800) {
-      const color = getRandomColor(lastWhatColor);
+      const color = getRandomColor([lastWhatColor, lastWhoColor]);
       whatDiv.style.background = color;
       lastWhatColor = color;
     }
