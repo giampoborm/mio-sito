@@ -91,9 +91,23 @@ img {
   cursor: pointer;
   background: #fff;
   color: #000;
-  transition: background 0.18s;
+  transition: background 0.18s, background-position 0.18s;
   user-select: none;
   font-family: 'HelveticaRounded', sans-serif;
+}
+
+#tilt-hint {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #000;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 @media (max-width: 800px) {
