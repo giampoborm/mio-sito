@@ -22,6 +22,28 @@ html, body {
   min-height: 100%;
   overflow: auto;
   font-display: swap;
+  cursor: url('/cursors/normal.svg'), auto;
+}
+
+a, button, .nav-button, .what-nav-button, .microtext.link, .view-full-project-button {
+  cursor: url('/cursors/point.svg'), pointer;
+}
+
+body.dragging, body.dragging * {
+  cursor: url('/cursors/drag.svg'), auto !important;
+}
+
+#contact {
+  cursor: url('/cursors/contacts.svg'), pointer;
+}
+
+#container {
+  cursor: url('/cursors/just-click.svg'), auto;
+}
+
+#container .project-element,
+#container .whatpage-title {
+  cursor: url('/cursors/normal.svg'), auto;
 }
 
 img {

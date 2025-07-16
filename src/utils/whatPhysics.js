@@ -81,6 +81,15 @@ export function setupWhatPhysics() {
   container.style.touchAction = 'none'; // Crucial for custom pointer/touch handling
   document.body.appendChild(container);
 
+  function updateContainerCursor() {
+    const currentProject = projects[currentProjectIndex];
+    if (currentElementIndex < currentProject.summary.elements.length) {
+      container.style.cursor = "url('/cursors/just-click.svg'), auto";
+    } else {
+      container.style.cursor = "url('/cursors/next.svg'), auto";
+    }
+  }
+
   // --- Step 5: Project Data and State ---
   const projects = projectsData.projects;
   let currentProjectIndex = 0;
@@ -102,6 +111,8 @@ export function setupWhatPhysics() {
     titleBody,
     { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.9 : window.innerHeight / 2 }
   );
+
+  updateContainerCursor();
 
   async function addProjectElement(elementData, spawnX, spawnY) {
     let domElement, measuredWidth, measuredHeight;
@@ -349,6 +360,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         markDone(titleDom);
         lastTitleColor = color;
       }
+      updateContainerCursor();
     } else {
       // Advance to the next project
       currentProjectIndex = (currentProjectIndex + 1) % projects.length;
@@ -381,8 +393,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         const newGravity = randomGravity();
         setGravity(engine, newGravity.x, newGravity.y);
       }
-      
+
       updateSpecificNav();
+      updateContainerCursor();
     }
   }
 
@@ -441,6 +454,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         setGravity(engine, newGravity.x, newGravity.y);
     }
     updateSpecificNav();
+    updateContainerCursor();
   }
   
   // Define the handler for the custom event
