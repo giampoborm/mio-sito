@@ -578,6 +578,11 @@ img {
   cursor: url('/cursors/drag.svg') 32 32, auto;
 }
 
+body.dragging,
+body.dragging * {
+  cursor: url('/cursors/drag.svg') 32 32, auto !important;
+}
+
 
 /* Example for custom class, e.g. .special (optional) */
 .microtext.special {

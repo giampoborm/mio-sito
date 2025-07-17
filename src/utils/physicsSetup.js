@@ -63,11 +63,19 @@ export function enableDragging(engine, world, container) {
   });
   Matter.World.add(world, mouseConstraint);
 
-  const setDragCursor = () => {
-    document.body.style.cursor = "url('/cursors/drag.svg') 32 32, auto";
+  const setDragCursor = (e) => {
+    if (
+      e &&
+      e.target === container &&
+      (container.style.cursor.includes('just-click.svg') ||
+        container.style.cursor.includes('next.svg'))
+    ) {
+      return;
+    }
+    document.body.classList.add('dragging');
   };
   const clearDragCursor = () => {
-    document.body.style.cursor = '';
+    document.body.classList.remove('dragging');
   };
 
   Matter.Events.on(mouseConstraint, 'startdrag', setDragCursor);
@@ -122,6 +130,7 @@ export function enableDragging(engine, world, container) {
     container.removeEventListener('pointerdown', setDragCursor);
     window.removeEventListener('pointerup', clearDragCursor);
     container.removeEventListener('pointercancel', clearDragCursor);
+    document.body.classList.remove('dragging');
   };
 }
 
