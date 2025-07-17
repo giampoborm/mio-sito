@@ -560,6 +560,19 @@ img {
   cursor: url('/cursors/normal.svg') 32 32, auto;
 }
 
+.whatpage-title,
+.project-image,
+.description-text,
+.details-text,
+.credits-text,
+.project-text,
+.archive-title,
+.summary-xs,
+.summary-sm,
+.summary-lg {
+  cursor: url('/cursors/normal.svg') 32 32, auto;
+}
+
 .microtext:active,
 .microtext.link:active {
   cursor: url('/cursors/drag.svg') 32 32, auto;
