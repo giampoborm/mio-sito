@@ -56,7 +56,6 @@ export function createPhysicsNavMenu(world, container, currentPage) {
     el.textContent = btn.label;
     el.className = 'nav-button';
     el.style.position = 'absolute';
-    el.style.cursor = 'pointer';
     el.style.fontFamily = 'inherit';
     el.style.userSelect = 'none';
     el.style.background = 'transparent';

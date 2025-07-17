@@ -63,6 +63,15 @@ export function enableDragging(engine, world, container) {
   });
   Matter.World.add(world, mouseConstraint);
 
+  const handleStartDrag = () => {
+    document.body.style.cursor = "url('/cursors/drag.svg') 32 32, auto";
+  };
+  const handleEndDrag = () => {
+    document.body.style.cursor = '';
+  };
+  Matter.Events.on(mouseConstraint, 'startdrag', handleStartDrag);
+  Matter.Events.on(mouseConstraint, 'enddrag', handleEndDrag);
+
   // Custom mobile-friendly tap/drag detection
   let isDragging = false;
   let dragStart = { x: 0, y: 0 };
@@ -103,6 +112,8 @@ export function enableDragging(engine, world, container) {
     container.removeEventListener('touchstart', handleTouchStart);
     container.removeEventListener('touchmove', handleTouchMove);
     container.removeEventListener('touchend', handleTouchEnd);
+    Matter.Events.off(mouseConstraint, 'startdrag', handleStartDrag);
+    Matter.Events.off(mouseConstraint, 'enddrag', handleEndDrag);
   };
 }
 
