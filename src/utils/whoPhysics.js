@@ -236,6 +236,19 @@ function addRagdoll(world, container, bodies, currentlyIsMobile) {
     rightUpperLegData,
     rightLowerLegData,
   ]) => {
+    // Ensure ragdoll pieces don't show the browser drag ghost
+    [
+      headData,
+      torsoData,
+      leftUpperArmData,
+      leftLowerArmData,
+      rightUpperArmData,
+      rightLowerArmData,
+      leftUpperLegData,
+      leftLowerLegData,
+      rightUpperLegData,
+      rightLowerLegData,
+    ].forEach(p => p.element.setAttribute('draggable', 'false'));
     // Basic dimensions
     const headRadius = (headData.width * scale) / 2;
     const torsoW = torsoData.width;
