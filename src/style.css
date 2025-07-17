@@ -38,11 +38,21 @@ body.dragging, body.dragging * {
 }
 
 #container {
+  /* base layout shared by Who and What pages */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 10;
+}
+
+body.what-page #container {
   cursor: url('/cursors/just-click.svg'), auto;
 }
 
-#container .project-element,
-#container .whatpage-title {
+body.what-page #container .project-element,
+body.what-page #container .whatpage-title {
   cursor: url('/cursors/normal.svg'), auto;
 }
 
@@ -67,15 +77,6 @@ img {
   margin: 0;
 }
 /* Main container for physics */
-#container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100dvh;
-  z-index: 10;
-}
-
 .nav-button {
   font-size: 2rem;
   font-family: inherit;
@@ -110,7 +111,7 @@ img {
   justify-content: center;
   align-items: center;
   font-size: 6vw;
-  cursor: pointer;
+  cursor: url('/cursors/point.svg'), pointer;
   background: #fff;
   color: #000;
   transition: background 0.18s;
@@ -182,7 +183,7 @@ img {
   border-width: 3px;
   border-style: solid;
   border-radius: 1rem;
-  cursor: pointer;
+  cursor: url('/cursors/point.svg'), pointer;
   margin: .3rem;
 }
 
@@ -239,7 +240,7 @@ img {
   border: 4px solid #000;     /* thick black outline */
   border-radius: 18px;        /* same radius family */
   box-shadow: 4px 4px 0 #000; /* offset shadow: right + bottom only */
-  cursor: pointer;
+  cursor: url('/cursors/point.svg'), pointer;
 }
 .view-full-project-button:hover {
   transform: translate(-2px, -2px);       /* subtle lift */
@@ -431,7 +432,7 @@ img {
   color: #000000;
   border: 3px solid #000;
   box-shadow: 2px 2px 0 #000;
-  cursor: pointer;
+  cursor: url('/cursors/point.svg'), pointer;
   border-radius: 10px;
   transition: transform .15s, box-shadow .15s;
 
@@ -521,7 +522,7 @@ img {
   pointer-events: auto;
   user-select: none;
   text-align: center;
-  cursor: pointer;
+  cursor: url('/cursors/point.svg'), pointer;
   white-space: pre-line; /* ESSENTIAL for \n to work */
   /* Optional: text-shadow for contrast */
 }
@@ -557,7 +558,7 @@ img {
   color: #000000;
   border: 3px solid #000;
   box-shadow: 2px 2px 0 #000;
-  cursor: pointer;
+  cursor: url('/cursors/point.svg'), pointer;
   border-radius: 14px;
 }
 .microtext.link:hover {
