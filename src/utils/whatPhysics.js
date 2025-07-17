@@ -53,6 +53,7 @@ export function setupWhatPhysics() {
   let cleanupSyncLoop = () => {};
   let cleanupResizeHandler = () => {}; // For the return of handleResize
   let cleanupDragging = () => {};
+  let cleanupHoldBadgeResize = () => {};
 
   const bodies = []; // To track all Matter bodies and their DOM elements
   let lastTitleColor = null;
@@ -77,6 +78,10 @@ export function setupWhatPhysics() {
   const boundaries = createViewportBoundaries(world);
   // Store the returned cleanup function from handleResize
   cleanupResizeHandler = handleResize(boundaries, world);
+
+  const handleHoldResize = () => repositionHoldBadge();
+  window.addEventListener('resize', handleHoldResize);
+  cleanupHoldBadgeResize = () => window.removeEventListener('resize', handleHoldResize);
 
   // --- Step 4: DOM Container Setup ---
   const container = document.createElement('div');
@@ -105,9 +110,21 @@ export function setupWhatPhysics() {
   // --- Mobile long-press prompt setup ---
   let holdBadgeEl = null;
   let holdFillEl = null;
+  let holdBadgeBody = null;
   let holdTimer = null;
   let holdTriggered = false;
   const HOLD_MS = 400;
+
+  function repositionHoldBadge() {
+    if (!holdBadgeEl || !holdBadgeBody) return;
+    const rect = holdBadgeEl.getBoundingClientRect();
+    const offset =
+      parseFloat(getComputedStyle(document.documentElement).fontSize || '16') * 3;
+    Matter.Body.setPosition(holdBadgeBody, {
+      x: window.innerWidth / 2,
+      y: window.innerHeight - offset - rect.height / 2,
+    });
+  }
 
   function showHoldBadge() {
     if (hasLearnedHold || !amIMobile) return;
@@ -121,8 +138,21 @@ export function setupWhatPhysics() {
       holdBadgeEl.appendChild(holdFillEl);
       holdBadgeEl.appendChild(span);
       container.appendChild(holdBadgeEl);
+
+      const rect = holdBadgeEl.getBoundingClientRect();
+      holdBadgeBody = Matter.Bodies.rectangle(
+        0,
+        0,
+        rect.width,
+        rect.height,
+        { isStatic: true }
+      );
+      Matter.World.add(world, holdBadgeBody);
+      bodies.push({ body: holdBadgeBody, domElement: holdBadgeEl });
+      repositionHoldBadge();
     } else {
       holdBadgeEl.style.display = 'block';
+      repositionHoldBadge();
     }
     holdFillEl.style.transition = 'none';
     holdFillEl.style.width = '0%';
@@ -133,6 +163,9 @@ export function setupWhatPhysics() {
       holdBadgeEl.style.display = 'none';
       holdFillEl.style.transition = 'none';
       holdFillEl.style.width = '0%';
+      if (holdBadgeBody) {
+        Matter.Body.setPosition(holdBadgeBody, { x: -9999, y: -9999 });
+      }
     }
   }
 
@@ -647,6 +680,9 @@ if (DEBUG) {
     if (cleanupResizeHandler) {
       cleanupResizeHandler();
       // console.log('Resize handler stopped.');
+    }
+    if (cleanupHoldBadgeResize) {
+      cleanupHoldBadgeResize();
     }
     if (cleanupDragging) {
       cleanupDragging();

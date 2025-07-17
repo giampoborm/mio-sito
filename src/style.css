@@ -229,9 +229,6 @@ img {
 /* Mobile long-press badge */
 .hold-to-next {
   position: absolute;
-  left: 50%;
-  bottom: 3rem;
-  transform: translateX(-50%);
   padding: 0.4rem 0.8rem;
   background: #fff;
   color: #000;
