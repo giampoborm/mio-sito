@@ -27,7 +27,6 @@ html, body {
 
 img {
   user-select: none;
-  pointer-events: none;   /* unless you intentionally want to block clicks */
 }
 
 
@@ -195,6 +194,7 @@ img {
 
 .project-image {
   object-fit: contain;
+  z-index: 30;
 }
 
 .project-video {
