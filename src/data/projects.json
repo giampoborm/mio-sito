@@ -12,11 +12,11 @@
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/logo.webp"
+            "src": "/assets/what/moodnothing.baby/logo.webp"
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/smile.webp"
+            "src": "/assets/what/moodnothing.baby/smile.webp"
           },
           {
             "type": "text",
@@ -26,11 +26,11 @@
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/not-funny-tee.webp"
+            "src": "/assets/what/moodnothing.baby/not-funny-tee.webp"
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/cat-calling-tee.webp"
+            "src": "/assets/what/moodnothing.baby/cat-calling-tee.webp"
           },
           {
             "type": "text",
@@ -40,11 +40,11 @@
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/screenshot-desktop.webp"
+            "src": "/assets/what/moodnothing.baby/screenshot-desktop.webp"
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/screensmobile-1.webp"
+            "src": "/assets/what/moodnothing.baby/screensmobile-1.webp"
           },
           {
             "type": "text",
@@ -54,7 +54,7 @@
           },
           {
             "type": "video",
-            "src": "src/assets/what/moodnothing.baby/video-collezione_1.mp4"
+            "src": "/assets/what/moodnothing.baby/video-collezione_1.mp4"
           }
         ]
       },
@@ -90,19 +90,19 @@
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/not-funny-tee.webp",
+            "src": "/assets/what/moodnothing.baby/not-funny-tee.webp",
             "columns": 1,
             "gridColumnStart": 1
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/unemployed-tee.webp",
+            "src": "/assets/what/moodnothing.baby/unemployed-tee.webp",
             "columns": 1,
             "gridColumnStart": 2
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/cat-calling-tee.webp",
+            "src": "/assets/what/moodnothing.baby/cat-calling-tee.webp",
             "columns": 1,
             "gridColumnStart": 3
           },
@@ -115,13 +115,13 @@
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/logo.webp",
+            "src": "/assets/what/moodnothing.baby/logo.webp",
             "columns": 1,
             "gridColumnStart": 1
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/facciamodal.webp",
+            "src": "/assets/what/moodnothing.baby/facciamodal.webp",
             "columns": 1,
             "gridColumnStart": 2
           },
@@ -149,13 +149,13 @@
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/screensmobile-1modalB.webp",
+            "src": "/assets/what/moodnothing.baby/screensmobile-1modalB.webp",
             "columns": 1,
             "gridColumnStart": 3
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/screensmobile-2modalB.webp",
+            "src": "/assets/what/moodnothing.baby/screensmobile-2modalB.webp",
             "columns": 1,
             "gridColumnStart": 4
           },
@@ -169,7 +169,7 @@
           },
           {
             "type": "image",
-            "src": "src/assets/what/moodnothing.baby/screenshot-desktopmodal.webp",
+            "src": "/assets/what/moodnothing.baby/screenshot-desktopmodal.webp",
             "columns": 4,
             "gridColumnStart": 1
           },
@@ -190,25 +190,25 @@
           },
           {
             "type": "video",
-            "src": "src/assets/what/moodnothing.baby/teaser-prima-collezione.mp4",
+            "src": "/assets/what/moodnothing.baby/teaser-prima-collezione.mp4",
             "columns": 1,
             "gridColumnStart": 1
           },
           {
             "type": "video",
-            "src": "src/assets/what/moodnothing.baby/video-collezione_1.mp4",
+            "src": "/assets/what/moodnothing.baby/video-collezione_1.mp4",
             "columns": 1,
             "gridColumnStart": 2
           },
           {
             "type": "video",
-            "src": "src/assets/what/moodnothing.baby/thinking_1.mp4",
+            "src": "/assets/what/moodnothing.baby/thinking_1.mp4",
             "columns": 1,
             "gridColumnStart": 3
           },
           {
             "type": "video",
-            "src": "src/assets/what/moodnothing.baby/natale.mp4",
+            "src": "/assets/what/moodnothing.baby/natale.mp4",
             "columns": 1,
             "gridColumnStart": 4
           },
@@ -241,11 +241,11 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/copertina.webp"
+          "src": "/assets/what/postmoderno-accidentale/copertina.webp"
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/mockup-doppio.webp"
+          "src": "/assets/what/postmoderno-accidentale/mockup-doppio.webp"
         },
           {
             "type": "text",
@@ -255,11 +255,11 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/carro.webp"
+          "src": "/assets/what/postmoderno-accidentale/carro.webp"
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/tipafiamme1.webp"
+          "src": "/assets/what/postmoderno-accidentale/tipafiamme1.webp"
         },
           {
             "type": "text",
@@ -269,11 +269,11 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/mockup6-7.webp"
+          "src": "/assets/what/postmoderno-accidentale/mockup6-7.webp"
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/kant.webp"
+          "src": "/assets/what/postmoderno-accidentale/kant.webp"
         },
           {
             "type": "text",
@@ -283,7 +283,7 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/ylean.webp"
+          "src": "/assets/what/postmoderno-accidentale/ylean.webp"
         }
       ]
     },
@@ -313,7 +313,7 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/copertina-croppata.webp",
+          "src": "/assets/what/postmoderno-accidentale/copertina-croppata.webp",
           "columns": 2,
           "gridColumnStart": 3
         },
@@ -334,13 +334,13 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/carroM.webp",
+          "src": "/assets/what/postmoderno-accidentale/carroM.webp",
           "columns": 2,
           "gridColumnStart": 1
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/tipafiamme.webp",
+          "src": "/assets/what/postmoderno-accidentale/tipafiamme.webp",
           "columns": 2,
           "gridColumnStart": 3
         },
@@ -360,7 +360,7 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/mockup-aperto.webp",
+          "src": "/assets/what/postmoderno-accidentale/mockup-aperto.webp",
           "columns": 1,
           "gridColumnStart": 1
         },
@@ -387,7 +387,7 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/kant2.webp",
+          "src": "/assets/what/postmoderno-accidentale/kant2.webp",
           "columns": 1,
           "gridColumnStart": 4
         },
@@ -407,37 +407,37 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/pag1.webp",
+          "src": "/assets/what/postmoderno-accidentale/pag1.webp",
           "columns": 1,
           "gridColumnStart": 1
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/pag2.webp",
+          "src": "/assets/what/postmoderno-accidentale/pag2.webp",
           "columns": 1,
           "gridColumnStart": 2
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/pag3.webp",
+          "src": "/assets/what/postmoderno-accidentale/pag3.webp",
           "columns": 1,
           "gridColumnStart": 3
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/retro.webp",
+          "src": "/assets/what/postmoderno-accidentale/retro.webp",
           "columns": 1,
           "gridColumnStart": 4
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/mockup-aperto-pt2.webp",
+          "src": "/assets/what/postmoderno-accidentale/mockup-aperto-pt2.webp",
           "columns": 2,
           "gridColumnStart": 1
         },
         {
           "type": "image",
-          "src": "src/assets/what/postmoderno-accidentale/pisa.webp",
+          "src": "/assets/what/postmoderno-accidentale/pisa.webp",
           "columns": 2,
           "gridColumnStart": 3
         },
@@ -462,11 +462,11 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/copertina.webp"
+          "src": "/assets/what/beyond-the-frame/copertina.webp"
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/spreadC.webp"
+          "src": "/assets/what/beyond-the-frame/spreadC.webp"
         },
           {
             "type": "text",
@@ -482,15 +482,15 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/lizscan.webp"
+          "src": "/assets/what/beyond-the-frame/lizscan.webp"
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/lizpini2.webp"
+          "src": "/assets/what/beyond-the-frame/lizpini2.webp"
         },
         {
           "type": "video",
-          "src": "src/assets/what/beyond-the-frame/lizposa.mp4"
+          "src": "/assets/what/beyond-the-frame/lizposa.mp4"
         },
           {
             "type": "text",
@@ -500,7 +500,7 @@
           },
         {
           "type": "video",
-          "src": "src/assets/what/beyond-the-frame/spicegirlverticale1.mp4"
+          "src": "/assets/what/beyond-the-frame/spicegirlverticale1.mp4"
         },
           {
             "type": "text",
@@ -510,7 +510,7 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/spread2V.webp"
+          "src": "/assets/what/beyond-the-frame/spread2V.webp"
         }
       ]
     },
@@ -546,13 +546,13 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/copertinina.webp",
+          "src": "/assets/what/beyond-the-frame/copertinina.webp",
           "columns": 2,
           "gridColumnStart": 1
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/copertinona.webp",
+          "src": "/assets/what/beyond-the-frame/copertinona.webp",
           "columns": 2,
           "gridColumnStart": 3
         },
@@ -572,25 +572,25 @@
         },
         {
           "type": "video",
-          "src": "src/assets/what/beyond-the-frame/videoesperienza1.mp4",
+          "src": "/assets/what/beyond-the-frame/videoesperienza1.mp4",
           "columns": 1,
           "gridColumnStart": 1
         },
         {
           "type": "video",
-          "src": "src/assets/what/beyond-the-frame/copertinedoppoia.mp4",
+          "src": "/assets/what/beyond-the-frame/copertinedoppoia.mp4",
           "columns": 1,
           "gridColumnStart": 2
         },
         {
           "type": "video",
-          "src": "src/assets/what/beyond-the-frame/cavalloverticale1.mp4",
+          "src": "/assets/what/beyond-the-frame/cavalloverticale1.mp4",
           "columns": 1,
           "gridColumnStart":3
         },
                 {
           "type": "video",
-          "src": "src/assets/what/beyond-the-frame/girarepagina.mp4",
+          "src": "/assets/what/beyond-the-frame/girarepagina.mp4",
           "columns": 1,
           "gridColumnStart": 4
         },
@@ -603,7 +603,7 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/spreadG1.webp",
+          "src": "/assets/what/beyond-the-frame/spreadG1.webp",
           "columns": 2,
           "gridColumnStart": 1
         },
@@ -623,31 +623,31 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/leicammina.webp",
+          "src": "/assets/what/beyond-the-frame/leicammina.webp",
           "columns": 1,
           "gridColumnStart": 1
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/cavallovuoto.webp",
+          "src": "/assets/what/beyond-the-frame/cavallovuoto.webp",
           "columns": 1,
           "gridColumnStart": 2
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/ferrodicavallo.webp",
+          "src": "/assets/what/beyond-the-frame/ferrodicavallo.webp",
           "columns": 1,
           "gridColumnStart": 3
         },
         {
           "type": "video",
-          "src": "src/assets/what/beyond-the-frame/lizcammina.mp4",
+          "src": "/assets/what/beyond-the-frame/lizcammina.mp4",
           "columns": 1,
           "gridColumnStart": 4
         },
         {
           "type": "video",
-          "src": "src/assets/what/beyond-the-frame/videocavallo.mp4",
+          "src": "/assets/what/beyond-the-frame/videocavallo.mp4",
           "columns": 2,
           "gridColumnStart": 1
         },
@@ -667,7 +667,7 @@
         },
         {
           "type": "image",
-          "src": "src/assets/what/beyond-the-frame/binding.webp",
+          "src": "/assets/what/beyond-the-frame/binding.webp",
           "columns": 2,
           "gridColumnStart": 3
         },
@@ -693,7 +693,7 @@
         },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/Strebottiglie.webp"
+        "src": "/assets/what/parolo-wines-label/Strebottiglie.webp"
       },
         {
           "type": "text",
@@ -703,7 +703,7 @@
         },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/Sfinal.webp"
+        "src": "/assets/what/parolo-wines-label/Sfinal.webp"
       },
         {
           "type": "text",
@@ -713,11 +713,11 @@
         },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/Sneroiniziale.webp"
+        "src": "/assets/what/parolo-wines-label/Sneroiniziale.webp"
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/Snerooutp.webp"
+        "src": "/assets/what/parolo-wines-label/Snerooutp.webp"
       },
         {
           "type": "text",
@@ -727,11 +727,11 @@
         },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/Sbiancofinale.webp"
+        "src": "/assets/what/parolo-wines-label/Sbiancofinale.webp"
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/Sdasotto.webp"
+        "src": "/assets/what/parolo-wines-label/Sdasotto.webp"
       },
         {
           "type": "text",
@@ -759,7 +759,7 @@
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/hero.webp",
+        "src": "/assets/what/parolo-wines-label/hero.webp",
         "columns": 4,
         "gridColumnStart": 1
       },
@@ -793,7 +793,7 @@
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/form.webp",
+        "src": "/assets/what/parolo-wines-label/form.webp",
         "columns": 2,
         "gridColumnStart": 3
       },
@@ -813,13 +813,13 @@
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/prototipo1.webp",
+        "src": "/assets/what/parolo-wines-label/prototipo1.webp",
         "columns": 2,
         "gridColumnStart": 1
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/prototipo2.webp",
+        "src": "/assets/what/parolo-wines-label/prototipo2.webp",
         "columns": 2,
         "gridColumnStart": 3
       },
@@ -846,13 +846,13 @@
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/neroiniziale.webp",
+        "src": "/assets/what/parolo-wines-label/neroiniziale.webp",
         "columns": 2,
         "gridColumnStart": 1
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/nerooutp.webp",
+        "src": "/assets/what/parolo-wines-label/nerooutp.webp",
         "columns": 2,
         "gridColumnStart": 3
       },
@@ -865,13 +865,13 @@
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/biancoiniziale.webp",
+        "src": "/assets/what/parolo-wines-label/biancoiniziale.webp",
         "columns": 2,
         "gridColumnStart": 1
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/biancooutp.webp",
+        "src": "/assets/what/parolo-wines-label/biancooutp.webp",
         "columns": 2,
         "gridColumnStart": 3
       },
@@ -898,7 +898,7 @@
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/final.webp",
+        "src": "/assets/what/parolo-wines-label/final.webp",
         "columns": 4,
         "gridColumnStart": 1
       },
@@ -911,13 +911,13 @@
       },
       {
         "type": "image",
-        "src": "src/assets/what/parolo-wines-label/trebottiglie.webp",
+        "src": "/assets/what/parolo-wines-label/trebottiglie.webp",
         "columns": 2,
         "gridColumnStart": 1
       },
       {
         "type": "video",
-        "src": "src/assets/what/parolo-wines-label/videovini.mp4",
+        "src": "/assets/what/parolo-wines-label/videovini.mp4",
         "columns": 2,
         "gridColumnStart": 3
       },
@@ -948,11 +948,11 @@
           },
         {
           "type": "video",
-          "src": "src/assets/what/archive/screenprint2.mp4"
+          "src": "/assets/what/archive/screenprint2.mp4"
         },
         {
           "type": "image",
-          "src": "src/assets/what/archive/libricinitagliati.webp"
+          "src": "/assets/what/archive/libricinitagliati.webp"
         },
           {
             "type": "text",
@@ -962,7 +962,7 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/archive/www1s.webp"
+          "src": "/assets/what/archive/www1s.webp"
         },
           {
             "type": "text",
@@ -972,7 +972,7 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/archive/performancefoto.webp"
+          "src": "/assets/what/archive/performancefoto.webp"
         },
           {
             "type": "text",
@@ -982,7 +982,7 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/archive/menufront.webp"
+          "src": "/assets/what/archive/menufront.webp"
         },
           {
             "type": "text",
@@ -992,7 +992,7 @@
           },
         {
           "type": "image",
-          "src": "src/assets/what/archive/boh.webp"
+          "src": "/assets/what/archive/boh.webp"
         },
           {
             "type": "text",
@@ -1038,14 +1038,14 @@
           "columns": 4,
           "gridColumnStart": 1
         },
-        { "type": "video", "src": "src/assets/what/archive/screenp1.mp4", "columns": 1, "gridColumnStart": 1 },
-        { "type": "image", "src": "src/assets/what/archive/screenpfoto.webp", "columns": 1, "gridColumnStart": 2 },
-        { "type": "image", "src": "src/assets/what/archive/screenpdrummer.webp", "columns": 1, "gridColumnStart": 3 },
-        { "type": "image", "src": "src/assets/what/archive/drummertshi.webp", "columns": 1, "gridColumnStart": 4 },
-        { "type": "image", "src": "src/assets/what/archive/trelibricini.webp", "columns": 1, "gridColumnStart": 1 },
-        { "type": "image", "src": "src/assets/what/archive/copertina.webp", "columns": 1, "gridColumnStart": 2 },
-        { "type": "image", "src": "src/assets/what/archive/pagfotoalbum.webp", "columns": 1, "gridColumnStart": 3 },
-        { "type": "image", "src": "src/assets/what/archive/libricini.webp", "columns": 1, "gridColumnStart": 4 },
+        { "type": "video", "src": "/assets/what/archive/screenp1.mp4", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "/assets/what/archive/screenpfoto.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "/assets/what/archive/screenpdrummer.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "/assets/what/archive/drummertshi.webp", "columns": 1, "gridColumnStart": 4 },
+        { "type": "image", "src": "/assets/what/archive/trelibricini.webp", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "/assets/what/archive/copertina.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "/assets/what/archive/pagfotoalbum.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "/assets/what/archive/libricini.webp", "columns": 1, "gridColumnStart": 4 },
 
         {
           "type": "text",
@@ -1062,10 +1062,10 @@
           "columns": 4,
           "gridColumnStart": 1
         },
-        { "type": "image", "src": "src/assets/what/archive/www1.webp", "columns": 1, "gridColumnStart": 1 },
-        { "type": "image", "src": "src/assets/what/archive/www2.webp", "columns": 1, "gridColumnStart": 2 },
-        { "type": "image", "src": "src/assets/what/archive/www3.webp", "columns": 1, "gridColumnStart": 3 },
-        { "type": "image", "src": "src/assets/what/archive/wwwretro.webp", "columns": 1, "gridColumnStart": 4 },
+        { "type": "image", "src": "/assets/what/archive/www1.webp", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "/assets/what/archive/www2.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "/assets/what/archive/www3.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "/assets/what/archive/wwwretro.webp", "columns": 1, "gridColumnStart": 4 },
 
         {
           "type": "text",
@@ -1089,8 +1089,8 @@
           "columns": 3,
           "gridColumnStart": 1
         },
-        { "type": "video", "src": "src/assets/what/archive/perf1.mp4", "columns": 1, "gridColumnStart": 4 },
-        { "type": "video", "src": "src/assets/what/archive/perf2.mp4", "columns": 1, "gridColumnStart": 1 },
+        { "type": "video", "src": "/assets/what/archive/perf1.mp4", "columns": 1, "gridColumnStart": 4 },
+        { "type": "video", "src": "/assets/what/archive/perf2.mp4", "columns": 1, "gridColumnStart": 1 },
         {
           "type": "text",
           "content": "The second performance tended more towards an irony-borne strategy, this idea of a supportive chorus of clones, that with a slightly uncanny set of movements stood behind the artist.",
@@ -1105,7 +1105,7 @@
           "columns": 3,
           "gridColumnStart": 1
         },
-        { "type": "video", "src": "src/assets/what/archive/perf3.mp4", "columns": 1, "gridColumnStart": 4 },
+        { "type": "video", "src": "/assets/what/archive/perf3.mp4", "columns": 1, "gridColumnStart": 4 },
 
         {
           "type": "text",
@@ -1129,10 +1129,10 @@
           "columns": 4,
           "gridColumnStart": 1
         },
-        { "type": "image", "src": "src/assets/what/archive/bellafotomenu.webp", "columns": 1, "gridColumnStart": 1 },
-        { "type": "image", "src": "src/assets/what/archive/menupag2.webp", "columns": 1, "gridColumnStart": 2 },
-        { "type": "image", "src": "src/assets/what/archive/menupag3foto.webp", "columns": 1, "gridColumnStart": 3 },
-        { "type": "image", "src": "src/assets/what/archive/font.webp", "columns": 1, "gridColumnStart": 4 },
+        { "type": "image", "src": "/assets/what/archive/bellafotomenu.webp", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "/assets/what/archive/menupag2.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "/assets/what/archive/menupag3foto.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "/assets/what/archive/font.webp", "columns": 1, "gridColumnStart": 4 },
         {
           "type": "text",
           "content": "The second one was meant to be a totem menu for the main bar, it needed to be eye catching, cocktail driven yet comprehensive of all the information, ingredients and quantity included. I created two versions made for two different sides of the bar, but didn’t have the opportunity to test them as prototypes as the bar has been closed since.",
@@ -1140,8 +1140,8 @@
           "columns": 4,
           "gridColumnStart": 1
         },
-        { "type": "image", "src": "src/assets/what/archive/orizzontale.webp", "columns": 2, "gridColumnStart": 1 },
-        { "type": "image", "src": "src/assets/what/archive/veticalemenu.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "/assets/what/archive/orizzontale.webp", "columns": 2, "gridColumnStart": 1 },
+        { "type": "image", "src": "/assets/what/archive/veticalemenu.webp", "columns": 1, "gridColumnStart": 3 },
         {
           "type": "text",
           "content": "reels / tiktok",
@@ -1157,8 +1157,8 @@
           "columns": 3,
           "gridColumnStart": 1
         },
-        { "type": "video", "src": "src/assets/what/archive/boh.mp4", "columns": 1, "gridColumnStart": 4 },
-        { "type": "image", "src": "src/assets/what/archive/tiktokanalytics.webp", "columns": 4, "gridColumnStart": 1 },
+        { "type": "video", "src": "/assets/what/archive/boh.mp4", "columns": 1, "gridColumnStart": 4 },
+        { "type": "image", "src": "/assets/what/archive/tiktokanalytics.webp", "columns": 4, "gridColumnStart": 1 },
 
         {
           "type": "text",
@@ -1175,10 +1175,10 @@
           "columns": 4,
           "gridColumnStart": 1
         },
-        { "type": "image", "src": "src/assets/what/archive/primapag.webp", "columns": 1, "gridColumnStart": 1 },
-        { "type": "image", "src": "src/assets/what/archive/desktopfoto.webp", "columns": 1, "gridColumnStart": 2 },
-        { "type": "image", "src": "src/assets/what/archive/intro.webp", "columns": 1, "gridColumnStart": 3 },
-        { "type": "image", "src": "src/assets/what/archive/random.webp", "columns": 1, "gridColumnStart": 4 },
+        { "type": "image", "src": "/assets/what/archive/primapag.webp", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "/assets/what/archive/desktopfoto.webp", "columns": 1, "gridColumnStart": 2 },
+        { "type": "image", "src": "/assets/what/archive/intro.webp", "columns": 1, "gridColumnStart": 3 },
+        { "type": "image", "src": "/assets/what/archive/random.webp", "columns": 1, "gridColumnStart": 4 },
 
         {
           "type": "text",
@@ -1195,8 +1195,8 @@
           "columns": 4,
           "gridColumnStart": 1
         },
-        { "type": "video", "src": "src/assets/what/archive/slot.mp4", "columns": 1, "gridColumnStart": 1 },
-        { "type": "image", "src": "src/assets/what/archive/treflyer.webp", "columns": 2, "gridColumnStart": 2 }
+        { "type": "video", "src": "/assets/what/archive/slot.mp4", "columns": 1, "gridColumnStart": 1 },
+        { "type": "image", "src": "/assets/what/archive/treflyer.webp", "columns": 2, "gridColumnStart": 2 }
       ]
     }
   }
