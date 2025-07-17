@@ -224,6 +224,7 @@ img {
 .project-video {
   max-width: 100%;
   height: auto;
+  cursor: url('/cursors/point.svg'), pointer;
 }
 
 
@@ -387,13 +388,18 @@ img {
   display: contents;
 }
 
-.full-project-image, .full-project-video{
+.full-project-image,
+.full-project-video{
   width: 100%;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 3px 14px rgba(0,0,0,.09);
   object-fit: contain;            /* keeps shirts nicely framed      */
   background: #fafafa;            /* avoids transparent → black edge */
+}
+
+.full-project-video{
+  cursor: url('/cursors/point.svg'), pointer;
 }
 
 .full-project-text {
