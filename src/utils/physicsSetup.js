@@ -1,5 +1,5 @@
 import Matter from 'matter-js';
-import { requestIOSMotionPermission } from './iosPermission';
+import { requestIOSMotionPermission } from './iosPermission.js';
 
 // Initialize the Matter.js Engine and World
 export function initializeMatterEngine() {
