@@ -63,6 +63,28 @@ export function enableDragging(engine, world, container) {
   });
   Matter.World.add(world, mouseConstraint);
 
+  const setDragCursor = (e) => {
+    if (
+      e &&
+      e.target === container &&
+      (container.style.cursor.includes('just-click.svg') ||
+        container.style.cursor.includes('next.svg'))
+    ) {
+      return;
+    }
+    document.body.classList.add('dragging');
+  };
+  const clearDragCursor = () => {
+    document.body.classList.remove('dragging');
+  };
+
+  Matter.Events.on(mouseConstraint, 'startdrag', setDragCursor);
+  Matter.Events.on(mouseConstraint, 'enddrag', clearDragCursor);
+
+  container.addEventListener('pointerdown', setDragCursor);
+  window.addEventListener('pointerup', clearDragCursor);
+  container.addEventListener('pointercancel', clearDragCursor);
+
   // Custom mobile-friendly tap/drag detection
   let isDragging = false;
   let dragStart = { x: 0, y: 0 };
@@ -103,6 +125,12 @@ export function enableDragging(engine, world, container) {
     container.removeEventListener('touchstart', handleTouchStart);
     container.removeEventListener('touchmove', handleTouchMove);
     container.removeEventListener('touchend', handleTouchEnd);
+    Matter.Events.off(mouseConstraint, 'startdrag', setDragCursor);
+    Matter.Events.off(mouseConstraint, 'enddrag', clearDragCursor);
+    container.removeEventListener('pointerdown', setDragCursor);
+    window.removeEventListener('pointerup', clearDragCursor);
+    container.removeEventListener('pointercancel', clearDragCursor);
+    document.body.classList.remove('dragging');
   };
 }
 

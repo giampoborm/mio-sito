@@ -22,11 +22,11 @@ html, body {
   min-height: 100%;
   overflow: auto;
   font-display: swap;
+  cursor: url('/cursors/normal.svg') 32 32, auto;
 }
 
 img {
   user-select: none;
-  pointer-events: none;   /* unless you intentionally want to block clicks */
 }
 
 
@@ -88,7 +88,6 @@ img {
   justify-content: center;
   align-items: center;
   font-size: 6vw;
-  cursor: pointer;
   background: #fff;
   color: #000;
   transition: background 0.18s;
@@ -160,7 +159,6 @@ img {
   border-width: 3px;
   border-style: solid;
   border-radius: 1rem;
-  cursor: pointer;
   margin: .3rem;
 }
 
@@ -196,6 +194,7 @@ img {
 
 .project-image {
   object-fit: contain;
+  z-index: 30;
 }
 
 .project-video {
@@ -217,7 +216,6 @@ img {
   border: 4px solid #000;     /* thick black outline */
   border-radius: 18px;        /* same radius family */
   box-shadow: 4px 4px 0 #000; /* offset shadow: right + bottom only */
-  cursor: pointer;
 }
 .view-full-project-button:hover {
   transform: translate(-2px, -2px);       /* subtle lift */
@@ -409,7 +407,6 @@ img {
   color: #000000;
   border: 3px solid #000;
   box-shadow: 2px 2px 0 #000;
-  cursor: pointer;
   border-radius: 10px;
   transition: transform .15s, box-shadow .15s;
 
@@ -499,7 +496,6 @@ img {
   pointer-events: auto;
   user-select: none;
   text-align: center;
-  cursor: pointer;
   white-space: pre-line; /* ESSENTIAL for \n to work */
   /* Optional: text-shadow for contrast */
 }
@@ -516,7 +512,7 @@ img {
   color: #181818;
   font-size: 1rem;
   font-family: inherit;
-  cursor: grab;
+  /* cursor updated below */
   z-index: 10;
   user-select: none;
   /* Drag friendliness */
@@ -524,9 +520,6 @@ img {
   z-index: 1000;
 }
 
-.microtext:active {
-  cursor: grabbing;
-}
 
 /* For links */
 .microtext.link {
@@ -535,7 +528,6 @@ img {
   color: #000000;
   border: 3px solid #000;
   box-shadow: 2px 2px 0 #000;
-  cursor: pointer;
   border-radius: 14px;
 }
 .microtext.link:hover {
@@ -546,6 +538,51 @@ img {
   transform: translate(0,0);
   box-shadow: 2px 2px 0 #000;
 }
+
+/* --- Custom Cursors ----------------------------------------------------- */
+.home-side,
+.nav-button,
+.what-nav-button,
+.modal-close-button,
+.view-full-project-button,
+.project-video,
+.full-project-video,
+.anchor:not(#contact),
+.microtext.link {
+  cursor: url('/cursors/point.svg') 32 32, auto;
+}
+
+#contact {
+  cursor: url('/cursors/contacts.svg') 32 32, auto;
+}
+
+.microtext {
+  cursor: url('/cursors/normal.svg') 32 32, auto;
+}
+
+.whatpage-title,
+.project-image,
+.description-text,
+.details-text,
+.credits-text,
+.project-text,
+.archive-title,
+.summary-xs,
+.summary-sm,
+.summary-lg {
+  cursor: url('/cursors/normal.svg') 32 32, auto;
+}
+
+.microtext:active,
+.microtext.link:active {
+  cursor: url('/cursors/drag.svg') 32 32, auto;
+}
+
+body.dragging,
+body.dragging * {
+  cursor: url('/cursors/drag.svg') 32 32, auto !important;
+}
+
 
 /* Example for custom class, e.g. .special (optional) */
 .microtext.special {

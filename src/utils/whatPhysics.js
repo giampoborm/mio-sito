@@ -79,12 +79,22 @@ export function setupWhatPhysics() {
   container.id = 'container';
   container.classList.add('container');
   container.style.touchAction = 'none'; // Crucial for custom pointer/touch handling
+  container.style.cursor = "url('/cursors/just-click.svg') 32 32, auto";
   document.body.appendChild(container);
 
   // --- Step 5: Project Data and State ---
   const projects = projectsData.projects;
   let currentProjectIndex = 0;
   let currentElementIndex = 0;
+
+  function updateWhitespaceCursor() {
+    const summaryElements = projects[currentProjectIndex].summary.elements;
+    if (currentElementIndex < summaryElements.length) {
+      container.style.cursor = "url('/cursors/just-click.svg') 32 32, auto";
+    } else {
+      container.style.cursor = "url('/cursors/next.svg') 32 32, auto";
+    }
+  }
 
   const amIMobile = isMobile(); // Determine device type once
 
@@ -96,6 +106,8 @@ export function setupWhatPhysics() {
     { tag: 'h1', className: 'whatpage-title' }
   );
   bodies.push({ body: titleBody, domElement: titleDom });
+
+  updateWhitespaceCursor();
 
   // Position the title: center on desktop, lower on mobile
   Matter.Body.setPosition(
@@ -341,6 +353,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       const elementData = summaryElements[currentElementIndex];
       await addProjectElement(elementData, x, y);
       currentElementIndex++;
+      updateWhitespaceCursor();
       if (currentElementIndex === summaryElements.length) {
         const buttonData = { type: 'button', content: 'View Full Project' };
         await addProjectElement(buttonData, x + (Math.random()*40-20), y + (Math.random()*40-20)); // Slight offset
@@ -354,6 +367,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       currentProjectIndex = (currentProjectIndex + 1) % projects.length;
       currentElementIndex = 0;
       clearProjectElements(); // Clears only summary items, not title/nav
+      updateWhitespaceCursor();
 
       // Remove old title
       Matter.World.remove(world, titleBody);
@@ -413,6 +427,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     currentProjectIndex = newIndex;
     currentElementIndex = 0;
     clearProjectElements();
+    updateWhitespaceCursor();
 
     // Remove old title
     Matter.World.remove(world, titleBody);
