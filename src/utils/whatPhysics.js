@@ -39,6 +39,10 @@ const DESKTOP_SCALING = { // Original scales you were using
   button: 1.0,
 };
 
+// Track whether the user has already successfully used the long-press gesture
+// to advance projects during this session. Persisted across page mounts.
+let hasLearnedHold = false;
+
 export function setupWhatPhysics() {
   // --- Step 1: Initialization and Variable Scoping ---
   const engine = initializeMatterEngine();
@@ -49,6 +53,7 @@ export function setupWhatPhysics() {
   let cleanupSyncLoop = () => {};
   let cleanupResizeHandler = () => {}; // For the return of handleResize
   let cleanupDragging = () => {};
+  let cleanupHoldBadgeResize = () => {};
 
   const bodies = []; // To track all Matter bodies and their DOM elements
   let lastTitleColor = null;
@@ -74,6 +79,10 @@ export function setupWhatPhysics() {
   // Store the returned cleanup function from handleResize
   cleanupResizeHandler = handleResize(boundaries, world);
 
+  const handleHoldResize = () => repositionHoldBadge();
+  window.addEventListener('resize', handleHoldResize);
+  cleanupHoldBadgeResize = () => window.removeEventListener('resize', handleHoldResize);
+
   // --- Step 4: DOM Container Setup ---
   const container = document.createElement('div');
   container.id = 'container';
@@ -97,6 +106,97 @@ export function setupWhatPhysics() {
   }
 
   const amIMobile = isMobile(); // Determine device type once
+
+  // --- Mobile long-press prompt setup ---
+  let holdBadgeEl = null;
+  let holdFillEl = null;
+  let holdBadgeBody = null;
+  let holdTimer = null;
+  let holdTriggered = false;
+  const HOLD_MS = 400;
+
+  function repositionHoldBadge() {
+    if (!holdBadgeEl || !holdBadgeBody) return;
+    const rect = holdBadgeEl.getBoundingClientRect();
+    const offset =
+      parseFloat(getComputedStyle(document.documentElement).fontSize || '16') * 3;
+    Matter.Body.setPosition(holdBadgeBody, {
+      x: window.innerWidth / 2,
+      y: window.innerHeight - offset - rect.height / 2,
+    });
+  }
+
+  function showHoldBadge() {
+    if (hasLearnedHold || !amIMobile) return;
+    if (!holdBadgeEl) {
+      holdBadgeEl = document.createElement('div');
+      holdBadgeEl.className = 'hold-to-next';
+      holdFillEl = document.createElement('div');
+      holdFillEl.className = 'hold-to-next-fill';
+      const span = document.createElement('span');
+      span.textContent = 'hold to view next project';
+      holdBadgeEl.appendChild(holdFillEl);
+      holdBadgeEl.appendChild(span);
+      container.appendChild(holdBadgeEl);
+
+      const rect = holdBadgeEl.getBoundingClientRect();
+      holdBadgeBody = Matter.Bodies.rectangle(
+        0,
+        0,
+        rect.width,
+        rect.height,
+        { isStatic: true }
+      );
+      Matter.World.add(world, holdBadgeBody);
+      bodies.push({ body: holdBadgeBody, domElement: holdBadgeEl });
+      repositionHoldBadge();
+    } else {
+      holdBadgeEl.style.display = 'block';
+      repositionHoldBadge();
+    }
+    holdFillEl.style.transition = 'none';
+    holdFillEl.style.width = '0%';
+  }
+
+  function hideHoldBadge() {
+    if (holdBadgeEl) {
+      holdBadgeEl.style.display = 'none';
+      holdFillEl.style.transition = 'none';
+      holdFillEl.style.width = '0%';
+      if (holdBadgeBody) {
+        Matter.Body.setPosition(holdBadgeBody, { x: -9999, y: -9999 });
+      }
+    }
+  }
+
+  function startHoldTimer() {
+    if (holdTimer || hasLearnedHold || !holdBadgeEl) return;
+    holdTriggered = false;
+    holdFillEl.style.transition = 'none';
+    holdFillEl.style.width = '0%';
+    void holdFillEl.offsetWidth; // force reflow
+    holdFillEl.style.transition = `width ${HOLD_MS}ms linear`;
+    holdFillEl.style.width = '100%';
+    holdTimer = setTimeout(() => {
+      holdTimer = null;
+      holdTriggered = true;
+      hasLearnedHold = true;
+      hideHoldBadge();
+      advanceToNextProject();
+    }, HOLD_MS);
+  }
+
+  function cancelHoldTimer() {
+    if (holdTimer) {
+      clearTimeout(holdTimer);
+      holdTimer = null;
+    }
+    holdTriggered = false;
+    if (holdFillEl) {
+      holdFillEl.style.transition = 'none';
+      holdFillEl.style.width = '0%';
+    }
+  }
 
   // --- Step 6: Initial Project Title ---
   let { body: titleBody, domElement: titleDom } = spawnCenterText(
@@ -293,6 +393,17 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     if (!e.isPrimary) return;
     pointerDownPos = { x: e.clientX, y: e.clientY };
     isDragging = false;
+
+    const atEnd =
+      currentElementIndex >=
+      projects[currentProjectIndex].summary.elements.length;
+    const interactive =
+      e.target.classList.contains('view-full-project-button') ||
+      e.target.closest('.nav-button') ||
+      e.target.closest('.what-nav-button');
+    if (amIMobile && atEnd && !interactive) {
+      startHoldTimer();
+    }
   };
 
   const handlePointerMove = (e) => {
@@ -301,24 +412,42 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     const dy = e.clientY - pointerDownPos.y;
     if (Math.sqrt(dx * dx + dy * dy) > DRAG_THRESHOLD) {
       isDragging = true;
+      cancelHoldTimer();
     }
   };
 
   const handlePointerUp = (e) => {
     if (!e.isPrimary) return;
 
+    const atEnd =
+      currentElementIndex >=
+      projects[currentProjectIndex].summary.elements.length;
+
     if (isDragging) {
       isDragging = false;
       pointerDownPos = null;
+      cancelHoldTimer();
+      return;
+    }
+
+    if (amIMobile && atEnd) {
+      cancelHoldTimer();
+      pointerDownPos = null;
+      if (holdTriggered) {
+        holdTriggered = false;
+        return;
+      }
       return;
     }
 
     // Check if the tap was on the container itself or a non-interactive child
     if (e.target === container || container.contains(e.target)) {
       // Prevent spawning if a button with its own interaction was clicked/tapped
-      if (e.target.classList.contains('view-full-project-button') ||
-          e.target.closest('.nav-button') || // General nav
-          e.target.closest('.what-nav-button')) { // Project-specific nav (ensure this class is used in whatNav.js)
+      if (
+        e.target.classList.contains('view-full-project-button') ||
+        e.target.closest('.nav-button') || // General nav
+        e.target.closest('.what-nav-button')
+      ) {
         pointerDownPos = null; // Reset, but let the button's own click handler fire
         return;
       }
@@ -329,6 +458,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
 
   const handlePointerCancel = (e) => {
     if (!e.isPrimary) return;
+    cancelHoldTimer();
     pointerDownPos = null;
     isDragging = false;
   };
@@ -361,43 +491,48 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         titleDom.dataset.highlightColor = color;
         markDone(titleDom);
         lastTitleColor = color;
+        showHoldBadge();
       }
     } else {
-      // Advance to the next project
-      currentProjectIndex = (currentProjectIndex + 1) % projects.length;
-      currentElementIndex = 0;
-      clearProjectElements(); // Clears only summary items, not title/nav
-      updateWhitespaceCursor();
-
-      // Remove old title
-      Matter.World.remove(world, titleBody);
-      if (titleDom.parentNode) titleDom.parentNode.removeChild(titleDom);
-      const titleIndexInBodies = bodies.findIndex(b => b.body === titleBody);
-      if (titleIndexInBodies > -1) bodies.splice(titleIndexInBodies, 1);
-
-
-      // Create new title
-      const newTitleData = spawnCenterText(
-        world,
-        container,
-        projects[currentProjectIndex].title,
-        { tag: 'h1', className: 'whatpage-title' }
-      );
-      titleBody = newTitleData.body;
-      titleDom = newTitleData.domElement;
-      bodies.push({ body: titleBody, domElement: titleDom });
-      Matter.Body.setPosition(
-        titleBody,
-        { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * .9 : window.innerHeight / 2 }
-      );
-
-      if (!isMobile()) { // Only change gravity on desktop, mobile uses device orientation
-        const newGravity = randomGravity();
-        setGravity(engine, newGravity.x, newGravity.y);
-      }
-      
-      updateSpecificNav();
+      advanceToNextProject();
     }
+  }
+
+  function advanceToNextProject() {
+    hideHoldBadge();
+    cancelHoldTimer();
+    currentProjectIndex = (currentProjectIndex + 1) % projects.length;
+    currentElementIndex = 0;
+    clearProjectElements(); // Clears only summary items, not title/nav
+    updateWhitespaceCursor();
+
+    // Remove old title
+    Matter.World.remove(world, titleBody);
+    if (titleDom.parentNode) titleDom.parentNode.removeChild(titleDom);
+    const titleIndexInBodies = bodies.findIndex(b => b.body === titleBody);
+    if (titleIndexInBodies > -1) bodies.splice(titleIndexInBodies, 1);
+
+    // Create new title
+    const newTitleData = spawnCenterText(
+      world,
+      container,
+      projects[currentProjectIndex].title,
+      { tag: 'h1', className: 'whatpage-title' }
+    );
+    titleBody = newTitleData.body;
+    titleDom = newTitleData.domElement;
+    bodies.push({ body: titleBody, domElement: titleDom });
+    Matter.Body.setPosition(
+      titleBody,
+      { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.9 : window.innerHeight / 2 }
+    );
+
+    if (!isMobile()) { // Only change gravity on desktop, mobile uses device orientation
+      const newGravity = randomGravity();
+      setGravity(engine, newGravity.x, newGravity.y);
+    }
+
+    updateSpecificNav();
   }
 
   // --- Step 12: Project-Specific Navigation (Bottom Nav) ---
@@ -424,6 +559,8 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
 
   // --- Step 13: Custom Event Listener for Project Navigation ---
   function handleProjectNavigation(newIndex) {
+    hideHoldBadge();
+    cancelHoldTimer();
     currentProjectIndex = newIndex;
     currentElementIndex = 0;
     clearProjectElements();
@@ -520,6 +657,9 @@ if (DEBUG) {
   return function teardownWhatPhysics() {
     // console.log('Tearing down WhatPhysics...');
 
+    cancelHoldTimer();
+    hideHoldBadge();
+
     // A. Remove event listeners
     container.removeEventListener('pointerdown', handlePointerDown);
     container.removeEventListener('pointermove', handlePointerMove);
@@ -540,6 +680,9 @@ if (DEBUG) {
     if (cleanupResizeHandler) {
       cleanupResizeHandler();
       // console.log('Resize handler stopped.');
+    }
+    if (cleanupHoldBadgeResize) {
+      cleanupHoldBadgeResize();
     }
     if (cleanupDragging) {
       cleanupDragging();
