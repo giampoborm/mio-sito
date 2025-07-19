@@ -197,15 +197,33 @@ export function renderHomepage(app) {
 
   let teardownTilt = null;
   if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    requestIOSMotionPermission(
-      () => {
-        teardownTilt = initTiltHome(whoPane, whatPane, app, tapSwap);
-      },
-      () => {
-        whoPane.style.setProperty('--pane-bkg', '#fff');
-        whatPane.style.setProperty('--pane-bkg', '#fff');
-      }
-    );
+    const userPreference = localStorage.getItem('gravity-mode');
+
+    const enableTilt = () => {
+      teardownTilt = initTiltHome(whoPane, whatPane, app, tapSwap);
+    };
+
+    const disableTilt = () => {
+      whoPane.style.setProperty('--pane-bkg', '#fff');
+      whatPane.style.setProperty('--pane-bkg', '#fff');
+    };
+
+    if (userPreference === 'orientation') {
+      enableTilt();
+    } else if (userPreference === 'normal') {
+      disableTilt();
+    } else {
+      requestIOSMotionPermission(
+        () => {
+          localStorage.setItem('gravity-mode', 'orientation');
+          enableTilt();
+        },
+        () => {
+          localStorage.setItem('gravity-mode', 'normal');
+          disableTilt();
+        }
+      );
+    }
   }
 
   return () => {
