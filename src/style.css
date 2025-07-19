@@ -227,6 +227,21 @@ img {
   border: 4px solid #000;
   border-radius: 18px;
   box-shadow: 4px 4px 0 #000;
+  position: relative;
+  overflow: hidden;
+  --hold-progress: 0%;
+  --hold-color: transparent;
+}
+.hold-next-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--hold-progress);
+  background: var(--hold-color);
+  transition: width 0.4s linear;
+  pointer-events: none;
 }
 .view-full-project-button:hover {
   transform: translate(-2px, -2px);       /* subtle lift */

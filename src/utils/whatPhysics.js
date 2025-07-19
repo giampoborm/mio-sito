@@ -86,6 +86,7 @@ export function setupWhatPhysics() {
   const projects = projectsData.projects;
   let currentProjectIndex = 0;
   let currentElementIndex = 0;
+  let holdButtonDom = null;
 
   function updateWhitespaceCursor() {
     const summaryElements = projects[currentProjectIndex].summary.elements;
@@ -260,6 +261,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     const item = { body, domElement };
     if (ro) item.ro = ro;
     bodies.push(item);
+    return item;
   }
 
   // --- Step 8: `clearProjectElements` Function ---
@@ -315,6 +317,11 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         handleProjectNavigation((currentProjectIndex + 1) % projects.length);
         longPressTimer = null;
       }, LONG_PRESS_DURATION);
+      if (holdButtonDom) {
+        const color = titleDom.dataset.highlightColor || '#000';
+        holdButtonDom.style.setProperty('--hold-color', color);
+        holdButtonDom.style.setProperty('--hold-progress', '100%');
+      }
     }
   };
 
@@ -327,6 +334,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       if (longPressTimer) {
         clearTimeout(longPressTimer);
         longPressTimer = null;
+        if (holdButtonDom) {
+          holdButtonDom.style.setProperty('--hold-progress', '0%');
+        }
       }
     }
   };
@@ -337,11 +347,17 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     if (longPressTimer) {
       clearTimeout(longPressTimer);
       longPressTimer = null;
+      if (holdButtonDom) {
+        holdButtonDom.style.setProperty('--hold-progress', '0%');
+      }
       pointerDownPos = null;
       return;
     }
     if (longPressFired) {
       longPressFired = false;
+      if (holdButtonDom) {
+        holdButtonDom.style.setProperty('--hold-progress', '0%');
+      }
       pointerDownPos = null;
       return;
     }
@@ -349,6 +365,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     if (isDragging) {
       isDragging = false;
       pointerDownPos = null;
+      if (holdButtonDom) {
+        holdButtonDom.style.setProperty('--hold-progress', '0%');
+      }
       return;
     }
 
@@ -365,6 +384,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       handleClickToSpawn(e); // Proceed to spawn
     }
     pointerDownPos = null; // Reset after any interaction
+    if (holdButtonDom) {
+      holdButtonDom.style.setProperty('--hold-progress', '0%');
+    }
   };
 
   const handlePointerCancel = (e) => {
@@ -374,6 +396,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       longPressTimer = null;
     }
     longPressFired = false;
+    if (holdButtonDom) {
+      holdButtonDom.style.setProperty('--hold-progress', '0%');
+    }
     pointerDownPos = null;
     isDragging = false;
   };
@@ -408,12 +433,19 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         };
         await addProjectElement(fullData, x + (Math.random()*40-20), y + (Math.random()*40-20));
 
-        const holdData = {
-          type: 'button',
-          content: 'Hold for Next',
-          cssClass: 'hold-next-button'
-        };
-        await addProjectElement(holdData, x + (Math.random()*40-20), y + (Math.random()*40-20));
+        if (amIMobile) {
+          const holdData = {
+            type: 'button',
+            content: 'Hold for Next',
+            cssClass: 'hold-next-button'
+          };
+          const { domElement } = await addProjectElement(
+            holdData,
+            x + (Math.random()*40-20),
+            y + (Math.random()*40-20)
+          );
+          holdButtonDom = domElement;
+        }
 
         const color = pickRandomPrimary([lastTitleColor]);
         titleDom.dataset.highlightColor = color;
@@ -454,6 +486,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     currentProjectIndex = newIndex;
     currentElementIndex = 0;
     clearProjectElements();
+    holdButtonDom = null;
     updateWhitespaceCursor();
 
     // Remove old title
