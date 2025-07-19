@@ -3,8 +3,8 @@
    ========================================================================== */
 @font-face {
   font-family: 'HelveticaRounded';
-  src: url('src/assets/font1/HelveticaRoundedLTStd-Bd.woff2') format('woff2'),
-       url('src/assets/font1/HelveticaRoundedLTStd-Bd.woff') format('woff');
+  src: url('/assets/font1/HelveticaRoundedLTStd-Bd.woff2') format('woff2'),
+       url('/assets/font1/HelveticaRoundedLTStd-Bd.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
