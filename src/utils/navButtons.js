@@ -1,12 +1,14 @@
 import Matter from 'matter-js';
 import { measureTextDimensions } from './generalUtils.js';
+import {
+  COLORS,
+  getRandomColor,
+  getNavHighlightColor,
+  setNavHighlightColor
+} from './colorSystem.js';
 
-// Color palette for highlight
-const PRIMARY_COLORS = ['#FF0000', '#FFFF00', '#0000FF', '#FFA500', '#008000'];
-
-// Utility: pick a random color
-export function pickRandomPrimary() {
-  return PRIMARY_COLORS[Math.floor(Math.random() * PRIMARY_COLORS.length)];
+export function pickRandomPrimary(exclude = []) {
+  return getRandomColor(exclude);
 }
 
 /**
@@ -23,13 +25,14 @@ export function createPhysicsNavMenu(world, container, currentPage) {
     { label: 'what?', path: '/what', id: 'what' }
   ];
 
-  // Pick highlight color once per load
-  if (!window.__navHighlightColor) window.__navHighlightColor = pickRandomPrimary();
-  const highlightColor = window.__navHighlightColor;
+  if (!getNavHighlightColor()) {
+    setNavHighlightColor(pickRandomPrimary());
+  }
+  const highlightColor = getNavHighlightColor();
 
   const bodies = [];
   const margin = 18; // Smallest gap from edge (adjust to taste)
-  const y = 40;      // Vertically near the top
+  const y = 30;      // Vertically near the top
 
   navButtons.forEach((btn, index) => {
     // Use helper for dimensions
@@ -53,7 +56,6 @@ export function createPhysicsNavMenu(world, container, currentPage) {
     el.textContent = btn.label;
     el.className = 'nav-button';
     el.style.position = 'absolute';
-    el.style.cursor = 'pointer';
     el.style.fontFamily = 'inherit';
     el.style.userSelect = 'none';
     el.style.background = 'transparent';
@@ -65,15 +67,32 @@ export function createPhysicsNavMenu(world, container, currentPage) {
       (currentPage === '/what' && btn.id === 'what');
     if (isActive) {
       el.style.color = highlightColor;
-      el.style.textDecoration = 'none'; // explicitly no underline
+      el.style.textDecoration = 'none';
     } else {
       el.style.color = '#000';
+      el.addEventListener('mouseenter', () => {
+        const other = navButtons.find(nb => nb.id !== btn.id && nb.el && nb.el.dataset.currentColor);
+        const exclude = [highlightColor];
+        if (other && other.el.dataset.currentColor) exclude.push(other.el.dataset.currentColor);
+        const c = getRandomColor(exclude);
+        el.style.color = c;
+        el.dataset.currentColor = c;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.color = '#000';
+        el.dataset.currentColor = '';
+      });
     }
+
+    // store reference for hover exclusions
+    btn.el = el;
 
     // SPA navigation
     el.addEventListener('click', (e) => {
       e.stopPropagation();
       if (window.location.pathname !== btn.path) {
+        const color = el.dataset.currentColor || getRandomColor([highlightColor]);
+        setNavHighlightColor(color);
         history.pushState({}, '', btn.path);
         window.dispatchEvent(new PopStateEvent('popstate'));
       }

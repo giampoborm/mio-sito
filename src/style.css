@@ -3,8 +3,8 @@
    ========================================================================== */
 @font-face {
   font-family: 'HelveticaRounded';
-  src: url('src/assets/font1/HelveticaRoundedLTStd-Bd.woff2') format('woff2'),
-       url('src/assets/font1/HelveticaRoundedLTStd-Bd.woff') format('woff');
+  src: url('/assets/font1/HelveticaRoundedLTStd-Bd.woff2') format('woff2'),
+       url('/assets/font1/HelveticaRoundedLTStd-Bd.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -22,11 +22,11 @@ html, body {
   min-height: 100%;
   overflow: auto;
   font-display: swap;
+  cursor: url('/cursors/normal.svg') 32 32, auto;
 }
 
 img {
   user-select: none;
-  pointer-events: none;   /* unless you intentionally want to block clicks */
 }
 
 
@@ -88,12 +88,34 @@ img {
   justify-content: center;
   align-items: center;
   font-size: 6vw;
-  cursor: pointer;
   background: #fff;
   color: #000;
   transition: background 0.18s;
   user-select: none;
   font-family: 'HelveticaRounded', sans-serif;
+}
+
+/* pane styling for tilt interaction */
+.pane {
+  background: var(--pane-bkg, #fff);
+  transition: background 180ms ease-out;
+  background-position: center var(--bkg-offset, 0);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.tilt-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pane {
+    transition-duration: 0ms;
+  }
 }
 
 @media (max-width: 800px) {
@@ -137,7 +159,6 @@ img {
   border-width: 3px;
   border-style: solid;
   border-radius: 1rem;
-  cursor: pointer;
   margin: .3rem;
 }
 
@@ -173,6 +194,7 @@ img {
 
 .project-image {
   object-fit: contain;
+  z-index: 30;
 }
 
 .project-video {
@@ -194,7 +216,32 @@ img {
   border: 4px solid #000;     /* thick black outline */
   border-radius: 18px;        /* same radius family */
   box-shadow: 4px 4px 0 #000; /* offset shadow: right + bottom only */
-  cursor: pointer;
+}
+.hold-next-button {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  background: #fff;
+  color: #000;
+  border: 4px solid #000;
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 #000;
+  position: relative;
+  overflow: hidden;
+  --hold-progress: 0%;
+  --hold-color: transparent;
+}
+.hold-next-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--hold-progress);
+  background: var(--hold-color);
+  transition: width 0.4s linear;
+  pointer-events: none;
 }
 .view-full-project-button:hover {
   transform: translate(-2px, -2px);       /* subtle lift */
@@ -202,6 +249,14 @@ img {
 }
 .view-full-project-button:active {
   transform: translate(0, 0);             /* press-in */
+  box-shadow: 2px 2px 0 #000;
+}
+.hold-next-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+.hold-next-button:active {
+  transform: translate(0, 0);
   box-shadow: 2px 2px 0 #000;
 }
 
@@ -386,7 +441,6 @@ img {
   color: #000000;
   border: 3px solid #000;
   box-shadow: 2px 2px 0 #000;
-  cursor: pointer;
   border-radius: 10px;
   transition: transform .15s, box-shadow .15s;
 
@@ -476,9 +530,12 @@ img {
   pointer-events: auto;
   user-select: none;
   text-align: center;
-  cursor: pointer;
   white-space: pre-line; /* ESSENTIAL for \n to work */
   /* Optional: text-shadow for contrast */
+}
+
+.touch-reactive {
+  transition: color 0.1s linear;
 }
 
 .microtext {
@@ -489,7 +546,7 @@ img {
   color: #181818;
   font-size: 1rem;
   font-family: inherit;
-  cursor: grab;
+  /* cursor updated below */
   z-index: 10;
   user-select: none;
   /* Drag friendliness */
@@ -497,9 +554,6 @@ img {
   z-index: 1000;
 }
 
-.microtext:active {
-  cursor: grabbing;
-}
 
 /* For links */
 .microtext.link {
@@ -508,7 +562,6 @@ img {
   color: #000000;
   border: 3px solid #000;
   box-shadow: 2px 2px 0 #000;
-  cursor: pointer;
   border-radius: 14px;
 }
 .microtext.link:hover {
@@ -519,6 +572,52 @@ img {
   transform: translate(0,0);
   box-shadow: 2px 2px 0 #000;
 }
+
+/* --- Custom Cursors ----------------------------------------------------- */
+.home-side,
+.nav-button,
+.what-nav-button,
+.modal-close-button,
+.view-full-project-button,
+.hold-next-button,
+.project-video,
+.full-project-video,
+.anchor:not(#contact),
+.microtext.link {
+  cursor: url('/cursors/point.svg') 32 32, auto;
+}
+
+#contact {
+  cursor: url('/cursors/contacts.svg') 32 32, auto;
+}
+
+.microtext {
+  cursor: url('/cursors/normal.svg') 32 32, auto;
+}
+
+.whatpage-title,
+.project-image,
+.description-text,
+.details-text,
+.credits-text,
+.project-text,
+.archive-title,
+.summary-xs,
+.summary-sm,
+.summary-lg {
+  cursor: url('/cursors/normal.svg') 32 32, auto;
+}
+
+.microtext:active,
+.microtext.link:active {
+  cursor: url('/cursors/drag.svg') 32 32, auto;
+}
+
+body.dragging,
+body.dragging * {
+  cursor: url('/cursors/drag.svg') 32 32, auto !important;
+}
+
 
 /* Example for custom class, e.g. .special (optional) */
 .microtext.special {

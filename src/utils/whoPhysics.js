@@ -12,8 +12,11 @@ import {
   isMobile
 } from './physicsSetup.js';
 import { loadAndMeasureImage } from './generalUtils.js';
-import { createPhysicsNavMenu } from './navButtons.js';
+import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
+import { enableHighlightOnTouch } from './highlightOnTouch.js';
+import { markDone } from './doneColor.js';
 import { ANCHORS } from '../data/who_text.js';
+import { shuffleColors, getRandomColor, getNavHighlightColor, COLORS } from './colorSystem.js';
 
 // --- Ragdoll asset imports ---
 import headPath from '../assets/who/head.png';
@@ -96,6 +99,8 @@ function spawnEasterEgg(world, container, bodies) {
 // --- Main anchor block creator (now using fractional positions!) ---
 function createAnchors(world, container, bodies, isOnMobile) {
   const spawnedAnchors = new Set();
+  const colorCycle = shuffleColors();
+  let colorIndex = 0;
 
   ANCHORS.forEach((anchor) => {
     // Get position using the new system
@@ -121,6 +126,25 @@ function createAnchors(world, container, bodies, isOnMobile) {
     el.id = anchor.id;
     el.textContent = displayText;
     el.className = anchor.size === "big" ? "anchor-big anchor" : "anchor-small anchor";
+    el.classList.add('touch-reactive');
+    let color;
+    if (colorIndex < colorCycle.length) {
+      color = colorCycle[colorIndex++];
+    } else {
+      color = getRandomColor();
+    }
+    el.dataset.highlightColor = color;
+    el.style.color = '#111';
+    el.addEventListener('mouseenter', () => {
+      el.style.color = el.dataset.highlightColor;
+    });
+    el.addEventListener('mouseleave', () => {
+      if (el.dataset.done === 'true') {
+        el.style.color = el.dataset.highlightColor;
+      } else {
+        el.style.color = '#111';
+      }
+    });
      // Add any other classes based on anchor.class if you have that property
     if (anchor.class) { // Assuming you might have a general 'class' property for anchors
         el.classList.add(anchor.class);
@@ -170,6 +194,9 @@ function createAnchors(world, container, bodies, isOnMobile) {
         spawnMicroText(world, container, bodies, micro, coordsToUse, microIdx);
       });
 
+      // Mark anchor as done and keep its highlight colour
+      markDone(el);
+
       lastTouchCoords = null; // Reset for the next interaction
     });
     // --- END MODIFICATION ---
@@ -209,6 +236,19 @@ function addRagdoll(world, container, bodies, currentlyIsMobile) {
     rightUpperLegData,
     rightLowerLegData,
   ]) => {
+    // Ensure ragdoll pieces don't show the browser drag ghost
+    [
+      headData,
+      torsoData,
+      leftUpperArmData,
+      leftLowerArmData,
+      rightUpperArmData,
+      rightLowerArmData,
+      leftUpperLegData,
+      leftLowerLegData,
+      rightUpperLegData,
+      rightLowerLegData,
+    ].forEach(p => p.element.setAttribute('draggable', 'false'));
     // Basic dimensions
     const headRadius = (headData.width * scale) / 2;
     const torsoW = torsoData.width;
@@ -484,6 +524,9 @@ export function setupWhoPhysics() {
   const isOnMobile = window.innerWidth <= 768;
   createAnchors(world, container, bodies, isOnMobile);
 
+  const highlightColor = getNavHighlightColor() || COLORS[0];
+  const cleanupHighlight = enableHighlightOnTouch(engine, bodies, { highlightColor });
+
   // 6. Physics runner and sync
   const cleanupDragging = enableDragging(engine, world, container);
   const cleanupSyncLoop = syncDOMWithBodies(bodies, container);
@@ -545,6 +588,9 @@ export function setupWhoPhysics() {
     }
     if (cleanupDragging) {
       cleanupDragging();
+    }
+    if (cleanupHighlight) {
+      cleanupHighlight();
     }
 
     // Debug Renderer Cleanup

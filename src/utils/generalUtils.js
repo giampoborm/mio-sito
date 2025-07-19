@@ -88,6 +88,9 @@ export function setupVideoPlayback(video) {
     });
   });
   observer.observe(video);
+  return () => {
+    observer.disconnect();
+  };
 }
 
 
