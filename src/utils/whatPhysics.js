@@ -207,19 +207,24 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       });
       ro.observe(domElement);
 
-    } else if (elementData.type === 'button') {
-      domElement = document.createElement('button');
-      domElement.textContent = elementData.content;
-      domElement.classList.add('view-full-project-button');
-      domElement.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openFullProjectModal(projects[currentProjectIndex].details);
-      });
-      container.appendChild(domElement);
-      const rect = domElement.getBoundingClientRect();
-      measuredWidth = rect.width || 100; // Fallback
-      measuredHeight = rect.height || 30; // Fallback
-      // Scale the physics body dimensions for button
+      } else if (elementData.type === 'button') {
+        domElement = document.createElement('button');
+        domElement.textContent = elementData.content;
+        const btnClass = elementData.cssClass || 'view-full-project-button';
+        domElement.classList.add(btnClass);
+        if (elementData.action === 'openFullProject') {
+          domElement.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openFullProjectModal(projects[currentProjectIndex].details);
+          });
+        } else {
+          domElement.addEventListener('click', (e) => e.stopPropagation());
+        }
+        container.appendChild(domElement);
+        const rect = domElement.getBoundingClientRect();
+        measuredWidth = rect.width || 100; // Fallback
+        measuredHeight = rect.height || 30; // Fallback
+        // Scale the physics body dimensions for button
       measuredWidth *= currentButtonBodyScale;
       measuredHeight *= currentButtonBodyScale;
     } else {
@@ -350,9 +355,10 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     // Check if the tap was on the container itself or a non-interactive child
     if (e.target === container || container.contains(e.target)) {
       // Prevent spawning if a button with its own interaction was clicked/tapped
-      if (e.target.classList.contains('view-full-project-button') ||
-          e.target.closest('.nav-button') || // General nav
-          e.target.closest('.what-nav-button')) { // Project-specific nav (ensure this class is used in whatNav.js)
+        if (e.target.classList.contains('view-full-project-button') ||
+            e.target.classList.contains('hold-next-button') ||
+            e.target.closest('.nav-button') || // General nav
+            e.target.closest('.what-nav-button')) { // Project-specific nav (ensure this class is used in whatNav.js)
         pointerDownPos = null; // Reset, but let the button's own click handler fire
         return;
       }
@@ -394,8 +400,21 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       currentElementIndex++;
       updateWhitespaceCursor();
       if (currentElementIndex === summaryElements.length) {
-        const buttonData = { type: 'button', content: 'View Full Project' };
-        await addProjectElement(buttonData, x + (Math.random()*40-20), y + (Math.random()*40-20)); // Slight offset
+        const fullData = {
+          type: 'button',
+          content: 'View Full Project',
+          cssClass: 'view-full-project-button',
+          action: 'openFullProject'
+        };
+        await addProjectElement(fullData, x + (Math.random()*40-20), y + (Math.random()*40-20));
+
+        const holdData = {
+          type: 'button',
+          content: 'Hold for Next',
+          cssClass: 'hold-next-button'
+        };
+        await addProjectElement(holdData, x + (Math.random()*40-20), y + (Math.random()*40-20));
+
         const color = pickRandomPrimary([lastTitleColor]);
         titleDom.dataset.highlightColor = color;
         markDone(titleDom);
