@@ -255,6 +255,11 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     const item = { body, domElement };
     if (ro) item.ro = ro;
     bodies.push(item);
+
+    // Reveal the element after the physics body is in place
+    requestAnimationFrame(() => {
+      domElement.style.visibility = 'visible';
+    });
   }
 
   // --- Step 8: `clearProjectElements` Function ---
