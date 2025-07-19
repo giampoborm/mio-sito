@@ -287,12 +287,30 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
   let pointerDownPos = null;
   let isDragging = false;
   const DRAG_THRESHOLD = 5;
+  const LONG_PRESS_DURATION = 400;
+  let longPressTimer = null;
+  let longPressFired = false;
 
   // Define handlers as constants to ensure correct removal
   const handlePointerDown = (e) => {
     if (!e.isPrimary) return;
     pointerDownPos = { x: e.clientX, y: e.clientY };
     isDragging = false;
+
+    if (
+      amIMobile &&
+      currentElementIndex >= projects[currentProjectIndex].summary.elements.length &&
+      !(e.target.classList.contains('view-full-project-button') ||
+        e.target.closest('.nav-button') ||
+        e.target.closest('.what-nav-button'))
+    ) {
+      longPressFired = false;
+      longPressTimer = setTimeout(() => {
+        longPressFired = true;
+        handleProjectNavigation((currentProjectIndex + 1) % projects.length);
+        longPressTimer = null;
+      }, LONG_PRESS_DURATION);
+    }
   };
 
   const handlePointerMove = (e) => {
@@ -301,11 +319,27 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     const dy = e.clientY - pointerDownPos.y;
     if (Math.sqrt(dx * dx + dy * dy) > DRAG_THRESHOLD) {
       isDragging = true;
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+      }
     }
   };
 
   const handlePointerUp = (e) => {
     if (!e.isPrimary) return;
+
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+      pointerDownPos = null;
+      return;
+    }
+    if (longPressFired) {
+      longPressFired = false;
+      pointerDownPos = null;
+      return;
+    }
 
     if (isDragging) {
       isDragging = false;
@@ -329,6 +363,11 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
 
   const handlePointerCancel = (e) => {
     if (!e.isPrimary) return;
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+    longPressFired = false;
     pointerDownPos = null;
     isDragging = false;
   };
@@ -363,40 +402,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         lastTitleColor = color;
       }
     } else {
-      // Advance to the next project
-      currentProjectIndex = (currentProjectIndex + 1) % projects.length;
-      currentElementIndex = 0;
-      clearProjectElements(); // Clears only summary items, not title/nav
-      updateWhitespaceCursor();
-
-      // Remove old title
-      Matter.World.remove(world, titleBody);
-      if (titleDom.parentNode) titleDom.parentNode.removeChild(titleDom);
-      const titleIndexInBodies = bodies.findIndex(b => b.body === titleBody);
-      if (titleIndexInBodies > -1) bodies.splice(titleIndexInBodies, 1);
-
-
-      // Create new title
-      const newTitleData = spawnCenterText(
-        world,
-        container,
-        projects[currentProjectIndex].title,
-        { tag: 'h1', className: 'whatpage-title' }
-      );
-      titleBody = newTitleData.body;
-      titleDom = newTitleData.domElement;
-      bodies.push({ body: titleBody, domElement: titleDom });
-      Matter.Body.setPosition(
-        titleBody,
-        { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * .9 : window.innerHeight / 2 }
-      );
-
-      if (!isMobile()) { // Only change gravity on desktop, mobile uses device orientation
-        const newGravity = randomGravity();
-        setGravity(engine, newGravity.x, newGravity.y);
+      if (!amIMobile) {
+        handleProjectNavigation((currentProjectIndex + 1) % projects.length);
       }
-      
-      updateSpecificNav();
     }
   }
 
