@@ -101,6 +101,7 @@ export function loadAndMeasureImage(src, container, scale = 1) {
     const img = document.createElement('img');
     img.src = src;
     img.style.position = 'absolute';
+    img.style.visibility = 'hidden';
     container.appendChild(img);
     img.addEventListener('load', () => {
       // Get natural dimensions
@@ -126,6 +127,7 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
     const video = document.createElement('video');
     video.src = src;
     video.style.position = 'absolute';
+    video.style.visibility = 'hidden';
     video.controls = true;
     container.appendChild(video);
     // Set up interactive playback behaviour
