@@ -163,3 +163,45 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
     });
   });
 }
+
+export function prefetchProjectAssets(projectDetails) {
+  if (!projectDetails) return;
+
+  const collectSources = (details) => {
+    const srcs = [];
+    if (details.sections) {
+      details.sections.forEach((section) => {
+        if (Array.isArray(section.elements)) {
+          section.elements.forEach((item) => {
+            if (item.type === 'image' || item.type === 'video') {
+              srcs.push(item.src);
+            }
+          });
+        }
+      });
+    } else if (Array.isArray(details.elements)) {
+      details.elements.forEach((item) => {
+        if (item.type === 'image' || item.type === 'video') {
+          srcs.push(item.src);
+        }
+      });
+    }
+    return srcs;
+  };
+
+  const sources = collectSources(projectDetails);
+
+  sources.forEach((src) => {
+    const ext = src.split('.').pop().toLowerCase();
+    if (['mp4', 'webm', 'ogg', 'mov'].includes(ext)) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = src;
+      document.head.appendChild(link);
+    } else {
+      const img = new Image();
+      img.src = src;
+    }
+  });
+}
