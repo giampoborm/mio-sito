@@ -18,7 +18,8 @@ import {
   measureTextDimensionsAfterFonts,
   loadAndMeasureImage,
   loadAndMeasureVideo,
-  prefetchProjectAssets
+  prefetchProjectAssets,
+  prefetchSummaryAssets
 } from './generalUtils.js';
 import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
 import { createWhatProjectNav } from './whatNav.js'; // Ensure class name 'what-nav-button' is used by this
@@ -85,6 +86,14 @@ export function setupWhatPhysics() {
 
   // --- Step 5: Project Data and State ---
   const projects = projectsData.projects;
+  projects.forEach((p, i) => {
+    const fn = () => prefetchSummaryAssets(p.summary);
+    if (window.requestIdleCallback) {
+      requestIdleCallback(fn);
+    } else {
+      setTimeout(fn, i * 50);
+    }
+  });
   let currentProjectIndex = 0;
   let currentElementIndex = 0;
   let holdButtonDom = null;
