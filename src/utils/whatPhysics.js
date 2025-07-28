@@ -79,7 +79,7 @@ export function setupWhatPhysics() {
   container.id = 'container';
   container.classList.add('container');
   container.style.touchAction = 'none'; // Crucial for custom pointer/touch handling
-  container.style.cursor = "url('/cursors/just-click.svg') 32 32, auto";
+  container.style.cursor = `url('${import.meta.env.BASE_URL}cursors/just-click.svg') 32 32, auto`;
   document.body.appendChild(container);
 
   // --- Step 5: Project Data and State ---
@@ -91,9 +91,9 @@ export function setupWhatPhysics() {
   function updateWhitespaceCursor() {
     const summaryElements = projects[currentProjectIndex].summary.elements;
     if (currentElementIndex < summaryElements.length) {
-      container.style.cursor = "url('/cursors/just-click.svg') 32 32, auto";
+      container.style.cursor = `url('${import.meta.env.BASE_URL}cursors/just-click.svg') 32 32, auto`;
     } else {
-      container.style.cursor = "url('/cursors/next.svg') 32 32, auto";
+      container.style.cursor = `url('${import.meta.env.BASE_URL}cursors/next.svg') 32 32, auto`;
     }
   }
 
