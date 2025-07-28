@@ -89,6 +89,7 @@ export function setupWhatPhysics() {
   let currentElementIndex = 0;
   let holdButtonDom = null;
   const preloadedIndices = new Set();
+  let spawnInProgress = false;
 
   function updateWhitespaceCursor() {
     const summaryElements = projects[currentProjectIndex].summary.elements;
@@ -430,7 +431,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
 
   // --- Step 11: `handleClickToSpawn` Function (Triggered by PointerUp) ---
   async function handleClickToSpawn(event) {
-    if (isDragging) return; // Should already be handled by pointerup, but as a safeguard
+    if (isDragging || spawnInProgress) return; // Should already be handled by pointerup, but as a safeguard
+    spawnInProgress = true;
+    try {
 
     const x = event.clientX;
     const y = event.clientY;
@@ -475,6 +478,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       if (!amIMobile) {
         handleProjectNavigation((currentProjectIndex + 1) % projects.length);
       }
+    }
+    } finally {
+      spawnInProgress = false;
     }
   }
 
