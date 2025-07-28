@@ -96,10 +96,13 @@ export function setupVideoPlayback(video) {
 
 
 
-export function loadAndMeasureImage(src, container, scale = 1) {
+export function loadAndMeasureImage(src, container, scale = 1, alt = '') {
   return new Promise((resolve, reject) => {
     const img = document.createElement('img');
     img.src = src;
+    if (alt) {
+      img.alt = alt;
+    }
     img.style.position = 'absolute';
     // Hide the element until it has loaded and been sized to avoid a flash at
     // the top-left of the screen on mobile devices

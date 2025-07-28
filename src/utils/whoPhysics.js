@@ -214,16 +214,16 @@ function addRagdoll(world, container, bodies, currentlyIsMobile) {
 
 
   Promise.all([
-    loadAndMeasureImage(headPath, container, scale),
-    loadAndMeasureImage(torsoPath, container, scale),
-    loadAndMeasureImage(leftUpperArmPath, container, scale),
-    loadAndMeasureImage(leftLowerArmPath, container, scale),
-    loadAndMeasureImage(rightUpperArmPath, container, scale),
-    loadAndMeasureImage(rightLowerArmPath, container, scale),
-    loadAndMeasureImage(leftUpperLegPath, container, scale),
-    loadAndMeasureImage(leftLowerLegPath, container, scale),
-    loadAndMeasureImage(rightUpperLegPath, container, scale),
-    loadAndMeasureImage(rightLowerLegPath, container, scale),
+    loadAndMeasureImage(headPath, container, scale, 'head'),
+    loadAndMeasureImage(torsoPath, container, scale, 'torso'),
+    loadAndMeasureImage(leftUpperArmPath, container, scale, 'left upper arm'),
+    loadAndMeasureImage(leftLowerArmPath, container, scale, 'left lower arm'),
+    loadAndMeasureImage(rightUpperArmPath, container, scale, 'right upper arm'),
+    loadAndMeasureImage(rightLowerArmPath, container, scale, 'right lower arm'),
+    loadAndMeasureImage(leftUpperLegPath, container, scale, 'left upper leg'),
+    loadAndMeasureImage(leftLowerLegPath, container, scale, 'left lower leg'),
+    loadAndMeasureImage(rightUpperLegPath, container, scale, 'right upper leg'),
+    loadAndMeasureImage(rightLowerLegPath, container, scale, 'right lower leg'),
   ]).then(([
     headData,
     torsoData,

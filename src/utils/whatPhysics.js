@@ -138,7 +138,12 @@ export function setupWhatPhysics() {
 
     if (elementData.type === 'image') {
       // Use currentImageScale when loading/measuring
-      const data = await loadAndMeasureImage(elementData.src, container, currentImageScale);
+      const data = await loadAndMeasureImage(
+        elementData.src,
+        container,
+        currentImageScale,
+        elementData.alt
+      );
       domElement = data.element;
       measuredWidth = data.width;
       measuredHeight = data.height;
