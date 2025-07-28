@@ -225,9 +225,21 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         const rect = domElement.getBoundingClientRect();
         measuredWidth = rect.width || 100; // Fallback
         measuredHeight = rect.height || 30; // Fallback
+
+        // Increase body size to include box-shadow offsets/spread so
+        // collisions match the button's visible extent.
+        const style = window.getComputedStyle(domElement);
+        const firstShadow = style.boxShadow ? style.boxShadow.split(',')[0] : '';
+        const nums = firstShadow.match(/-?\d*\.?\d+px/g) || [];
+        const offsetX = parseFloat(nums[0]) || 0;
+        const offsetY = parseFloat(nums[1]) || 0;
+        const spread = parseFloat(nums[3]) || 0; // third index = spread if present
+        measuredWidth += Math.abs(offsetX) + Math.abs(spread);
+        measuredHeight += Math.abs(offsetY) + Math.abs(spread);
+
         // Scale the physics body dimensions for button
-      measuredWidth *= currentButtonBodyScale;
-      measuredHeight *= currentButtonBodyScale;
+        measuredWidth *= currentButtonBodyScale;
+        measuredHeight *= currentButtonBodyScale;
     } else {
       domElement = document.createElement('div');
       domElement.textContent = 'Unknown element type';
