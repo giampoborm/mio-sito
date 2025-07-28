@@ -28,7 +28,7 @@ const MOBILE_SCALING = {
   image: 0.45, // e.g., images are 45% of their desktop summary size on mobile
   video: 0.1,  // Videos might need more aggressive scaling due to their original size
   text: 1.0,   // Text physics bodies might be 80% of desktop, actual font via CSS
-  button: 0.8, // Button physics bodies
+  button: 1, // Button physics bodies
   // Add more types if needed
 };
 

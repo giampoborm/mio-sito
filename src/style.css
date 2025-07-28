@@ -33,9 +33,7 @@ img {
 @media (max-width: 768px) {
   /* On mobile, let the user scroll vertically */
   html, body {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: auto;
+    overflow: hidden;
   }
 }
 .center-text {
