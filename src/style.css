@@ -22,7 +22,7 @@ html, body {
   min-height: 100%;
   overflow: auto;
   font-display: swap;
-  cursor: url('./cursors/normal.svg') 32 32, auto;
+  cursor: url('/cursors/normal.svg') 32 32, auto;
 }
 
 img {
@@ -584,15 +584,15 @@ img {
 .full-project-video,
 .anchor:not(#contact),
 .microtext.link {
-  cursor: url('./cursors/point.svg') 32 32, auto;
+  cursor: url('/cursors/point.svg') 32 32, auto;
 }
 
 #contact {
-  cursor: url('./cursors/contacts.svg') 32 32, auto;
+  cursor: url('/cursors/contacts.svg') 32 32, auto;
 }
 
 .microtext {
-  cursor: url('./cursors/normal.svg') 32 32, auto;
+  cursor: url('/cursors/normal.svg') 32 32, auto;
 }
 
 .whatpage-title,
@@ -605,17 +605,17 @@ img {
 .summary-xs,
 .summary-sm,
 .summary-lg {
-  cursor: url('./cursors/normal.svg') 32 32, auto;
+  cursor: url('/cursors/normal.svg') 32 32, auto;
 }
 
 .microtext:active,
 .microtext.link:active {
-  cursor: url('./cursors/drag.svg') 32 32, auto;
+  cursor: url('/cursors/drag.svg') 32 32, auto;
 }
 
 body.dragging,
 body.dragging * {
-  cursor: url('./cursors/drag.svg') 32 32, auto !important;
+  cursor: url('/cursors/drag.svg') 32 32, auto !important;
 }
 
 
