@@ -18,7 +18,8 @@ import {
   measureTextDimensionsAfterFonts,
   loadAndMeasureImage,
   loadAndMeasureVideo,
-  prefetchProjectAssets
+  prefetchProjectAssets,
+  prefetchSummaryAssets
 } from './generalUtils.js';
 import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
 import { createWhatProjectNav } from './whatNav.js'; // Ensure class name 'what-nav-button' is used by this
@@ -89,6 +90,7 @@ export function setupWhatPhysics() {
   let currentElementIndex = 0;
   let holdButtonDom = null;
   const preloadedIndices = new Set();
+  const preloadedSummaryIndices = new Set();
   let spawnInProgress = false;
 
   function updateWhitespaceCursor() {
@@ -114,6 +116,11 @@ export function setupWhatPhysics() {
   if (!preloadedIndices.has(currentProjectIndex)) {
     preloadedIndices.add(currentProjectIndex);
     prefetchProjectAssets(projects[currentProjectIndex].details);
+  }
+
+  if (!preloadedSummaryIndices.has(currentProjectIndex)) {
+    preloadedSummaryIndices.add(currentProjectIndex);
+    prefetchSummaryAssets(projects[currentProjectIndex].summary);
   }
 
   updateWhitespaceCursor();
@@ -519,12 +526,17 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     holdButtonDom = null;
     updateWhitespaceCursor();
 
-    if (!preloadedIndices.has(currentProjectIndex)) {
-      preloadedIndices.add(currentProjectIndex);
-      prefetchProjectAssets(projects[currentProjectIndex].details);
-    }
+  if (!preloadedIndices.has(currentProjectIndex)) {
+    preloadedIndices.add(currentProjectIndex);
+    prefetchProjectAssets(projects[currentProjectIndex].details);
+  }
 
-    // Remove old title
+  if (!preloadedSummaryIndices.has(currentProjectIndex)) {
+    preloadedSummaryIndices.add(currentProjectIndex);
+    prefetchSummaryAssets(projects[currentProjectIndex].summary);
+  }
+
+  // Remove old title
     Matter.World.remove(world, titleBody);
     if (titleDom.parentNode) titleDom.parentNode.removeChild(titleDom);
     const titleIndexInBodies = bodies.findIndex(b => b.body === titleBody);

@@ -32,3 +32,9 @@ Unit tests use Node's built-in test runner. Execute:
 npm test
 ```
 
+## Asset Prefetching
+
+`prefetchProjectAssets` preloads image and video sources for the detailed modal
+view. `prefetchSummaryAssets` performs the same task for a project's summary so
+those media elements appear instantly once spawned.
+

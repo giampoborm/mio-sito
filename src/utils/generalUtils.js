@@ -208,3 +208,26 @@ export function prefetchProjectAssets(projectDetails) {
     }
   });
 }
+
+// Preload image and video sources used in a project summary.
+// Mirrors `prefetchProjectAssets` but operates on the summary data structure.
+export function prefetchSummaryAssets(summary) {
+  if (!summary || !Array.isArray(summary.elements)) return;
+
+  summary.elements.forEach((item) => {
+    if (item.type === 'image' || item.type === 'video') {
+      const src = item.src;
+      const ext = src.split('.').pop().toLowerCase();
+      if (['mp4', 'webm', 'ogg', 'mov'].includes(ext)) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'video';
+        link.href = src;
+        document.head.appendChild(link);
+      } else {
+        const img = new Image();
+        img.src = src;
+      }
+    }
+  });
+}
