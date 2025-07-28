@@ -216,17 +216,19 @@ img {
   border: 4px solid #000;     /* thick black outline */
   border-radius: 18px;        /* same radius family */
   box-shadow: 4px 4px 0 #000; /* offset shadow: right + bottom only */
+  text-transform: lowercase;
 }
 .hold-next-button {
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 0.65rem 1rem;
+  padding: 0.5rem 0.75rem;
   background: #fff;
   color: #000;
-  border: 4px solid #000;
-  border-radius: 18px;
-  box-shadow: 4px 4px 0 #000;
+  border: 3px solid #000;
+  border-radius: 14px;
+  box-shadow: 3px 3px 0 #000;
+  text-transform: lowercase;
   position: relative;
   overflow: hidden;
   --hold-progress: 0%;
@@ -253,11 +255,11 @@ img {
 }
 .hold-next-button:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 #000;
+  box-shadow: 4.5px 4.5px 0 #000;
 }
 .hold-next-button:active {
   transform: translate(0, 0);
-  box-shadow: 2px 2px 0 #000;
+  box-shadow: 1.5px 1.5px 0 #000;
 }
 
 .details-text,

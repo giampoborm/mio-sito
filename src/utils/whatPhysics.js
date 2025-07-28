@@ -439,7 +439,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       if (currentElementIndex === summaryElements.length) {
         const fullData = {
           type: 'button',
-          content: 'View Full Project',
+          content: 'view full project',
           cssClass: 'view-full-project-button',
           action: 'openFullProject'
         };
@@ -448,7 +448,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         if (amIMobile) {
           const holdData = {
             type: 'button',
-            content: 'Hold for Next',
+            content: 'hold for next',
             cssClass: 'hold-next-button'
           };
           const { domElement } = await addProjectElement(
