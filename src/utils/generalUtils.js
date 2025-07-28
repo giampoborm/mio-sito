@@ -208,3 +208,22 @@ export function prefetchProjectAssets(projectDetails) {
     }
   });
 }
+
+export function prefetchSummaryAssets(summary) {
+  if (!summary || !Array.isArray(summary.elements)) return;
+
+  summary.elements.forEach((item) => {
+    if (!item.src) return;
+    const ext = item.src.split('.').pop().toLowerCase();
+    if (item.type === 'video' || ['mp4', 'webm', 'ogg', 'mov'].includes(ext)) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = item.src;
+      document.head.appendChild(link);
+    } else if (item.type === 'image') {
+      const img = new Image();
+      img.src = item.src;
+    }
+  });
+}
