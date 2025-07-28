@@ -17,7 +17,8 @@ import {
   measureTextDimensions,
   measureTextDimensionsAfterFonts,
   loadAndMeasureImage,
-  loadAndMeasureVideo
+  loadAndMeasureVideo,
+  prefetchProjectAssets
 } from './generalUtils.js';
 import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
 import { createWhatProjectNav } from './whatNav.js'; // Ensure class name 'what-nav-button' is used by this
@@ -87,6 +88,7 @@ export function setupWhatPhysics() {
   let currentProjectIndex = 0;
   let currentElementIndex = 0;
   let holdButtonDom = null;
+  const preloadedIndices = new Set();
 
   function updateWhitespaceCursor() {
     const summaryElements = projects[currentProjectIndex].summary.elements;
@@ -107,6 +109,11 @@ export function setupWhatPhysics() {
     { tag: 'h1', className: 'whatpage-title' }
   );
   bodies.push({ body: titleBody, domElement: titleDom });
+
+  if (!preloadedIndices.has(currentProjectIndex)) {
+    preloadedIndices.add(currentProjectIndex);
+    prefetchProjectAssets(projects[currentProjectIndex].details);
+  }
 
   updateWhitespaceCursor();
 
@@ -500,6 +507,11 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     clearProjectElements();
     holdButtonDom = null;
     updateWhitespaceCursor();
+
+    if (!preloadedIndices.has(currentProjectIndex)) {
+      preloadedIndices.add(currentProjectIndex);
+      prefetchProjectAssets(projects[currentProjectIndex].details);
+    }
 
     // Remove old title
     Matter.World.remove(world, titleBody);
