@@ -101,6 +101,9 @@ export function loadAndMeasureImage(src, container, scale = 1) {
     const img = document.createElement('img');
     img.src = src;
     img.style.position = 'absolute';
+    // Hide the element until it has loaded and been sized to avoid a flash at
+    // the top-left of the screen on mobile devices
+    img.style.visibility = 'hidden';
     container.appendChild(img);
     img.addEventListener('load', () => {
       // Get natural dimensions
@@ -115,6 +118,7 @@ export function loadAndMeasureImage(src, container, scale = 1) {
       // After CSS is applied, measure the actual size
       const measuredW = img.offsetWidth;
       const measuredH = img.offsetHeight;
+      img.style.visibility = 'visible';
       resolve({ element: img, width: measuredW, height: measuredH });
     });
     img.addEventListener('error', (err) => reject(err));
@@ -126,6 +130,9 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
     const video = document.createElement('video');
     video.src = src;
     video.style.position = 'absolute';
+    // Prevent the video element from briefly appearing at the origin before
+    // metadata loads and sizing/positioning occur.
+    video.style.visibility = 'hidden';
     video.controls = true;
     container.appendChild(video);
     // Set up interactive playback behaviour
@@ -147,7 +154,7 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
       // Allow time for CSS to apply, then measure.
       const measuredW = video.offsetWidth;
       const measuredH = video.offsetHeight;
-      
+      video.style.visibility = 'visible';
       resolve({ element: video, width: measuredW, height: measuredH });
     });
     
