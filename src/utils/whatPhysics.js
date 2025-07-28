@@ -17,17 +17,19 @@ import {
   measureTextDimensions,
   measureTextDimensionsAfterFonts,
   loadAndMeasureImage,
-  loadAndMeasureVideo
+  loadAndMeasureVideo,
+  prefetchProjectAssets
 } from './generalUtils.js';
-import { createPhysicsNavMenu } from './navButtons.js';
+import { createPhysicsNavMenu, pickRandomPrimary } from './navButtons.js';
 import { createWhatProjectNav } from './whatNav.js'; // Ensure class name 'what-nav-button' is used by this
 import { openFullProjectModal } from './fullProjectModal.js';
+import { markDone } from './doneColor.js';
 
 const MOBILE_SCALING = {
   image: 0.45, // e.g., images are 45% of their desktop summary size on mobile
   video: 0.1,  // Videos might need more aggressive scaling due to their original size
   text: 1.0,   // Text physics bodies might be 80% of desktop, actual font via CSS
-  button: 0.8, // Button physics bodies
+  button: 1, // Button physics bodies
   // Add more types if needed
 };
 
@@ -50,6 +52,7 @@ export function setupWhatPhysics() {
   let cleanupDragging = () => {};
 
   const bodies = []; // To track all Matter bodies and their DOM elements
+  let lastTitleColor = null;
 
   // --- Step 2: Gravity Setup ---
   function randomGravity() {
@@ -77,12 +80,25 @@ export function setupWhatPhysics() {
   container.id = 'container';
   container.classList.add('container');
   container.style.touchAction = 'none'; // Crucial for custom pointer/touch handling
+  container.style.cursor = `url('${import.meta.env.BASE_URL}cursors/just-click.svg') 32 32, auto`;
   document.body.appendChild(container);
 
   // --- Step 5: Project Data and State ---
   const projects = projectsData.projects;
   let currentProjectIndex = 0;
   let currentElementIndex = 0;
+  let holdButtonDom = null;
+  const preloadedIndices = new Set();
+  let spawnInProgress = false;
+
+  function updateWhitespaceCursor() {
+    const summaryElements = projects[currentProjectIndex].summary.elements;
+    if (currentElementIndex < summaryElements.length) {
+      container.style.cursor = `url('${import.meta.env.BASE_URL}cursors/just-click.svg') 32 32, auto`;
+    } else {
+      container.style.cursor = `url('${import.meta.env.BASE_URL}cursors/next.svg') 32 32, auto`;
+    }
+  }
 
   const amIMobile = isMobile(); // Determine device type once
 
@@ -94,6 +110,13 @@ export function setupWhatPhysics() {
     { tag: 'h1', className: 'whatpage-title' }
   );
   bodies.push({ body: titleBody, domElement: titleDom });
+
+  if (!preloadedIndices.has(currentProjectIndex)) {
+    preloadedIndices.add(currentProjectIndex);
+    prefetchProjectAssets(projects[currentProjectIndex].details);
+  }
+
+  updateWhitespaceCursor();
 
   // Position the title: center on desktop, lower on mobile
   Matter.Body.setPosition(
@@ -115,7 +138,12 @@ export function setupWhatPhysics() {
 
     if (elementData.type === 'image') {
       // Use currentImageScale when loading/measuring
-      const data = await loadAndMeasureImage(elementData.src, container, currentImageScale);
+      const data = await loadAndMeasureImage(
+        elementData.src,
+        container,
+        currentImageScale,
+        elementData.alt
+      );
       domElement = data.element;
       measuredWidth = data.width;
       measuredHeight = data.height;
@@ -193,21 +221,38 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       });
       ro.observe(domElement);
 
-    } else if (elementData.type === 'button') {
-      domElement = document.createElement('button');
-      domElement.textContent = elementData.content;
-      domElement.classList.add('view-full-project-button');
-      domElement.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openFullProjectModal(projects[currentProjectIndex].details);
-      });
-      container.appendChild(domElement);
-      const rect = domElement.getBoundingClientRect();
-      measuredWidth = rect.width || 100; // Fallback
-      measuredHeight = rect.height || 30; // Fallback
-      // Scale the physics body dimensions for button
-      measuredWidth *= currentButtonBodyScale;
-      measuredHeight *= currentButtonBodyScale;
+      } else if (elementData.type === 'button') {
+        domElement = document.createElement('button');
+        domElement.textContent = elementData.content;
+        const btnClass = elementData.cssClass || 'view-full-project-button';
+        domElement.classList.add(btnClass);
+        if (elementData.action === 'openFullProject') {
+          domElement.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openFullProjectModal(projects[currentProjectIndex].details);
+          });
+        } else {
+          domElement.addEventListener('click', (e) => e.stopPropagation());
+        }
+        container.appendChild(domElement);
+        const rect = domElement.getBoundingClientRect();
+        measuredWidth = rect.width || 100; // Fallback
+        measuredHeight = rect.height || 30; // Fallback
+
+        // Increase body size to include box-shadow offsets/spread so
+        // collisions match the button's visible extent.
+        const style = window.getComputedStyle(domElement);
+        const firstShadow = style.boxShadow ? style.boxShadow.split(',')[0] : '';
+        const nums = firstShadow.match(/-?\d*\.?\d+px/g) || [];
+        const offsetX = parseFloat(nums[0]) || 0;
+        const offsetY = parseFloat(nums[1]) || 0;
+        const spread = parseFloat(nums[3]) || 0; // third index = spread if present
+        measuredWidth += Math.abs(offsetX) + Math.abs(spread);
+        measuredHeight += Math.abs(offsetY) + Math.abs(spread);
+
+        // Scale the physics body dimensions for button
+        measuredWidth *= currentButtonBodyScale;
+        measuredHeight *= currentButtonBodyScale;
     } else {
       domElement = document.createElement('div');
       domElement.textContent = 'Unknown element type';
@@ -241,6 +286,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     const item = { body, domElement };
     if (ro) item.ro = ro;
     bodies.push(item);
+    return item;
   }
 
   // --- Step 8: `clearProjectElements` Function ---
@@ -273,12 +319,35 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
   let pointerDownPos = null;
   let isDragging = false;
   const DRAG_THRESHOLD = 5;
+  const LONG_PRESS_DURATION = 400;
+  let longPressTimer = null;
+  let longPressFired = false;
 
   // Define handlers as constants to ensure correct removal
   const handlePointerDown = (e) => {
     if (!e.isPrimary) return;
     pointerDownPos = { x: e.clientX, y: e.clientY };
     isDragging = false;
+
+    if (
+      amIMobile &&
+      currentElementIndex >= projects[currentProjectIndex].summary.elements.length &&
+      !(e.target.classList.contains('view-full-project-button') ||
+        e.target.closest('.nav-button') ||
+        e.target.closest('.what-nav-button'))
+    ) {
+      longPressFired = false;
+      longPressTimer = setTimeout(() => {
+        longPressFired = true;
+        handleProjectNavigation((currentProjectIndex + 1) % projects.length);
+        longPressTimer = null;
+      }, LONG_PRESS_DURATION);
+      if (holdButtonDom) {
+        const color = titleDom.dataset.highlightColor || '#000';
+        holdButtonDom.style.setProperty('--hold-color', color);
+        holdButtonDom.style.setProperty('--hold-progress', '100%');
+      }
+    }
   };
 
   const handlePointerMove = (e) => {
@@ -287,34 +356,74 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     const dy = e.clientY - pointerDownPos.y;
     if (Math.sqrt(dx * dx + dy * dy) > DRAG_THRESHOLD) {
       isDragging = true;
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+        if (holdButtonDom) {
+          holdButtonDom.style.setProperty('--hold-progress', '0%');
+        }
+      }
     }
   };
 
   const handlePointerUp = (e) => {
     if (!e.isPrimary) return;
 
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+      if (holdButtonDom) {
+        holdButtonDom.style.setProperty('--hold-progress', '0%');
+      }
+      pointerDownPos = null;
+      return;
+    }
+    if (longPressFired) {
+      longPressFired = false;
+      if (holdButtonDom) {
+        holdButtonDom.style.setProperty('--hold-progress', '0%');
+      }
+      pointerDownPos = null;
+      return;
+    }
+
     if (isDragging) {
       isDragging = false;
       pointerDownPos = null;
+      if (holdButtonDom) {
+        holdButtonDom.style.setProperty('--hold-progress', '0%');
+      }
       return;
     }
 
     // Check if the tap was on the container itself or a non-interactive child
     if (e.target === container || container.contains(e.target)) {
       // Prevent spawning if a button with its own interaction was clicked/tapped
-      if (e.target.classList.contains('view-full-project-button') ||
-          e.target.closest('.nav-button') || // General nav
-          e.target.closest('.what-nav-button')) { // Project-specific nav (ensure this class is used in whatNav.js)
+        if (e.target.classList.contains('view-full-project-button') ||
+            e.target.classList.contains('hold-next-button') ||
+            e.target.closest('.nav-button') || // General nav
+            e.target.closest('.what-nav-button')) { // Project-specific nav (ensure this class is used in whatNav.js)
         pointerDownPos = null; // Reset, but let the button's own click handler fire
         return;
       }
       handleClickToSpawn(e); // Proceed to spawn
     }
     pointerDownPos = null; // Reset after any interaction
+    if (holdButtonDom) {
+      holdButtonDom.style.setProperty('--hold-progress', '0%');
+    }
   };
 
   const handlePointerCancel = (e) => {
     if (!e.isPrimary) return;
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+    longPressFired = false;
+    if (holdButtonDom) {
+      holdButtonDom.style.setProperty('--hold-progress', '0%');
+    }
     pointerDownPos = null;
     isDragging = false;
   };
@@ -327,7 +436,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
 
   // --- Step 11: `handleClickToSpawn` Function (Triggered by PointerUp) ---
   async function handleClickToSpawn(event) {
-    if (isDragging) return; // Should already be handled by pointerup, but as a safeguard
+    if (isDragging || spawnInProgress) return; // Should already be handled by pointerup, but as a safeguard
+    spawnInProgress = true;
+    try {
 
     const x = event.clientX;
     const y = event.clientY;
@@ -339,44 +450,42 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       const elementData = summaryElements[currentElementIndex];
       await addProjectElement(elementData, x, y);
       currentElementIndex++;
+      updateWhitespaceCursor();
       if (currentElementIndex === summaryElements.length) {
-        const buttonData = { type: 'button', content: 'View Full Project' };
-        await addProjectElement(buttonData, x + (Math.random()*40-20), y + (Math.random()*40-20)); // Slight offset
+        const fullData = {
+          type: 'button',
+          content: 'view full project',
+          cssClass: 'view-full-project-button',
+          action: 'openFullProject'
+        };
+        await addProjectElement(fullData, x + (Math.random()*40-20), y + (Math.random()*40-20));
+
+        if (amIMobile) {
+          const holdData = {
+            type: 'button',
+            content: 'hold for next',
+            cssClass: 'hold-next-button'
+          };
+          const { domElement } = await addProjectElement(
+            holdData,
+            x + (Math.random()*40-20),
+            y + (Math.random()*40-20)
+          );
+          holdButtonDom = domElement;
+        }
+
+        const color = pickRandomPrimary([lastTitleColor]);
+        titleDom.dataset.highlightColor = color;
+        markDone(titleDom);
+        lastTitleColor = color;
       }
     } else {
-      // Advance to the next project
-      currentProjectIndex = (currentProjectIndex + 1) % projects.length;
-      currentElementIndex = 0;
-      clearProjectElements(); // Clears only summary items, not title/nav
-
-      // Remove old title
-      Matter.World.remove(world, titleBody);
-      if (titleDom.parentNode) titleDom.parentNode.removeChild(titleDom);
-      const titleIndexInBodies = bodies.findIndex(b => b.body === titleBody);
-      if (titleIndexInBodies > -1) bodies.splice(titleIndexInBodies, 1);
-
-
-      // Create new title
-      const newTitleData = spawnCenterText(
-        world,
-        container,
-        projects[currentProjectIndex].title,
-        { tag: 'h1', className: 'whatpage-title' }
-      );
-      titleBody = newTitleData.body;
-      titleDom = newTitleData.domElement;
-      bodies.push({ body: titleBody, domElement: titleDom });
-      Matter.Body.setPosition(
-        titleBody,
-        { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * .9 : window.innerHeight / 2 }
-      );
-
-      if (!isMobile()) { // Only change gravity on desktop, mobile uses device orientation
-        const newGravity = randomGravity();
-        setGravity(engine, newGravity.x, newGravity.y);
+      if (!amIMobile) {
+        handleProjectNavigation((currentProjectIndex + 1) % projects.length);
       }
-      
-      updateSpecificNav();
+    }
+    } finally {
+      spawnInProgress = false;
     }
   }
 
@@ -407,6 +516,13 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     currentProjectIndex = newIndex;
     currentElementIndex = 0;
     clearProjectElements();
+    holdButtonDom = null;
+    updateWhitespaceCursor();
+
+    if (!preloadedIndices.has(currentProjectIndex)) {
+      preloadedIndices.add(currentProjectIndex);
+      prefetchProjectAssets(projects[currentProjectIndex].details);
+    }
 
     // Remove old title
     Matter.World.remove(world, titleBody);

@@ -88,16 +88,25 @@ export function setupVideoPlayback(video) {
     });
   });
   observer.observe(video);
+  return () => {
+    observer.disconnect();
+  };
 }
 
 
 
 
-export function loadAndMeasureImage(src, container, scale = 1) {
+export function loadAndMeasureImage(src, container, scale = 1, alt = '') {
   return new Promise((resolve, reject) => {
     const img = document.createElement('img');
     img.src = src;
+    if (alt) {
+      img.alt = alt;
+    }
     img.style.position = 'absolute';
+    // Hide the element until it has loaded and been sized to avoid a flash at
+    // the top-left of the screen on mobile devices
+    img.style.visibility = 'hidden';
     container.appendChild(img);
     img.addEventListener('load', () => {
       // Get natural dimensions
@@ -112,6 +121,7 @@ export function loadAndMeasureImage(src, container, scale = 1) {
       // After CSS is applied, measure the actual size
       const measuredW = img.offsetWidth;
       const measuredH = img.offsetHeight;
+      img.style.visibility = 'visible';
       resolve({ element: img, width: measuredW, height: measuredH });
     });
     img.addEventListener('error', (err) => reject(err));
@@ -123,6 +133,9 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
     const video = document.createElement('video');
     video.src = src;
     video.style.position = 'absolute';
+    // Prevent the video element from briefly appearing at the origin before
+    // metadata loads and sizing/positioning occur.
+    video.style.visibility = 'hidden';
     video.controls = true;
     container.appendChild(video);
     // Set up interactive playback behaviour
@@ -144,12 +157,54 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
       // Allow time for CSS to apply, then measure.
       const measuredW = video.offsetWidth;
       const measuredH = video.offsetHeight;
-      
+      video.style.visibility = 'visible';
       resolve({ element: video, width: measuredW, height: measuredH });
     });
     
     video.addEventListener('error', (err) => {
       reject(err);
     });
+  });
+}
+
+export function prefetchProjectAssets(projectDetails) {
+  if (!projectDetails) return;
+
+  const collectSources = (details) => {
+    const srcs = [];
+    if (details.sections) {
+      details.sections.forEach((section) => {
+        if (Array.isArray(section.elements)) {
+          section.elements.forEach((item) => {
+            if (item.type === 'image' || item.type === 'video') {
+              srcs.push(item.src);
+            }
+          });
+        }
+      });
+    } else if (Array.isArray(details.elements)) {
+      details.elements.forEach((item) => {
+        if (item.type === 'image' || item.type === 'video') {
+          srcs.push(item.src);
+        }
+      });
+    }
+    return srcs;
+  };
+
+  const sources = collectSources(projectDetails);
+
+  sources.forEach((src) => {
+    const ext = src.split('.').pop().toLowerCase();
+    if (['mp4', 'webm', 'ogg', 'mov'].includes(ext)) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = src;
+      document.head.appendChild(link);
+    } else {
+      const img = new Image();
+      img.src = src;
+    }
   });
 }

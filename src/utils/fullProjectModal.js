@@ -10,6 +10,9 @@ export function openFullProjectModal(projectDetails) {
   const modalOverlay = document.createElement('div');
   modalOverlay.classList.add('full-project-modal-overlay');
 
+  const videoCleanups = [];
+  modalOverlay.videoCleanups = videoCleanups;
+
   // Create the modal container (grid container).
   const modalContainer = document.createElement('div');
   modalContainer.classList.add('modal-container');
@@ -19,6 +22,7 @@ export function openFullProjectModal(projectDetails) {
   closeButton.textContent = 'close';
   closeButton.classList.add('modal-close-button');
   closeButton.addEventListener('click', () => {
+    videoCleanups.forEach((fn) => fn());
     closeFullProjectModal(modalOverlay);
   });
   modalContainer.appendChild(closeButton);
@@ -33,6 +37,10 @@ export function openFullProjectModal(projectDetails) {
       }
       section.elements.forEach((item) => {
         const itemEl = createFullProjectElement(item);
+        if (item.type === 'video') {
+          const cleanup = setupVideoPlayback(itemEl);
+          videoCleanups.push(cleanup);
+        }
         sectionEl.appendChild(itemEl);
       });
       modalContainer.appendChild(sectionEl);
@@ -40,6 +48,10 @@ export function openFullProjectModal(projectDetails) {
   } else if (projectDetails.elements && Array.isArray(projectDetails.elements)) {
     projectDetails.elements.forEach((item) => {
       const itemEl = createFullProjectElement(item);
+      if (item.type === 'video') {
+        const cleanup = setupVideoPlayback(itemEl);
+        videoCleanups.push(cleanup);
+      }
       modalContainer.appendChild(itemEl);
     });
   }
@@ -82,7 +94,6 @@ function createFullProjectElement(item) {
       el.src = item.src;
       el.controls = true;
       el.classList.add('full-project-video');
-      setupVideoPlayback(el);
       break;
     default:
       el = document.createElement('div');
