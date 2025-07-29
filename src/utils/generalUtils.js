@@ -99,6 +99,7 @@ export function setupVideoPlayback(video) {
 export function loadAndMeasureImage(src, container, scale = 1, alt = '') {
   return new Promise((resolve, reject) => {
     const img = document.createElement('img');
+    img.loading = 'lazy';
     img.src = src;
     if (alt) {
       img.alt = alt;
