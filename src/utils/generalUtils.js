@@ -141,6 +141,7 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
     video.autoplay = true;
     video.muted = true;
     video.playsInline = true;
+    video.loop = true;
     container.appendChild(video);
     // Set up interactive playback behaviour
     setupVideoPlayback(video);
