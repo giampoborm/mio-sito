@@ -99,6 +99,7 @@ export function setupVideoPlayback(video) {
 export function loadAndMeasureImage(src, container, scale = 1, alt = '') {
   return new Promise((resolve, reject) => {
     const img = document.createElement('img');
+    img.loading = 'lazy';
     img.src = src;
     if (alt) {
       img.alt = alt;
@@ -137,6 +138,9 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
     // metadata loads and sizing/positioning occur.
     video.style.visibility = 'hidden';
     video.controls = true;
+    video.autoplay = true;
+    video.muted = true;
+    video.playsInline = true;
     container.appendChild(video);
     // Set up interactive playback behaviour
     setupVideoPlayback(video);
@@ -158,6 +162,10 @@ export function loadAndMeasureVideo(src, container, scale = 1) {
       const measuredW = video.offsetWidth;
       const measuredH = video.offsetHeight;
       video.style.visibility = 'visible';
+      // Start playback once metadata is available
+      video.play().catch(() => {
+        /* ignore autoplay failures */
+      });
       resolve({ element: video, width: measuredW, height: measuredH });
     });
     

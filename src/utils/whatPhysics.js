@@ -86,14 +86,19 @@ export function setupWhatPhysics() {
 
   // --- Step 5: Project Data and State ---
   const projects = projectsData.projects;
-  projects.forEach((p, i) => {
-    const fn = () => prefetchSummaryAssets(p.summary);
-    if (window.requestIdleCallback) {
-      requestIdleCallback(fn);
-    } else {
-      setTimeout(fn, i * 50);
+  const summaryPrefetched = new Set();
+  const preloadSummary = (index) => {
+    if (!summaryPrefetched.has(index)) {
+      summaryPrefetched.add(index);
+      const fn = () => prefetchSummaryAssets(projects[index].summary);
+      if (window.requestIdleCallback) {
+        requestIdleCallback(fn);
+      } else {
+        setTimeout(fn, 50 * index);
+      }
     }
-  });
+  };
+  preloadSummary(0);
   let currentProjectIndex = 0;
   let currentElementIndex = 0;
   let holdButtonDom = null;
@@ -124,6 +129,9 @@ export function setupWhatPhysics() {
     preloadedIndices.add(currentProjectIndex);
     prefetchProjectAssets(projects[currentProjectIndex].details);
   }
+  // Prefetch the next project's summary to keep one step ahead
+  const nextSummaryIndex = (currentProjectIndex + 1) % projects.length;
+  preloadSummary(nextSummaryIndex);
 
   updateWhitespaceCursor();
 
@@ -531,6 +539,15 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     if (!preloadedIndices.has(currentProjectIndex)) {
       preloadedIndices.add(currentProjectIndex);
       prefetchProjectAssets(projects[currentProjectIndex].details);
+    }
+    preloadSummary(currentProjectIndex);
+
+    // Preload the next project's summary and details
+    const nextIndex = (currentProjectIndex + 1) % projects.length;
+    preloadSummary(nextIndex);
+    if (!preloadedIndices.has(nextIndex)) {
+      preloadedIndices.add(nextIndex);
+      prefetchProjectAssets(projects[nextIndex].details);
     }
 
     // Remove old title
