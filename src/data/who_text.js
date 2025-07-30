@@ -23,7 +23,7 @@ export const ANCHORS = [
     size: "big",
     microTexts: [
       { text: "send me an email", link: "mailto:giampobo@gmail.com", class: "link" },
-      { text: "or intrude my privacy on instagram", link: "https://instagram.com/giampogonzalez", class: "link" }
+      { text: "or intrude my privacy on instagram", link: "https://instagram.com/giampo.o", class: "link" }
     ]
   },
   {
