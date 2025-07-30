@@ -199,13 +199,34 @@ export function renderHomepage(app) {
   if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
     const userPreference = localStorage.getItem('gravity-mode');
 
-    const enableTilt = () => {
-      teardownTilt = initTiltHome(whoPane, whatPane, app, tapSwap);
-    };
-
     const disableTilt = () => {
       whoPane.style.setProperty('--pane-bkg', '#fff');
       whatPane.style.setProperty('--pane-bkg', '#fff');
+    };
+
+    const enableTilt = () => {
+      const startTilt = () => {
+        teardownTilt = initTiltHome(whoPane, whatPane, app, tapSwap);
+      };
+
+      if (
+        typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function'
+      ) {
+        DeviceOrientationEvent.requestPermission()
+          .then(state => {
+            if (state === 'granted') {
+              startTilt();
+            } else {
+              disableTilt();
+            }
+          })
+          .catch(() => {
+            disableTilt();
+          });
+      } else {
+        startTilt();
+      }
     };
 
     if (userPreference === 'orientation') {
