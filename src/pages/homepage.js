@@ -215,8 +215,28 @@ export function renderHomepage(app) {
     } else {
       requestIOSMotionPermission(
         () => {
-          localStorage.setItem('gravity-mode', 'orientation');
-          enableTilt();
+          if (
+            typeof DeviceOrientationEvent !== 'undefined' &&
+            typeof DeviceOrientationEvent.requestPermission === 'function'
+          ) {
+            DeviceOrientationEvent.requestPermission()
+              .then((state) => {
+                if (state === 'granted') {
+                  localStorage.setItem('gravity-mode', 'orientation');
+                  enableTilt();
+                } else {
+                  localStorage.setItem('gravity-mode', 'normal');
+                  disableTilt();
+                }
+              })
+              .catch(() => {
+                localStorage.setItem('gravity-mode', 'normal');
+                disableTilt();
+              });
+          } else {
+            localStorage.setItem('gravity-mode', 'orientation');
+            enableTilt();
+          }
         },
         () => {
           localStorage.setItem('gravity-mode', 'normal');
