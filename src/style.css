@@ -565,14 +565,14 @@ img {
   border-radius: 14px;
 }
 
-.microtext.link-text {
+.link-text {
   padding: 0;
   background: none;
   color: #000;
   border: none;
   box-shadow: none;
   border-radius: 0;
-  text-decoration: none;
+  text-decoration: underline;
 }
 .microtext.link:hover {
   transform: translate(-2px, -2px);
@@ -594,7 +594,7 @@ img {
 .full-project-video,
 .anchor:not(#contact),
 .microtext.link,
-.microtext.link-text {
+.link-text {
   cursor: url('/cursors/point.svg') 32 32, auto;
 }
 
@@ -621,7 +621,7 @@ img {
 
 .microtext:active,
 .microtext.link:active,
-.microtext.link-text:active {
+.link-text:active {
   cursor: url('/cursors/drag.svg') 32 32, auto;
 }
 

@@ -63,9 +63,7 @@ export const ANCHORS = [
     size: "small",
     microTexts: [
       {
-        text: "check it on the what? page",
-        link: "/what",
-        class: "link-text"
+        html: 'check it on the <a href="/what" class="link-text">what?</a> page'
       }
     ]
   },
