@@ -62,13 +62,11 @@ export const ANCHORS = [
     },
     size: "small",
     microTexts: [
-      { text: "visual identities" },
-      { text: "motion design" },
-      { text: "generative design" },
-      { text: "audiovisual design" },
-      { text: "editorial & bookmaking" },
-      { text: "typography" },
-      { text: "other stuff" }
+      {
+        text: "check it on the what? page",
+        link: "/what",
+        class: "link"
+      }
     ]
   },
   {
