@@ -45,18 +45,40 @@ function getAnchorPosition(anchor, isOnMobile) {
 // --- Microtext spawner ---
 function spawnMicroText(world, container, bodies, micro, event, idx = 0) {
   let el;
-  if (micro.link) {
+  if (micro.html) {
+    el = document.createElement('div');
+    el.className = 'microtext';
+    if (micro.class) el.classList.add(micro.class);
+    el.innerHTML = micro.html;
+  } else if (micro.link) {
     el = document.createElement('a');
     el.href = micro.link;
     el.textContent = micro.text;
     el.target = "_blank";
-    el.className = "microtext link";
+    el.className = 'microtext';
+    if (micro.class) {
+      el.classList.add(micro.class);
+    } else {
+      el.classList.add('link');
+    }
   } else {
     el = document.createElement('div');
     el.textContent = micro.text;
-    el.className = "microtext";
+    el.className = 'microtext';
+    if (micro.class) el.classList.add(micro.class);
   }
-  if (micro.class) el.classList.add(micro.class);
+
+  const linkTarget =
+    el.classList.contains('link-text') ? el : el.querySelector('.link-text');
+  if (linkTarget) {
+    linkTarget.addEventListener('mouseenter', () => {
+      const color = getRandomColor([getNavHighlightColor()]);
+      linkTarget.style.color = color;
+    });
+    linkTarget.addEventListener('mouseleave', () => {
+      linkTarget.style.color = '#000';
+    });
+  }
 
   el.style.position = 'absolute';
   container.appendChild(el);

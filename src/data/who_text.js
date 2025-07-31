@@ -62,13 +62,9 @@ export const ANCHORS = [
     },
     size: "small",
     microTexts: [
-      { text: "visual identities" },
-      { text: "motion design" },
-      { text: "generative design" },
-      { text: "audiovisual design" },
-      { text: "editorial & bookmaking" },
-      { text: "typography" },
-      { text: "other stuff" }
+      {
+        html: 'check it on the <a href="/what" class="link-text">what?</a> page'
+      }
     ]
   },
   {
