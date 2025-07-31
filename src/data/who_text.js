@@ -65,7 +65,7 @@ export const ANCHORS = [
       {
         text: "check it on the what? page",
         link: "/what",
-        class: "link"
+        class: "link-text"
       }
     ]
   },

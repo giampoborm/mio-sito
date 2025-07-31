@@ -50,13 +50,28 @@ function spawnMicroText(world, container, bodies, micro, event, idx = 0) {
     el.href = micro.link;
     el.textContent = micro.text;
     el.target = "_blank";
-    el.className = "microtext link";
+    el.className = 'microtext';
+    if (micro.class) {
+      el.classList.add(micro.class);
+    } else {
+      el.classList.add('link');
+    }
   } else {
     el = document.createElement('div');
     el.textContent = micro.text;
-    el.className = "microtext";
+    el.className = 'microtext';
+    if (micro.class) el.classList.add(micro.class);
   }
-  if (micro.class) el.classList.add(micro.class);
+
+  if (el.classList.contains('link-text')) {
+    el.addEventListener('mouseenter', () => {
+      const color = getRandomColor([getNavHighlightColor()]);
+      el.style.color = color;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.color = '#000';
+    });
+  }
 
   el.style.position = 'absolute';
   container.appendChild(el);
