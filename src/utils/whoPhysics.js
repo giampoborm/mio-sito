@@ -32,10 +32,15 @@ import rightLowerLegPath from '../assets/who/rightLowerLeg.png';
 
 // --- Helper: Get anchor position (fractional, supports dx/dy pixel nudge) ---
 function getAnchorPosition(anchor, isOnMobile) {
-  const mode = isOnMobile ? "mobile" : "desktop";
-  const pos = anchor.position[mode];
-  const dx = pos && "dx" in pos ? pos.dx : 0;
-  const dy = pos && "dy" in pos ? pos.dy : 0;
+  let mode;
+  if (window.innerWidth <= 400 && anchor.position.xs) {
+    mode = 'xs';
+  } else {
+    mode = isOnMobile ? 'mobile' : 'desktop';
+  }
+  const pos = anchor.position[mode] || anchor.position.desktop;
+  const dx = pos && 'dx' in pos ? pos.dx : 0;
+  const dy = pos && 'dy' in pos ? pos.dy : 0;
   return {
     x: Math.round((pos.x || 0) * window.innerWidth + dx),
     y: Math.round((pos.y || 0) * window.innerHeight + dy),
