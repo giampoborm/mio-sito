@@ -28,7 +28,7 @@ export function renderWhatpage(app) {
       document.body.appendChild(nudgeEl);
       window.addEventListener('touchstart', removeNudge);
       nudgeRemoveTimeoutId = setTimeout(removeNudge, 4000);
-    }, 2000);
+    }, 1000);
   }
 
   // Return the teardown function so that the router can call it when leaving this page.
