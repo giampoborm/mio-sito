@@ -346,7 +346,7 @@ img {
 }
 
 /* Further reduce text size on very small screens */
-@media (max-width: 420px) {
+@media (max-width: 400px) {
   .whatpage-title {
     font-size: clamp(1.2rem, 6vw + 0.3rem, 1.4rem);
     line-height: 1;
