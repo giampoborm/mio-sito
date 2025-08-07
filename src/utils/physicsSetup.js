@@ -30,11 +30,12 @@ export function syncDOMWithBodies(bodies, container) {
       if (domElement && domElement.isConnected && domElement.offsetParent !== null) {
         const x = body.position.x;
         const y = body.position.y;
+        const scale = parseFloat(domElement.dataset.scale) || 1;
         const w = domElement.offsetWidth;
         const h = domElement.offsetHeight;
         const angle = body.angle;
         domElement.style.transform =
-          `translate(${x - w / 2}px, ${y - h / 2}px) rotate(${angle}rad)`;
+          `translate(${x - w / 2}px, ${y - h / 2}px) rotate(${angle}rad) scale(${scale})`;
       }
     }
     animationFrameId = requestAnimationFrame(sync);
