@@ -28,7 +28,15 @@ import { markDone } from './doneColor.js';
 
 function getMobileScaling() {
   const width = window.innerWidth;
-  const base = width < 412 ? 0.6 : 1;
+  let base;
+  if (width >= 400) {
+    base = 1;
+  } else if (width <= 360) {
+    base = 0.7;
+  } else {
+    // Linearly interpolate between 100% at 400px and 70% at 360px
+    base = 0.7 + ((width - 360) / 40) * 0.3;
+  }
   return {
     image: 0.45 * base,
     video: 0.1 * base,
