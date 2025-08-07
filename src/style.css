@@ -664,7 +664,7 @@ body.dragging * {
     font-size: 1.8rem; /* Or whatever looks good */
   }
   .anchor-big {
-    font-size: 1.7rem; /* Example */
+    font-size: clamp(1.2rem, 6vw, 1.7rem);
   }
   #main-name {
     text-align: left;
@@ -673,12 +673,12 @@ body.dragging * {
     text-align: right;
   }
   .anchor-small {
-    font-size: .8rem;   /* Example */
+    font-size: clamp(0.6rem, 3vw, 0.8rem);
   }
   .microtext {
     font-size: 0.85rem; /* Example */
     /* Consider a max-width for microtexts on mobile too */
-    max-width: 30vw; /* Or a pixel value that works */
+    max-width: min(240px, 60vw);
   }
 }
 
