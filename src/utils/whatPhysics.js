@@ -26,13 +26,15 @@ import { createWhatProjectNav } from './whatNav.js'; // Ensure class name 'what-
 import { openFullProjectModal } from './fullProjectModal.js';
 import { markDone } from './doneColor.js';
 
-const MOBILE_SCALING = {
-  image: 0.45, // e.g., images are 45% of their desktop summary size on mobile
-  video: 0.1,  // Videos might need more aggressive scaling due to their original size
-  text: 1.0,   // Text physics bodies might be 80% of desktop, actual font via CSS
-  button: 1, // Button physics bodies
-  // Add more types if needed
-};
+function getMobileScaling() {
+  const base = Math.min(window.innerWidth / 768, 1);
+  return {
+    image: 0.45 * base,
+    video: 0.1 * base,
+    text: base,
+    button: base,
+  };
+}
 
 const DESKTOP_SCALING = { // Original scales you were using
   image: 0.75,
@@ -146,12 +148,11 @@ export function setupWhatPhysics() {
     let ro; // ResizeObserver for text elements, if created
     
     // Determine current scale based on device
-    const currentImageScale = amIMobile ? MOBILE_SCALING.image : DESKTOP_SCALING.image;
-    const currentVideoScale = amIMobile ? MOBILE_SCALING.video : DESKTOP_SCALING.video;
-    // For text and buttons, we might primarily control visual size with CSS,
-    // but we can scale the physics body if desired.
-    const currentTextBodyScale = amIMobile ? MOBILE_SCALING.text : DESKTOP_SCALING.text;
-    const currentButtonBodyScale = amIMobile ? MOBILE_SCALING.button : DESKTOP_SCALING.button;
+    const scaling = amIMobile ? getMobileScaling() : DESKTOP_SCALING;
+    const currentImageScale = scaling.image;
+    const currentVideoScale = scaling.video;
+    const currentTextBodyScale = scaling.text;
+    const currentButtonBodyScale = scaling.button;
 
     if (elementData.type === 'image') {
       // Use currentImageScale when loading/measuring
@@ -203,8 +204,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
   domElement = document.createElement('div');
   domElement.innerHTML = summaryText.replace(/\n/g, '<br>');
   domElement.classList.add(...cssClasses); // Applies display:block, width:fit-content, etc.
-  // domElement.style.display = 'inline-table'; // REMOVE this if you were experimenting
-  // domElement.style.display = 'inline-block'; // REMOVE this
+  domElement.dataset.scale = currentTextBodyScale;
   container.appendChild(domElement);
 
   // ... (ResizeObserver logic, which should still work fine) ...
@@ -215,8 +215,8 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       const currentBodyWidth = body.bounds.max.x - body.bounds.min.x;
       const currentBodyHeight = body.bounds.max.y - body.bounds.min.y;
 
-      const newDomWidth = e.contentRect.width;
-      const newDomHeight = e.contentRect.height;
+      const newDomWidth = e.contentRect.width * currentTextBodyScale;
+      const newDomHeight = e.contentRect.height * currentTextBodyScale;
 
       // Check for positive dimensions to avoid division by zero or NaN scales
       if (currentBodyWidth > 0 && currentBodyHeight > 0 && newDomWidth > 0 && newDomHeight > 0) {
@@ -270,6 +270,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         // Scale the physics body dimensions for button
         measuredWidth *= currentButtonBodyScale;
         measuredHeight *= currentButtonBodyScale;
+        domElement.dataset.scale = currentButtonBodyScale;
     } else {
       domElement = document.createElement('div');
       domElement.textContent = 'Unknown element type';
