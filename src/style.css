@@ -317,7 +317,7 @@ img {
 /* Apply max-width within media queries */
 @media (max-width: 768px) { /* Or your preferred mobile breakpoint */
   .whatpage-title {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 4vw + 1rem, 1.8rem);
     /* Apply fit-content to title too if needed */
     display: block;
     width: -moz-fit-content;
@@ -334,7 +334,7 @@ img {
   .summary-lg {
     inline-size: fit-content;
     line-height: 1;
-        max-width: 18ch;
+    max-width: 18ch;
   }
 
   .details-text,
@@ -342,6 +342,24 @@ img {
   .project-text,
   .archive-title {
     max-width: 18ch;
+  }
+}
+
+/* Further reduce text size on very small screens */
+@media (max-width: 420px) {
+  .whatpage-title {
+    font-size: clamp(1.2rem, 6vw + 0.3rem, 1.4rem);
+    line-height: 1;
+  }
+
+  .summary-xs { font-size: clamp(0.8rem, 2vw + 0.5rem, 0.9rem); }
+  .summary-sm { font-size: clamp(0.9rem, 2vw + 0.6rem, 1rem); }
+  .summary-lg { font-size: clamp(1rem, 2vw + 0.7rem, 1.1rem); }
+
+  .summary-xs,
+  .summary-sm,
+  .summary-lg {
+    line-height: 1;
   }
 }
 
