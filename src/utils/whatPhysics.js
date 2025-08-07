@@ -27,7 +27,8 @@ import { openFullProjectModal } from './fullProjectModal.js';
 import { markDone } from './doneColor.js';
 
 function getMobileScaling() {
-  const base = Math.min(window.innerWidth / 768, 1);
+  const width = window.innerWidth;
+  const base = width < 412 ? 0.6 : 1;
   return {
     image: 0.45 * base,
     video: 0.1 * base,
