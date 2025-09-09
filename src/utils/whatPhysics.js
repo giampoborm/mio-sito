@@ -145,22 +145,6 @@ export function setupWhatPhysics() {
       hint = document.createElement('div');
       hint.id = id;
       hint.textContent = "dont click the title but the white space...";
-      // Centered overlay styling (kept local to avoid CSS changes)
-      hint.style.position = 'absolute';
-      hint.style.top = '50%';
-      hint.style.left = '50%';
-      hint.style.transform = 'translate(-50%, -50%)';
-      hint.style.background = 'rgba(255,255,255,0.95)';
-      hint.style.color = '#000';
-      hint.style.border = '3px solid #000';
-      hint.style.borderRadius = '16px';
-      hint.style.boxShadow = '4px 4px 0 #000';
-      hint.style.padding = '0.6rem 0.9rem';
-      hint.style.fontSize = '1rem';
-      hint.style.zIndex = '1000';
-      hint.style.pointerEvents = 'none';
-      hint.style.opacity = '0';
-      hint.style.transition = 'opacity 120ms ease';
       container.appendChild(hint);
       // Force reflow to enable fade-in transition
       // eslint-disable-next-line no-unused-expressions
