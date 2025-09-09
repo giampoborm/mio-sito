@@ -184,6 +184,26 @@ img {
   max-width: 70vw;  /* mobile-friendly width */
 }
 
+#title-click-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  color: #000;
+  font-size: 1rem;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+@media (min-width: 769px) {
+  #title-click-hint {
+    top: 40%;
+  }
+}
+
 .project-element {
   position: absolute;
   top: 0;
