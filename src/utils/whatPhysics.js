@@ -144,7 +144,9 @@ export function setupWhatPhysics() {
     if (!hint) {
       hint = document.createElement('div');
       hint.id = id;
-      hint.textContent = "dont click the title but the white space...";
+      hint.textContent = amIMobile
+        ? "dont tap the title but the white space..."
+        : "dont click the title but the white space...";
       container.appendChild(hint);
       // Force reflow to enable fade-in transition
       // eslint-disable-next-line no-unused-expressions
