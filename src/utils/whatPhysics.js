@@ -136,6 +136,58 @@ export function setupWhatPhysics() {
   );
   bodies.push({ body: titleBody, domElement: titleDom });
 
+  // --- Title interaction: block spawning on title tap/click and show hint ---
+  let titleHintTimeout = null;
+  function showTitleHint() {
+    const id = 'title-click-hint';
+    let hint = document.getElementById(id);
+    if (!hint) {
+      hint = document.createElement('div');
+      hint.id = id;
+      hint.textContent = "dont click the title but the white space...";
+      // Centered overlay styling (kept local to avoid CSS changes)
+      hint.style.position = 'absolute';
+      hint.style.top = '50%';
+      hint.style.left = '50%';
+      hint.style.transform = 'translate(-50%, -50%)';
+      hint.style.background = 'rgba(255,255,255,0.95)';
+      hint.style.color = '#000';
+      hint.style.border = '3px solid #000';
+      hint.style.borderRadius = '16px';
+      hint.style.boxShadow = '4px 4px 0 #000';
+      hint.style.padding = '0.6rem 0.9rem';
+      hint.style.fontSize = '1rem';
+      hint.style.zIndex = '1000';
+      hint.style.pointerEvents = 'none';
+      hint.style.opacity = '0';
+      hint.style.transition = 'opacity 120ms ease';
+      container.appendChild(hint);
+      // Force reflow to enable fade-in transition
+      // eslint-disable-next-line no-unused-expressions
+      hint.offsetHeight;
+    }
+    hint.style.opacity = '1';
+    if (titleHintTimeout) clearTimeout(titleHintTimeout);
+    titleHintTimeout = setTimeout(() => {
+      if (hint) hint.style.opacity = '0';
+      // Remove after fade
+      setTimeout(() => {
+        if (hint && hint.parentNode) hint.parentNode.removeChild(hint);
+      }, 150);
+    }, 3000);
+  }
+
+  function attachTitleInterception(dom) {
+    if (!dom) return;
+    const stop = (e) => { e.stopPropagation(); e.preventDefault(); };
+    // Block pointer events from bubbling to container listeners
+    dom.addEventListener('pointerdown', stop);
+    dom.addEventListener('pointerup', (e) => { stop(e); showTitleHint(); });
+    dom.addEventListener('click', (e) => { stop(e); showTitleHint(); });
+    dom.style.touchAction = 'none';
+  }
+  attachTitleInterception(titleDom);
+
   if (!preloadedIndices.has(currentProjectIndex)) {
     preloadedIndices.add(currentProjectIndex);
     prefetchProjectAssets(projects[currentProjectIndex].details);
@@ -425,6 +477,12 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
 
     // Check if the tap was on the container itself or a non-interactive child
     if (e.target === container || container.contains(e.target)) {
+      // If the tap was on the title, block spawn and show hint
+      if (e.target.closest && e.target.closest('.whatpage-title')) {
+        showTitleHint();
+        pointerDownPos = null;
+        return;
+      }
       // Prevent spawning if a button with its own interaction was clicked/tapped
         if (e.target.classList.contains('view-full-project-button') ||
             e.target.classList.contains('hold-next-button') ||
@@ -577,6 +635,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     titleBody = newTitleData.body;
     titleDom = newTitleData.domElement;
     bodies.push({ body: titleBody, domElement: titleDom });
+    attachTitleInterception(titleDom);
     Matter.Body.setPosition(
       titleBody,
       { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.9 : window.innerHeight / 2 }
