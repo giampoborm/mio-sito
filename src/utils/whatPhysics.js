@@ -93,6 +93,7 @@ export function setupWhatPhysics() {
   container.classList.add('container');
   container.style.touchAction = 'none'; // Crucial for custom pointer/touch handling
   container.style.cursor = `url('${import.meta.env.BASE_URL}cursors/just-click.svg') 32 32, auto`;
+  container.__navMenuCleanup = [];
   document.body.appendChild(container);
 
   // --- Step 5: Project Data and State ---
@@ -115,6 +116,17 @@ export function setupWhatPhysics() {
   let holdButtonDom = null;
   const preloadedIndices = new Set();
   let spawnInProgress = false;
+
+  const waitForSpawnIdle = () => new Promise((resolve) => {
+    const check = () => {
+      if (!spawnInProgress) {
+        resolve();
+      } else {
+        requestAnimationFrame(check);
+      }
+    };
+    check();
+  });
 
   function updateWhitespaceCursor() {
     const summaryElements = projects[currentProjectIndex].summary.elements;
@@ -173,6 +185,42 @@ export function setupWhatPhysics() {
     dom.style.touchAction = 'none';
   }
   attachTitleInterception(titleDom);
+
+  const completionJitter = () => (Math.random() * 40) - 20;
+
+  async function addCompletionElements(baseX, baseY) {
+    const x = typeof baseX === 'number' ? baseX : window.innerWidth / 2;
+    const y = typeof baseY === 'number' ? baseY : window.innerHeight / 2;
+
+    const fullData = {
+      type: 'button',
+      content: 'view full project',
+      cssClass: 'view-full-project-button',
+      action: 'openFullProject'
+    };
+    await addProjectElement(fullData, x + completionJitter(), y + completionJitter());
+
+    if (amIMobile) {
+      const holdData = {
+        type: 'button',
+        content: 'hold for next',
+        cssClass: 'hold-next-button'
+      };
+      const { domElement } = await addProjectElement(
+        holdData,
+        x + completionJitter(),
+        y + completionJitter()
+      );
+      holdButtonDom = domElement;
+    } else {
+      holdButtonDom = null;
+    }
+
+    const color = pickRandomPrimary([lastTitleColor]);
+    titleDom.dataset.highlightColor = color;
+    markDone(titleDom);
+    lastTitleColor = color;
+  }
 
   if (!preloadedIndices.has(currentProjectIndex)) {
     preloadedIndices.add(currentProjectIndex);
@@ -379,6 +427,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
   // --- Step 9: General Navigation Menu ---
   const navMenuBodies = createPhysicsNavMenu(world, container, '/what');
   bodies.push(...navMenuBodies);
+  window.dispatchEvent(new CustomEvent('whatProjectChanged', {
+    detail: { index: currentProjectIndex }
+  }));
 
   // --- Step 10: Pointer Event Handling for Spawning ---
   let pointerDownPos = null;
@@ -398,8 +449,10 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       amIMobile &&
       currentElementIndex >= projects[currentProjectIndex].summary.elements.length &&
       !(e.target.classList.contains('view-full-project-button') ||
+        e.target.classList.contains('hold-next-button') ||
         e.target.closest('.nav-button') ||
-        e.target.closest('.what-nav-button'))
+        e.target.closest('.what-nav-button') ||
+        e.target.closest('.project-dropdown'))
     ) {
       longPressFired = false;
       longPressTimer = setTimeout(() => {
@@ -473,7 +526,8 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         if (e.target.classList.contains('view-full-project-button') ||
             e.target.classList.contains('hold-next-button') ||
             e.target.closest('.nav-button') || // General nav
-            e.target.closest('.what-nav-button')) { // Project-specific nav (ensure this class is used in whatNav.js)
+            e.target.closest('.what-nav-button') ||
+            e.target.closest('.project-dropdown')) { // Project-specific nav (whatNav.js) or dropdown list
         pointerDownPos = null; // Reset, but let the button's own click handler fire
         return;
       }
@@ -523,32 +577,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       currentElementIndex++;
       updateWhitespaceCursor();
       if (currentElementIndex === summaryElements.length) {
-        const fullData = {
-          type: 'button',
-          content: 'view full project',
-          cssClass: 'view-full-project-button',
-          action: 'openFullProject'
-        };
-        await addProjectElement(fullData, x + (Math.random()*40-20), y + (Math.random()*40-20));
-
-        if (amIMobile) {
-          const holdData = {
-            type: 'button',
-            content: 'hold for next',
-            cssClass: 'hold-next-button'
-          };
-          const { domElement } = await addProjectElement(
-            holdData,
-            x + (Math.random()*40-20),
-            y + (Math.random()*40-20)
-          );
-          holdButtonDom = domElement;
-        }
-
-        const color = pickRandomPrimary([lastTitleColor]);
-        titleDom.dataset.highlightColor = color;
-        markDone(titleDom);
-        lastTitleColor = color;
+        await addCompletionElements(x, y);
       }
     } else {
       if (!amIMobile) {
@@ -632,8 +661,43 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         setGravity(engine, newGravity.x, newGravity.y);
     }
     updateSpecificNav();
+    window.dispatchEvent(new CustomEvent('whatProjectChanged', {
+      detail: { index: currentProjectIndex }
+    }));
   }
-  
+
+  const autoSpawnOffset = () => {
+    const base = Math.max(Math.min(window.innerWidth, window.innerHeight) * 0.25, 120);
+    return (Math.random() - 0.5) * base;
+  };
+
+  async function completeProjectInstantly(targetIndex) {
+    await waitForSpawnIdle();
+    spawnInProgress = true;
+    try {
+      handleProjectNavigation(targetIndex);
+
+      const summaryElements = projects[currentProjectIndex].summary.elements;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      for (const elementData of summaryElements) {
+        await addProjectElement(
+          elementData,
+          centerX + autoSpawnOffset(),
+          centerY + autoSpawnOffset()
+        );
+      }
+
+      currentElementIndex = summaryElements.length;
+      updateWhitespaceCursor();
+
+      await addCompletionElements(centerX, centerY);
+    } finally {
+      spawnInProgress = false;
+    }
+  }
+
   // Define the handler for the custom event
   const handleWhatProjectNavEvent = (e) => {
     const { target } = e.detail;
@@ -650,6 +714,19 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     }
   };
   window.addEventListener('whatProjectNav', handleWhatProjectNavEvent);
+
+  const handleProjectListSelect = async (event) => {
+    const { index } = event.detail || {};
+    if (typeof index !== 'number' || index < 0 || index >= projects.length) {
+      return;
+    }
+    try {
+      await completeProjectInstantly(index);
+    } catch (error) {
+      console.error('Failed to complete project from list button', error);
+    }
+  };
+  window.addEventListener('whatProjectListSelect', handleProjectListSelect);
 
   // --- Step 14: Start DOM Syncing, Dragging, and Matter.js Runner ---
   // Store the returned cleanup function from syncDOMWithBodies
@@ -702,7 +779,20 @@ if (DEBUG) {
     container.removeEventListener('pointerup', handlePointerUp);
     container.removeEventListener('pointercancel', handlePointerCancel);
     window.removeEventListener('whatProjectNav', handleWhatProjectNavEvent);
+    window.removeEventListener('whatProjectListSelect', handleProjectListSelect);
     // console.log('Custom and pointer listeners removed.');
+
+    if (Array.isArray(container.__navMenuCleanup)) {
+      container.__navMenuCleanup.forEach((fn) => {
+        try {
+          fn();
+        } catch (error) {
+          // ignore cleanup errors
+        }
+      });
+      container.__navMenuCleanup.length = 0;
+      container.__navMenuCleanup = null;
+    }
 
     // B. Call cleanup functions for ongoing processes
     if (cleanupSyncLoop) {
