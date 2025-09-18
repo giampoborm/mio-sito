@@ -41,14 +41,14 @@ export function createPhysicsNavMenu(world, container, currentPage) {
     : null;
 
   let dropdownEl = null;
-  let dropdownButtons = [];
+  let projectButtons = [];
   let isDropdownOpen = false;
   let currentAnchor = null;
   let latestProjectIndex = 0;
 
   const highlightProjectInDropdown = (index) => {
-    if (!dropdownButtons.length) return;
-    dropdownButtons.forEach((button, idx) => {
+    if (!projectButtons.length) return;
+    projectButtons.forEach((button, idx) => {
       if (idx === index) {
         button.classList.add('is-active');
         button.setAttribute('aria-current', 'true');
@@ -66,8 +66,12 @@ export function createPhysicsNavMenu(world, container, currentPage) {
     dropdownEl.style.display = 'none';
     if (currentAnchor) {
       currentAnchor.setAttribute('aria-expanded', 'false');
+      currentAnchor.classList.remove('is-open');
+      currentAnchor.style.color = '#000';
+      currentAnchor.dataset.currentColor = '';
     }
     isDropdownOpen = false;
+    currentAnchor = null;
   };
 
   const updateDropdownPosition = () => {
@@ -107,7 +111,7 @@ export function createPhysicsNavMenu(world, container, currentPage) {
     listEl.className = 'project-dropdown-list';
     dropdownEl.appendChild(listEl);
 
-    dropdownButtons = projectsData.projects.map((project, index) => {
+    projectButtons = projectsData.projects.map((project, index) => {
       const itemEl = document.createElement('li');
       itemEl.className = 'project-dropdown-item';
 
@@ -131,6 +135,33 @@ export function createPhysicsNavMenu(world, container, currentPage) {
       listEl.appendChild(itemEl);
       return buttonEl;
     });
+
+    const contactItemEl = document.createElement('li');
+    contactItemEl.className = 'project-dropdown-item';
+
+    const contactButtonEl = document.createElement('button');
+    contactButtonEl.type = 'button';
+    contactButtonEl.textContent = 'contact';
+    contactButtonEl.className = 'project-dropdown-button project-dropdown-button-contact';
+    contactButtonEl.addEventListener('click', (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      const color = currentAnchor?.dataset.currentColor || highlightColor;
+      if (color) {
+        setNavHighlightColor(color);
+      }
+      window.__whoPendingAnchor = 'contact';
+      const nextState = { ...(history.state || {}), whoAutoSpawn: 'contact' };
+      history.pushState(nextState, '', '/who');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      closeDropdown();
+    });
+    contactButtonEl.addEventListener('pointerdown', (event) => {
+      event.stopPropagation();
+    });
+
+    contactItemEl.appendChild(contactButtonEl);
+    listEl.appendChild(contactItemEl);
 
     dropdownEl.addEventListener('pointerdown', (event) => {
       event.stopPropagation();
@@ -205,6 +236,9 @@ export function createPhysicsNavMenu(world, container, currentPage) {
         el.dataset.currentColor = c;
       });
       el.addEventListener('mouseleave', () => {
+        if (btn.type === 'list' && isDropdownOpen && currentAnchor === el) {
+          return;
+        }
         el.style.color = '#000';
         el.dataset.currentColor = '';
       });
@@ -242,6 +276,12 @@ export function createPhysicsNavMenu(world, container, currentPage) {
           dropdownEl.classList.add('is-open');
           dropdownEl.setAttribute('aria-hidden', 'false');
           el.setAttribute('aria-expanded', 'true');
+          el.classList.add('is-open');
+          const color = el.dataset.currentColor || highlightColor;
+          if (color) {
+            el.style.color = color;
+            el.dataset.currentColor = color;
+          }
           isDropdownOpen = true;
         }
       };
