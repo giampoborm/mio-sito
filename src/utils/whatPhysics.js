@@ -52,6 +52,75 @@ const DESKTOP_SCALING = { // Original scales you were using
   button: 1.0,
 };
 
+const AUTO_PLACEMENT_MARGIN = 48;
+const NORMALIZED_MIN = 0.05;
+const NORMALIZED_MAX = 0.95;
+
+function clampPositionToViewport(x, y, width = 0, height = 0, margin = AUTO_PLACEMENT_MARGIN) {
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  const halfWidth = Math.max(width / 2, 0);
+  const halfHeight = Math.max(height / 2, 0);
+
+  const minX = margin + halfWidth;
+  const maxX = viewportWidth - margin - halfWidth;
+  const minY = margin + halfHeight;
+  const maxY = viewportHeight - margin - halfHeight;
+
+  const fallbackX = viewportWidth / 2;
+  const fallbackY = viewportHeight / 2;
+
+  const clampValue = (value, min, max, fallback) => {
+    if (!Number.isFinite(value)) return fallback;
+    if (max < min) return fallback;
+    return Math.min(Math.max(value, min), max);
+  };
+
+  return {
+    x: clampValue(x, minX, maxX, fallbackX),
+    y: clampValue(y, minY, maxY, fallbackY),
+  };
+}
+
+function createScatterPlanner(totalCount, viewportWidth, viewportHeight) {
+  const safeTotal = Number.isFinite(totalCount) ? Math.max(0, Math.floor(totalCount)) : 0;
+  if (safeTotal <= 0) {
+    return () => ({ x: 0.5, y: 0.5 });
+  }
+
+  const aspectRatio = viewportHeight > 0 ? viewportWidth / viewportHeight : 1;
+  const columns = Math.max(1, Math.round(Math.sqrt(safeTotal * aspectRatio)));
+  const rows = Math.max(1, Math.ceil(safeTotal / columns));
+  const jitterX = 0.25 / columns;
+  const jitterY = 0.2 / rows;
+
+  let index = 0;
+
+  return () => {
+    const currentIndex = index++;
+    if (currentIndex >= safeTotal) {
+      const randomX = NORMALIZED_MIN + Math.random() * (NORMALIZED_MAX - NORMALIZED_MIN);
+      const randomY = NORMALIZED_MIN + Math.random() * (NORMALIZED_MAX - NORMALIZED_MIN);
+      return { x: randomX, y: randomY };
+    }
+
+    const row = Math.floor(currentIndex / columns);
+    const column = currentIndex % columns;
+    const serpentineColumn = row % 2 === 1 ? columns - 1 - column : column;
+
+    let x = (serpentineColumn + 0.5) / columns;
+    let y = (row + 0.5) / rows;
+
+    x += (Math.random() - 0.5) * jitterX;
+    y += (Math.random() - 0.5) * jitterY;
+
+    x = Math.min(NORMALIZED_MAX, Math.max(NORMALIZED_MIN, x));
+    y = Math.min(NORMALIZED_MAX, Math.max(NORMALIZED_MIN, y));
+
+    return { x, y };
+  };
+}
+
 export function setupWhatPhysics() {
   // --- Step 1: Initialization and Variable Scoping ---
   const engine = initializeMatterEngine();
@@ -190,7 +259,7 @@ export function setupWhatPhysics() {
     { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.9 : window.innerHeight / 2 }
   );
 
-  async function addProjectElement(elementData, spawnX, spawnY) {
+  async function addProjectElement(elementData, spawnX, spawnY, placementCallback) {
     let domElement, measuredWidth, measuredHeight;
     let ro; // ResizeObserver for text elements, if created
     
@@ -335,14 +404,43 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     domElement.style.position = 'absolute';
     domElement.style.userSelect = 'none';
     domElement.setAttribute('draggable', 'false');
-    
+
+    let resolvedX = spawnX;
+    let resolvedY = spawnY;
+    let shouldClamp = false;
+
+    if (typeof placementCallback === 'function') {
+      const proposed = placementCallback({ width: measuredWidth, height: measuredHeight });
+      if (proposed && typeof proposed.x === 'number' && typeof proposed.y === 'number') {
+        let proposedX = proposed.x;
+        let proposedY = proposed.y;
+        if (
+          proposedX >= 0 && proposedX <= 1 &&
+          proposedY >= 0 && proposedY <= 1
+        ) {
+          proposedX *= window.innerWidth;
+          proposedY *= window.innerHeight;
+        }
+        resolvedX = proposedX;
+        resolvedY = proposedY;
+        shouldClamp = true;
+      }
+    }
+
+    const fallbackX = (typeof resolvedX === 'number') ? resolvedX : Math.random() * window.innerWidth;
+    const fallbackY = (typeof resolvedY === 'number') ? resolvedY : Math.random() * window.innerHeight;
+
+    const { x: finalX, y: finalY } = shouldClamp
+      ? clampPositionToViewport(fallbackX, fallbackY, measuredWidth, measuredHeight)
+      : { x: fallbackX, y: fallbackY };
+
     // Re-measure DOM element for visual reference if needed, but physics body uses scaled values
     // const finalRect = domElement.getBoundingClientRect();
     // Note: measuredWidth and measuredHeight are now the SIZED values for the physics body
 
     const body = Matter.Bodies.rectangle(
-      (typeof spawnX === 'number') ? spawnX : Math.random() * window.innerWidth,
-      (typeof spawnY === 'number') ? spawnY : Math.random() * window.innerHeight,
+      finalX,
+      finalY,
       measuredWidth > 0 ? measuredWidth : 50,
       measuredHeight > 0 ? measuredHeight : 20,
       { restitution: 0.9, friction: 0.05 }
@@ -560,6 +658,101 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     }
   }
 
+  async function completeProjectInstantly() {
+    if (spawnInProgress) return;
+
+    const currentProject = projects[currentProjectIndex];
+    const summaryElements = currentProject.summary.elements;
+    const remainingElements = summaryElements.slice(currentElementIndex);
+    if (remainingElements.length === 0) {
+      return;
+    }
+
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    const finishingThisProject = currentElementIndex + remainingElements.length === summaryElements.length;
+    const additionalButtons = finishingThisProject ? 1 + (amIMobile ? 1 : 0) : 0;
+    const planner = createScatterPlanner(
+      remainingElements.length + additionalButtons,
+      viewportWidth,
+      viewportHeight
+    );
+
+    const autoPlacement = ({ width, height }) => {
+      const { x: normX, y: normY } = planner();
+      const horizontalPadding = Math.max(AUTO_PLACEMENT_MARGIN, viewportWidth * 0.08);
+      const verticalPadding = Math.max(AUTO_PLACEMENT_MARGIN, viewportHeight * 0.08);
+
+      const minX = horizontalPadding + width / 2;
+      const maxX = viewportWidth - horizontalPadding - width / 2;
+      const minY = verticalPadding + height / 2;
+      const maxY = viewportHeight - verticalPadding - height / 2;
+
+      const widthRange = Math.max(maxX - minX, 0);
+      const heightRange = Math.max(maxY - minY, 0);
+
+      const normSpan = NORMALIZED_MAX - NORMALIZED_MIN || 1;
+      const normalizedX = (normX - NORMALIZED_MIN) / normSpan;
+      const normalizedY = (normY - NORMALIZED_MIN) / normSpan;
+
+      const safeNormalizedX = Number.isFinite(normalizedX)
+        ? Math.min(Math.max(normalizedX, 0), 1)
+        : 0.5;
+      const safeNormalizedY = Number.isFinite(normalizedY)
+        ? Math.min(Math.max(normalizedY, 0), 1)
+        : 0.5;
+
+      const x = widthRange > 0 ? minX + safeNormalizedX * widthRange : viewportWidth / 2;
+      const y = heightRange > 0 ? minY + safeNormalizedY * heightRange : viewportHeight / 2;
+
+      return { x, y };
+    };
+
+    spawnInProgress = true;
+    try {
+      for (const elementData of remainingElements) {
+        await addProjectElement(elementData, undefined, undefined, autoPlacement);
+        currentElementIndex++;
+      }
+
+      updateWhitespaceCursor();
+
+      if (!finishingThisProject) {
+        return;
+      }
+
+      const fullData = {
+        type: 'button',
+        content: 'view full project',
+        cssClass: 'view-full-project-button',
+        action: 'openFullProject'
+      };
+      await addProjectElement(fullData, undefined, undefined, autoPlacement);
+
+      if (amIMobile) {
+        const holdData = {
+          type: 'button',
+          content: 'hold for next',
+          cssClass: 'hold-next-button'
+        };
+        const { domElement } = await addProjectElement(holdData, undefined, undefined, autoPlacement);
+        holdButtonDom = domElement;
+      }
+
+      const color = pickRandomPrimary([lastTitleColor]);
+      titleDom.dataset.highlightColor = color;
+      markDone(titleDom);
+      lastTitleColor = color;
+    } finally {
+      spawnInProgress = false;
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.completeProjectInstantly = completeProjectInstantly;
+  }
+
   // --- Step 12: Project-Specific Navigation (Bottom Nav) ---
   let specificNavButtonObjects = createWhatProjectNav(world, container, currentProjectIndex, projects.length);
   bodies.push(...specificNavButtonObjects);
@@ -695,6 +888,10 @@ if (DEBUG) {
   // --- Step 15: Teardown Function ---
   return function teardownWhatPhysics() {
     // console.log('Tearing down WhatPhysics...');
+
+    if (typeof window !== 'undefined' && window.completeProjectInstantly === completeProjectInstantly) {
+      window.completeProjectInstantly = undefined;
+    }
 
     // A. Remove event listeners
     container.removeEventListener('pointerdown', handlePointerDown);
