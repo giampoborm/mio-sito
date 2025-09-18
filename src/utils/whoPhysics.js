@@ -123,6 +123,7 @@ function createAnchors(world, container, bodies, isOnMobile) {
   const spawnedAnchors = new Set();
   const colorCycle = shuffleColors();
   let colorIndex = 0;
+  const anchorControls = new Map();
 
   ANCHORS.forEach((anchor) => {
     // Get position using the new system
@@ -183,46 +184,56 @@ function createAnchors(world, container, bodies, isOnMobile) {
     // --- MODIFICATION FOR TOUCH & CLICK ---
     let lastTouchCoords = null;
 
+    const spawnAnchor = (coords, options = {}) => {
+      if (spawnedAnchors.has(anchor.id) && !options.force) return false;
+      spawnedAnchors.add(anchor.id);
+
+      const coordsToUse = coords || { clientX: x, clientY: y };
+
+      anchor.microTexts.forEach((micro, microIdx) => {
+        spawnMicroText(world, container, bodies, micro, coordsToUse, microIdx);
+      });
+
+      markDone(el);
+      lastTouchCoords = null;
+      return true;
+    };
+
+    anchorControls.set(anchor.id, {
+      element: el,
+      spawn: spawnAnchor,
+    });
+
     // Listen to touchend to capture coordinates
     el.addEventListener('touchend', (touchEvent) => {
-      // Prevent click if touchend is part of a drag/scroll
-      if (touchEvent.cancelable) { // Check if it can be cancelled
-          // A simple check: if the touch moved significantly, it might be a scroll.
-          // This is a basic heuristic. For robust drag detection, you'd need more.
-          // For now, let's assume a tap doesn't move much.
-      }
       if (touchEvent.changedTouches && touchEvent.changedTouches.length > 0) {
         lastTouchCoords = {
           clientX: touchEvent.changedTouches[0].clientX,
           clientY: touchEvent.changedTouches[0].clientY,
         };
       }
-      // We don't preventDefault here usually, to allow the click event to fire.
-      // However, if double spawning occurs, you might need to manage it.
-    }, { passive: true }); // Use passive for touchend if not preventing default scroll
+    }, { passive: true });
 
     el.addEventListener('click', (clickEvent) => {
-      if (spawnedAnchors.has(anchor.id)) return;
-      spawnedAnchors.add(anchor.id);
-
-      // Determine the event coordinates to use for spawning
-      const coordsToUse = lastTouchCoords || { // Prioritize last touch coordinates
+      const coordsToUse = lastTouchCoords || {
         clientX: clickEvent.clientX,
         clientY: clickEvent.clientY,
       };
-
-      anchor.microTexts.forEach((micro, microIdx) => {
-        // Pass the determined coordinates (either from touch or click)
-        spawnMicroText(world, container, bodies, micro, coordsToUse, microIdx);
-      });
-
-      // Mark anchor as done and keep its highlight colour
-      markDone(el);
-
-      lastTouchCoords = null; // Reset for the next interaction
+      spawnAnchor(coordsToUse);
     });
     // --- END MODIFICATION ---
   });
+
+  return {
+    spawnAnchorById(anchorId, coords, options) {
+      const control = anchorControls.get(anchorId);
+      if (!control) return false;
+      return control.spawn(coords, options);
+    },
+    getAnchorElement(anchorId) {
+      return anchorControls.get(anchorId)?.element || null;
+    },
+  };
 }
 
 function addRagdoll(world, container, bodies, currentlyIsMobile) {
@@ -544,7 +555,36 @@ export function setupWhoPhysics() {
 
   // 5. Anchors (with new fractional positioning)
   const isOnMobile = window.innerWidth <= 768;
-  createAnchors(world, container, bodies, isOnMobile);
+  const anchorAPI = createAnchors(world, container, bodies, isOnMobile);
+
+  let pendingAnchorId = null;
+  if (typeof window.__whoPendingAnchor === 'string') {
+    pendingAnchorId = window.__whoPendingAnchor;
+  }
+  window.__whoPendingAnchor = null;
+
+  const historyAutoSpawn =
+    history.state && typeof history.state.whoAutoSpawn === 'string'
+      ? history.state.whoAutoSpawn
+      : null;
+
+  if (!pendingAnchorId && historyAutoSpawn) {
+    pendingAnchorId = historyAutoSpawn;
+  }
+
+  if (pendingAnchorId) {
+    requestAnimationFrame(() => {
+      anchorAPI.spawnAnchorById(pendingAnchorId);
+    });
+  }
+
+  const handleWhoTriggerAnchor = (event) => {
+    const detail = event?.detail || {};
+    const { anchorId, coords, options } = detail;
+    if (typeof anchorId !== 'string') return;
+    anchorAPI.spawnAnchorById(anchorId, coords, options);
+  };
+  window.addEventListener('whoTriggerAnchor', handleWhoTriggerAnchor);
 
   const highlightColor = getNavHighlightColor() || COLORS[0];
   const cleanupHighlight = enableHighlightOnTouch(engine, bodies, { highlightColor });
@@ -614,6 +654,8 @@ export function setupWhoPhysics() {
     if (cleanupHighlight) {
       cleanupHighlight();
     }
+
+    window.removeEventListener('whoTriggerAnchor', handleWhoTriggerAnchor);
 
     // Debug Renderer Cleanup
     if (DEBUG_WHO_PAGE && matterRenderInstance) {

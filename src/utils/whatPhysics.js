@@ -52,6 +52,84 @@ const DESKTOP_SCALING = { // Original scales you were using
   button: 1.0,
 };
 
+const clampValue = (value, min, max) => {
+  if (!Number.isFinite(value)) {
+    if (Number.isFinite(min) && Number.isFinite(max)) {
+      return (min + max) / 2;
+    }
+    return 0;
+  }
+  if (min > max) {
+    return Number.isFinite(min) && Number.isFinite(max)
+      ? (min + max) / 2
+      : value;
+  }
+  return Math.min(Math.max(value, min), max);
+};
+
+const computeViewportMargins = (viewportWidth, viewportHeight) => {
+  const marginX = Math.min(Math.max(viewportWidth * 0.06, 32), viewportWidth / 3);
+  const marginY = Math.min(Math.max(viewportHeight * 0.1, 48), viewportHeight / 3);
+  return { marginX, marginY };
+};
+
+const createScatterPlanner = (totalCount, viewportWidth, viewportHeight) => {
+  const count = Math.max(totalCount, 1);
+  const columns = Math.max(1, Math.ceil(Math.sqrt(count)));
+  const rows = Math.max(1, Math.ceil(count / columns));
+  const { marginX, marginY } = computeViewportMargins(viewportWidth, viewportHeight);
+  const jitterScale = 0.35;
+  let index = 0;
+
+  return ({ width = 0, height = 0 } = {}) => {
+    const currentIndex = index;
+    index += 1;
+
+    if (currentIndex >= count) {
+      return {
+        x: viewportWidth / 2,
+        y: viewportHeight / 2,
+      };
+    }
+
+    const row = Math.floor(currentIndex / columns);
+    let col = currentIndex % columns;
+    if (row % 2 === 1) {
+      col = columns - 1 - col;
+    }
+
+    const columnSpan = Math.max(columns - 1, 1);
+    const rowSpan = Math.max(rows - 1, 1);
+    const baseX = columns === 1 ? 0.5 : col / columnSpan;
+    const baseY = rows === 1 ? 0.5 : row / rowSpan;
+
+    const cellWidth = 1 / columns;
+    const cellHeight = 1 / rows;
+    const jitterX = (Math.random() - 0.5) * cellWidth * jitterScale;
+    const jitterY = (Math.random() - 0.5) * cellHeight * jitterScale;
+
+    const normalizedX = Math.min(Math.max(baseX + jitterX, 0), 1);
+    const normalizedY = Math.min(Math.max(baseY + jitterY, 0), 1);
+
+    const halfWidth = width / 2;
+    const halfHeight = height / 2;
+
+    const minX = marginX + halfWidth;
+    const maxX = viewportWidth - marginX - halfWidth;
+    const minY = marginY + halfHeight;
+    const maxY = viewportHeight - marginY - halfHeight;
+
+    const resolvedX = minX <= maxX
+      ? minX + normalizedX * (maxX - minX)
+      : viewportWidth / 2;
+    const resolvedY = minY <= maxY
+      ? minY + normalizedY * (maxY - minY)
+      : viewportHeight / 2;
+
+    return { x: resolvedX, y: resolvedY };
+  };
+};
+
 export function setupWhatPhysics() {
   // --- Step 1: Initialization and Variable Scoping ---
   const engine = initializeMatterEngine();
@@ -93,6 +171,7 @@ export function setupWhatPhysics() {
   container.classList.add('container');
   container.style.touchAction = 'none'; // Crucial for custom pointer/touch handling
   container.style.cursor = `url('${import.meta.env.BASE_URL}cursors/just-click.svg') 32 32, auto`;
+  container.__navMenuCleanup = [];
   document.body.appendChild(container);
 
   // --- Step 5: Project Data and State ---
@@ -115,6 +194,17 @@ export function setupWhatPhysics() {
   let holdButtonDom = null;
   const preloadedIndices = new Set();
   let spawnInProgress = false;
+
+  const waitForSpawnIdle = () => new Promise((resolve) => {
+    const check = () => {
+      if (!spawnInProgress) {
+        resolve();
+      } else {
+        requestAnimationFrame(check);
+      }
+    };
+    check();
+  });
 
   function updateWhitespaceCursor() {
     const summaryElements = projects[currentProjectIndex].summary.elements;
@@ -174,6 +264,42 @@ export function setupWhatPhysics() {
   }
   attachTitleInterception(titleDom);
 
+  const completionJitter = () => (Math.random() * 40) - 20;
+
+  async function addCompletionElements(baseX, baseY) {
+    const x = typeof baseX === 'number' ? baseX : window.innerWidth / 2;
+    const y = typeof baseY === 'number' ? baseY : window.innerHeight / 2;
+
+    const fullData = {
+      type: 'button',
+      content: 'view full project',
+      cssClass: 'view-full-project-button',
+      action: 'openFullProject'
+    };
+    await addProjectElement(fullData, x + completionJitter(), y + completionJitter());
+
+    if (amIMobile) {
+      const holdData = {
+        type: 'button',
+        content: 'hold for next',
+        cssClass: 'hold-next-button'
+      };
+      const { domElement } = await addProjectElement(
+        holdData,
+        x + completionJitter(),
+        y + completionJitter()
+      );
+      holdButtonDom = domElement;
+    } else {
+      holdButtonDom = null;
+    }
+
+    const color = pickRandomPrimary([lastTitleColor]);
+    titleDom.dataset.highlightColor = color;
+    markDone(titleDom);
+    lastTitleColor = color;
+  }
+
   if (!preloadedIndices.has(currentProjectIndex)) {
     preloadedIndices.add(currentProjectIndex);
     prefetchProjectAssets(projects[currentProjectIndex].details);
@@ -190,7 +316,7 @@ export function setupWhatPhysics() {
     { x: window.innerWidth / 2, y: amIMobile ? window.innerHeight * 0.9 : window.innerHeight / 2 }
   );
 
-  async function addProjectElement(elementData, spawnX, spawnY) {
+  async function addProjectElement(elementData, spawnX, spawnY, placementCallback) {
     let domElement, measuredWidth, measuredHeight;
     let ro; // ResizeObserver for text elements, if created
     
@@ -335,16 +461,60 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     domElement.style.position = 'absolute';
     domElement.style.userSelect = 'none';
     domElement.setAttribute('draggable', 'false');
-    
-    // Re-measure DOM element for visual reference if needed, but physics body uses scaled values
-    // const finalRect = domElement.getBoundingClientRect();
-    // Note: measuredWidth and measuredHeight are now the SIZED values for the physics body
+
+    const bodyWidth = measuredWidth > 0 ? measuredWidth : 50;
+    const bodyHeight = measuredHeight > 0 ? measuredHeight : 20;
+
+    let resolvedX = spawnX;
+    let resolvedY = spawnY;
+    const usingPlanner = typeof placementCallback === 'function';
+
+    if (usingPlanner) {
+      try {
+        const plannedPosition = placementCallback({ width: bodyWidth, height: bodyHeight });
+        if (plannedPosition && Number.isFinite(plannedPosition.x) && Number.isFinite(plannedPosition.y)) {
+          resolvedX = plannedPosition.x;
+          resolvedY = plannedPosition.y;
+        }
+      } catch (error) {
+        console.error('Failed to resolve auto-spawn position', error);
+      }
+    }
+
+    if (usingPlanner) {
+      const { marginX, marginY } = computeViewportMargins(window.innerWidth, window.innerHeight);
+      const minX = marginX + bodyWidth / 2;
+      const maxX = window.innerWidth - marginX - bodyWidth / 2;
+      const minY = marginY + bodyHeight / 2;
+      const maxY = window.innerHeight - marginY - bodyHeight / 2;
+
+      if (!Number.isFinite(resolvedX)) {
+        resolvedX = minX <= maxX
+          ? minX + Math.random() * (maxX - minX)
+          : window.innerWidth / 2;
+      }
+      if (!Number.isFinite(resolvedY)) {
+        resolvedY = minY <= maxY
+          ? minY + Math.random() * (maxY - minY)
+          : window.innerHeight / 2;
+      }
+
+      resolvedX = clampValue(resolvedX, minX, maxX);
+      resolvedY = clampValue(resolvedY, minY, maxY);
+    } else {
+      if (!Number.isFinite(resolvedX)) {
+        resolvedX = Math.random() * window.innerWidth;
+      }
+      if (!Number.isFinite(resolvedY)) {
+        resolvedY = Math.random() * window.innerHeight;
+      }
+    }
 
     const body = Matter.Bodies.rectangle(
-      (typeof spawnX === 'number') ? spawnX : Math.random() * window.innerWidth,
-      (typeof spawnY === 'number') ? spawnY : Math.random() * window.innerHeight,
-      measuredWidth > 0 ? measuredWidth : 50,
-      measuredHeight > 0 ? measuredHeight : 20,
+      resolvedX,
+      resolvedY,
+      bodyWidth,
+      bodyHeight,
       { restitution: 0.9, friction: 0.05 }
     );
     Matter.World.add(world, body);
@@ -379,6 +549,9 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
   // --- Step 9: General Navigation Menu ---
   const navMenuBodies = createPhysicsNavMenu(world, container, '/what');
   bodies.push(...navMenuBodies);
+  window.dispatchEvent(new CustomEvent('whatProjectChanged', {
+    detail: { index: currentProjectIndex }
+  }));
 
   // --- Step 10: Pointer Event Handling for Spawning ---
   let pointerDownPos = null;
@@ -398,8 +571,10 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       amIMobile &&
       currentElementIndex >= projects[currentProjectIndex].summary.elements.length &&
       !(e.target.classList.contains('view-full-project-button') ||
+        e.target.classList.contains('hold-next-button') ||
         e.target.closest('.nav-button') ||
-        e.target.closest('.what-nav-button'))
+        e.target.closest('.what-nav-button') ||
+        e.target.closest('.project-dropdown'))
     ) {
       longPressFired = false;
       longPressTimer = setTimeout(() => {
@@ -473,7 +648,8 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         if (e.target.classList.contains('view-full-project-button') ||
             e.target.classList.contains('hold-next-button') ||
             e.target.closest('.nav-button') || // General nav
-            e.target.closest('.what-nav-button')) { // Project-specific nav (ensure this class is used in whatNav.js)
+            e.target.closest('.what-nav-button') ||
+            e.target.closest('.project-dropdown')) { // Project-specific nav (whatNav.js) or dropdown list
         pointerDownPos = null; // Reset, but let the button's own click handler fire
         return;
       }
@@ -523,32 +699,7 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
       currentElementIndex++;
       updateWhitespaceCursor();
       if (currentElementIndex === summaryElements.length) {
-        const fullData = {
-          type: 'button',
-          content: 'view full project',
-          cssClass: 'view-full-project-button',
-          action: 'openFullProject'
-        };
-        await addProjectElement(fullData, x + (Math.random()*40-20), y + (Math.random()*40-20));
-
-        if (amIMobile) {
-          const holdData = {
-            type: 'button',
-            content: 'hold for next',
-            cssClass: 'hold-next-button'
-          };
-          const { domElement } = await addProjectElement(
-            holdData,
-            x + (Math.random()*40-20),
-            y + (Math.random()*40-20)
-          );
-          holdButtonDom = domElement;
-        }
-
-        const color = pickRandomPrimary([lastTitleColor]);
-        titleDom.dataset.highlightColor = color;
-        markDone(titleDom);
-        lastTitleColor = color;
+        await addCompletionElements(x, y);
       }
     } else {
       if (!amIMobile) {
@@ -632,8 +783,44 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
         setGravity(engine, newGravity.x, newGravity.y);
     }
     updateSpecificNav();
+    window.dispatchEvent(new CustomEvent('whatProjectChanged', {
+      detail: { index: currentProjectIndex }
+    }));
   }
-  
+
+  async function completeProjectInstantly(targetIndex) {
+    await waitForSpawnIdle();
+    spawnInProgress = true;
+    try {
+      handleProjectNavigation(targetIndex);
+
+      const summaryElements = projects[currentProjectIndex].summary.elements;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const placementPlanner = createScatterPlanner(
+        summaryElements.length,
+        window.innerWidth,
+        window.innerHeight
+      );
+
+      for (const elementData of summaryElements) {
+        await addProjectElement(
+          elementData,
+          undefined,
+          undefined,
+          placementPlanner
+        );
+      }
+
+      currentElementIndex = summaryElements.length;
+      updateWhitespaceCursor();
+
+      await addCompletionElements(centerX, centerY);
+    } finally {
+      spawnInProgress = false;
+    }
+  }
+
   // Define the handler for the custom event
   const handleWhatProjectNavEvent = (e) => {
     const { target } = e.detail;
@@ -650,6 +837,19 @@ const { width: rawW, height: rawH } = await measureTextDimensionsAfterFonts(
     }
   };
   window.addEventListener('whatProjectNav', handleWhatProjectNavEvent);
+
+  const handleProjectListSelect = async (event) => {
+    const { index } = event.detail || {};
+    if (typeof index !== 'number' || index < 0 || index >= projects.length) {
+      return;
+    }
+    try {
+      await completeProjectInstantly(index);
+    } catch (error) {
+      console.error('Failed to complete project from list button', error);
+    }
+  };
+  window.addEventListener('whatProjectListSelect', handleProjectListSelect);
 
   // --- Step 14: Start DOM Syncing, Dragging, and Matter.js Runner ---
   // Store the returned cleanup function from syncDOMWithBodies
@@ -702,7 +902,20 @@ if (DEBUG) {
     container.removeEventListener('pointerup', handlePointerUp);
     container.removeEventListener('pointercancel', handlePointerCancel);
     window.removeEventListener('whatProjectNav', handleWhatProjectNavEvent);
+    window.removeEventListener('whatProjectListSelect', handleProjectListSelect);
     // console.log('Custom and pointer listeners removed.');
+
+    if (Array.isArray(container.__navMenuCleanup)) {
+      container.__navMenuCleanup.forEach((fn) => {
+        try {
+          fn();
+        } catch (error) {
+          // ignore cleanup errors
+        }
+      });
+      container.__navMenuCleanup.length = 0;
+      container.__navMenuCleanup = null;
+    }
 
     // B. Call cleanup functions for ongoing processes
     if (cleanupSyncLoop) {
