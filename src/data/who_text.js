@@ -6,7 +6,8 @@ export const ANCHORS = [
     text: "i'm gianpaolo\nbormioli",
     position: {
       desktop: { x: 0.42, y: 0.45 }, // edit as you wish, 0.5 = centered
-      mobile:  { x: 0.25, y: 0.42 }
+      mobile:  { x: 0.25, y: 0.42 },
+      xs:      { x: 0.5,  y: 0.34 }
     },
     size: "big",
     microTexts: [
@@ -18,7 +19,8 @@ export const ANCHORS = [
     text: "what\nabout you?",
     position: {
       desktop: { x: 0.62, y: 0.55 },
-      mobile:  { x: 0.8, y: 0.52 }
+      mobile:  { x: 0.8,  y: 0.52 },
+      xs:      { x: 0.5,  y: 0.67 }
     },
     size: "big",
     microTexts: [
@@ -31,7 +33,8 @@ export const ANCHORS = [
     text: "anti-nothing approach",
     position: {
       desktop: { x: 0.14, y: 0.2 },
-      mobile:  { x: 0.7, y: 0.8 }
+      mobile:  { x: 0.7,  y: 0.8 },
+      xs:      { x: 0.83, y: 0.82 }
     },
     size: "small",
     microTexts: [
@@ -45,7 +48,8 @@ export const ANCHORS = [
     text: "a communication designer",
     position: {
       desktop: { x: 0.785, y: 0.3 },
-      mobile:  { x: 0.3, y: 0.17 }
+      mobile:  { x: 0.3,   y: 0.17 },
+      xs:      { x: 0.2,   y: 0.2 }
     },
     size: "small",
     microTexts: [
@@ -58,7 +62,8 @@ export const ANCHORS = [
     text: "i do stuff",
     position: {
       desktop: { x: 0.2, y: 0.7 },
-      mobile:  { x: 0.7, y: 0.3 }
+      mobile:  { x: 0.7, y: 0.3 },
+      xs:      { x: 0.85, y: 0.15 }
     },
     size: "small",
     microTexts: [
@@ -72,7 +77,8 @@ export const ANCHORS = [
     text: "creative direction / storytelling",
     position: {
       desktop: { x: 0.7, y: 0.8 },
-      mobile:  { x: 0.3, y: 0.67 }
+      mobile:  { x: 0.3,  y: 0.67 },
+      xs:      { x: 0.2,  y: 0.85 }
     },
     size: "small",
     microTexts: [
